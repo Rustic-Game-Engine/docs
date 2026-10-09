@@ -3,7 +3,8 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 export const docGroups: DocGroup[] = [
   { label: "Start here", docs: [
-    { slug: "", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
+    { slug: "engine", title: "Engine overview", description: "Start building games or contributing to the Rust engine.", source: "content/engine.md" },
+    { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
   ] },
   { label: "Core API", docs: [
@@ -59,7 +60,17 @@ export const docGroups: DocGroup[] = [
     { slug: "scripting/php", title: "PHP", description: "Build PHP API behaviors for UI entries.", source: "docs/Scripting/scriptingPHP.md" },
     { slug: "scripting/web", title: "HTML/CSS", description: "Use inline JavaScript in Web script assets.", source: "docs/Scripting/scriptingWeb.md" },
   ] },
+  { label: "Website", docs: [
+    { slug: "website", title: "Website overview", description: "Develop the Next.js docs site and understand the repository layout.", source: "content/website.md" },
+    { slug: "website/documentation", title: "Writing documentation", description: "Add guides, maintain API pages, and make content searchable.", source: "content/documentation.md" },
+    { slug: "website/development", title: "Development & deployment", description: "Build, preview, and deploy the documentation website.", source: "README.md" },
+  ] },
 ];
 
-export const allDocs = docGroups.flatMap((group) => group.docs.map((doc) => ({ ...doc, group: group.label })));
+export const docSections = [
+  { title: "Engine", href: "/docs/engine", groups: docGroups.filter((group) => group.label !== "Website") },
+  { title: "Website", href: "/docs/website", groups: docGroups.filter((group) => group.label === "Website") },
+];
+
+export const allDocs = docSections.flatMap((section) => section.groups.flatMap((group) => group.docs.map((doc) => ({ ...doc, group: group.label, project: section.title }))));
 export function routeFor(slug: string) { return slug ? `/docs/${slug}` : "/docs"; }
