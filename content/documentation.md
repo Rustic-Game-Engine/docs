@@ -1,0 +1,29 @@
+# Writing documentation
+
+Help first-time users succeed with exact setup steps, copyable examples, expected results, current limitations, and ways to diagnose common failures. Update documentation alongside the engine change whenever engine functionality or scripting behavior changes.
+
+## Choose the source
+
+- Engine guides live in `docs/` in this repository. Keep the corresponding `Engine/docs/` content in the engine repository accurate too.
+- Generated API reference content lives in `lib/api-docs.ts`.
+- Website contributor guides live in `content/`; development and deployment instructions live in `README.md`.
+
+`lib/docs.ts` reads these sources at build time. Engine sources use paths such as `docs/Scripting/gameplayActions.md`. Generated sources use the `api:` prefix. Website sources use paths such as `content/my-guide.md` or `README.md`.
+
+## Add a reachable page
+
+Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs a unique slug, a title, a concise description, and a source:
+
+```ts
+{ slug: "website/my-guide", title: "My guide", description: "What readers will learn.", source: "content/my-guide.md" }
+```
+
+The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine entries in an engine group and website entries in the Website group. The page above appears at `/docs/website/my-guide`.
+
+## Link and format content
+
+Use a single level-one heading, followed by descriptive level-two or level-three sections. The renderer supports paragraphs, lists, links, inline code, bold text, fenced code blocks, blockquotes, and tables. Use explicit `/docs/...` links for website pages and cross-project references; source-file links can be resolved for cataloged engine documents.
+
+## Verify the result
+
+Check the text against the implemented engine behavior. From the docs repository root, run `npm run build`, then preview the exported site as described in [Development & deployment](/docs/website/development). Confirm your page appears in navigation and search, and check the setup, examples, and links before opening a pull request.
