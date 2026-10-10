@@ -9,6 +9,11 @@ Before opening a pull request, run `npm run lint -- --max-warnings=0`,
 `npm run build`, `npx tsc --noEmit`, and `npm audit --audit-level=moderate`.
 Keep generated `.next/`, `out/`, and TypeScript build-info files out of Git.
 
+For every new feature or code change, commit the completed work on a dedicated
+branch, push it, and open a pull request after the required checks pass. Include
+the behavior change and validation results in the pull request description, and
+return its link to the user. Do not merge the pull request unless asked.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

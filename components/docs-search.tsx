@@ -7,8 +7,6 @@ import { docSections, routeFor } from "@/lib/docs-catalog";
 
 import { searchDocs, type SearchEntry } from "@/lib/docs-search";
 
-import { SiteFrame } from "./site-frame";
-
 export function DocsSearch({ project, entries }: { project: string; entries: SearchEntry[] }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -24,7 +22,7 @@ export function DocsSearch({ project, entries }: { project: string; entries: Sea
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  return <SiteFrame aside={<div className="search-on-page"><p>SEARCH TIPS</p><span>Try a name</span><code>{isEngine ? "transforms" : "website"}</code><span>Try a workflow</span><code>{isEngine ? "gameplay" : "deployment"}</code><span>Try a term from a page</span><code>{isEngine ? "set_translation" : "npm"}</code></div>}>
+  return <>
       <main className="content doc-content search-page">
         <div className="breadcrumbs"><Link href="/docs">DOCS</Link><ArrowRight size={13} /><Link href={section?.href ?? "/docs/engine"}>{project.toUpperCase()}</Link><ArrowRight size={13} /><span>SEARCH</span></div>
         <section className="search-hero" aria-labelledby="search-title">
@@ -37,5 +35,6 @@ export function DocsSearch({ project, entries }: { project: string; entries: Sea
         </section>
         <footer className="search-page-footer"><span><i /> LIVE DOC INDEX</span><span>LOCAL CATALOG / NO AI GUESSWORK</span></footer>
       </main>
-  </SiteFrame>;
+    <aside className="on-page"><div className="search-on-page"><p>SEARCH TIPS</p><span>Try a name</span><code>{isEngine ? "transforms" : "website"}</code><span>Try a workflow</span><code>{isEngine ? "gameplay" : "deployment"}</code><span>Try a term from a page</span><code>{isEngine ? "set_translation" : "npm"}</code></div></aside>
+  </>;
 }

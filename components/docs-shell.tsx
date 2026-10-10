@@ -7,7 +7,6 @@ import { type ReactNode, useMemo, useState } from "react";
 import { allDocs, canonicalDocPath, docSections, routeFor } from "@/lib/docs-catalog";
 
 import { RepositoryCards } from "./repository-cards";
-import { SiteFrame } from "./site-frame";
 
 function textSlug(text: string) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -114,7 +113,8 @@ export function DocsShell({ markdown, title, group }: { markdown: string; title:
   const projectDocs = allDocs.filter((doc) => doc.project === currentDoc?.project);
   const currentIndex = projectDocs.findIndex((doc) => routeFor(doc.slug) === pathname);
 
-  return <SiteFrame aside={<><p>ON THIS PAGE</p>{headings.map((heading) => <a className={heading.level === 3 ? "nested" : ""} href={`#${heading.id}`} key={heading.id}>{heading.text}</a>)}</>}>
+  return <>
       <main className="content doc-content"><div className="breadcrumbs"><Link href="/docs">DOCS</Link><ArrowRight size={13} /><Link href={docSections.find((section) => section.title === currentDoc?.project)?.href ?? "/docs/open-source"}>{currentDoc?.project.toUpperCase()}</Link><ArrowRight size={13} /><span>{group.toUpperCase()}</span><ArrowRight size={13} />{parentDoc ? <><Link href={routeFor(parentDoc.slug)}>{parentDoc.title.toUpperCase()}</Link><ArrowRight size={13} /></> : null}<span>{title.toUpperCase()}</span></div>{currentDoc?.slug === "open-source" ? <><article className="markdown"><Markdown source={markdown.split("## Choose a repository")[0]} /></article><RepositoryCards /><article className="markdown"><Markdown source={`## Choose a repository${markdown.split("## Choose a repository").slice(1).join("## Choose a repository")}`} /></article></> : <article className="markdown"><Markdown source={markdown} /></article>}<nav className="page-pagination" aria-label="Documentation pages">{currentIndex > 0 ? <Link href={routeFor(projectDocs[currentIndex - 1].slug)}><ArrowLeft size={16} /><span><small>PREVIOUS</small>{projectDocs[currentIndex - 1].title}</span></Link> : <span />}{currentIndex < projectDocs.length - 1 ? <Link className="next" href={routeFor(projectDocs[currentIndex + 1].slug)}><span><small>NEXT</small>{projectDocs[currentIndex + 1].title}</span><ArrowRight size={16} /></Link> : null}</nav></main>
-  </SiteFrame>;
+    <aside className="on-page"><p>ON THIS PAGE</p>{headings.map((heading) => <a className={heading.level === 3 ? "nested" : ""} href={`#${heading.id}`} key={heading.id}>{heading.text}</a>)}</aside>
+  </>;
 }

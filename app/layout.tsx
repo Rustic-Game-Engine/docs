@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import { SiteFrame } from "@/components/site-frame";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans" });
@@ -18,7 +19,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${plexMono.variable}`}>{children}</body>
+      <body className={`${manrope.variable} ${plexMono.variable}`}>
+        <SiteFrame>{children}</SiteFrame>
+      </body>
     </html>
   );
 }
