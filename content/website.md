@@ -2,7 +2,7 @@
 
 [Open the docs repository on GitHub](https://github.com/Rustic-Game-Engine/docs).
 
-This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
+This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. Its source-development guide sits alongside the other repositories under [Open-Sourced Docs](/docs/open-source). It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
 
 ## Languages and framework
 
@@ -49,7 +49,7 @@ For a first customization, change a repository guide in `content/` and reload it
 | `components/docs-shell.tsx` | Markdown rendering, code copying, table of contents, and pagination | Check how supported Markdown is displayed |
 | `components/docs-search.tsx` | Browser-side catalog search and results | Improve search descriptions or presentation |
 
-Guides are rendered by a small custom Markdown renderer. Use its supported headings, lists, links, code fences, blockquotes, and tables; raw HTML and arbitrary MDX components are not part of the documented content format. See [Writing documentation](/docs/website/documentation) for a complete page-entry example.
+Guides are rendered by a small custom Markdown renderer. Use its supported headings, lists, links, code fences, blockquotes, and tables; raw HTML and arbitrary MDX components are not part of the documented content format. See [Writing documentation](/docs/open-source/docs/documentation) for a complete page-entry example.
 
 ## Main scripts and workflows
 
@@ -80,7 +80,7 @@ npm audit --audit-level=moderate
 
 Build with `npm run build`, then deploy `out/` to your own static host. For Cloudflare Pages, use a separate project for your fork and replace the upstream project/account settings in the workflow. Configure `CLOUDFLARE_API_TOKEN` in your own repository's Actions secrets with Pages Edit access to that account. Do not commit a token or reuse the upstream production target.
 
-Preview the static build with `npx wrangler pages dev out`. Check `/`, `/docs/repositories`, a deep article link, search, and a missing-page response. Read [Development & deployment](/docs/website/development) for the existing project's workflow and configuration.
+Preview the static build with `npx wrangler pages dev out`. Check `/`, `/docs/open-source`, a deep article link, search, and a missing-page response. Read [Development & deployment](/docs/open-source/docs/development) for the existing project's workflow and configuration.
 
 ## Diagnose common setup failures
 
@@ -91,4 +91,4 @@ Preview the static build with `npx wrangler pages dev out`. Check `/`, `/docs/re
 - Font download fails: confirm the build environment can reach the configured Google font services.
 - Cloudflare's credential check fails: configure the repository secret; the last successful production deployment stays live.
 
-When an engine API changes, update the published guide here alongside the matching `Engine/docs` content in the [engine repository](https://github.com/Rustic-Game-Engine/engine). Return to the [repository directory](/docs/repositories) for the other public projects.
+When an engine API changes, update the published guide here alongside the matching `Engine/docs` content in the [engine repository](https://github.com/Rustic-Game-Engine/engine). Return to the [repository directory](/docs/open-source) for the other public projects.

@@ -4,13 +4,14 @@ import { ChevronDown, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
-import { allDocs, docSections, routeFor } from "@/lib/docs-catalog";
+import { allDocs, canonicalDocPath, docSections, routeFor } from "@/lib/docs-catalog";
 
 export function SiteFrame({ children, aside }: { children: ReactNode; aside: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const isIndex = pathname === "/" || pathname === "/docs" || pathname === "/docs/search" || pathname === "/docs/repositories";
-  const project = allDocs.find((doc) => routeFor(doc.slug) === pathname)?.project ?? "Engine";
+  const canonicalPath = canonicalDocPath(pathname);
+  const isIndex = pathname === "/" || pathname === "/docs" || pathname === "/docs/search";
+  const project = allDocs.find((doc) => routeFor(doc.slug) === canonicalPath)?.project ?? "Engine";
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -38,13 +39,12 @@ export function SiteFrame({ children, aside }: { children: ReactNode; aside: Rea
         <div className="sidebar-mobile-head"><span>Documentation</span><button onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X /></button></div>
         <nav className="sidebar-content" aria-label="Documentation">
           <Link className="home-link" href="/" onClick={() => setMenuOpen(false)} aria-current={pathname === "/" || pathname === "/docs" ? "page" : undefined}>Welcome to Rustic</Link>
-          <Link className="repository-directory-link" href="/docs/repositories" onClick={() => setMenuOpen(false)}>Open-source repositories</Link>
           <div className="project-switcher" aria-label="Documentation projects">{docSections.map((section) => <Link href={section.href} key={section.title} className={!isIndex && project === section.title ? "active" : ""} onClick={() => setMenuOpen(false)}>{section.title}</Link>)}</div>
           {docSections.filter((section) => isIndex || section.title === project).map((section) => <div className="nav-project" key={section.title}>
-            <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}<span>{section.repository}</span></Link>
-            {(isIndex ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
-              <p>{group.label === section.title ? "Contributor guides" : group.label}</p>
-              {group.docs.map((doc) => <Link className={routeFor(doc.slug) === pathname ? "active" : ""} aria-current={routeFor(doc.slug) === pathname ? "page" : undefined} href={routeFor(doc.slug)} key={doc.slug} onClick={() => setMenuOpen(false)}>{doc.title}</Link>)}
+            <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}</Link>
+            {(isIndex && section.title === "Engine" ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
+              <p>{group.label === "Open-Sourced Docs" ? "Overview" : group.label === "Engine source" ? "Engine" : group.label}</p>
+              {group.docs.map((doc) => <Link className={routeFor(doc.slug) === canonicalPath ? "active" : ""} aria-current={routeFor(doc.slug) === canonicalPath ? "page" : undefined} href={routeFor(doc.slug)} key={doc.slug} onClick={() => setMenuOpen(false)}>{doc.title}</Link>)}
             </section>)}
           </div>)}
         </nav>

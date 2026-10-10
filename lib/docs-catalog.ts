@@ -3,7 +3,7 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 export const docGroups: DocGroup[] = [
   { label: "Start here", docs: [
-    { slug: "engine", title: "Engine repository", description: "Rust architecture, prerequisites, builds, tooling, and starting points for your own engine.", source: "content/engine.md" },
+    { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
   ] },
@@ -60,26 +60,41 @@ export const docGroups: DocGroup[] = [
     { slug: "scripting/php", title: "PHP", description: "Build PHP API behaviors for UI entries.", source: "docs/Scripting/scriptingPHP.md" },
     { slug: "scripting/web", title: "HTML/CSS", description: "Use inline JavaScript in Web script assets.", source: "docs/Scripting/scriptingWeb.md" },
   ] },
+  { label: "Open-Sourced Docs", docs: [
+    { slug: "open-source", title: "Open-Sourced Docs", description: "Repository development guides for the engine, docs, examples, and hosting SDK.", source: "content/repositories.md" },
+  ] },
+  { label: "Engine source", docs: [
+    { slug: "open-source/engine", title: "Engine repository", description: "Rust architecture, prerequisites, builds, tooling, and starting points for your own engine.", source: "content/engine-source.md" },
+  ] },
   { label: "Docs", docs: [
-    { slug: "repositories", title: "Open-source directory", description: "Compare every public Rustic repository: engine, docs, examples, and hosting SDK.", source: "content/repositories.md" },
-    { slug: "website", title: "Docs repository", description: "TypeScript and Next.js setup, source files, npm scripts, and developing your own documentation site.", source: "content/website.md" },
-    { slug: "website/documentation", title: "Writing documentation", description: "Add guides, maintain API pages, and make content searchable.", source: "content/documentation.md" },
-    { slug: "website/development", title: "Development & deployment", description: "Build, preview, and deploy the documentation website.", source: "README.md" },
+    { slug: "open-source/docs", title: "Docs repository", description: "TypeScript and Next.js setup, source files, npm scripts, and developing your own documentation site.", source: "content/website.md" },
+    { slug: "open-source/docs/documentation", title: "Writing documentation", description: "Add guides, maintain API pages, and make content searchable.", source: "content/documentation.md" },
+    { slug: "open-source/docs/development", title: "Development & deployment", description: "Build, preview, and deploy the documentation website.", source: "README.md" },
   ] },
   { label: "Examples", docs: [
-    { slug: "examples", title: "Examples repository", description: "Current sample repository status, prerequisites, and how to create your first example game.", source: "content/examples.md" },
+    { slug: "open-source/examples", title: "Examples repository", description: "Current sample repository status, prerequisites, and how to create your first example game.", source: "content/examples.md" },
   ] },
   { label: "Hosting SDK", docs: [
-    { slug: "hosting-sdk", title: "Hosting SDK repository", description: "Public SDK scope, current source status, and starting points for a new implementation.", source: "content/hosting-sdk.md" },
+    { slug: "open-source/hosting-sdk", title: "Hosting SDK repository", description: "Public SDK scope, current source status, and starting points for a new implementation.", source: "content/hosting-sdk.md" },
   ] },
 ];
 
+const sourceGroups = ["Open-Sourced Docs", "Engine source", "Docs", "Examples", "Hosting SDK"];
 export const docSections = [
-  { title: "Engine", repository: "engine", href: "/docs/engine", groups: docGroups.filter((group) => !["Docs", "Examples", "Hosting SDK"].includes(group.label)) },
-  { title: "Docs", repository: "docs", href: "/docs/website", groups: docGroups.filter((group) => group.label === "Docs") },
-  { title: "Examples", repository: "examples", href: "/docs/examples", groups: docGroups.filter((group) => group.label === "Examples") },
-  { title: "Hosting SDK", repository: "hosting-sdk", href: "/docs/hosting-sdk", groups: docGroups.filter((group) => group.label === "Hosting SDK") },
+  { title: "Engine", href: "/docs/engine", groups: docGroups.filter((group) => !sourceGroups.includes(group.label)) },
+  { title: "Open-Sourced Docs", href: "/docs/open-source", groups: docGroups.filter((group) => sourceGroups.includes(group.label)) },
 ];
+
+export const docAliases: Record<string, string> = {
+  "repositories": "open-source",
+  "website": "open-source/docs",
+  "website/documentation": "open-source/docs/documentation",
+  "website/development": "open-source/docs/development",
+  "examples": "open-source/examples",
+  "hosting-sdk": "open-source/hosting-sdk",
+};
+export function resolveDocSlug(slug: string) { return docAliases[slug] ?? slug; }
+export function canonicalDocPath(pathname: string) { return routeFor(resolveDocSlug(pathname.replace(/^\/docs\/?/, ""))); }
 
 export const allDocs = docSections.flatMap((section) => section.groups.flatMap((group) => group.docs.map((doc) => ({ ...doc, group: group.label, project: section.title }))));
 export function routeFor(slug: string) { return slug ? `/docs/${slug}` : "/docs"; }

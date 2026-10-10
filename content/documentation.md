@@ -15,10 +15,10 @@ Help first-time users succeed with exact setup steps, copyable examples, expecte
 Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs a unique slug, a title, a concise description, and a source:
 
 ```ts
-{ slug: "website/my-guide", title: "My guide", description: "What readers will learn.", source: "content/my-guide.md" }
+{ slug: "open-source/docs/my-guide", title: "My guide", description: "What readers will learn.", source: "content/my-guide.md" }
 ```
 
-The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine entries in an engine group, examples in Examples, and hosting SDK guides in Hosting SDK and docs contributor entries in the Docs group. The page above appears at `/docs/website/my-guide`.
+The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine usage pages in the engine groups. Under Open-Sourced Docs, use Engine source for engine development, Docs for website development, Examples for sample contributions, and Hosting SDK for SDK development. The page above appears at `/docs/open-source/docs/my-guide`.
 
 ## Link and format content
 
@@ -26,4 +26,4 @@ Use a single level-one heading, followed by descriptive level-two or level-three
 
 ## Verify the result
 
-Check the text against the implemented engine behavior. From the docs repository root, run `npm run build`, then preview the exported site as described in [Development & deployment](/docs/website/development). Confirm your page appears in navigation and search, and check the setup, examples, and links before opening a pull request.
+Check the text against the implemented engine behavior. From the docs repository root, run `npm run build`, then preview the exported site as described in [Development & deployment](/docs/open-source/docs/development). Confirm your page appears in navigation and search, and check the setup, examples, and links before opening a pull request.
