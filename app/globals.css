@@ -42,6 +42,9 @@ kbd { display: flex; align-items: center; gap: 2px; padding: 3px 6px; border: 1p
 .nav-section > p, .on-page > p { margin: 0 0 10px; font-family: var(--font-mono); font-size: .67rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
 .nav-section a { display: block; padding: 7px 10px; margin: 1px -10px; border-left: 2px solid transparent; color: var(--muted); font-size: .88rem; font-weight: 560; }
 .nav-section a:hover { color: var(--ink); }
+.nav-guide summary { padding: 7px 0; color: var(--muted); font-size: .88rem; font-weight: 560; cursor: pointer; }
+.nav-guide summary:hover { color: var(--ink); }
+.nav-subpages { margin-left: 12px; padding-left: 10px; border-left: 1px solid var(--line); }
 .nav-section a.active { color: var(--ink); border-left-color: var(--rust); background: linear-gradient(90deg, color-mix(in srgb, var(--rust) 10%, transparent), transparent 75%); }
 .sidebar-footer { margin-top: auto; padding: 18px 24px 22px; border-top: 1px solid var(--line); }
 .sidebar-footer p { margin: 0 0 10px; font-size: .75rem; color: var(--muted); }

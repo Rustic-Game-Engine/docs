@@ -5,137 +5,16 @@ Luau behaviors use the built-in Rustic API. Define callbacks and call
 SDK, dispatches lifecycle calls, and handles communication internally. Scripts do
 not parse requests, build commands, serialize JSON, or print responses.
 
-## Setup and attachment
 
-1. Use the current Rustic installer, which bundles the Luau runtime. Rebuild or reinstall Rustic if the bundled host is missing.
-   Run `cargo xtask doctor` from the Engine folder to check discovery.
-2. Open your game project and scene. Select a **Part** object for this movement example.
-3. Use **Programming > New Script > Object Component Script** and select Luau.
-   Save the asset, then attach it to the selected object using
-   **Programming > Attach Existing Script** or **+ Add Component** in the Inspector.
-   Create global or scene scripts through their corresponding Programming commands.
-   Keep the editor-assigned Asset ID; do not edit the registry or scene files by hand.
-4. Paste the complete example below. Press **Play**, then hover or click the embedded
-   Play viewport and hold **W**. The owner moves along positive Z at one unit per
-   second. The Console shows **Behavior started** once. Stop Play to restore the
-   authored scene. Attach to an object with a transform to see movement.
+## Topics
 
-For a source checkout, build with `cargo xtask build` from Engine. This builds the
-Luau host beside the editor/runtime. If you build individual Cargo packages, build
-the host too:
+- [Setup and attachment](/docs/scripting/luau/setup-and-attachment)
+- [Complete behavior](/docs/scripting/luau/complete-behavior)
+- [Built-in functions](/docs/scripting/luau/built-in-functions)
+- [Callbacks and values](/docs/scripting/luau/callbacks-and-values)
+- [Current limits and diagnosis](/docs/scripting/luau/current-limits-and-diagnosis)
 
-```powershell
-cargo build --locked --manifest-path apps/luau-host/Cargo.toml --target-dir target
-```
+## Related guides
 
-The Luau host has its own Cargo workspace to keep Luau's native library separate
-from Lua 5.4. User scripts keep the `.luau` extension and their editor-assigned IDs.
-
-## Complete behavior
-
-```luau
-return {
-    on_start = function() rustic.log("info", "Behavior started") end,
-    fixed_update = function(dt)
-        local x, y, z = rustic.get_translation()
-        if rustic.key("KeyW").held then rustic.set_translation(x, y, z + dt) end
-    end,
-}
-```
-
-The SDK is staged automatically beside the source in an engine temporary directory.
-You do not install a package, copy the SDK into your game, or write a process loop.
-**Programming > Open Programming Workspace** also writes editor support files under
-`.rustic/generated/programming`. Regenerate those files after upgrading Rustic.
-Edit your behavior source, not generated SDK files. Run through Rustic Play so the
-engine can supply the API and callback state.
-
-## Built-in functions
-
-All gameplay languages expose owner ID and timing, translation, declared public
-properties, built-in attributes, held-key input, logging, enabled state, scene lookup,
-instance creation, and camera selection. Use native member syntax for your language.
-
-| API | Result or effect |
-| --- | --- |
-| `rustic.entity_id()` | Stable owner ID string |
-| `rustic.delta_time()`, `rustic.fixed_delta_time()` | Seconds |
-| `rustic.get_translation()` | Three numbers; C uses `RusticVector3` with x/y/z |
-| `rustic.set_translation(x,y,z)` | Queues owner movement |
-| `rustic.get_property(name)`, `rustic.set_property(name,value)` | Reads or updates an already declared property |
-| `rustic.get_attribute(name)`, `rustic.edit_attribute(name,value)` | Reads or edits an owner built-in attribute |
-| `rustic.key(name)`, `rustic.input(name)` | Action state with pressed/released/held/axis |
-| `rustic.key_events()`, `rustic.any_key_pressed()` | Input event snapshot |
-| `rustic.log(level,message)`, `rustic.set_enabled(enabled)` | Logs or queues enabled state |
-| `Game.scene.Find(path)`, `Game.scene.List()` | Finds an ID or lists matching IDs |
-| `instance.add(source,parent)`, `instance.clone(source,parent)` | Queues creation; no immediate new ID |
-| `Game.setCurrentCamera(source)` | Queues camera selection by path or ID |
-
-Mutations apply after the callback, in call order. Getters read the callback's
-snapshot, so a getter after a setter still reads the original state. Properties and
-attributes must retain their engine types; numbers must be finite. Attribute names
-are `Name`, `Position`, `Size`, `Color`, `CanTouch`, `CanCollide`, `Anchored`, and
-`Parent`. Color is three RGB numbers. Instance parents must be stable entity IDs;
-resolve a path with `Game.scene.Find` first. Scene List returns IDs, not path strings.
-
-## Callbacks and values
-
-Supported lifecycle names are `on_create`, `on_start`, `on_enable`, `fixed_update`,
-`update`, `on_disable`, `on_destroy`, and `on_stop`. Only frame callbacks receive
-`dt` (seconds). Omitted callbacks are handled automatically. C and C++ register
-function pointers in `RusticBehavior`; Python passes a callback dictionary to `run`;
-PHP passes one to `rustic_run`; C# and Java dispatch the supplied callback name.
-Luau returns a table and also accepts `Start`, `FixedUpdate`, `Update`, and the other
-capitalized lifecycle aliases used by Lua. State declared outside callbacks persists
-for this behavior instance until teardown or reload.
-
-Python and PHP use native dictionaries/arrays for key state. C#, Java, and C use
-native action structs/objects with `.held`. Luau uses tables and returns translation
-as three separate numbers. C property/attribute reads return `RusticValue`: inspect
-its `type` and use `boolean`, `number`, `string`, or `vector`/`length`. C strings and
-read values last until the next callback; copy them if you need to retain them.
-C# property/attribute reads return ordinary `object?` values (bool, long/double,
-string, double[] or null); Java returns Object values (Boolean, Long/Double,
-String, double[] or null). Cast to the declared property type before arithmetic.
-C scene listing takes a path argument, e.g. `Game.scene.List("Game.scene")`, and
-returns a `RusticList` with count/items.
-
-## Current limits and diagnosis
-
-The embedded Play viewport forwards held WASD, arrows, and Shift. Other keys,
-press/release events, named actions, and separate runtime-window input are not wired
-in this build. Collision callbacks remain unavailable. API 1.1 provides cross-language
-`Events` for every supported script type; see [Shared gameplay actions](gameplayActions.md).
-
-Each instance runs in its own process with a safe environment allowlist and a
-temporary working directory. Sources and responses are limited to 1 MiB; callbacks
-have three seconds to finish. An exception, invalid engine value, process exit,
-timeout, or rejected call disables the behavior. Failed build/reload validation
-keeps the last good instance running.
-
-- **Host unavailable:** rebuild or reinstall Rustic; rustic-luau-host must be
-  beside the editor/runtime executable. A separate Luau CLI is unnecessary.
-- **Nothing moves:** check attachment, owner transform, Play focus, and held KeyW.
-- **Property rejected:** declare it in the editor and preserve its type.
-- **Wrong parent:** pass the ID returned by Find, not the path string.
-- **SDK missing when running manually:** run the behavior through Rustic Play.
-- **Callback failed:** read the Rustic Console/build diagnostic. Use `rustic.log`
-  for gameplay logs; external stdout belongs to the engine's private transport.
-- **Old script has a request loop:** replace it with the callback setup above.
-  If the old starter defines its own SDK classes, remove those definitions and
-  keep your gameplay logic in the callbacks. Rustic now supplies the SDK.
-
-
-## Target another scene object
-
-Use `rustic.game.Demo.Room.Player:EditAttribute("Position", {1, 2, 3})` inside
-a callback. See [Edit scene objects](sceneObjects.md) for named-scene setup,
-supported attributes, and troubleshooting. The bundled Luau SDK queues edits
-after the callback and does not provide path-based getters.
-
-## Shared gameplay actions
-
-API 1.1 exposes shared-core easing, tweens, movement, skeletal/keyframe/procedural
-animation, timelines, timers, paths, cameras, physics, effects, audio and signals.
-See [Shared gameplay actions](gameplayActions.md) for attachment, native call
-conventions, duration/speed options, callbacks, scene-clock controls and backend limits.
+- [Edit scene objects](/docs/guides/scene-objects)
+- [Use gameplay actions](/docs/guides/gameplay-actions)

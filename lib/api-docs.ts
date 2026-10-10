@@ -118,7 +118,7 @@ const docs: Record<string, ApiDoc> = {
       Java: "boolean held = rustic.key(\"KeyW\").held;",
       PHP: "$held = $rustic->key(\"KeyW\")[\"held\"];",
       "HTML / inline JS": "if (rustic.key('KeyW').held) console.debug('forward key is held');",
-    }, notes: ["The embedded Play viewport forwards held KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ShiftLeft, and ShiftRight. It does not forward other keys or input from New Window or Standalone. Follow the [Lua controller guide](scriptingLua.md#input) for attachment steps, a complete example, and troubleshooting.", protocolNote],
+    }, notes: ["The embedded Play viewport forwards held KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ShiftLeft, and ShiftRight. It does not forward other keys or input from New Window or Standalone. Follow the [Lua controller guide](/docs/scripting/lua/input) for attachment steps, a complete example, and troubleshooting.", protocolNote],
   },
   logging: {
     title: "Logging API", summary: "Send a bounded diagnostic message to the live game console.",
@@ -194,7 +194,16 @@ function simpleMutationExamples(dynamic: string, compiled: string): Record<strin
 export function buildApiMarkdown(id: string) {
   if (id === "overview") return overview();
   if (id === "callbacks") return callbacks();
-  const doc = docs[id];
+  const entityTopic = id === "entity-identity" || id === "frame-time";
+  const doc = entityTopic ? {
+    ...docs.entity,
+    title: id === "entity-identity" ? "Entity identity API" : "Frame time API",
+    summary: id === "entity-identity" ? "Identify the behavior owner with its stable entity ID." : "Read engine-supplied frame intervals in seconds.",
+    when: id === "entity-identity" ? "Read the entity ID when another system needs a stable reference to this owner." : "Use delta_time with Update for frame-rate-independent presentation and fixed_delta_time with FixedUpdate for simulation.",
+    calls: id === "entity-identity" ? ["rustic.entity_id()"] : ["rustic.delta_time()", "rustic.fixed_delta_time()"],
+    returns: id === "entity-identity" ? "The ID is a stable string." : "Time values are finite seconds.",
+    examples: Object.fromEntries(Object.entries(docs.entity.examples).map(([language, example]) => [language, id === "entity-identity" ? example.split("\n")[0] : example.split("\n").slice(1).join("\n")])),
+  } : docs[id];
   if (!doc) throw new Error(`Unknown API document: ${id}`);
   const variables = doc.parameters.length ? `| Variable | Type | Required | Description |\n| --- | --- | --- | --- |\n${doc.parameters.map((x) => `| \`${x.name}\` | ${x.type} | ${x.required ? "Yes" : "No"} | ${x.description} |`).join("\n")}` : "This API has no arguments.";
   const examples = languages.map((lang) => `### ${lang}\n\n\`\`\`${codeLanguage(lang)}\n${doc.examples[lang]}\n\`\`\``).join("\n\n");

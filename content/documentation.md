@@ -14,6 +14,14 @@ For the complete contributor path, begin with [Documentation Overview](/docs/ope
 
 ## Add a reachable page
 
+Each documentation page covers one topic. Keep its setup, examples, parameters,
+and limitations together, and link to separate topics instead of adding them to
+the same article. When splitting a broad guide, keep its original URL as a topic
+index and place the focused pages beneath it, such as
+`guides/gameplay-actions/paths`. Set each sub-page's `parent` to the original
+guide's slug and list it immediately after that guide in the catalog. This nests
+the pages in navigation and adds a link to the parent in their breadcrumbs.
+
 Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs a unique slug, a title, a concise description, and a source:
 
 ```ts
