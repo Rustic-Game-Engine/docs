@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { allDocs, routeFor } from "@/lib/docs-catalog";
 
-import { SiteFrame } from "./site-frame";
-
 export function DocsSearch() {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,7 +18,7 @@ export function DocsSearch() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  return <SiteFrame aside={<div className="search-on-page"><p>SEARCH TIPS</p><span>Try an API name</span><code>transforms</code><span>Try a project</span><code>website</code><span>Try a workflow</span><code>gameplay</code></div>}>
+  return <>
       <main className="content doc-content search-page">
         <div className="breadcrumbs"><Link href="/docs">DOCS</Link><ArrowRight size={13} /><span>SEARCH</span></div>
         <section className="search-hero" aria-labelledby="search-title">
@@ -33,5 +31,6 @@ export function DocsSearch() {
         </section>
         <footer className="search-page-footer"><span><i /> LIVE DOC INDEX</span><span>LOCAL CATALOG / NO AI GUESSWORK</span></footer>
       </main>
-  </SiteFrame>;
+    <aside className="on-page"><div className="search-on-page"><p>SEARCH TIPS</p><span>Try an API name</span><code>transforms</code><span>Try a project</span><code>website</code><span>Try a workflow</span><code>gameplay</code></div></aside>
+  </>;
 }

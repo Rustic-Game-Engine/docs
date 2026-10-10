@@ -1,9 +1,8 @@
 import { ArrowRight, BookOpen, Code2, Globe, Layers, Search } from "lucide-react";
 import Link from "next/link";
-import { SiteFrame } from "./site-frame";
 
 export function DocsLanding() {
-  return <SiteFrame aside={<><p>ON THIS PAGE</p><a href="#welcome">Welcome</a><a href="#choose-your-path">Choose your path</a><a href="#start-building">Start building</a></>}>
+  return <>
     <main className="content landing-content">
       <div className="breadcrumbs">RUSTIC / DOCUMENTATION</div>
       <section className="intro" id="welcome" aria-labelledby="welcome-title">
@@ -30,5 +29,6 @@ export function DocsLanding() {
       </section>
       <footer className="page-footer"><span>Rustic Engine · Built in Rust. Made for your ideas.</span><Link href="https://github.com/Rustic-Game-Engine">Explore all repositories <ArrowRight size={14} /></Link></footer>
     </main>
-  </SiteFrame>;
+    <aside className="on-page"><p>ON THIS PAGE</p><a href="#welcome">Welcome</a><a href="#choose-your-path">Choose your path</a><a href="#start-building">Start building</a></aside>
+  </>;
 }

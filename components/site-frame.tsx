@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
 import { allDocs, canonicalDocPath, docSections, routeFor } from "@/lib/docs-catalog";
 
-export function SiteFrame({ children, aside }: { children: ReactNode; aside: ReactNode }) {
+export function SiteFrame({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const canonicalPath = canonicalDocPath(pathname);
@@ -51,7 +51,6 @@ export function SiteFrame({ children, aside }: { children: ReactNode; aside: Rea
       </aside>
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
       {children}
-      <aside className="on-page">{aside}</aside>
     </div>
   </div>;
 }
