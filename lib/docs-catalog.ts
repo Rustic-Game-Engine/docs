@@ -38,6 +38,7 @@ export const docGroups: DocGroup[] = [
   ] },
   { label: "Scene API", docs: [
     { slug: "guides/scene-objects", title: "Edit scene objects", description: "Target an object by scene name and hierarchy in any script language.", source: "docs/Scripting/sceneObjects.md" },
+    { slug: "api/environment", title: "Scene environment", description: "Read and change sky textures, ambient and sun lighting, and haze from every script language.", source: "api:environment" },
     { slug: "api/scene", title: "Scene lookup", description: "Find entities and enumerate stable scene paths.", source: "api:scene" },
     { slug: "api/instances", title: "Add & clone instances", description: "Queue creation from a source path with an optional parent.", source: "api:instances" },
     { slug: "api/camera", title: "Current camera", description: "Select the active game camera by path or entity ID.", source: "api:camera" },
