@@ -310,3 +310,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rust); outline-
 @media (max-width: 760px) {
   .topbar { backdrop-filter: none; }
 }
+
+.repository-directory-link { display: flex; align-items: center; gap: 10px; margin: 24px 0; color: var(--rust-deep); font-size: .85rem; font-weight: 700; }
+.sidebar-content .repository-directory-link { margin: -10px 0 24px; font-size: .78rem; }
+.project-card-grid .guide-card > span { margin-top: 24px; }
+
+.repository-cards { margin-top: 32px; }
+.repository-cards h2 { margin: 0 0 11px; font-size: 1.14rem; letter-spacing: -.025em; }

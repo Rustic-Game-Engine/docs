@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DocsLanding } from "@/components/docs-landing";
 import { DocsShell } from "@/components/docs-shell";
-import { allDocs } from "@/lib/docs-catalog";
+import { allDocs, docAliases, routeFor } from "@/lib/docs-catalog";
 import { findDoc, readDoc } from "@/lib/docs";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [{ slug: undefined }, ...allDocs.map((doc) => ({ slug: doc.slug.split("/") }))];
+  return [{ slug: undefined }, ...allDocs.map((doc) => ({ slug: doc.slug.split("/") })), ...Object.keys(docAliases).map((slug) => ({ slug: slug.split("/") }))];
 }
 
 export async function generateMetadata({ params }: PageProps<"/docs/[[...slug]]">): Promise<Metadata> {
   const { slug } = await params;
   if (!slug?.length) return { title: "Welcome · Rustic Engine Docs", description: "Start building with Rustic Engine or contribute to the documentation website." };
   const doc = findDoc(slug);
-  return doc ? { title: `${doc.title} · Rustic Engine Docs`, description: doc.description } : {};
+  return doc ? { title: `${doc.title} · Rustic Engine Docs`, description: doc.description, alternates: { canonical: routeFor(doc.slug) } } : {};
 }
 
 export default async function DocumentationPage({ params }: PageProps<"/docs/[[...slug]]">) {

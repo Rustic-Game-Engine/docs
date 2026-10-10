@@ -1,26 +1,31 @@
-# Welcome to Rustic Engine
+# Using Rustic Engine
 
-Build 2D and 3D games with a native Rust engine and editor. Start with a gameplay guide, choose a scripting language, and explore the API as you need it. Rustic is under active development; each guide describes the behavior and limitations available today.
+Create 2D and 3D games with the native Rustic editor. This section explains how to use the engine: create gameplay scripts, attach behaviors, work with scene objects, and use the API in Play.
 
-## Build your first behavior
+## Start making a game
 
-1. Read [Gameplay programming](/docs/guides/gameplay-programming) for script creation, attachment, and Play mode.
-2. Choose a language, such as [Lua](/docs/scripting/lua) or [JavaScript](/docs/scripting/javascript), and follow its setup and copyable examples.
-3. Use the [API overview](/docs/api/overview) and [Lifecycle callbacks](/docs/callbacks) to understand when your code runs.
-4. Add [Gameplay actions](/docs/guides/gameplay-actions), [Scene objects](/docs/guides/scene-objects), or [Physics](/docs/guides/physics) as your game grows.
+1. Open the Rustic project manager, create or import a project, and open it in the editor.
+2. Read [Gameplay programming](/docs/guides/gameplay-programming) for script creation, attachment, execution, and reload behavior.
+3. Choose a language. The [Lua guide](/docs/scripting/lua) includes setup and a copyable keyboard controller; [JavaScript](/docs/scripting/javascript) is another starting point.
+4. Attach the script to the intended entity, enter Play, and inspect the console. Follow the language guide's expected results and troubleshooting steps.
 
-## Work on the engine
+## Prerequisites for gameplay
 
-The Rust workspace, native applications, engine documentation, and engine-specific instructions live in `Engine/` in the [engine repository](https://github.com/Rustic-Game-Engine/engine). Run engine commands from that directory. Install the pinned toolchain in `Engine/rust-toolchain.toml`, then launch the project manager:
+You need a working Rustic editor installation and a project. Bundled Lua, Luau, JavaScript/QuickJS, and Web support let you start without installing every optional language. Python, C/C++, C#, Java, and PHP may require external toolchains; follow the relevant language guide.
 
-```sh
-cd Engine
-cargo xtask doctor
-cargo xtask run project-manager
-```
+You do not need to modify or compile the Rust engine to write a gameplay behavior using an installed editor. Source-build and installer instructions live in the separate [engine open-source documentation](/docs/open-source/engine).
 
-The project manager creates or imports projects and launches the editor. See `Engine/README.md` for the full build and validation commands and `Engine/AGENTS.md` for the engine completion requirements.
+## Explore the engine API
 
-## Keep the docs current
+- [API overview](/docs/api/overview): concepts, supported languages, and execution rules.
+- [Lifecycle callbacks](/docs/callbacks): setup, frames, physics, and teardown.
+- [Scene objects](/docs/guides/scene-objects): target objects by name and hierarchy.
+- [Gameplay actions](/docs/guides/gameplay-actions): animation, movement, timing, audio, and callbacks.
+- [Physics](/docs/guides/physics): primitive bodies, gravity, collision, and current limits.
+- [Cameras and lights](/docs/guides/cameras-and-lights): scene camera and lighting behavior.
 
-When engine functionality or scripting behavior changes, update the affected guides and API reference in a companion change in the docs repository, keep `Engine/docs` accurate, and link the docs pull request in the engine pull request. The [documentation workflow](/docs/website/documentation) explains where those sources live and how to make new pages reachable.
+Rustic is under active development. Each guide describes the implemented behavior and its current limitations; use the guide's examples and diagnostic steps when something does not behave as expected.
+
+## Develop the engine itself
+
+For Rust architecture, repository setup, prerequisites, build commands, source entry points, and main scripts, visit [Open-Sourced Docs → Engine](/docs/open-source/engine). The [Open-Sourced Docs directory](/docs/open-source) also covers the docs, examples, and hosting SDK repositories.
