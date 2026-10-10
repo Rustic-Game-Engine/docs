@@ -4,6 +4,16 @@
 
 Rustic Game Engine is a native 2D/3D game engine and editor under active development. Its Rust workspace lives in `Engine/`; the repository root is not a Cargo workspace. It includes a project manager, authoring editor, runtime, asset worker, scene model, rendering, and gameplay scripting. It is the starting point for modifying the engine itself or building your own engine version.
 
+## Go deeper into engine development
+
+Follow this path for a complete source-development workflow:
+
+1. [Development environment](/docs/open-source/engine/setup): Set up pinned Rust, native prerequisites, your fork, and the first editor launch.
+2. [Architecture & source layout](/docs/open-source/engine/architecture): Trace native processes, crates, dependencies, and current architectural boundaries.
+3. [Build tools & installer](/docs/open-source/engine/tooling): Understand implemented xtask commands, profiles, Luau builds, and Windows packaging.
+4. [Extending the engine](/docs/open-source/engine/extending): Develop a focused source change across scripting adapters, persistence, and documentation.
+5. [Testing & debugging](/docs/open-source/engine/testing): Run crate tests, smoke checks, external adapters, headless graphics, and installer qualification.
+
 ## Languages and architecture
 
 The implementation is **Rust**, with `egui` for native UI, `winit` for desktop surfaces, and an engine-owned rendering interface backed by `wgpu`. GPU shaders use **WGSL**. Windows installer and language-toolchain automation use **PowerShell**.

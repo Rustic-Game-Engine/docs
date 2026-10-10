@@ -4,6 +4,15 @@
 
 This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. Its source-development guide sits alongside the other repositories under [Open-Sourced Docs](/docs/open-source). It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
 
+## Go deeper into docs development
+
+Follow this path for a complete source-development workflow:
+
+1. [Docs architecture](/docs/open-source/docs/architecture): Trace the catalog, build-time readers, static routes, aliases, rendering, and browser search.
+2. [Add a documentation page](/docs/open-source/docs/adding-pages): A worked tutorial for writing, registering, linking, previewing, and submitting a new guide.
+3. [Customize your fork](/docs/open-source/docs/customizing): Change branding, colors, navigation, and repository guides while preserving accessibility.
+4. [Testing & deployment](/docs/open-source/docs/testing-deployment): Verify the static export, browser flows, CI gates, credentials, and your own Pages deployment.
+
 ## Languages and framework
 
 The application is written in **TypeScript** and **React**, using **Next.js 16.4** and React 19. Styling uses **CSS**; guides use **Markdown**; generated API text is maintained in TypeScript. npm manages dependencies. Next.js produces static HTML and browser assets for Cloudflare Pages; the published site does not need a running Node.js server.

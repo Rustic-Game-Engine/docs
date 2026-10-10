@@ -105,10 +105,20 @@ function Markdown({ source }: { source: string }) {
 
 export function DocsShell({ markdown, title, group }: { markdown: string; title: string; group: string }) {
   const pathname = canonicalDocPath(usePathname());
-  const headings = useMemo(() => markdown.split("\n").flatMap((line) => {
-    const match = /^(#{2,3})\s+(.+)$/.exec(line);
-    return match ? [{ level: match[1].length, text: match[2].replace(/[`*_]/g, ""), id: textSlug(match[2].replace(/[`*_]/g, "")) }] : [];
-  }), [markdown]);
+  const headings = useMemo(() => {
+    const result: { level: number; text: string; id: string }[] = [];
+    let inCodeBlock = false;
+    for (const line of markdown.split("\n")) {
+      if (line.startsWith("```")) { inCodeBlock = !inCodeBlock; continue; }
+      if (inCodeBlock) continue;
+      const match = /^(#{2,3})\s+(.+)$/.exec(line);
+      if (match) {
+        const text = match[2].replace(/[`*_]/g, "");
+        result.push({ level: match[1].length, text, id: textSlug(text) });
+      }
+    }
+    return result;
+  }, [markdown]);
   const currentDoc = allDocs.find((doc) => routeFor(doc.slug) === pathname);
   const projectDocs = allDocs.filter((doc) => doc.project === currentDoc?.project);
   const currentIndex = projectDocs.findIndex((doc) => routeFor(doc.slug) === pathname);

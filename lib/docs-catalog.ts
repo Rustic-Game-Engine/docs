@@ -65,9 +65,18 @@ export const docGroups: DocGroup[] = [
   ] },
   { label: "Engine source", docs: [
     { slug: "open-source/engine", title: "Engine repository", description: "Rust architecture, prerequisites, builds, tooling, and starting points for your own engine.", source: "content/engine-source.md" },
+    { slug: "open-source/engine/setup", title: "Development environment", description: "Set up pinned Rust, native prerequisites, your fork, and the first editor launch.", source: "content/engine-source/setup.md" },
+    { slug: "open-source/engine/architecture", title: "Architecture & source layout", description: "Trace native processes, crates, dependencies, and current architectural boundaries.", source: "content/engine-source/architecture.md" },
+    { slug: "open-source/engine/tooling", title: "Build tools & installer", description: "Understand implemented xtask commands, profiles, Luau builds, and Windows packaging.", source: "content/engine-source/tooling.md" },
+    { slug: "open-source/engine/extending", title: "Extending the engine", description: "Develop a focused source change across scripting adapters, persistence, and documentation.", source: "content/engine-source/extending.md" },
+    { slug: "open-source/engine/testing", title: "Testing & debugging", description: "Run crate tests, smoke checks, external adapters, headless graphics, and installer qualification.", source: "content/engine-source/testing.md" },
   ] },
   { label: "Docs", docs: [
     { slug: "open-source/docs", title: "Docs repository", description: "TypeScript and Next.js setup, source files, npm scripts, and developing your own documentation site.", source: "content/website.md" },
+    { slug: "open-source/docs/architecture", title: "Docs architecture", description: "Trace the catalog, build-time readers, static routes, aliases, rendering, and browser search.", source: "content/docs-source/architecture.md" },
+    { slug: "open-source/docs/adding-pages", title: "Add a documentation page", description: "A worked tutorial for writing, registering, linking, previewing, and submitting a new guide.", source: "content/docs-source/adding-pages.md" },
+    { slug: "open-source/docs/customizing", title: "Customize your fork", description: "Change branding, colors, navigation, and repository guides while preserving accessibility.", source: "content/docs-source/customizing.md" },
+    { slug: "open-source/docs/testing-deployment", title: "Testing & deployment", description: "Verify the static export, browser flows, CI gates, credentials, and your own Pages deployment.", source: "content/docs-source/testing-deployment.md" },
     { slug: "open-source/docs/documentation", title: "Writing documentation", description: "Add guides, maintain API pages, and make content searchable.", source: "content/documentation.md" },
     { slug: "open-source/docs/development", title: "Development & deployment", description: "Build, preview, and deploy the documentation website.", source: "README.md" },
   ] },
