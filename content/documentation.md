@@ -2,6 +2,8 @@
 
 Help first-time users succeed with exact setup steps, copyable examples, expected results, current limitations, and ways to diagnose common failures. Update documentation alongside the engine change whenever engine functionality or scripting behavior changes.
 
+For the complete contributor path, begin with [Documentation Overview](/docs/open-source/docs/overview), then [Local Setup](/docs/open-source/docs/local-setup) and [Writing Guidelines](/docs/open-source/docs/writing-guidelines). Use [Adding Documentation](/docs/open-source/docs/adding-documentation) for new routes and [Editing Existing Pages](/docs/open-source/docs/editing-pages) for corrections.
+
 ## Choose the source
 
 - Engine guides live in `docs/` in this repository. Keep the corresponding `Engine/docs/` content in the engine repository accurate too.
@@ -12,6 +14,14 @@ Help first-time users succeed with exact setup steps, copyable examples, expecte
 
 ## Add a reachable page
 
+Each documentation page covers one topic. Keep its setup, examples, parameters,
+and limitations together, and link to separate topics instead of adding them to
+the same article. When splitting a broad guide, keep its original URL as a topic
+index and place the focused pages beneath it, such as
+`guides/gameplay-actions/paths`. Set each sub-page's `parent` to the original
+guide's slug and list it immediately after that guide in the catalog. This nests
+the pages in navigation and adds a link to the parent in their breadcrumbs.
+
 Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs a unique slug, a title, a concise description, and a source:
 
 ```ts
@@ -19,6 +29,8 @@ Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs
 ```
 
 The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine usage pages in the engine groups. Under Open-Sourced Docs, use Engine source for engine development, Docs for website development, Examples for sample contributions, and Hosting SDK for SDK development. The page above appears at `/docs/open-source/docs/my-guide`.
+
+Search indexes the full page content, including code examples and generated API references, at build time. Engine search (`/docs/search`) only returns Engine pages; Open-Sourced Docs search (`/docs/open-source/search`) only returns repository guides. The search button and Ctrl/Cmd+K open the search for the current section.
 
 ## Link and format content
 

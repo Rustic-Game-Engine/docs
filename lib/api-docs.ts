@@ -118,7 +118,7 @@ const docs: Record<string, ApiDoc> = {
       Java: "boolean held = rustic.key(\"KeyW\").held;",
       PHP: "$held = $rustic->key(\"KeyW\")[\"held\"];",
       "HTML / inline JS": "if (rustic.key('KeyW').held) console.debug('forward key is held');",
-    }, notes: ["The embedded Play viewport forwards held KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ShiftLeft, and ShiftRight. It does not forward other keys or input from New Window or Standalone. Follow the [Lua controller guide](scriptingLua.md#input) for attachment steps, a complete example, and troubleshooting.", protocolNote],
+    }, notes: ["The embedded Play viewport forwards held KeyW, KeyA, KeyS, KeyD, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, ShiftLeft, and ShiftRight. It does not forward other keys or input from New Window or Standalone. Follow the [Lua controller guide](/docs/scripting/lua/input) for attachment steps, a complete example, and troubleshooting.", protocolNote],
   },
   logging: {
     title: "Logging API", summary: "Send a bounded diagnostic message to the live game console.",
@@ -135,6 +135,26 @@ const docs: Record<string, ApiDoc> = {
     calls: ["rustic.set_enabled(enabled)"], parameters: [p("enabled", "boolean", true, "True to enable; false to disable.")],
     returns: "No value. The change applies after the callback and can trigger enable/disable lifecycle callbacks.",
     examples: simpleMutationExamples("rustic.set_enabled(false)", "rustic.set_enabled(false);"), notes: [protocolNote],
+  },
+  environment: {
+    title: "Scene environment API", summary: "Read and update all loaded-scene sky, ambient light, sun light and haze settings in every scripting language.",
+    when: "Call during Start or a later gameplay callback. Attach a scene startup or object component script, copy panoramas into the project before Play, and enable the environment. See [Sky & atmosphere](/docs/guides/scene-environment) for complete setup and all 13 fields.",
+    calls: ["Game.scene.getEnvironment()", "Game.scene.setEnvironment(settings)", "Game.scene.setSkyTexture(path)", "C: Game.scene.getEnvironment(field) / setEnvironment(field, value)"],
+    parameters: [p("settings", "partial settings object", true, "enabled, sky_image, sky_color, rotation_degrees, exposure, ambient_color, ambient_intensity, sun_color, sun_intensity, sun_direction, haze_color, haze_density, haze_start. Omitted fields retain current values."), p("path", "project-relative string", true, "2:1 HDR, PNG, JPEG or TGA panorama present in the play snapshot. Empty clears the image."), p("field", "setting name (C)", true, "C reads/writes one typed field per call.")],
+    returns: "Live settings as a fresh object. Partial updates validate and commit atomically and return the resulting settings; C reads return RusticValue and C setters return void.",
+    examples: {
+      "Lua 5.4": "Game.scene.setEnvironment({enabled=true,sun_intensity=1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment().sky_image)",
+      JavaScript: "Game.scene.setEnvironment({enabled:true,sun_intensity:1});\nGame.scene.setSkyTexture('assets/skies/day.hdr');\nprint(Game.scene.getEnvironment().sky_image);",
+      Python: "from rustic import Game\nGame.scene.setEnvironment({'enabled':True,'sun_intensity':1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment()['sky_image'])",
+      "C++": 'Game.scene.setEnvironment({{"enabled",true},{"sun_intensity",1.0}});\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nauto sky=Game.scene.getEnvironment().at("sky_image").string();',
+      "C#": 'Game.scene.setEnvironment(new {enabled=true,sun_intensity=1});\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nvar sky=Game.scene.getEnvironment().GetProperty("sky_image").GetString();',
+      Luau: "Game.scene.setEnvironment({enabled=true,sun_intensity=1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment().sky_image)",
+      C: 'Game.scene.setEnvironment("enabled",(RusticValue){.type=RUSTIC_BOOL,.boolean=true});\nGame.scene.setEnvironment("sun_intensity",(RusticValue){.type=RUSTIC_NUMBER,.number=1});\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nRusticValue sky=Game.scene.getEnvironment("sky_image");',
+      Java: 'Game.scene.setEnvironment(java.util.Map.of("enabled",true,"sun_intensity",1));\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nvar env=(java.util.Map<?,?>)Game.scene.getEnvironment();',
+      PHP: 'global $Game;\n$Game->scene->setEnvironment(["enabled"=>true,"sun_intensity"=>1]);\n$Game->scene->setSkyTexture("assets/skies/day.hdr");\n$sky=$Game->scene->getEnvironment()["sky_image"];',
+      "HTML / inline JS": "Game.scene.setEnvironment({enabled:true,sun_intensity:1});\nGame.scene.setSkyTexture('assets/skies/day.hdr');\nprint(Game.scene.getEnvironment().sky_image);",
+    },
+    notes: ["Unknown settings and invalid values raise errors without mutating the environment. Exposure is limited to [-20,20]; colors/intensities/distances must be finite and non-negative; sun direction must be finite and nonzero.", "setSkyTexture changes only the image; set enabled=true separately. The renderer checks the image on the next frame. The panorama does not generate image-based lighting or reflections.", "Changes affect the running scene and do not save to the editor or appear in Apply Runtime Changes. Restart Play to restore authored settings.", protocolNote],
   },
   scene: {
     title: "Scene lookup API", summary: "Resolve stable scene paths to entity IDs and list paths in the play snapshot.",
@@ -174,7 +194,16 @@ function simpleMutationExamples(dynamic: string, compiled: string): Record<strin
 export function buildApiMarkdown(id: string) {
   if (id === "overview") return overview();
   if (id === "callbacks") return callbacks();
-  const doc = docs[id];
+  const entityTopic = id === "entity-identity" || id === "frame-time";
+  const doc = entityTopic ? {
+    ...docs.entity,
+    title: id === "entity-identity" ? "Entity identity API" : "Frame time API",
+    summary: id === "entity-identity" ? "Identify the behavior owner with its stable entity ID." : "Read engine-supplied frame intervals in seconds.",
+    when: id === "entity-identity" ? "Read the entity ID when another system needs a stable reference to this owner." : "Use delta_time with Update for frame-rate-independent presentation and fixed_delta_time with FixedUpdate for simulation.",
+    calls: id === "entity-identity" ? ["rustic.entity_id()"] : ["rustic.delta_time()", "rustic.fixed_delta_time()"],
+    returns: id === "entity-identity" ? "The ID is a stable string." : "Time values are finite seconds.",
+    examples: Object.fromEntries(Object.entries(docs.entity.examples).map(([language, example]) => [language, id === "entity-identity" ? example.split("\n")[0] : example.split("\n").slice(1).join("\n")])),
+  } : docs[id];
   if (!doc) throw new Error(`Unknown API document: ${id}`);
   const variables = doc.parameters.length ? `| Variable | Type | Required | Description |\n| --- | --- | --- | --- |\n${doc.parameters.map((x) => `| \`${x.name}\` | ${x.type} | ${x.required ? "Yes" : "No"} | ${x.description} |`).join("\n")}` : "This API has no arguments.";
   const examples = languages.map((lang) => `### ${lang}\n\n\`\`\`${codeLanguage(lang)}\n${doc.examples[lang]}\n\`\`\``).join("\n\n");

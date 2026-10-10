@@ -24,7 +24,7 @@ export function DocsLanding() {
           <Link href="/docs/guides/gameplay-programming"><BookOpen size={24} /><span><strong>Your first gameplay script</strong><small>Create a behavior, attach it, and try it in Play.</small></span><ArrowRight size={18} /></Link>
           <Link href="/docs/scripting/lua"><Code2 size={24} /><span><strong>Choose a scripting language</strong><small>Start with Lua, or explore the other language guides.</small></span><ArrowRight size={18} /></Link>
           <Link href="/docs/open-source/docs/documentation"><Globe size={24} /><span><strong>Contribute a guide</strong><small>Find the sources and make your page easy to discover.</small></span><ArrowRight size={18} /></Link>
-          <Link href="/docs/search"><Search size={24} /><span><strong>Find what you need</strong><small>Search APIs, engine usage, and open-source development guides.</small></span><ArrowRight size={18} /></Link>
+          <Link href="/docs/search"><Search size={24} /><span><strong>Find what you need</strong><small>Search engine APIs, guides, and scripting examples.</small></span><ArrowRight size={18} /></Link>
         </div>
       </section>
       <footer className="page-footer"><span>Rustic Engine · Built in Rust. Made for your ideas.</span><Link href="https://github.com/Rustic-Game-Engine">Explore all repositories <ArrowRight size={14} /></Link></footer>
