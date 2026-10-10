@@ -43,6 +43,7 @@ export const docGroups: DocGroup[] = [
     { slug: "api/camera", title: "Current camera", description: "Select the active game camera by path or entity ID.", source: "api:camera" },
   ] },
   { label: "Engine guides", docs: [
+    { slug: "guides/scene-environment", title: "Sky & atmosphere", description: "Set a per-scene panorama, ambient and sun lighting, and distance haze.", source: "docs/SCENE_ENVIRONMENT.md" },
     { slug: "guides/physics", title: "Basic physics", description: "Gravity, falling primitives, collision, anchored floors, and current limits.", source: "docs/PHYSICS.md" },
     { slug: "guides/ai-agents", title: "AI agents & app data", description: "Connect Codex or Claude and inspect or edit agent information through MCP.", source: "docs/AGENT_INTEGRATION.md" },
     { slug: "guides/gameplay-programming", title: "Gameplay programming", description: "Script attachment, execution order, reload, and runtime behavior.", source: "docs/GAMEPLAY_PROGRAMMING.md" },
