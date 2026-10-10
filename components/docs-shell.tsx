@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Check, Copy } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useMemo, useState } from "react";
-import { allDocs, routeFor } from "@/lib/docs-catalog";
+import { allDocs, docSections, routeFor } from "@/lib/docs-catalog";
 
 import { SiteFrame } from "./site-frame";
 
@@ -113,6 +113,6 @@ export function DocsShell({ markdown, title, group }: { markdown: string; title:
   const currentIndex = projectDocs.findIndex((doc) => routeFor(doc.slug) === pathname);
 
   return <SiteFrame aside={<><p>ON THIS PAGE</p>{headings.map((heading) => <a className={heading.level === 3 ? "nested" : ""} href={`#${heading.id}`} key={heading.id}>{heading.text}</a>)}</>}>
-      <main className="content doc-content"><div className="breadcrumbs"><Link href="/docs">DOCS</Link><ArrowRight size={13} /><Link href={currentDoc?.project === "Website" ? "/docs/website" : "/docs/engine"}>{currentDoc?.project.toUpperCase()}</Link><ArrowRight size={13} /><span>{group.toUpperCase()}</span><ArrowRight size={13} /><span>{title.toUpperCase()}</span></div><article className="markdown"><Markdown source={markdown} /></article><nav className="page-pagination" aria-label="Documentation pages">{currentIndex > 0 ? <Link href={routeFor(projectDocs[currentIndex - 1].slug)}><ArrowLeft size={16} /><span><small>PREVIOUS</small>{projectDocs[currentIndex - 1].title}</span></Link> : <span />}{currentIndex < projectDocs.length - 1 ? <Link className="next" href={routeFor(projectDocs[currentIndex + 1].slug)}><span><small>NEXT</small>{projectDocs[currentIndex + 1].title}</span><ArrowRight size={16} /></Link> : null}</nav></main>
+      <main className="content doc-content"><div className="breadcrumbs"><Link href="/docs">DOCS</Link><ArrowRight size={13} /><Link href={docSections.find((section) => section.title === currentDoc?.project)?.href ?? "/docs/repositories"}>{currentDoc?.project.toUpperCase()}</Link><ArrowRight size={13} /><span>{group.toUpperCase()}</span><ArrowRight size={13} /><span>{title.toUpperCase()}</span></div><article className="markdown"><Markdown source={markdown} /></article><nav className="page-pagination" aria-label="Documentation pages">{currentIndex > 0 ? <Link href={routeFor(projectDocs[currentIndex - 1].slug)}><ArrowLeft size={16} /><span><small>PREVIOUS</small>{projectDocs[currentIndex - 1].title}</span></Link> : <span />}{currentIndex < projectDocs.length - 1 ? <Link className="next" href={routeFor(projectDocs[currentIndex + 1].slug)}><span><small>NEXT</small>{projectDocs[currentIndex + 1].title}</span><ArrowRight size={16} /></Link> : null}</nav></main>
   </SiteFrame>;
 }

@@ -4,13 +4,13 @@ import { ChevronDown, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
-import { docSections, routeFor } from "@/lib/docs-catalog";
+import { allDocs, docSections, routeFor } from "@/lib/docs-catalog";
 
 export function SiteFrame({ children, aside }: { children: ReactNode; aside: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const isIndex = pathname === "/" || pathname === "/docs" || pathname === "/docs/search";
-  const project = pathname.startsWith("/docs/website") ? "Website" : "Engine";
+  const isIndex = pathname === "/" || pathname === "/docs" || pathname === "/docs/search" || pathname === "/docs/repositories";
+  const project = allDocs.find((doc) => routeFor(doc.slug) === pathname)?.project ?? "Engine";
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -31,16 +31,17 @@ export function SiteFrame({ children, aside }: { children: ReactNode; aside: Rea
     <header className="topbar">
       <Link className="brand" href="/" aria-label="Rustic docs home"><span className="brand-mark"><span /></span><span>RUSTIC</span><span className="brand-division">DOCS</span></Link>
       <Link className="search-trigger" href="/docs/search"><Search size={17} /><span>Search documentation</span></Link>
-      <nav className="top-actions" aria-label="Site links"><span className="version-button">v0.1 <ChevronDown size={14} /></span><a href="https://github.com/Rustic-Game-Engine/engine" aria-label="Rustic Engine on GitHub"><Github size={19} /></a><button className="icon-button" onClick={() => setDark((value) => !value)} aria-label="Toggle theme">{dark ? <Sun size={18} /> : <Moon size={18} />}</button><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation" aria-expanded={menuOpen} aria-controls="docs-sidebar"><Menu /></button></nav>
+      <nav className="top-actions" aria-label="Site links"><span className="version-button">v0.1 <ChevronDown size={14} /></span><a href="https://github.com/Rustic-Game-Engine" aria-label="Rustic repositories on GitHub"><Github size={19} /></a><button className="icon-button" onClick={() => setDark((value) => !value)} aria-label="Toggle theme">{dark ? <Sun size={18} /> : <Moon size={18} />}</button><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation" aria-expanded={menuOpen} aria-controls="docs-sidebar"><Menu /></button></nav>
     </header>
     <div className="docs-shell article-shell">
       <aside id="docs-sidebar" className={menuOpen ? "sidebar open" : "sidebar"}>
         <div className="sidebar-mobile-head"><span>Documentation</span><button onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X /></button></div>
         <nav className="sidebar-content" aria-label="Documentation">
           <Link className="home-link" href="/" onClick={() => setMenuOpen(false)} aria-current={pathname === "/" || pathname === "/docs" ? "page" : undefined}>Welcome to Rustic</Link>
+          <Link className="repository-directory-link" href="/docs/repositories" onClick={() => setMenuOpen(false)}>Open-source repositories</Link>
           <div className="project-switcher" aria-label="Documentation projects">{docSections.map((section) => <Link href={section.href} key={section.title} className={!isIndex && project === section.title ? "active" : ""} onClick={() => setMenuOpen(false)}>{section.title}</Link>)}</div>
           {docSections.filter((section) => isIndex || section.title === project).map((section) => <div className="nav-project" key={section.title}>
-            <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}<span>{section.title === "Engine" ? "Engine/" : "docs repo"}</span></Link>
+            <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}<span>{section.repository}</span></Link>
             {(isIndex ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
               <p>{group.label === section.title ? "Contributor guides" : group.label}</p>
               {group.docs.map((doc) => <Link className={routeFor(doc.slug) === pathname ? "active" : ""} aria-current={routeFor(doc.slug) === pathname ? "page" : undefined} href={routeFor(doc.slug)} key={doc.slug} onClick={() => setMenuOpen(false)}>{doc.title}</Link>)}

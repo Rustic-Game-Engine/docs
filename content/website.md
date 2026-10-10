@@ -1,26 +1,94 @@
-# Welcome to the documentation website
+# Docs repository
 
-This is the home of Rustic Engine's guides and API reference. The Next.js website lives at the root of the [docs repository](https://github.com/Rustic-Game-Engine/docs), separate from the Rust [engine repository](https://github.com/Rustic-Game-Engine/engine).
+[Open the docs repository on GitHub](https://github.com/Rustic-Game-Engine/docs).
 
-## Run the website
+This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
 
-Use Node.js 24 and run these commands from the docs repository root:
+## Languages and framework
+
+The application is written in **TypeScript** and **React**, using **Next.js 16.4** and React 19. Styling uses **CSS**; guides use **Markdown**; generated API text is maintained in TypeScript. npm manages dependencies. Next.js produces static HTML and browser assets for Cloudflare Pages; the published site does not need a running Node.js server.
+
+## Prerequisites
+
+- Git to clone your fork and manage contributions.
+- **Node.js 24** and npm, matching the repository's CI and deployment workflows.
+- A modern browser for local preview and an editor for TypeScript, CSS, and Markdown.
+- Internet access to install locked npm dependencies and fetch Google fonts during builds.
+- Cloudflare access only if you want to publish to your own Pages project. Local development needs no Cloudflare token or engine installation.
+
+## Fork and run your own version
+
+Fork the repository on GitHub, replace `YOUR_ACCOUNT`, then run:
 
 ```sh
+git clone https://github.com/YOUR_ACCOUNT/docs.git
+cd docs
+git switch -c my-docs-change
+node --version
 npm ci
 npm run dev
 ```
 
-Open the local URL printed by Next.js. The welcome page is available at `/` and `/docs`; the engine documentation starts at `/docs/engine`.
+Open the local URL printed by Next.js, normally `http://localhost:3000`. Both `/` and `/docs` show the welcome page. `npm ci` uses the committed lockfile so your dependencies match CI.
 
-## Find your way around
+For a first customization, change a repository guide in `content/` and reload its page. Then update the landing page copy, colors in `app/globals.css`, and the catalog as needed. Keep a new site's project name, GitHub links, metadata, favicon, and deployment target consistent with your fork.
 
-- [Writing documentation](/docs/website/documentation) covers source files, the page catalog, and API generation.
-- [Development & deployment](/docs/website/development) covers the static build, Cloudflare Pages, and repository deployment workflow.
-- [Engine overview](/docs/engine) leads to gameplay guides, scripting languages, and the API reference.
+## Source map and good starting points
 
-## Separate projects
+| File or directory | What it controls | A good first change |
+| --- | --- | --- |
+| [app/page.tsx](https://github.com/Rustic-Game-Engine/docs/blob/main/app/page.tsx), `components/docs-landing.tsx` | Welcome page and repository cards | Explain your project and link its guides |
+| `app/layout.tsx`, `public/favicon.svg` | Site metadata, fonts, and identity | Update the title, description, and icon |
+| `app/globals.css` | Colors, typography, article layouts, mobile behavior | Adjust a design token and check desktop/mobile |
+| [lib/docs-catalog.ts](https://github.com/Rustic-Game-Engine/docs/blob/main/lib/docs-catalog.ts) | Page slugs, descriptions, repository groups, navigation, and search index | Register a new guide |
+| `docs/`, `content/` | Engine guides and repository/contributor guides | Improve setup steps or add a focused tutorial |
+| [lib/docs.ts](https://github.com/Rustic-Game-Engine/docs/blob/main/lib/docs.ts) | Finds catalog entries and loads Markdown or generated API text | Understand the build-time source flow |
+| `lib/api-docs.ts` | Generates the API reference Markdown | Correct a behavior description against the engine |
+| `app/docs/[[...slug]]/page.tsx` | Static documentation routes and page metadata | Understand how catalog entries become exported pages |
+| `components/site-frame.tsx` | Shared header, repository navigation, theme, and mobile menu | Improve navigation or accessibility |
+| `components/docs-shell.tsx` | Markdown rendering, code copying, table of contents, and pagination | Check how supported Markdown is displayed |
+| `components/docs-search.tsx` | Browser-side catalog search and results | Improve search descriptions or presentation |
 
-Run Rust commands inside `Engine/` in the engine repository. Run Node.js commands at the root of the docs repository. Keep the two projects separate; the docs site builds on its own without an engine checkout.
+Guides are rendered by a small custom Markdown renderer. Use its supported headings, lists, links, code fences, blockquotes, and tables; raw HTML and arbitrary MDX components are not part of the documented content format. See [Writing documentation](/docs/website/documentation) for a complete page-entry example.
 
-Published engine guides live in `docs/`, generated API content in `lib/api-docs.ts`, website contributor guides in `content/`, and navigation in `lib/docs-catalog.ts`. Read the docs repository's `AGENTS.md` before changing this project. When engine behavior changes, update the affected published docs here and the corresponding `Engine/docs` content in the engine repository.
+## Main scripts and workflows
+
+Run npm commands at the docs repository root:
+
+| Command or file | Purpose | Expected result |
+| --- | --- | --- |
+| `npm ci` | Installs the exact locked dependency tree | Creates local `node_modules/` |
+| `npm run dev` | Starts Next.js development mode | Local preview with refresh on edits |
+| `npm run build` | Compiles, type-checks, and exports all catalog pages | Deployable static site in `out/` |
+| `npm run lint -- --max-warnings=0` | Runs ESLint, React, hooks, TypeScript, and accessibility rules | Fails on errors or warnings |
+| `npx tsc --noEmit` | Checks TypeScript after route types have been generated | No emitted application files |
+| `npm audit --audit-level=moderate` | Checks dependencies for known vulnerabilities | Reports moderate or higher findings |
+| `npm run start` | Calls `next start` | Not suitable for this site's static export; preview `out/` instead |
+| [quality.yml](https://github.com/Rustic-Game-Engine/docs/blob/main/.github/workflows/quality.yml) | Installs with Node.js 24, then runs lint, build, types, and audit | Pull-request and main-branch validation |
+| [deploy-website.yml](https://github.com/Rustic-Game-Engine/docs/blob/main/.github/workflows/deploy-website.yml) | Builds and uploads `out/` to Cloudflare Pages on `main` | Production deployment when credentials are configured |
+
+Before opening a pull request:
+
+```sh
+npm run lint -- --max-warnings=0
+npm run build
+npx tsc --noEmit
+npm audit --audit-level=moderate
+```
+
+## Publish your own documentation site
+
+Build with `npm run build`, then deploy `out/` to your own static host. For Cloudflare Pages, use a separate project for your fork and replace the upstream project/account settings in the workflow. Configure `CLOUDFLARE_API_TOKEN` in your own repository's Actions secrets with Pages Edit access to that account. Do not commit a token or reuse the upstream production target.
+
+Preview the static build with `npx wrangler pages dev out`. Check `/`, `/docs/repositories`, a deep article link, search, and a missing-page response. Read [Development & deployment](/docs/website/development) for the existing project's workflow and configuration.
+
+## Diagnose common setup failures
+
+- `npm ci` fails: confirm Node.js 24 and a consistent `package.json`/`package-lock.json`; use npm when intentionally changing dependencies.
+- TypeScript cannot find generated route types: run `npm run build` before the standalone type check.
+- A new guide does not appear: add it to `lib/docs-catalog.ts`; creating a Markdown file alone does not register a page.
+- A build cannot read a guide: check the catalog's source path relative to this repository root.
+- Font download fails: confirm the build environment can reach the configured Google font services.
+- Cloudflare's credential check fails: configure the repository secret; the last successful production deployment stays live.
+
+When an engine API changes, update the published guide here alongside the matching `Engine/docs` content in the [engine repository](https://github.com/Rustic-Game-Engine/engine). Return to the [repository directory](/docs/repositories) for the other public projects.

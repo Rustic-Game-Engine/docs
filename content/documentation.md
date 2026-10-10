@@ -18,7 +18,7 @@ Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs
 { slug: "website/my-guide", title: "My guide", description: "What readers will learn.", source: "content/my-guide.md" }
 ```
 
-The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine entries in an engine group and website entries in the Website group. The page above appears at `/docs/website/my-guide`.
+The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine entries in an engine group, examples in Examples, and hosting SDK guides in Hosting SDK and docs contributor entries in the Docs group. The page above appears at `/docs/website/my-guide`.
 
 ## Link and format content
 

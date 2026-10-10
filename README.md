@@ -20,8 +20,9 @@ npm run dev
 
 For a production build, run `npm run build`. The deployable site is in `out/`.
 It includes the documentation, generated API pages, client-side search, and a
-404 page. Both `/` and `/docs` show the welcome page. Engine guides and APIs
-start at `/docs/engine`, and website contributor guides at `/docs/website`.
+404 page. Both `/` and `/docs` show the welcome page. The open-source directory is at `/docs/repositories`, with detailed guides
+for the engine (`/docs/engine`), docs (`/docs/website`), examples (`/docs/examples`),
+and hosting SDK (`/docs/hosting-sdk`) repositories.
 The API overview is at `/docs/api/overview`. Website guides live in `content/`
 and are registered alongside engine guides in `lib/docs-catalog.ts`.
 Preview the exported site with `npx wrangler pages dev out`; `next start` does
