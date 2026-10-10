@@ -99,3 +99,12 @@ export function canonicalDocPath(pathname: string) { return routeFor(resolveDocS
 
 export const allDocs = docSections.flatMap((section) => section.groups.flatMap((group) => group.docs.map((doc) => ({ ...doc, group: group.label, project: section.title }))));
 export function routeFor(slug: string) { return slug ? `/docs/${slug}` : "/docs"; }
+
+export function projectForPath(pathname: string) {
+  const canonicalPath = canonicalDocPath(pathname);
+  return canonicalPath === "/docs/open-source" || canonicalPath.startsWith("/docs/open-source/") ? "Open-Sourced Docs" : "Engine";
+}
+
+export function searchRouteFor(project: string) {
+  return project === "Open-Sourced Docs" ? "/docs/open-source/search" : "/docs/search";
+}

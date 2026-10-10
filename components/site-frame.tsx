@@ -4,14 +4,15 @@ import { ChevronDown, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
-import { allDocs, canonicalDocPath, docSections, routeFor } from "@/lib/docs-catalog";
+import { canonicalDocPath, docSections, projectForPath, routeFor, searchRouteFor } from "@/lib/docs-catalog";
 
 export function SiteFrame({ children, aside }: { children: ReactNode; aside: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const canonicalPath = canonicalDocPath(pathname);
-  const isIndex = pathname === "/" || pathname === "/docs" || pathname === "/docs/search";
-  const project = allDocs.find((doc) => routeFor(doc.slug) === canonicalPath)?.project ?? "Engine";
+  const isIndex = pathname === "/" || pathname === "/docs";
+  const project = projectForPath(pathname);
+  const searchHref = searchRouteFor(project);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -19,19 +20,19 @@ export function SiteFrame({ children, aside }: { children: ReactNode; aside: Rea
     const handler = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
-        if (pathname === "/docs/search") document.querySelector<HTMLInputElement>(".search-field input")?.focus();
-        else router.push("/docs/search");
+        if (pathname === searchHref) document.querySelector<HTMLInputElement>(".search-field input")?.focus();
+        else router.push(searchHref);
       }
       if (event.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [pathname, router]);
+  }, [pathname, router, searchHref]);
 
   return <div className={dark ? "site dark" : "site"}>
     <header className="topbar">
       <Link className="brand" href="/" aria-label="Rustic docs home"><span className="brand-mark"><span /></span><span>RUSTIC</span><span className="brand-division">DOCS</span></Link>
-      <Link className="search-trigger" href="/docs/search"><Search size={17} /><span>Search documentation</span></Link>
+      <Link className="search-trigger" href={searchHref}><Search size={17} /><span>Search documentation</span></Link>
       <nav className="top-actions" aria-label="Site links"><span className="version-button">v0.1 <ChevronDown size={14} /></span><a href="https://github.com/Rustic-Game-Engine" aria-label="Rustic repositories on GitHub"><Github size={19} /></a><button className="icon-button" onClick={() => setDark((value) => !value)} aria-label="Toggle theme">{dark ? <Sun size={18} /> : <Moon size={18} />}</button><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation" aria-expanded={menuOpen} aria-controls="docs-sidebar"><Menu /></button></nav>
     </header>
     <div className="docs-shell article-shell">

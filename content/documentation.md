@@ -20,6 +20,8 @@ Add an entry to the appropriate group in `lib/docs-catalog.ts`. Each entry needs
 
 The catalog supplies static routes, sidebar navigation, previous and next links, and the client-side search index. Put engine usage pages in the engine groups. Under Open-Sourced Docs, use Engine source for engine development, Docs for website development, Examples for sample contributions, and Hosting SDK for SDK development. The page above appears at `/docs/open-source/docs/my-guide`.
 
+Search indexes the full page content, including code examples and generated API references, at build time. Engine search (`/docs/search`) only returns Engine pages; Open-Sourced Docs search (`/docs/open-source/search`) only returns repository guides. The search button and Ctrl/Cmd+K open the search for the current section.
+
 ## Link and format content
 
 Use a single level-one heading, followed by descriptive level-two or level-three sections. The renderer supports paragraphs, lists, links, inline code, bold text, fenced code blocks, blockquotes, and tables. Use explicit `/docs/...` links for website pages and cross-project references; source-file links can be resolved for cataloged engine documents.
