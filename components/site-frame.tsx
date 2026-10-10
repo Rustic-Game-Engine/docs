@@ -4,7 +4,18 @@ import { ChevronDown, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
-import { canonicalDocPath, docSections, projectForPath, routeFor, searchRouteFor } from "@/lib/docs-catalog";
+import { canonicalDocPath, docSections, projectForPath, routeFor, searchRouteFor, type DocEntry } from "@/lib/docs-catalog";
+
+function DocNavigation({ doc, docs, pathname, onNavigate }: { doc: DocEntry; docs: DocEntry[]; pathname: string; onNavigate: () => void }) {
+  const children = docs.filter((entry) => entry.parent === doc.slug);
+  const href = routeFor(doc.slug);
+  const link = <Link className={href === pathname ? "active" : ""} aria-current={href === pathname ? "page" : undefined} href={href} onClick={onNavigate}>{children.length ? "Overview" : doc.title}</Link>;
+  if (!children.length) return link;
+  return <details className="nav-guide" open={pathname === href || pathname.startsWith(`${href}/`)}>
+    <summary>{doc.title}</summary>
+    <div className="nav-subpages">{link}{children.map((child) => <DocNavigation key={child.slug} doc={child} docs={docs} pathname={pathname} onNavigate={onNavigate} />)}</div>
+  </details>;
+}
 
 export function SiteFrame({ children, aside }: { children: ReactNode; aside: ReactNode }) {
   const pathname = usePathname();
@@ -45,7 +56,7 @@ export function SiteFrame({ children, aside }: { children: ReactNode; aside: Rea
             <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}</Link>
             {(isIndex && section.title === "Engine" ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
               <p>{group.label === "Open-Sourced Docs" ? "Overview" : group.label === "Engine source" ? "Engine" : group.label}</p>
-              {group.docs.map((doc) => <Link className={routeFor(doc.slug) === canonicalPath ? "active" : ""} aria-current={routeFor(doc.slug) === canonicalPath ? "page" : undefined} href={routeFor(doc.slug)} key={doc.slug} onClick={() => setMenuOpen(false)}>{doc.title}</Link>)}
+              {group.docs.filter((doc) => !doc.parent).map((doc) => <DocNavigation key={`${doc.slug}:${canonicalPath}`} doc={doc} docs={group.docs} pathname={canonicalPath} onNavigate={() => setMenuOpen(false)} />)}
             </section>)}
           </div>)}
         </nav>

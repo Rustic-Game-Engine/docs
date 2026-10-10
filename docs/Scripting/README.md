@@ -30,7 +30,7 @@ records retain that ID even if the source file moves.
 **Play keyboard status:** The embedded Play viewport currently forwards only held
 WASD, arrow, and Shift keys to scripts. Press/release events, named input actions,
 other key names, and separate runtime-window keyboard input are not wired yet.
-See the [Lua input guide](scriptingLua.md#input) for supported names, setup, a
+See the [Lua input guide](/docs/scripting/lua/input) for supported names, setup, a
 copyable controller, and troubleshooting. The same held-key limitation applies
 to other script languages.
 
