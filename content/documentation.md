@@ -2,6 +2,8 @@
 
 Help first-time users succeed with exact setup steps, copyable examples, expected results, current limitations, and ways to diagnose common failures. Update documentation alongside the engine change whenever engine functionality or scripting behavior changes.
 
+For the complete contributor path, begin with [Documentation Overview](/docs/open-source/docs/overview), then [Local Setup](/docs/open-source/docs/local-setup) and [Writing Guidelines](/docs/open-source/docs/writing-guidelines). Use [Adding Documentation](/docs/open-source/docs/adding-documentation) for new routes and [Editing Existing Pages](/docs/open-source/docs/editing-pages) for corrections.
+
 ## Choose the source
 
 - Engine guides live in `docs/` in this repository. Keep the corresponding `Engine/docs/` content in the engine repository accurate too.
