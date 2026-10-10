@@ -9,9 +9,10 @@ import { canonicalDocPath, docSections, projectForPath, routeFor, searchRouteFor
 function DocNavigation({ doc, docs, pathname, onNavigate }: { doc: DocEntry; docs: DocEntry[]; pathname: string; onNavigate: () => void }) {
   const children = docs.filter((entry) => entry.parent === doc.slug);
   const href = routeFor(doc.slug);
+  const [expanded, setExpanded] = useState(() => pathname === href || pathname.startsWith(`${href}/`));
   const link = <Link className={href === pathname ? "active" : ""} aria-current={href === pathname ? "page" : undefined} href={href} onClick={onNavigate}>{children.length ? "Overview" : doc.title}</Link>;
   if (!children.length) return link;
-  return <details className="nav-guide" open={pathname === href || pathname.startsWith(`${href}/`)}>
+  return <details className="nav-guide" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
     <summary>{doc.title}</summary>
     <div className="nav-subpages">{link}{children.map((child) => <DocNavigation key={child.slug} doc={child} docs={docs} pathname={pathname} onNavigate={onNavigate} />)}</div>
   </details>;
@@ -56,7 +57,7 @@ export function SiteFrame({ children }: { children: ReactNode }) {
             <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}</Link>
             {(isIndex && section.title === "Engine" ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
               <p>{group.label === "Open-Sourced Docs" ? "Overview" : group.label === "Engine source" ? "Engine" : group.label}</p>
-              {group.docs.filter((doc) => !doc.parent).map((doc) => <DocNavigation key={`${doc.slug}:${canonicalPath}`} doc={doc} docs={group.docs} pathname={canonicalPath} onNavigate={() => setMenuOpen(false)} />)}
+              {group.docs.filter((doc) => !doc.parent).map((doc) => <DocNavigation key={doc.slug} doc={doc} docs={group.docs} pathname={canonicalPath} onNavigate={() => setMenuOpen(false)} />)}
             </section>)}
           </div>)}
         </nav>
