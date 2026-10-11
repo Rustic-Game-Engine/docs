@@ -211,6 +211,16 @@ kbd { display: flex; align-items: center; gap: 2px; padding: 3px 6px; border: 1p
 .doc-code > div { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #343539; color: #9fa1a7; font: 600 .68rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .doc-code button { display: flex; align-items: center; gap: 6px; border: 0; background: transparent; color: #d6d6d6; cursor: pointer; font: .72rem var(--font-mono); }
 .doc-code pre { margin: 0; padding: 20px; overflow: auto; font: .83rem/1.7 var(--font-mono); }
+.doc-code .hljs-comment, .doc-code .hljs-quote { color: #a0a6b2; font-style: italic; }
+.doc-code .hljs-keyword, .doc-code .hljs-selector-tag, .doc-code .hljs-literal { color: #c4a7e7; }
+.doc-code .hljs-string, .doc-code .hljs-regexp, .doc-code .hljs-addition { color: #a3d9a5; }
+.doc-code .hljs-number, .doc-code .hljs-symbol, .doc-code .hljs-bullet { color: #f2c078; }
+.doc-code .hljs-title, .doc-code .hljs-section { color: #8fc7ef; }
+.doc-code .hljs-built_in, .doc-code .hljs-type, .doc-code .hljs-class { color: #82d8cf; }
+.doc-code .hljs-attr, .doc-code .hljs-attribute, .doc-code .hljs-variable, .doc-code .hljs-params { color: #edc8a3; }
+.doc-code .hljs-meta, .doc-code .hljs-tag, .doc-code .hljs-name, .doc-code .hljs-deletion { color: #f49b91; }
+.doc-code .hljs-emphasis { font-style: italic; }
+.doc-code .hljs-strong { font-weight: 700; }
 .table-wrap { margin: 26px 0; overflow-x: auto; border: 1px solid var(--line); }
 .markdown table { width: 100%; border-collapse: collapse; font-size: .86rem; line-height: 1.5; }
 .markdown th { background: var(--soft); text-align: left; font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; }

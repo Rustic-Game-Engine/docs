@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useMemo, useState } from "react";
 import { allDocs, canonicalDocPath, docSections, routeFor } from "@/lib/docs-catalog";
+import { highlightCode, type SyntaxNode } from "@/lib/syntax-highlighting";
 
 import { RepositoryCards } from "./repository-cards";
 
@@ -42,14 +43,24 @@ function inline(text: string): ReactNode[] {
   return nodes;
 }
 
+function syntaxNodes(nodes: SyntaxNode[]): ReactNode[] {
+  return nodes.map((node, index) => {
+    if (node.type === "text") return node.value;
+    if (node.type !== "element") return null;
+    const classes = node.properties.className;
+    return <span className={Array.isArray(classes) ? classes.join(" ") : undefined} key={index}>{syntaxNodes(node.children)}</span>;
+  });
+}
+
 function CodeBlock({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
+  const highlighted = useMemo(() => syntaxNodes(highlightCode(code, language)), [code, language]);
   const copy = async () => {
     await navigator.clipboard.writeText(code);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1500);
   };
-  return <div className="doc-code"><div><span>{language}</span><button onClick={copy}>{copied ? <Check size={14} /> : <Copy size={14} />}{copied ? "Copied" : "Copy"}</button></div><pre><code>{code}</code></pre></div>;
+  return <div className="doc-code"><div><span>{language}</span><button onClick={copy}>{copied ? <Check size={14} /> : <Copy size={14} />}{copied ? "Copied" : "Copy"}</button></div><pre><code>{highlighted}</code></pre></div>;
 }
 
 function Markdown({ source }: { source: string }) {
