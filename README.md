@@ -13,3 +13,15 @@ published guides and API references must also be made here.
 
 - [Development and build](/docs/open-source/docs/development/development-and-build)
 - [Cloudflare Pages deployment](/docs/open-source/docs/development/cloudflare-pages-deployment)
+
+## API examples
+
+Core scripting examples and lifecycle registration live in `lib/api-docs.ts`.
+Gameplay function examples live in `lib/api-example-data.json`; `lib/api-examples.ts`
+adds them to the published module pages and search index through `lib/docs.ts`.
+Each entry has an example for all ten script types. Where a language lacks a
+getter or needs explicit storage cleanup, document that difference instead of
+inventing a call. Check signatures against the engine SDKs when editing examples.
+
+Run `npm run check:api-examples` to verify language coverage, published calls,
+reachable pages, and lifecycle examples. CI runs this check before building.

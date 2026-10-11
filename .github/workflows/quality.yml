@@ -32,6 +32,7 @@ jobs:
           cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run lint -- --max-warnings=0
+      - run: npm run check:api-examples
       - run: npm run build
         if: ${{ !cancelled() }}
       - run: npx tsc --noEmit
