@@ -193,7 +193,7 @@ kbd { display: flex; align-items: center; gap: 2px; padding: 3px 6px; border: 1p
 .article-shell { min-height: calc(100vh - 68px); }
 .doc-content { max-width: 960px; width: 100%; margin: 0 auto; padding-bottom: 70px; }
 .markdown { padding-top: 46px; color: var(--ink); font-size: 1rem; line-height: 1.78; }
-.markdown h1 { margin: 0 0 26px; font-size: clamp(2.7rem, 5vw, 4.6rem); line-height: 1.02; letter-spacing: -.06em; }
+.markdown h1 { margin: 0 0 26px; font-size: clamp(2.7rem, 5vw, 4.6rem); line-height: 1.02; letter-spacing: -.06em; overflow-wrap: anywhere; }
 .markdown h1 + p { margin-top: -4px; padding-bottom: 30px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 1.08rem; line-height: 1.75; }
 .markdown h2 { margin: 64px 0 20px; padding-top: 8px; font-size: 1.75rem; line-height: 1.25; letter-spacing: -.035em; scroll-margin-top: 90px; }
 .markdown h3 { margin: 38px 0 14px; font-size: 1.2rem; letter-spacing: -.02em; scroll-margin-top: 90px; }
