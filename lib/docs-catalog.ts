@@ -1,7 +1,9 @@
-export type DocEntry = { slug: string; title: string; description: string; source: string; parent?: string };
+import { apiCategories } from "./api-reference";
+
+export type DocEntry = { slug: string; title: string; description: string; source: string; sourcePath?: string; parent?: string };
 export type DocGroup = { label: string; docs: DocEntry[] };
 
-export const docGroups: DocGroup[] = [
+const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
@@ -9,8 +11,6 @@ export const docGroups: DocGroup[] = [
   ] },
   { label: "Core API", docs: [
     { slug: "api/entity", title: "Entity & time", description: "Read the current entity ID and frame timing.", source: "content/entity-and-time.md" },
-    { slug: "api/entity/identity", title: "Entity identity", description: "Read the behavior owner’s stable entity ID.", source: "api:entity-identity", parent: "api/entity" },
-    { slug: "api/entity/frame-time", title: "Frame time", description: "Read frame and fixed-step intervals in seconds.", source: "api:frame-time", parent: "api/entity" },
     { slug: "api/transforms", title: "Transforms", description: "Read and change the owning entity's position.", source: "api:transforms" },
     { slug: "api/properties", title: "Public properties", description: "Read and update declared script properties.", source: "api:properties" },
     { slug: "api/attributes", title: "Built-in attributes", description: "Read or edit engine-owned entity attributes.", source: "api:attributes" },
@@ -64,6 +64,7 @@ export const docGroups: DocGroup[] = [
     { slug: "api/physics-actions/forces", title: "Physics forces", description: "Apply forces, impulses and velocity changes to simulated bodies.", source: "docs/Scripting/API/physics-actions/forces.md", parent: "api/physics-actions" },
     { slug: "api/effects", title: "Effects", description: "Fade, flash, shake and pulse entity properties with shared easing.", source: "docs/Scripting/API/effects.md" },
     { slug: "api/audio", title: "Audio", description: "List and select Windows audio devices, load reusable audio in Lua/Luau, and play and fade WAV, MP3, AAC, FLAC, and OGG voices.", source: "docs/Scripting/API/audio.md" },
+    { slug: "api/audio", title: "Audio", description: "Record audio and read microphone PCM in Lua/Luau; play WAV, MP3, AAC, FLAC, and OGG voices and control fades.", source: "docs/Scripting/API/audio.md" },
     { slug: "api/events", title: "Events and signals", description: "Communicate through queued global events and object-scoped signals across scripting languages.", source: "docs/Scripting/API/events.md" },
     { slug: "api/clock", title: "Clock", description: "Scale or pause the shared scene clock for actions, animation, physics and audio.", source: "docs/Scripting/API/clock.md" },
     { slug: "api/operation-handles", title: "Operation handles", description: "Inspect, pause, resume, cancel and observe engine-scheduled actions.", source: "docs/Scripting/API/operation-handles.md" },
@@ -240,6 +241,21 @@ export const docGroups: DocGroup[] = [
   ] },
 ];
 
+export const docGroups: DocGroup[] = categoryGroups.map((group) => ({
+  ...group,
+  docs: group.docs.flatMap((doc) => {
+    const category = apiCategories.find((entry) => entry.slug === doc.slug);
+    if (!category) return [doc];
+    return [
+      { ...doc, sourcePath: doc.source, source: `api-category:${category.slug}` },
+      ...category.calls.map((call) => ({
+        slug: call.slug, title: call.title, description: call.description,
+        source: `api-call:${call.slug}`, parent: category.slug,
+      })),
+    ];
+  }),
+}));
+
 const sourceGroups = ["Open-Sourced Docs", "Engine source", "Docs", "Examples", "Hosting SDK"];
 export const docSections = [
   { title: "Engine", href: "/docs/engine", groups: docGroups.filter((group) => !sourceGroups.includes(group.label)) },
@@ -247,6 +263,8 @@ export const docSections = [
 ];
 
 export const docAliases: Record<string, string> = {
+  "api/entity/identity": "api/entity/entity-id",
+  "api/entity/frame-time": "api/entity",
   "repositories": "open-source",
   "website": "open-source/docs",
   "website/documentation": "open-source/docs/documentation",

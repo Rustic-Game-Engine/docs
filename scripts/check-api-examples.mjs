@@ -9,7 +9,10 @@ const load = (file) => {
   const exports = {};
   const source = readFileSync(new URL(`../lib/${file}`, import.meta.url), "utf8");
   const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
-  runInNewContext(compiled, { exports, require: (id) => require(id === "./api-example-data.json" ? "../lib/api-example-data.json" : id) });
+  runInNewContext(compiled, { exports, require: (id) => {
+    if (id.startsWith("./") && !id.endsWith(".json")) return load(`${id.slice(2)}.ts`);
+    return require(id === "./api-example-data.json" ? "../lib/api-example-data.json" : id);
+  } });
   return exports;
 };
 const { buildApiMarkdown } = load("api-docs.ts");
@@ -20,7 +23,7 @@ const blocks = (markdown) => [...markdown.matchAll(/```[^\n]+\n([\s\S]*?)\n```/g
 let total = 0;
 for (const [topic, entries] of Object.entries(data)) {
   const source = `docs/Scripting/API/${topic}.md`;
-  assert(allDocs.some((doc) => doc.source === source), `Examples are unreachable: ${topic}`);
+  assert(allDocs.some((doc) => (doc.sourcePath ?? doc.source) === source), `Examples are unreachable: ${topic}`);
   const markdown = buildFunctionExamples(topic);
   const titles = new Set();
   for (const entry of entries) {

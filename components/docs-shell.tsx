@@ -17,7 +17,10 @@ function resolveDocHref(href: string) {
   const [source, fragment] = href.split("#", 2);
   const clean = source.replaceAll("\\", "/");
   const filename = clean.split("/").pop()?.toLowerCase();
-  const match = allDocs.find((doc) => doc.source.toLowerCase().endsWith(clean.toLowerCase()) || doc.source.split("/").pop()?.toLowerCase() === filename);
+  const match = allDocs.find((doc) => {
+    const sourcePath = "sourcePath" in doc ? doc.sourcePath ?? doc.source : doc.source;
+    return sourcePath.toLowerCase().endsWith(clean.toLowerCase()) || sourcePath.split("/").pop()?.toLowerCase() === filename;
+  });
   return match ? `${routeFor(match.slug)}${fragment ? `#${fragment}` : ""}` : href;
 }
 
