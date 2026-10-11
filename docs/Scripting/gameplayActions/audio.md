@@ -12,7 +12,7 @@ return { Start = function()
 end }
 ```
 
-`play` decodes WAV/OGG into a retained PCM voice; `playAt(source, position, options?)`
+`play` decodes WAV, MP3, AAC, FLAC, and OGG into a retained PCM voice; `playAt(source, position, options?)`
 adds distance attenuation relative to the active camera. A voice has an ID and
 `pause`, `resume`, `stop` controls. `volume(voice, value)` and `pitch(voice, value)`
 change playback parameters; fades and crossfades are scheduler actions with easing.
@@ -26,8 +26,7 @@ mixing. Library tests verify PCM consumption and voice controls without a device
 
 ## Load and control audio objects (Lua and Luau)
 
-Create `assets/sounds/` in your project and place `crash.wav` there (WAV and OGG
-are supported). Create a Lua or Luau Object Component script, attach it to an
+Create `assets/sounds/` in your project and place `crash.wav` there (WAV, MP3, AAC, FLAC, and OGG are supported). Create a Lua or Luau Object Component script, attach it to an
 enabled scene object, and press **Play**. Use `Start` to load audio before playing:
 
 ```lua
