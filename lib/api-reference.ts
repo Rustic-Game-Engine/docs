@@ -7,10 +7,10 @@ function category(slug: string, source: string, signatures: string[]): ApiCatego
   const segments = new Set<string>();
   return { slug: `api/${slug}`, source, calls: signatures.map((signature) => {
     const name = signature.split("(")[0];
-    const method = name.split(".").pop()!;
+    const method = name.split(/[.:]/).pop()!;
     // Include the receiver when a category exposes both service and handle calls.
-    const receiver = name.split(".").slice(0, -1).join(".");
-    const local = ["voice", "handle", "connection", "builder"].includes(receiver);
+    const receiver = name.split(/[.:]/).slice(0, -1).join(".");
+    const local = ["voice", "handle", "connection", "builder", "rec", "mic", "capture"].includes(receiver);
     let segment = `${local ? `${receiver}-` : ""}${method}`
       .replace(/([a-z0-9])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
     if (segments.has(segment)) segment = `${receiver.split(".").pop()!.toLowerCase()}-${segment}`;
@@ -59,6 +59,15 @@ export const apiCategories: ApiCategory[] = [
     "Audio.fadeIn(voice, duration, easing?, volume = 1)",
     "Audio.fadeOut(voice, duration, easing?)",
     "Audio.crossfade(oldVoice, newVoice, duration, easing?)",
+    "rustic.game:startRecording(path?, options?)",
+    "rustic.game:stopRecording(recording?)",
+    "rustic.game:startHotMic()",
+    "rustic.game:stopHotMic(mic?)",
+    "rec:stopRecording()",
+    "mic:stopHotMic()",
+    "capture:read()",
+    "capture:stop()",
+    "capture:unload()",
   ]),
   category("camera-actions", "docs/Scripting/API/camera-actions.md", [
     "Camera.current()",
