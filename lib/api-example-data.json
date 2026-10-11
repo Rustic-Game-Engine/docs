@@ -1461,6 +1461,134 @@
         "PHP": "$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
         "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
       }
+    },
+    {
+      "title": "Audio.load",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.load",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.play",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.pause",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.pause();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.pause(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.pause();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->pause();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();"
+      }
+    },
+    {
+      "title": "audio.resume",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.resume();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.resume(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.resume();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->resume();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();"
+      }
+    },
+    {
+      "title": "audio.stop",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    },
+    {
+      "title": "audio.Unload",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    },
+    {
+      "title": "audio.unload",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
     }
   ],
   "events": [
