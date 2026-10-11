@@ -2,6 +2,24 @@
 
 [Back to Use gameplay actions](/docs/guides/gameplay-actions).
 
+## Supported file types
+
+| Audio type | File extensions |
+| --- | --- |
+| WAV (integer or floating-point PCM) | `.wav` |
+| MP3 | `.mp3` |
+| AAC-LC | `.aac` (ADTS), `.m4a` (MP4) |
+| FLAC | `.flac` |
+| OGG Vorbis | `.ogg`, `.oga` |
+| OGG Opus (mono or stereo) | `.ogg`, `.oga`, `.opus` |
+
+Place audio files in your project's `assets/` folder. These types work with
+`:load()` in Lua/Luau and `Audio.play` / `Audio.playAt` in every supported script
+language. See [Audio API: supported audio files](/docs/api/audio#supported-audio-files)
+for codec limitations and memory limits.
+
+## Play and fade
+
 Follow [Set up gameplay actions](/docs/guides/gameplay-actions/setup) before running this Lua example.
 
 ```lua
