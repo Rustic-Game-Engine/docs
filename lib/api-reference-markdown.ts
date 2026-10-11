@@ -73,6 +73,10 @@ function section(markdown: string, heading: string) {
 
 // Audio examples focus on the selected call; voice creation is setup for controls.
 const audioExamples: Record<string, string> = {
+  "get-output-devices": 'const devices = Audio.get_output_devices();\nprint(JSON.stringify(devices));',
+  "get-input-devices": 'const devices = Audio.get_input_devices();\nprint(JSON.stringify(devices));',
+  "set-output-device": 'const devices = Audio.get_output_devices();\nif (devices.length > 0) {\n  Audio.set_output_device(devices[0].id);\n}',
+  "set-input-device": 'const devices = Audio.get_input_devices();\nif (devices.length > 0) {\n  Audio.set_input_device(devices[0].id);\n}',
   play: 'const voice = Audio.play("assets/music.ogg", {loop: true});',
   "play-at": 'const voice = Audio.playAt("assets/music.ogg", [0, 0, 0]);',
   "voice-pause": 'const voice = Audio.play("assets/music.ogg");\nvoice.pause();',
@@ -86,6 +90,7 @@ const audioExamples: Record<string, string> = {
 };
 
 const audioParameters: Record<string, string> = {
+  id: "Opaque ID from the latest device list for the matching direction in this Play scene. Pass null to select the current system default; names are display labels, not IDs.",
   source: "Project-relative WAV/OGG asset path. Provide the file before Play.",
   options: "Optional playback options: loop, volume and pitch.",
   position: "World vector used for distance attenuation relative to the active camera.",
@@ -99,6 +104,9 @@ const audioParameters: Record<string, string> = {
 };
 
 function audioReturn(method: string) {
+  if (["get-output-devices", "get-input-devices"].includes(method)) return "Returns a list of device records containing string id and name fields. Empty lists are valid on hosts without devices. Enumeration currently requires Windows; headless platforms return an empty list.";
+  if (method === "set-output-device") return "Returns no value. Switches this scene's mixer output to the selected Windows device. Mixer voices retain their playback cursors; queued output samples are discarded, so a brief interruption is possible. A failed switch preserves the previous output.";
+  if (method === "set-input-device") return "Returns no value. Validates and retains this scene's selected Windows input device. This call does not start microphone capture or route sound to playback. Lua/Luau recording and hot mic capture currently use the system default input independently of this selection.";
   if (["play", "play-at"].includes(method)) return "Returns a voice object with an ID and playback controls.";
   if (["fade-in", "fade-out", "crossfade"].includes(method)) return "Returns an operation handle. The shared scheduler advances the fade using scene-clock time.";
   return "Updates the voice playback directly without creating an operation handle.";
@@ -137,6 +145,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
       `## Capture limits and troubleshooting\n\n${captureConstraints}`,
     ].join("\n\n");
   }
+  const audioDevice = audio && ["get-output-devices", "get-input-devices", "set-output-device", "set-input-device"].includes(method);
   const args = call.signature.match(/\((.*)\)/)?.[1] ?? "";
   const parameters = audio && args ? `| Parameter | Meaning |\n| --- | --- |\n${args.split(",").map((arg) => {
     const name = arg.trim().replace(/[?=].*$/, "").trim();
@@ -153,6 +162,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   const constraints = section(shared, "Behavior and limitations") || section(shared, "Constraints and behavior");
   // Example-specific outcomes belong alongside the example that demonstrates them.
   const sharedConstraints = constraints.split("\n").filter((line) => !/^- (Attach (the|this) example|The (Console|voice) |Provide assets\/music)/.test(line)).join("\n");
+  const deviceConstraints = "Native device methods work in the Windows player and are available in every supported scripting language. Lists are snapshots: another enumeration of the same direction invalidates older IDs. IDs belong to the current Play scene; do not save them in project settings. Output and input IDs are not interchangeable, and names can be duplicated. Selection is shared by scripts in the scene and resets on Stop/new Play.\n\nSelecting on a headless platform, selecting an unknown/stale ID, a missing system default or a native driver failure raises a script error. Check the Console, refresh the list after hardware changes, and select a valid ID or null. Device removal is not automatically recovered.\n\nUse nil in Lua/Luau, None in Python and NULL in C for the system default. Java and C require an explicit argument; other bindings also allow omitting it. C lists use RusticAudioDevices (count and items[i].id/name) and last until the next callback; C++ returns a RusticValue array, C# a JsonElement array, Java a list of maps and PHP associative arrays.";
   return [
     `# ${call.title}`,
     `[${title}](/docs/${category.slug})`,
@@ -161,6 +171,6 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
     `## Parameters\n\n${parameters}`,
     returns && `## Return and timing\n\n${returns}`,
     example && `## Usage example\n\n${example}`,
-    sharedConstraints && `## Shared ${title} constraints\n\n${sharedConstraints}`,
+    (audioDevice ? deviceConstraints : sharedConstraints) && `## Shared ${title} constraints\n\n${audioDevice ? deviceConstraints : sharedConstraints}`,
   ].filter(Boolean).join("\n\n");
 }

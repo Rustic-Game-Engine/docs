@@ -49,6 +49,10 @@ export const apiCategories: ApiCategory[] = [
     "Animation.recoil(entity, quaternion, duration, easing?)",
   ]),
   category("audio", "docs/Scripting/API/audio.md", [
+    "Audio.get_output_devices()",
+    "Audio.get_input_devices()",
+    "Audio.set_output_device(id = null)",
+    "Audio.set_input_device(id = null)",
     "Audio.play(source, options?)",
     "Audio.playAt(source, position, options?)",
     "voice.pause()",

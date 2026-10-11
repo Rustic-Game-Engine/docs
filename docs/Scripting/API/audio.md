@@ -104,8 +104,9 @@ list and report an unavailable-backend error when selecting a device.
   duplicated; use the ID to select a device.
 - `Audio.set_output_device(id)` switches this scene's mixed audio to that output.
 - `Audio.set_input_device(id)` validates and retains the scene's selected input
-  device. **Microphone recording/capture is not implemented**, so this call does
-  not produce microphone samples or route microphone sound to playback.
+  device. This call does not start capture or route microphone sound to playback.
+  Lua/Luau recording and hot mic capture currently use the system default input
+  independently of this selection; see the recording section below.
 - Pass `null` (Lua/Luau `nil`, Python `None`, C `NULL`) to either setter to select
   the current system default. Java requires an explicit `null` argument; other
   bindings except C also allow omitting the argument. Setters return no value.

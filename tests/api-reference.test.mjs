@@ -20,6 +20,22 @@ test("API routes are unique, nested under their category, and contain valid sign
   assert.equal(apiCategories.find((category) => category.slug === "api/ease").calls.length, 31);
 });
 
+test("audio device methods have searchable routes and accurate device reference pages", async () => {
+  const category = apiCategories.find((entry) => entry.slug === "api/audio");
+  const shared = await readFile(new URL(`../${category.source}`, import.meta.url), "utf8");
+  for (const method of ["get_output_devices", "get_input_devices", "set_output_device", "set_input_device"]) {
+    const slug = `api/audio/${method.replaceAll("_", "-")}`;
+    const call = category.calls.find((entry) => entry.slug === slug);
+    assert.ok(call, `${method} must be registered for navigation, search and export`);
+    const markdown = buildApiCallMarkdown(category, call, "Audio", shared);
+    assert.ok(markdown.includes(`Audio.${method}(`));
+    assert.match(markdown, /Windows/);
+    assert.match(markdown, /snapshot/i);
+    assert.match(markdown, method.startsWith("get") ? /Returns a list of device records/ : /Returns no value/);
+    assert.doesNotMatch(markdown, /Updates the voice playback directly/);
+  }
+});
+
 test("category indexes link every API and call pages expose exactly one signature", async () => {
   for (const category of apiCategories) {
     const index = buildApiCategoryMarkdown(category, "Category", "Description");
