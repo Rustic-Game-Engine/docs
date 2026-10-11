@@ -12,7 +12,7 @@ test("API routes are unique, nested under their category, and contain valid sign
   for (const category of apiCategories) {
     for (const call of category.calls) {
       assert.ok(call.slug.startsWith(`${category.slug}/`));
-      assert.match(call.signature, /^[\w.]+(?:\([^()]*\))?$/);
+      assert.match(call.signature, /^[\w.:]+(?:\([^()]*\))?$/);
     }
   }
   assert.ok(calls.some((call) => call.slug === "api/audio/play"));
@@ -71,5 +71,23 @@ test("static export publishes every category and call with the category breadcru
   for (const alias of ["identity", "frame-time"]) {
     const page = await readFile(new URL(`../out/docs/api/entity/${alias}.html`, import.meta.url), "utf8");
     assert.match(page, /rel="canonical"/);
+  }
+});
+
+
+test("recording and hot mic APIs are registered and publish Lua/Luau usage", async () => {
+  const category = apiCategories.find((entry) => entry.slug === "api/audio");
+  const shared = await readFile(new URL(`../${category.source}`, import.meta.url), "utf8");
+  for (const slug of ["start-recording", "stop-recording", "start-hot-mic", "stop-hot-mic", "rec-stop-recording", "mic-stop-hot-mic", "capture-read", "capture-stop", "capture-unload"]) {
+    const call = category.calls.find((entry) => entry.slug === `api/audio/${slug}`);
+    assert.ok(call, `Missing published capture API: ${slug}`);
+    const markdown = buildApiCallMarkdown(category, call, "Audio", shared);
+    assert.match(markdown, /Available in Lua 5.4 and Luau/);
+    assert.match(markdown, /```lua/);
+    assert.ok(!markdown.includes("```javascript"), slug);
+    assert.ok(!markdown.includes("undefined"), slug);
+    const exported = await readFile(new URL(`../out/docs/${call.slug}.html`, import.meta.url), "utf8");
+    assert.ok(exported.includes(call.title), slug);
+    assert.ok(exported.includes("64 MiB"), slug);
   }
 });

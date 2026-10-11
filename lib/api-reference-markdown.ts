@@ -1,4 +1,63 @@
 import type { ApiCall, ApiCategory } from "./api-reference";
+// Capture uses Lua/Luau handles rather than the JavaScript playback facade.
+type CaptureReference = {
+  parameters: string;
+  returns: string;
+  example: string;
+};
+
+const noParameters = "This call has no arguments.";
+const audioCaptureReference: Record<string, CaptureReference> = {
+  "start-recording": {
+    parameters: "| Parameter | Meaning |\n| --- | --- |\n| path | Optional new `.wav` filename. Omit it to retain PCM in the returned handle. Absolute paths persist outside the play snapshot; relative paths resolve inside it. Parent directories must exist and existing files are never overwritten. |\n| options | Optional table: `{source = \"game\"}` (default) or `{source = \"microphone\"}`. Microphone capture requires Windows. |",
+    returns: "Returns a script-owned recording handle. Game output is 48,000 Hz stereo float PCM; microphone rate and channels come from the default input device. Stop the handle before consuming the completed recording. A path also writes a 32-bit float WAV that is finalized on stop or cleanup.",
+    example: 'local rec\nreturn {\n  Start = function()\n    rec = rustic.game:startRecording()\n    -- Or pass a new absolute .wav path to also save a file.\n  end,\n  Stop = function()\n    rec:stopRecording()\n    local packet = rec:read()\n    print(packet.sampleRate, packet.channels, #packet.samples)\n    rec:unload()\n  end\n}',
+  },
+  "stop-recording": {
+    parameters: "| Parameter | Meaning |\n| --- | --- |\n| recording | Optional recording handle owned by this script. Omit it to stop all of this script's recordings. |",
+    returns: "Stops recording and finalizes any WAV file. Returns the supplied handle, or nil when omitted. Retained PCM remains readable until unload or owner cleanup. Repeated stops are safe.",
+    example: 'local rec\nreturn {\n  Start = function() rec = rustic.game:startRecording() end,\n  Stop = function()\n    rustic.game:stopRecording(rec)\n    local packet = rec:read()\n    print(#packet.samples)\n    rec:unload()\n  end\n}',
+  },
+  "start-hot-mic": {
+    parameters: noParameters,
+    returns: "Returns a script-owned hot mic handle capturing the Windows default input device. Read local interleaved PCM chunks during Update for audio processing or your own relay code. Automatic network transport and speaker monitoring are not provided.",
+    example: 'local mic\nreturn {\n  Start = function() mic = rustic.game:startHotMic() end,\n  Update = function()\n    local packet = mic:read()\n    -- Use packet.samples, packet.sampleRate and packet.channels.\n    local peak = 0\n    for _, sample in ipairs(packet.samples) do\n      peak = math.max(peak, math.abs(sample))\n    end\n  end,\n  Stop = function() mic:stopHotMic(); mic:unload() end\n}',
+  },
+  "stop-hot-mic": {
+    parameters: "| Parameter | Meaning |\n| --- | --- |\n| mic | Optional hot mic handle owned by this script. Omit it to stop all of this script's hot microphones. |",
+    returns: "Closes the input device and discards unread hot mic input. Returns the supplied handle, or nil when omitted. Repeated stops are safe.",
+    example: 'local mic\nreturn {\n  Start = function() mic = rustic.game:startHotMic() end,\n  Stop = function() rustic.game:stopHotMic(mic); mic:unload() end\n}',
+  },
+  "rec-stop-recording": {
+    parameters: noParameters,
+    returns: "Stops this recording and finalizes its WAV file, returning the same recording handle. Recorded PCM remains available through read() until unload or owner cleanup. Repeated stops are safe.",
+    example: 'local rec\nreturn {\n  Start = function() rec = rustic.game:startRecording() end,\n  Stop = function()\n    rec:stopRecording()\n    repeat\n      local packet = rec:read()\n      print(#packet.samples)\n    until #packet.samples == 0\n    rec:unload()\n  end\n}',
+  },
+  "mic-stop-hot-mic": {
+    parameters: noParameters,
+    returns: "Closes this microphone and discards unread input, returning the same mic handle. Repeated stops are safe.",
+    example: 'local mic\nreturn {\n  Start = function() mic = rustic.game:startHotMic() end,\n  Stop = function() mic:stopHotMic(); mic:unload() end\n}',
+  },
+  "capture-read": {
+    parameters: noParameters,
+    returns: "Returns `{samples, sampleRate, channels, active, droppedSamples}`. Consumes at most 4,096 interleaved float samples while preserving complete channel frames. An empty samples table means no queued data is available. Recordings can be read after stop; a hot mic supplies only live queued input. droppedSamples reports input discarded since the preceding read.",
+    example: 'local capture\nreturn {\n  Start = function() capture = rustic.game:startRecording() end,\n  Stop = function()\n    capture:stopRecording()\n    repeat\n      local packet = capture:read()\n      print(packet.sampleRate, packet.channels, #packet.samples)\n    until #packet.samples == 0\n    capture:unload()\n  end\n}',
+  },
+  "capture-stop": {
+    parameters: noParameters,
+    returns: "Stops this recording or hot mic, returning the same handle. This is an alias for stopRecording() on recordings and stopHotMic() on hot microphones.",
+    example: 'local capture\nreturn {\n  Start = function() capture = rustic.game:startRecording() end,\n  Stop = function() capture:stop(); capture:unload() end\n}',
+  },
+  "capture-unload": {
+    parameters: noParameters,
+    returns: "Releases this capture handle and its retained PCM, closes any input device and finalizes any WAV file. Further calls on the handle raise an error. No value is returned.",
+    example: 'local capture\nreturn {\n  Start = function() capture = rustic.game:startRecording() end,\n  Stop = function() capture:stop(); capture:unload() end\n}',
+  },
+};
+
+const captureSetup = "Available in Lua 5.4 and Luau. Create an Object Component script in `scripts/`, attach it to an enabled scene object, and press **Play**. Start capture in Start or another callback. Use colon syntax. Microphone input requires Windows and OS microphone access. Recording captures audio, not video.";
+const captureConstraints = "- Capture handles belong to their script. Destroying the owner, ending Play or successful reload closes devices, finalizes files and releases handles. Read retained data in Stop before cleanup.\n- Each script may retain at most four capture handles; call `:unload()` after use. Recordings retain at most 64 MiB of PCM, including recordings written to files (about 175 seconds of stereo game audio). Exceeding the limit stops capture and read/stop report an error.\n- Hot mic queues at most two seconds of input. Read regularly, using multiple reads if needed. `droppedSamples` reports lost input. Microphone samples are finite floats in `[-1, 1]`; channel count and rate come from the device.\n- Default F32, I16 and U16 microphone formats are supported. Missing devices, denied access, unsupported formats, startup timeouts and disconnection raise errors. Catch expected failures with `pcall`.\n- A recording destination must be a new `.wav` file in an existing writable directory. Game mixer recording also works headlessly.\n\nSee [the recording and hot mic guide](/docs/guides/gameplay-actions/audio#record-audio-and-read-a-hot-microphone-lua-and-luau) for full setup and examples.";
+
 
 export function buildApiCategoryMarkdown(category: ApiCategory, title: string, description: string) {
   return `# ${title}\n\n${description}\n\nChoose an API to see its signature, parameters, examples and behavior.\n\n## APIs\n\n${category.calls.map((call) => `- [${call.title}](/docs/${call.slug})`).join("\n")}`;
@@ -73,6 +132,19 @@ function parametersFor(call: ApiCall, shared: string) {
 export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title: string, shared: string) {
   const method = call.slug.split("/").pop()!;
   const audio = category.slug === "api/audio";
+  const capture = audio ? audioCaptureReference[method] : undefined;
+  if (capture) {
+    return [
+      `# ${call.title}`,
+      `[${title}](/docs/${category.slug})`,
+      `## Signature\n\n\`${call.signature}\``,
+      `## Setup and usage\n\n${captureSetup}`,
+      `## Parameters\n\n${capture.parameters}`,
+      `## Return and timing\n\n${capture.returns}`,
+      `## Usage example\n\n\`\`\`lua\n${capture.example}\n\`\`\``,
+      `## Capture limits and troubleshooting\n\n${captureConstraints}`,
+    ].join("\n\n");
+  }
   const audioDevice = audio && ["get-output-devices", "get-input-devices", "set-output-device", "set-input-device"].includes(method);
   const args = call.signature.match(/\((.*)\)/)?.[1] ?? "";
   const parameters = audio && args ? `| Parameter | Meaning |\n| --- | --- |\n${args.split(",").map((arg) => {
