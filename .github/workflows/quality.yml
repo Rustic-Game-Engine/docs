@@ -35,6 +35,8 @@ jobs:
       - run: npm run check:api-examples
       - run: npm run build
         if: ${{ !cancelled() }}
+      - run: npm test
+        if: ${{ !cancelled() }}
       - run: npx tsc --noEmit
         if: ${{ !cancelled() }}
       - run: npm audit --audit-level=moderate

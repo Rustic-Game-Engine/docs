@@ -1,20 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
-import { runInNewContext } from "node:vm";
-import ts from "typescript";
+import { load } from "./load-lib.mjs";
 
-const require = createRequire(import.meta.url);
-const load = (file) => {
-  const exports = {};
-  const source = readFileSync(new URL(`../lib/${file}`, import.meta.url), "utf8");
-  const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
-  runInNewContext(compiled, { exports, require: (id) => {
-    if (id.startsWith("./") && !id.endsWith(".json")) return load(`${id.slice(2)}.ts`);
-    return require(id === "./api-example-data.json" ? "../lib/api-example-data.json" : id);
-  } });
-  return exports;
-};
 const { buildApiMarkdown } = load("api-docs.ts");
 const { buildFunctionExamples, exampleLanguages } = load("api-examples.ts");
 const { allDocs } = load("docs-catalog.ts");

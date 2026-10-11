@@ -1,9 +1,17 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { apiCategories } from "../lib/api-reference.ts";
-import { buildApiMarkdown } from "../lib/api-docs.ts";
-import { buildApiCallMarkdown, buildApiCategoryMarkdown } from "../lib/api-reference-markdown.ts";
+import { load } from "../scripts/load-lib.mjs";
+
+const { apiCategories } = load("api-reference.ts");
+const { buildApiMarkdown } = load("api-docs.ts");
+const { buildApiCallMarkdown, buildApiCategoryMarkdown } = load("api-reference-markdown.ts");
+const { exampleLanguages } = load("api-examples.ts");
+const exampleData = JSON.parse(await readFile(new URL("../lib/api-example-data.json", import.meta.url), "utf8"));
+const captureSlugs = ["start-recording", "stop-recording", "start-hot-mic", "stop-hot-mic", "rec-stop-recording", "mic-stop-hot-mic", "capture-read", "capture-stop", "capture-unload"];
+const supportedLanguages = (call) => captureSlugs.includes(call.slug.split("/").pop()) ? ["Lua 5.4", "Luau"]
+  : call.title === "rustic.find_entity()" ? ["Lua 5.4"]
+  : ["print()", "warn()"].includes(call.title) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : [...exampleLanguages];
 
 const calls = apiCategories.flatMap((category) => category.calls);
 
@@ -54,6 +62,25 @@ test("category indexes link every API and call pages expose exactly one signatur
   }
 });
 
+test("every API call renders examples for all supported languages", async () => {
+  for (const category of apiCategories) {
+    const shared = category.source.startsWith("api:")
+      ? buildApiMarkdown(category.source.slice(4))
+      : await readFile(new URL(`../${category.source}`, import.meta.url), "utf8");
+    for (const call of category.calls) {
+      const markdown = buildApiCallMarkdown(category, call, "Category", shared);
+      const languageBlocks = [...markdown.matchAll(/^### ([^\n]+)\n\n```[^\n]+\n([\s\S]*?)\n```/gm)];
+      assert.deepEqual(languageBlocks.map((match) => match[1]), supportedLanguages(call), call.slug);
+      for (const match of languageBlocks) assert.ok(match[2].trim(), `${call.slug}/${match[1]}`);
+      const name = call.signature.split("(")[0];
+      const entry = exampleData[category.slug.slice(4)]?.find((entry) => entry.title.split(" / ").includes(name));
+      if (entry) {
+        for (const match of languageBlocks) assert.equal(match[2], entry.examples[match[1]], `${call.slug}/${match[1]}`);
+      }
+    }
+  }
+});
+
 test("static export publishes every category and call with the category breadcrumb", async () => {
   const search = await readFile(new URL("../out/docs/search.html", import.meta.url), "utf8");
   for (const category of apiCategories) {
@@ -65,6 +92,9 @@ test("static export publishes every category and call with the category breadcru
       const article = page.match(/<article class="markdown">([\s\S]*?)<\/article>/)?.[1];
       assert.ok(article?.includes(call.title), call.slug);
       assert.equal(article.match(/<h2 id="signature">/g)?.length, 1, call.slug);
+      for (const language of supportedLanguages(call)) {
+        assert.ok(article.includes(`>${language}</h3>`), `${call.slug}/${language}`);
+      }
       assert.ok(page.match(/<div class="breadcrumbs">([\s\S]*?)<\/div>/)?.[1].includes(`href="/docs/${category.slug}"`), call.slug);
     }
   }
@@ -78,7 +108,7 @@ test("static export publishes every category and call with the category breadcru
 test("recording and hot mic APIs are registered and publish Lua/Luau usage", async () => {
   const category = apiCategories.find((entry) => entry.slug === "api/audio");
   const shared = await readFile(new URL(`../${category.source}`, import.meta.url), "utf8");
-  for (const slug of ["start-recording", "stop-recording", "start-hot-mic", "stop-hot-mic", "rec-stop-recording", "mic-stop-hot-mic", "capture-read", "capture-stop", "capture-unload"]) {
+  for (const slug of captureSlugs) {
     const call = category.calls.find((entry) => entry.slug === `api/audio/${slug}`);
     assert.ok(call, `Missing published capture API: ${slug}`);
     const markdown = buildApiCallMarkdown(category, call, "Audio", shared);
