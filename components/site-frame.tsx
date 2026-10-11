@@ -9,10 +9,12 @@ import { canonicalDocPath, docSections, projectForPath, routeFor, searchRouteFor
 function DocNavigation({ doc, docs, pathname, onNavigate }: { doc: DocEntry; docs: DocEntry[]; pathname: string; onNavigate: () => void }) {
   const children = docs.filter((entry) => entry.parent === doc.slug);
   const href = routeFor(doc.slug);
-  const [expanded, setExpanded] = useState(() => pathname === href || pathname.startsWith(`${href}/`));
+  const activeCategory = pathname === href || pathname.startsWith(`${href}/`);
+  const [navigation, setNavigation] = useState({ pathname, expanded: activeCategory });
+  const expanded = navigation.pathname === pathname ? navigation.expanded : activeCategory || navigation.expanded;
   const link = <Link className={href === pathname ? "active" : ""} aria-current={href === pathname ? "page" : undefined} href={href} onClick={onNavigate}>{children.length ? "Overview" : doc.title}</Link>;
   if (!children.length) return link;
-  return <details className="nav-guide" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
+  return <details className="nav-guide" open={expanded} onToggle={(event) => setNavigation({ pathname, expanded: event.currentTarget.open })}>
     <summary>{doc.title}</summary>
     <div className="nav-subpages">{link}{children.map((child) => <DocNavigation key={child.slug} doc={child} docs={docs} pathname={pathname} onNavigate={onNavigate} />)}</div>
   </details>;

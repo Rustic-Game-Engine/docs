@@ -1,7 +1,9 @@
-export type DocEntry = { slug: string; title: string; description: string; source: string; parent?: string };
+import { apiCategories } from "./api-reference";
+
+export type DocEntry = { slug: string; title: string; description: string; source: string; sourcePath?: string; parent?: string };
 export type DocGroup = { label: string; docs: DocEntry[] };
 
-export const docGroups: DocGroup[] = [
+const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
@@ -9,8 +11,6 @@ export const docGroups: DocGroup[] = [
   ] },
   { label: "Core API", docs: [
     { slug: "api/entity", title: "Entity & time", description: "Read the current entity ID and frame timing.", source: "content/entity-and-time.md" },
-    { slug: "api/entity/identity", title: "Entity identity", description: "Read the behavior owner’s stable entity ID.", source: "api:entity-identity", parent: "api/entity" },
-    { slug: "api/entity/frame-time", title: "Frame time", description: "Read frame and fixed-step intervals in seconds.", source: "api:frame-time", parent: "api/entity" },
     { slug: "api/transforms", title: "Transforms", description: "Read and change the owning entity's position.", source: "api:transforms" },
     { slug: "api/properties", title: "Public properties", description: "Read and update declared script properties.", source: "api:properties" },
     { slug: "api/attributes", title: "Built-in attributes", description: "Read or edit engine-owned entity attributes.", source: "api:attributes" },
@@ -240,6 +240,21 @@ export const docGroups: DocGroup[] = [
   ] },
 ];
 
+export const docGroups: DocGroup[] = categoryGroups.map((group) => ({
+  ...group,
+  docs: group.docs.flatMap((doc) => {
+    const category = apiCategories.find((entry) => entry.slug === doc.slug);
+    if (!category) return [doc];
+    return [
+      { ...doc, sourcePath: doc.source, source: `api-category:${category.slug}` },
+      ...category.calls.map((call) => ({
+        slug: call.slug, title: call.title, description: call.description,
+        source: `api-call:${call.slug}`, parent: category.slug,
+      })),
+    ];
+  }),
+}));
+
 const sourceGroups = ["Open-Sourced Docs", "Engine source", "Docs", "Examples", "Hosting SDK"];
 export const docSections = [
   { title: "Engine", href: "/docs/engine", groups: docGroups.filter((group) => !sourceGroups.includes(group.label)) },
@@ -247,6 +262,8 @@ export const docSections = [
 ];
 
 export const docAliases: Record<string, string> = {
+  "api/entity/identity": "api/entity/entity-id",
+  "api/entity/frame-time": "api/entity",
   "repositories": "open-source",
   "website": "open-source/docs",
   "website/documentation": "open-source/docs/documentation",
