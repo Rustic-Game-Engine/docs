@@ -1,6 +1,6 @@
 # Gameplay API reference
 
-Choose the module you need. For focused tutorials, see [Use gameplay actions](/docs/guides/gameplay-actions).
+Choose the module you need. Every module includes a function-by-function example in each of the ten supported script types, with native syntax and binding limits. For focused tutorials, see [Use gameplay actions](/docs/guides/gameplay-actions).
 
 - [Tween](/docs/api/tween) — Animate an entity property or script value without writing an Update loop.
 - [Ease](/docs/api/ease) — Choose one of 31 shared easing curves for actions and synchronous interpolation.

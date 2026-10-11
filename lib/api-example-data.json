@@ -1,0 +1,2258 @@
+{
+  "tween": [
+    {
+      "title": "Tween.to",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic)",
+        "JavaScript": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic);",
+        "Python": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic)",
+        "C++": "Tween::to(rustic.entity_id(), \"Opacity\", 1, 2, Ease::OutCubic);",
+        "C#": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic);",
+        "Luau": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic)",
+        "C": "Tween.to(rustic.entity_id(), \"Opacity\", (RusticValue){.type=RUSTIC_NUMBER,.number=1}, 2, Ease.OutCubic, NULL);",
+        "Java": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic);",
+        "PHP": "Tween::to($rustic->entity_id(), \"Opacity\", 1, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Tween.to(rustic.entity_id(), \"Opacity\", 1, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Tween.move",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Tween.rotate",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.rotate(rustic.entity_id(), {0,0,0,1}, 2, Ease.OutCubic)",
+        "JavaScript": "Tween.rotate(rustic.entity_id(), [0,0,0,1], 2, Ease.OutCubic);",
+        "Python": "Tween.rotate(rustic.entity_id(), [0,0,0,1], 2, Ease.OutCubic)",
+        "C++": "Tween::rotate(rustic.entity_id(), {0,0,0,1}, 2, Ease::OutCubic);",
+        "C#": "Tween.rotate(rustic.entity_id(), new double[]{0,0,0,1}, 2, Ease.OutCubic);",
+        "Luau": "Tween.rotate(rustic.entity_id(), {0,0,0,1}, 2, Ease.OutCubic)",
+        "C": "Tween.rotate(rustic.entity_id(), (RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,0,0,1}}, 2, Ease.OutCubic, NULL);",
+        "Java": "Tween.rotate(rustic.entity_id(), new double[]{0,0,0,1}, 2, Ease.OutCubic);",
+        "PHP": "Tween::rotate($rustic->entity_id(), [0,0,0,1], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Tween.rotate(rustic.entity_id(), [0,0,0,1], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Tween.scale",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.scale(rustic.entity_id(), {2,2,2}, 2, Ease.OutCubic)",
+        "JavaScript": "Tween.scale(rustic.entity_id(), [2,2,2], 2, Ease.OutCubic);",
+        "Python": "Tween.scale(rustic.entity_id(), [2,2,2], 2, Ease.OutCubic)",
+        "C++": "Tween::scale(rustic.entity_id(), {2,2,2}, 2, Ease::OutCubic);",
+        "C#": "Tween.scale(rustic.entity_id(), new double[]{2,2,2}, 2, Ease.OutCubic);",
+        "Luau": "Tween.scale(rustic.entity_id(), {2,2,2}, 2, Ease.OutCubic)",
+        "C": "Tween.scale(rustic.entity_id(), (RusticVector3){2,2,2}, 2, Ease.OutCubic, NULL);",
+        "Java": "Tween.scale(rustic.entity_id(), new double[]{2,2,2}, 2, Ease.OutCubic);",
+        "PHP": "Tween::scale($rustic->entity_id(), [2,2,2], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Tween.scale(rustic.entity_id(), [2,2,2], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Tween.value",
+      "note": "Receives each interpolated scalar in the sample callback.",
+      "examples": {
+        "Lua 5.4": "Tween.value(0, 1, 2, function(value) rustic.log(\"info\", \"sample received\") end, Ease.OutCubic)",
+        "JavaScript": "Tween.value(0, 1, 2, (value) => rustic.log(\"info\", \"sample received\"), Ease.OutCubic);",
+        "Python": "Tween.value(0, 1, 2, lambda *args: rustic.log(\"info\", \"sample received\"), Ease.OutCubic)",
+        "C++": "Tween::value(0, 1, 2, [](RusticValue value) { rustic.log(\"info\", \"sample received\"); }, Ease::OutCubic);",
+        "C#": "Tween.value(0, 1, 2, args => rustic.log(\"info\", \"sample received\"), Ease.OutCubic);",
+        "Luau": "Tween.value(0, 1, 2, function(value) rustic.log(\"info\", \"sample received\") end, Ease.OutCubic)",
+        "C": "Tween.value((RusticValue){.type=RUSTIC_NUMBER,.number=0}, (RusticValue){.type=RUSTIC_NUMBER,.number=1}, 2, Ease.OutCubic, on_sample, NULL);",
+        "Java": "Tween.value(0, 1, 2, args -> rustic.log(\"info\", \"sample received\"), Ease.OutCubic);",
+        "PHP": "Tween::value(0, 1, 2, fn(...$args) => $rustic->log(\"info\", \"sample received\"), Ease::OutCubic);",
+        "HTML / inline JS": "Tween.value(0, 1, 2, (value) => rustic.log(\"info\", \"sample received\"), Ease.OutCubic);"
+      }
+    }
+  ],
+  "movement": [
+    {
+      "title": "Movement.move",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.move(rustic.entity_id(), {1,0,0}, 1, Ease.OutCubic)",
+        "JavaScript": "Movement.move(rustic.entity_id(), [1,0,0], 1, Ease.OutCubic);",
+        "Python": "Movement.move(rustic.entity_id(), [1,0,0], 1, Ease.OutCubic)",
+        "C++": "Movement::move(rustic.entity_id(), {1,0,0}, 1, Ease::OutCubic);",
+        "C#": "Movement.move(rustic.entity_id(), new double[]{1,0,0}, 1, Ease.OutCubic);",
+        "Luau": "Movement.move(rustic.entity_id(), {1,0,0}, 1, Ease.OutCubic)",
+        "C": "Movement.move(rustic.entity_id(), (RusticVector3){1,0,0}, 1, Ease.OutCubic, NULL);",
+        "Java": "Movement.move(rustic.entity_id(), new double[]{1,0,0}, 1, Ease.OutCubic);",
+        "PHP": "Movement::move($rustic->entity_id(), [1,0,0], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Movement.move(rustic.entity_id(), [1,0,0], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Movement.moveTo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.moveTo(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "JavaScript": "Movement.moveTo(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);",
+        "Python": "Movement.moveTo(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)",
+        "C++": "Movement::moveTo(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);",
+        "C#": "Movement.moveTo(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "Luau": "Movement.moveTo(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "C": "Movement.moveTo(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);",
+        "Java": "Movement.moveTo(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "PHP": "Movement::moveTo($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Movement.moveTo(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Movement.rotateTo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.rotateTo(rustic.entity_id(), {0,0,0,1}, 1, Ease.OutCubic)",
+        "JavaScript": "Movement.rotateTo(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic);",
+        "Python": "Movement.rotateTo(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic)",
+        "C++": "Movement::rotateTo(rustic.entity_id(), {0,0,0,1}, 1, Ease::OutCubic);",
+        "C#": "Movement.rotateTo(rustic.entity_id(), new double[]{0,0,0,1}, 1, Ease.OutCubic);",
+        "Luau": "Movement.rotateTo(rustic.entity_id(), {0,0,0,1}, 1, Ease.OutCubic)",
+        "C": "Movement.rotateTo(rustic.entity_id(), (RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,0,0,1}}, 1, Ease.OutCubic, NULL);",
+        "Java": "Movement.rotateTo(rustic.entity_id(), new double[]{0,0,0,1}, 1, Ease.OutCubic);",
+        "PHP": "Movement::rotateTo($rustic->entity_id(), [0,0,0,1], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Movement.rotateTo(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Movement.lookAt",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.lookAt(rustic.entity_id(), {0,0,0}, 1, Ease.OutCubic)",
+        "JavaScript": "Movement.lookAt(rustic.entity_id(), [0,0,0], 1, Ease.OutCubic);",
+        "Python": "Movement.lookAt(rustic.entity_id(), [0,0,0], 1, Ease.OutCubic)",
+        "C++": "Movement::lookAt(rustic.entity_id(), {0,0,0}, 1, Ease::OutCubic);",
+        "C#": "Movement.lookAt(rustic.entity_id(), new double[]{0,0,0}, 1, Ease.OutCubic);",
+        "Luau": "Movement.lookAt(rustic.entity_id(), {0,0,0}, 1, Ease.OutCubic)",
+        "C": "Movement.lookAt(rustic.entity_id(), (RusticVector3){0,0,0}, 1, Ease.OutCubic, NULL);",
+        "Java": "Movement.lookAt(rustic.entity_id(), new double[]{0,0,0}, 1, Ease.OutCubic);",
+        "PHP": "Movement::lookAt($rustic->entity_id(), [0,0,0], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Movement.lookAt(rustic.entity_id(), [0,0,0], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Movement.follow",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, {0,1,0})",
+        "JavaScript": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, [0,1,0]);",
+        "Python": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, [0,1,0])",
+        "C++": "Movement::follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease::OutCubic, {0,1,0});",
+        "C#": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, new double[]{0,1,0});",
+        "Luau": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, {0,1,0})",
+        "C": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", (RusticVector3){0,1,0}, 2, Ease.OutCubic, NULL);",
+        "Java": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, new double[]{0,1,0});",
+        "PHP": "Movement::follow($rustic->entity_id(), \"Game.scene.Target\", 2, Ease::OutCubic, [0,1,0]);",
+        "HTML / inline JS": "Movement.follow(rustic.entity_id(), \"Game.scene.Target\", 2, Ease.OutCubic, [0,1,0]);"
+      }
+    },
+    {
+      "title": "Movement.orbit",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Movement.orbit(rustic.entity_id(), {0,0,0}, 3, 1, 2, Ease.OutCubic)",
+        "JavaScript": "Movement.orbit(rustic.entity_id(), [0,0,0], 3, 1, 2, Ease.OutCubic);",
+        "Python": "Movement.orbit(rustic.entity_id(), [0,0,0], 3, 1, 2, Ease.OutCubic)",
+        "C++": "Movement::orbit(rustic.entity_id(), {0,0,0}, 3, 1, 2, Ease::OutCubic);",
+        "C#": "Movement.orbit(rustic.entity_id(), new double[]{0,0,0}, 3, 1, 2, Ease.OutCubic);",
+        "Luau": "Movement.orbit(rustic.entity_id(), {0,0,0}, 3, 1, 2, Ease.OutCubic)",
+        "C": "Movement.orbit(rustic.entity_id(), (RusticVector3){0,0,0}, 3, 1, 2, Ease.OutCubic, NULL);",
+        "Java": "Movement.orbit(rustic.entity_id(), new double[]{0,0,0}, 3, 1, 2, Ease.OutCubic);",
+        "PHP": "Movement::orbit($rustic->entity_id(), [0,0,0], 3, 1, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Movement.orbit(rustic.entity_id(), [0,0,0], 3, 1, 2, Ease.OutCubic);"
+      }
+    }
+  ],
+  "smooth": [
+    {
+      "title": "Smooth.lerp",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic)",
+        "JavaScript": "const result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic);",
+        "Python": "result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic)",
+        "C++": "auto result = Smooth::lerp(0, 10, 0.5, Ease::OutCubic);",
+        "C#": "var result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic);",
+        "Luau": "local result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic)",
+        "C": "RusticValue result = Smooth.lerp((RusticValue){.type=RUSTIC_NUMBER,.number=0}, (RusticValue){.type=RUSTIC_NUMBER,.number=10}, 0.5, Ease.OutCubic);",
+        "Java": "var result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic);",
+        "PHP": "$result = Smooth::lerp(0, 10, 0.5, Ease::OutCubic);",
+        "HTML / inline JS": "const result = Smooth.lerp(0, 10, 0.5, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Smooth.slerp",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Smooth.slerp({0,0,0,1}, {0,1,0,0}, 0.5, Ease.OutCubic)",
+        "JavaScript": "const result = Smooth.slerp([0,0,0,1], [0,1,0,0], 0.5, Ease.OutCubic);",
+        "Python": "result = Smooth.slerp([0,0,0,1], [0,1,0,0], 0.5, Ease.OutCubic)",
+        "C++": "auto result = Smooth::slerp(RusticValue::Array{0,0,0,1}, RusticValue::Array{0,1,0,0}, 0.5, Ease::OutCubic);",
+        "C#": "var result = Smooth.slerp(new double[]{0,0,0,1}, new double[]{0,1,0,0}, 0.5, Ease.OutCubic);",
+        "Luau": "local result = Smooth.slerp({0,0,0,1}, {0,1,0,0}, 0.5, Ease.OutCubic)",
+        "C": "RusticValue result = Smooth.slerp((RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,0,0,1}}, (RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,1,0,0}}, 0.5, Ease.OutCubic);",
+        "Java": "var result = Smooth.slerp(new double[]{0,0,0,1}, new double[]{0,1,0,0}, 0.5, Ease.OutCubic);",
+        "PHP": "$result = Smooth::slerp([0,0,0,1], [0,1,0,0], 0.5, Ease::OutCubic);",
+        "HTML / inline JS": "const result = Smooth.slerp([0,0,0,1], [0,1,0,0], 0.5, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Smooth.inverseLerp",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Smooth.inverseLerp(0, 10, 5)",
+        "JavaScript": "const result = Smooth.inverseLerp(0, 10, 5);",
+        "Python": "result = Smooth.inverseLerp(0, 10, 5)",
+        "C++": "auto result = Smooth::inverseLerp(0, 10, 5);",
+        "C#": "var result = Smooth.inverseLerp(0, 10, 5);",
+        "Luau": "local result = Smooth.inverseLerp(0, 10, 5)",
+        "C": "double result = Smooth.inverseLerp(0, 10, 5);",
+        "Java": "var result = Smooth.inverseLerp(0, 10, 5);",
+        "PHP": "$result = Smooth::inverseLerp(0, 10, 5);",
+        "HTML / inline JS": "const result = Smooth.inverseLerp(0, 10, 5);"
+      }
+    },
+    {
+      "title": "Smooth.remap",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Smooth.remap(25, 0, 100, 0, 1)",
+        "JavaScript": "const result = Smooth.remap(25, 0, 100, 0, 1);",
+        "Python": "result = Smooth.remap(25, 0, 100, 0, 1)",
+        "C++": "auto result = Smooth::remap(25, 0, 100, 0, 1);",
+        "C#": "var result = Smooth.remap(25, 0, 100, 0, 1);",
+        "Luau": "local result = Smooth.remap(25, 0, 100, 0, 1)",
+        "C": "double result = Smooth.remap(25, 0, 100, 0, 1);",
+        "Java": "var result = Smooth.remap(25, 0, 100, 0, 1);",
+        "PHP": "$result = Smooth::remap(25, 0, 100, 0, 1);",
+        "HTML / inline JS": "const result = Smooth.remap(25, 0, 100, 0, 1);"
+      }
+    },
+    {
+      "title": "Smooth.smoothDamp",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016)",
+        "JavaScript": "const result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "Python": "result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016)",
+        "C++": "auto result = Smooth::smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "C#": "var result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "Luau": "local result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016)",
+        "C": "RusticDamping result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "Java": "var result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "PHP": "$result = Smooth::smoothDamp(0, 10, 0, 0.5, 0.016);",
+        "HTML / inline JS": "const result = Smooth.smoothDamp(0, 10, 0, 0.5, 0.016);"
+      }
+    }
+  ],
+  "physics-actions/queries": [
+    {
+      "title": "Physics.raycast",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Physics.raycast({0,4,0}, {0,-1,0}, 10)",
+        "JavaScript": "const result = Physics.raycast([0,4,0], [0,-1,0], 10);",
+        "Python": "result = Physics.raycast([0,4,0], [0,-1,0], 10)",
+        "C++": "auto result = Physics::raycast({0,4,0}, {0,-1,0}, 10);",
+        "C#": "var result = Physics.raycast(new double[]{0,4,0}, new double[]{0,-1,0}, 10);",
+        "Luau": "local result = Physics.raycast({0,4,0}, {0,-1,0}, 10)",
+        "C": "RusticHit result = Physics.raycast((RusticVector3){0,4,0}, (RusticVector3){0,-1,0}, 10);",
+        "Java": "var result = Physics.raycast(new double[]{0,4,0}, new double[]{0,-1,0}, 10);",
+        "PHP": "$result = Physics::raycast([0,4,0], [0,-1,0], 10);",
+        "HTML / inline JS": "const result = Physics.raycast([0,4,0], [0,-1,0], 10);"
+      }
+    },
+    {
+      "title": "Physics.sphereCast",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Physics.sphereCast({0,4,0}, {0,-1,0}, 10, 0.5)",
+        "JavaScript": "const result = Physics.sphereCast([0,4,0], [0,-1,0], 10, 0.5);",
+        "Python": "result = Physics.sphereCast([0,4,0], [0,-1,0], 10, 0.5)",
+        "C++": "auto result = Physics::sphereCast({0,4,0}, {0,-1,0}, 10, 0.5);",
+        "C#": "var result = Physics.sphereCast(new double[]{0,4,0}, new double[]{0,-1,0}, 10, 0.5);",
+        "Luau": "local result = Physics.sphereCast({0,4,0}, {0,-1,0}, 10, 0.5)",
+        "C": "RusticHit result = Physics.sphereCast((RusticVector3){0,4,0}, (RusticVector3){0,-1,0}, 10, 0.5);",
+        "Java": "var result = Physics.sphereCast(new double[]{0,4,0}, new double[]{0,-1,0}, 10, 0.5);",
+        "PHP": "$result = Physics::sphereCast([0,4,0], [0,-1,0], 10, 0.5);",
+        "HTML / inline JS": "const result = Physics.sphereCast([0,4,0], [0,-1,0], 10, 0.5);"
+      }
+    },
+    {
+      "title": "Physics.overlap",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local result = Physics.overlap({0,0,0}, 5)",
+        "JavaScript": "const result = Physics.overlap([0,0,0], 5);",
+        "Python": "result = Physics.overlap([0,0,0], 5)",
+        "C++": "auto result = Physics::overlap({0,0,0}, 5);",
+        "C#": "var result = Physics.overlap(new double[]{0,0,0}, 5);",
+        "Luau": "local result = Physics.overlap({0,0,0}, 5)",
+        "C": "RusticList result = Physics.overlap((RusticVector3){0,0,0}, 5);",
+        "Java": "var result = Physics.overlap(new double[]{0,0,0}, 5);",
+        "PHP": "$result = Physics::overlap([0,0,0], 5);",
+        "HTML / inline JS": "const result = Physics.overlap([0,0,0], 5);"
+      }
+    }
+  ],
+  "physics-actions/forces": [
+    {
+      "title": "Physics.force",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Physics.force(rustic.entity_id(), {0,6,0}, 0.016)",
+        "JavaScript": "Physics.force(rustic.entity_id(), [0,6,0], 0.016);",
+        "Python": "Physics.force(rustic.entity_id(), [0,6,0], 0.016)",
+        "C++": "Physics::force(rustic.entity_id(), {0,6,0}, 0.016);",
+        "C#": "Physics.force(rustic.entity_id(), new double[]{0,6,0}, 0.016);",
+        "Luau": "Physics.force(rustic.entity_id(), {0,6,0}, 0.016)",
+        "C": "Physics.force(rustic.entity_id(), (RusticVector3){0,6,0}, 0.016);",
+        "Java": "Physics.force(rustic.entity_id(), new double[]{0,6,0}, 0.016);",
+        "PHP": "Physics::force($rustic->entity_id(), [0,6,0], 0.016);",
+        "HTML / inline JS": "Physics.force(rustic.entity_id(), [0,6,0], 0.016);"
+      }
+    },
+    {
+      "title": "Physics.impulse",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Physics.impulse(rustic.entity_id(), {0,6,0})",
+        "JavaScript": "Physics.impulse(rustic.entity_id(), [0,6,0]);",
+        "Python": "Physics.impulse(rustic.entity_id(), [0,6,0])",
+        "C++": "Physics::impulse(rustic.entity_id(), {0,6,0});",
+        "C#": "Physics.impulse(rustic.entity_id(), new double[]{0,6,0});",
+        "Luau": "Physics.impulse(rustic.entity_id(), {0,6,0})",
+        "C": "Physics.impulse(rustic.entity_id(), (RusticVector3){0,6,0});",
+        "Java": "Physics.impulse(rustic.entity_id(), new double[]{0,6,0});",
+        "PHP": "Physics::impulse($rustic->entity_id(), [0,6,0]);",
+        "HTML / inline JS": "Physics.impulse(rustic.entity_id(), [0,6,0]);"
+      }
+    },
+    {
+      "title": "Physics.knockback",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Physics.knockback(rustic.entity_id(), {0,6,0})",
+        "JavaScript": "Physics.knockback(rustic.entity_id(), [0,6,0]);",
+        "Python": "Physics.knockback(rustic.entity_id(), [0,6,0])",
+        "C++": "Physics::knockback(rustic.entity_id(), {0,6,0});",
+        "C#": "Physics.knockback(rustic.entity_id(), new double[]{0,6,0});",
+        "Luau": "Physics.knockback(rustic.entity_id(), {0,6,0})",
+        "C": "Physics.knockback(rustic.entity_id(), (RusticVector3){0,6,0});",
+        "Java": "Physics.knockback(rustic.entity_id(), new double[]{0,6,0});",
+        "PHP": "Physics::knockback($rustic->entity_id(), [0,6,0]);",
+        "HTML / inline JS": "Physics.knockback(rustic.entity_id(), [0,6,0]);"
+      }
+    },
+    {
+      "title": "Physics.launch",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Physics.launch(rustic.entity_id(), {0,6,0})",
+        "JavaScript": "Physics.launch(rustic.entity_id(), [0,6,0]);",
+        "Python": "Physics.launch(rustic.entity_id(), [0,6,0])",
+        "C++": "Physics::launch(rustic.entity_id(), {0,6,0});",
+        "C#": "Physics.launch(rustic.entity_id(), new double[]{0,6,0});",
+        "Luau": "Physics.launch(rustic.entity_id(), {0,6,0})",
+        "C": "Physics.launch(rustic.entity_id(), (RusticVector3){0,6,0});",
+        "Java": "Physics.launch(rustic.entity_id(), new double[]{0,6,0});",
+        "PHP": "Physics::launch($rustic->entity_id(), [0,6,0]);",
+        "HTML / inline JS": "Physics.launch(rustic.entity_id(), [0,6,0]);"
+      }
+    },
+    {
+      "title": "Physics.explosion",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Physics.explosion({0,0,0}, 5, 10)",
+        "JavaScript": "Physics.explosion([0,0,0], 5, 10);",
+        "Python": "Physics.explosion([0,0,0], 5, 10)",
+        "C++": "Physics::explosion({0,0,0}, 5, 10);",
+        "C#": "Physics.explosion(new double[]{0,0,0}, 5, 10);",
+        "Luau": "Physics.explosion({0,0,0}, 5, 10)",
+        "C": "Physics.explosion((RusticVector3){0,0,0}, 5, 10);",
+        "Java": "Physics.explosion(new double[]{0,0,0}, 5, 10);",
+        "PHP": "Physics::explosion([0,0,0], 5, 10);",
+        "HTML / inline JS": "Physics.explosion([0,0,0], 5, 10);"
+      }
+    }
+  ],
+  "effects": [
+    {
+      "title": "Effects.fade",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic)",
+        "JavaScript": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic);",
+        "Python": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic)",
+        "C++": "Effects::fade(rustic.entity_id(), 0.5, 1, Ease::OutCubic);",
+        "C#": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic);",
+        "Luau": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic)",
+        "C": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic, NULL);",
+        "Java": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic);",
+        "PHP": "Effects::fade($rustic->entity_id(), 0.5, 1, Ease::OutCubic);",
+        "HTML / inline JS": "Effects.fade(rustic.entity_id(), 0.5, 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Effects.flash",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Effects.flash(rustic.entity_id(), {1,0,0}, 0.2, Ease.OutCubic)",
+        "JavaScript": "Effects.flash(rustic.entity_id(), [1,0,0], 0.2, Ease.OutCubic);",
+        "Python": "Effects.flash(rustic.entity_id(), [1,0,0], 0.2, Ease.OutCubic)",
+        "C++": "Effects::flash(rustic.entity_id(), {1,0,0}, 0.2, Ease::OutCubic);",
+        "C#": "Effects.flash(rustic.entity_id(), new double[]{1,0,0}, 0.2, Ease.OutCubic);",
+        "Luau": "Effects.flash(rustic.entity_id(), {1,0,0}, 0.2, Ease.OutCubic)",
+        "C": "Effects.flash(rustic.entity_id(), (RusticVector3){1,0,0}, 0.2, Ease.OutCubic, NULL);",
+        "Java": "Effects.flash(rustic.entity_id(), new double[]{1,0,0}, 0.2, Ease.OutCubic);",
+        "PHP": "Effects::flash($rustic->entity_id(), [1,0,0], 0.2, Ease::OutCubic);",
+        "HTML / inline JS": "Effects.flash(rustic.entity_id(), [1,0,0], 0.2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Effects.pulse",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Effects.pulse(rustic.entity_id(), {2,2,2}, 0.2, Ease.OutCubic)",
+        "JavaScript": "Effects.pulse(rustic.entity_id(), [2,2,2], 0.2, Ease.OutCubic);",
+        "Python": "Effects.pulse(rustic.entity_id(), [2,2,2], 0.2, Ease.OutCubic)",
+        "C++": "Effects::pulse(rustic.entity_id(), {2,2,2}, 0.2, Ease::OutCubic);",
+        "C#": "Effects.pulse(rustic.entity_id(), new double[]{2,2,2}, 0.2, Ease.OutCubic);",
+        "Luau": "Effects.pulse(rustic.entity_id(), {2,2,2}, 0.2, Ease.OutCubic)",
+        "C": "Effects.pulse(rustic.entity_id(), (RusticVector3){2,2,2}, 0.2, Ease.OutCubic, NULL);",
+        "Java": "Effects.pulse(rustic.entity_id(), new double[]{2,2,2}, 0.2, Ease.OutCubic);",
+        "PHP": "Effects::pulse($rustic->entity_id(), [2,2,2], 0.2, Ease::OutCubic);",
+        "HTML / inline JS": "Effects.pulse(rustic.entity_id(), [2,2,2], 0.2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Effects.shake",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic)",
+        "JavaScript": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic);",
+        "Python": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic)",
+        "C++": "Effects::shake(rustic.entity_id(), 0.1, 0.5, Ease::OutCubic);",
+        "C#": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic);",
+        "Luau": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic)",
+        "C": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic, NULL);",
+        "Java": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic);",
+        "PHP": "Effects::shake($rustic->entity_id(), 0.1, 0.5, Ease::OutCubic);",
+        "HTML / inline JS": "Effects.shake(rustic.entity_id(), 0.1, 0.5, Ease.OutCubic);"
+      }
+    }
+  ],
+  "clock": [
+    {
+      "title": "Clock.timeScale",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Clock.timeScale(0.5)",
+        "JavaScript": "Clock.timeScale(0.5);",
+        "Python": "Clock.timeScale(0.5)",
+        "C++": "Clock::timeScale(0.5);",
+        "C#": "Clock.timeScale(0.5);",
+        "Luau": "Clock.timeScale(0.5)",
+        "C": "Clock.timeScale(0.5);",
+        "Java": "Clock.timeScale(0.5);",
+        "PHP": "Clock::timeScale(0.5);",
+        "HTML / inline JS": "Clock.timeScale(0.5);"
+      }
+    },
+    {
+      "title": "Clock.pause",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Clock.pause()",
+        "JavaScript": "Clock.pause();",
+        "Python": "Clock.pause()",
+        "C++": "Clock::pause();",
+        "C#": "Clock.pause();",
+        "Luau": "Clock.pause()",
+        "C": "Clock.pause();",
+        "Java": "Clock.pause();",
+        "PHP": "Clock::pause();",
+        "HTML / inline JS": "Clock.pause();"
+      }
+    },
+    {
+      "title": "Clock.resume",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Clock.resume()",
+        "JavaScript": "Clock.resume();",
+        "Python": "Clock.resume()",
+        "C++": "Clock::resume();",
+        "C#": "Clock.resume();",
+        "Luau": "Clock.resume()",
+        "C": "Clock.resume();",
+        "Java": "Clock.resume();",
+        "PHP": "Clock::resume();",
+        "HTML / inline JS": "Clock.resume();"
+      }
+    },
+    {
+      "title": "Clock.state",
+      "note": "Clock.state is available in embedded Lua/JavaScript, Luau and Python. Other SDKs expose setters only (C# and PHP also allow timeScale() to read scale).",
+      "examples": {
+        "Lua 5.4": "local state = Clock.state()",
+        "JavaScript": "const state = Clock.state();",
+        "Python": "state = Clock.state()",
+        "C++": "// This SDK has no Clock.state getter; set the clock with Clock::timeScale(1).",
+        "C#": "var scale = Clock.timeScale();\n// C# exposes the scale getter but no paused-state snapshot.",
+        "Luau": "local state = Clock.state()",
+        "C": "// This SDK has no Clock.state getter; set the clock with Clock.timeScale(1).",
+        "Java": "// This SDK has no Clock.state getter; set the clock with Clock.timeScale(1).",
+        "PHP": "$scale = Clock::timeScale();\n// PHP exposes the scale getter but no paused-state snapshot.",
+        "HTML / inline JS": "const state = Clock.state();"
+      }
+    }
+  ],
+  "timer": [
+    {
+      "title": "Timer.after",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Timer.after(1, function() rustic.log(\"info\", \"done\") end)",
+        "JavaScript": "Timer.after(1, () => rustic.log(\"info\", \"done\"));",
+        "Python": "Timer.after(1, lambda : rustic.log(\"info\", \"done\"))",
+        "C++": "Timer::after(1, []() { rustic.log(\"info\", \"done\"); });",
+        "C#": "Timer.after(1, () => rustic.log(\"info\", \"done\"));",
+        "Luau": "Timer.after(1, function() rustic.log(\"info\", \"done\") end)",
+        "C": "Timer.after(1, on_done);",
+        "Java": "Timer.after(1, () -> rustic.log(\"info\", \"done\"));",
+        "PHP": "Timer::after(1, fn() => $rustic->log(\"info\", \"done\"));",
+        "HTML / inline JS": "Timer.after(1, () => rustic.log(\"info\", \"done\"));"
+      }
+    },
+    {
+      "title": "Timer.every",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Timer.every(1, function() rustic.log(\"info\", \"done\") end, 4)",
+        "JavaScript": "Timer.every(1, () => rustic.log(\"info\", \"done\"), 4);",
+        "Python": "Timer.every(1, lambda : rustic.log(\"info\", \"done\"), 4)",
+        "C++": "Timer::every(1, []() { rustic.log(\"info\", \"done\"); }, 4);",
+        "C#": "Timer.every(1, () => rustic.log(\"info\", \"done\"), 4);",
+        "Luau": "Timer.every(1, function() rustic.log(\"info\", \"done\") end, 4)",
+        "C": "Timer.every(1, on_done, 4);",
+        "Java": "Timer.every(1, () -> rustic.log(\"info\", \"done\"), 4);",
+        "PHP": "Timer::every(1, fn() => $rustic->log(\"info\", \"done\"), 4);",
+        "HTML / inline JS": "Timer.every(1, () => rustic.log(\"info\", \"done\"), 4);"
+      }
+    }
+  ],
+  "ease": [
+    {
+      "title": "Ease.Linear",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.Linear)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.Linear);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.Linear)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::Linear);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.Linear);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.Linear)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.Linear, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.Linear);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::Linear);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.Linear);"
+      }
+    },
+    {
+      "title": "Ease.InSine",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InSine)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InSine);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InSine)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InSine);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InSine);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InSine)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InSine, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InSine);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InSine);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InSine);"
+      }
+    },
+    {
+      "title": "Ease.OutSine",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutSine)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutSine);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutSine)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutSine);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutSine);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutSine)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutSine, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutSine);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutSine);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutSine);"
+      }
+    },
+    {
+      "title": "Ease.InOutSine",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutSine)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutSine);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutSine)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutSine);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutSine);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutSine)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutSine, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutSine);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutSine);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutSine);"
+      }
+    },
+    {
+      "title": "Ease.InQuad",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuad)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuad);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuad)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InQuad);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuad);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuad)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InQuad, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuad);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InQuad);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuad);"
+      }
+    },
+    {
+      "title": "Ease.OutQuad",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuad)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuad);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuad)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutQuad);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuad);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuad)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutQuad, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuad);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutQuad);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuad);"
+      }
+    },
+    {
+      "title": "Ease.InOutQuad",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuad)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuad);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuad)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutQuad);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuad);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuad)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutQuad, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuad);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutQuad);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuad);"
+      }
+    },
+    {
+      "title": "Ease.InCubic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InCubic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCubic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCubic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InCubic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InCubic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InCubic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InCubic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InCubic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InCubic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCubic);"
+      }
+    },
+    {
+      "title": "Ease.OutCubic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Ease.InOutCubic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutCubic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCubic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCubic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutCubic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutCubic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutCubic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutCubic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutCubic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutCubic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCubic);"
+      }
+    },
+    {
+      "title": "Ease.InQuart",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuart)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuart);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuart)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InQuart);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuart);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuart)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InQuart, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuart);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InQuart);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuart);"
+      }
+    },
+    {
+      "title": "Ease.OutQuart",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuart)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuart);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuart)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutQuart);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuart);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuart)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutQuart, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuart);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutQuart);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuart);"
+      }
+    },
+    {
+      "title": "Ease.InOutQuart",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuart)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuart);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuart)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutQuart);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuart);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuart)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutQuart, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuart);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutQuart);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuart);"
+      }
+    },
+    {
+      "title": "Ease.InQuint",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuint)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuint);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuint)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InQuint);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuint);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InQuint)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InQuint, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InQuint);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InQuint);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InQuint);"
+      }
+    },
+    {
+      "title": "Ease.OutQuint",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuint)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuint);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuint)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutQuint);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuint);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutQuint)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutQuint, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutQuint);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutQuint);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutQuint);"
+      }
+    },
+    {
+      "title": "Ease.InOutQuint",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuint)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuint);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuint)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutQuint);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuint);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutQuint)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutQuint, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutQuint);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutQuint);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutQuint);"
+      }
+    },
+    {
+      "title": "Ease.InExpo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InExpo)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InExpo);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InExpo)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InExpo);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InExpo);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InExpo)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InExpo, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InExpo);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InExpo);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InExpo);"
+      }
+    },
+    {
+      "title": "Ease.OutExpo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutExpo)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutExpo);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutExpo)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutExpo);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutExpo);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutExpo)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutExpo, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutExpo);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutExpo);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutExpo);"
+      }
+    },
+    {
+      "title": "Ease.InOutExpo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutExpo)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutExpo);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutExpo)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutExpo);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutExpo);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutExpo)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutExpo, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutExpo);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutExpo);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutExpo);"
+      }
+    },
+    {
+      "title": "Ease.InCirc",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InCirc)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCirc);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCirc)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InCirc);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InCirc);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InCirc)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InCirc, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InCirc);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InCirc);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InCirc);"
+      }
+    },
+    {
+      "title": "Ease.OutCirc",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCirc)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCirc);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCirc)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCirc);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCirc);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCirc)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCirc, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCirc);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCirc);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCirc);"
+      }
+    },
+    {
+      "title": "Ease.InOutCirc",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutCirc)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCirc);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCirc)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutCirc);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutCirc);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutCirc)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutCirc, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutCirc);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutCirc);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutCirc);"
+      }
+    },
+    {
+      "title": "Ease.InBack",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InBack)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBack);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBack)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InBack);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InBack);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InBack)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InBack, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InBack);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InBack);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBack);"
+      }
+    },
+    {
+      "title": "Ease.OutBack",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutBack)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBack);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBack)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutBack);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutBack);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutBack)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutBack, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutBack);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutBack);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBack);"
+      }
+    },
+    {
+      "title": "Ease.InOutBack",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutBack)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBack);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBack)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutBack);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutBack);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutBack)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutBack, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutBack);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutBack);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBack);"
+      }
+    },
+    {
+      "title": "Ease.InElastic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InElastic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InElastic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InElastic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InElastic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InElastic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InElastic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InElastic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InElastic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InElastic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InElastic);"
+      }
+    },
+    {
+      "title": "Ease.OutElastic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutElastic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutElastic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutElastic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutElastic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutElastic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutElastic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutElastic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutElastic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutElastic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutElastic);"
+      }
+    },
+    {
+      "title": "Ease.InOutElastic",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutElastic)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutElastic);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutElastic)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutElastic);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutElastic);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutElastic)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutElastic, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutElastic);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutElastic);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutElastic);"
+      }
+    },
+    {
+      "title": "Ease.InBounce",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InBounce)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBounce);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBounce)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InBounce);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InBounce);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InBounce)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InBounce, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InBounce);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InBounce);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InBounce);"
+      }
+    },
+    {
+      "title": "Ease.OutBounce",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutBounce)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBounce);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBounce)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutBounce);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutBounce);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutBounce)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutBounce, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutBounce);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutBounce);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutBounce);"
+      }
+    },
+    {
+      "title": "Ease.InOutBounce",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutBounce)",
+        "JavaScript": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBounce);",
+        "Python": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBounce)",
+        "C++": "Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::InOutBounce);",
+        "C#": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutBounce);",
+        "Luau": "Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.InOutBounce)",
+        "C": "Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.InOutBounce, NULL);",
+        "Java": "Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.InOutBounce);",
+        "PHP": "Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::InOutBounce);",
+        "HTML / inline JS": "Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.InOutBounce);"
+      }
+    }
+  ],
+  "camera-actions": [
+    {
+      "title": "Camera.current",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local camera = Camera.current()",
+        "JavaScript": "const camera = Camera.current();",
+        "Python": "camera = Camera.current()",
+        "C++": "auto camera = Camera::current();",
+        "C#": "var camera = Camera.current();",
+        "Luau": "local camera = Camera.current()",
+        "C": "const char *camera = Game.scene.Find(\"Game.scene.Camera\");\n// C has no Camera.current getter; resolve the authored camera explicitly.",
+        "Java": "var camera = Camera.current();",
+        "PHP": "$camera = Camera::current();",
+        "HTML / inline JS": "const camera = Camera.current();"
+      }
+    },
+    {
+      "title": "Camera.moveTo",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.moveTo(\"Game.scene.Camera\", {0,4,10}, 2, Ease.OutCubic)",
+        "JavaScript": "Camera.moveTo(\"Game.scene.Camera\", [0,4,10], 2, Ease.OutCubic);",
+        "Python": "Camera.moveTo(\"Game.scene.Camera\", [0,4,10], 2, Ease.OutCubic)",
+        "C++": "Camera::moveTo(\"Game.scene.Camera\", {0,4,10}, 2, Ease::OutCubic);",
+        "C#": "Camera.moveTo(\"Game.scene.Camera\", new double[]{0,4,10}, 2, Ease.OutCubic);",
+        "Luau": "Camera.moveTo(\"Game.scene.Camera\", {0,4,10}, 2, Ease.OutCubic)",
+        "C": "Camera.moveTo(\"Game.scene.Camera\", (RusticVector3){0,4,10}, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.moveTo(\"Game.scene.Camera\", new double[]{0,4,10}, 2, Ease.OutCubic);",
+        "PHP": "Camera::moveTo(\"Game.scene.Camera\", [0,4,10], 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.moveTo(\"Game.scene.Camera\", [0,4,10], 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.zoom",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "JavaScript": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "Python": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "C++": "Camera::zoom(\"Game.scene.Camera\", 1.0, 2, Ease::OutCubic);",
+        "C#": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "Luau": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "C": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "PHP": "Camera::zoom(\"Game.scene.Camera\", 1.0, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.zoom(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.fov",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "JavaScript": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "Python": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "C++": "Camera::fov(\"Game.scene.Camera\", 1.0, 2, Ease::OutCubic);",
+        "C#": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "Luau": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic)",
+        "C": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);",
+        "PHP": "Camera::fov(\"Game.scene.Camera\", 1.0, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.fov(\"Game.scene.Camera\", 1.0, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.lookAt",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.lookAt(\"Game.scene.Camera\", {0,0,0}, 1, Ease.OutCubic)",
+        "JavaScript": "Camera.lookAt(\"Game.scene.Camera\", [0,0,0], 1, Ease.OutCubic);",
+        "Python": "Camera.lookAt(\"Game.scene.Camera\", [0,0,0], 1, Ease.OutCubic)",
+        "C++": "Camera::lookAt(\"Game.scene.Camera\", {0,0,0}, 1, Ease::OutCubic);",
+        "C#": "Camera.lookAt(\"Game.scene.Camera\", new double[]{0,0,0}, 1, Ease.OutCubic);",
+        "Luau": "Camera.lookAt(\"Game.scene.Camera\", {0,0,0}, 1, Ease.OutCubic)",
+        "C": "Camera.lookAt(\"Game.scene.Camera\", (RusticVector3){0,0,0}, 1, Ease.OutCubic, NULL);",
+        "Java": "Camera.lookAt(\"Game.scene.Camera\", new double[]{0,0,0}, 1, Ease.OutCubic);",
+        "PHP": "Camera::lookAt(\"Game.scene.Camera\", [0,0,0], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.lookAt(\"Game.scene.Camera\", [0,0,0], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.follow",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic)",
+        "JavaScript": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic);",
+        "Python": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic)",
+        "C++": "Camera::follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease::OutCubic);",
+        "C#": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic);",
+        "Luau": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic)",
+        "C": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", (RusticVector3){0,1,0}, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic);",
+        "PHP": "Camera::follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.follow(\"Game.scene.Camera\", \"Game.scene.Target\", 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.orbit",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.orbit(\"Game.scene.Camera\", {0,0,0}, 5, 1, 2, Ease.OutCubic)",
+        "JavaScript": "Camera.orbit(\"Game.scene.Camera\", [0,0,0], 5, 1, 2, Ease.OutCubic);",
+        "Python": "Camera.orbit(\"Game.scene.Camera\", [0,0,0], 5, 1, 2, Ease.OutCubic)",
+        "C++": "Camera::orbit(\"Game.scene.Camera\", {0,0,0}, 5, 1, 2, Ease::OutCubic);",
+        "C#": "Camera.orbit(\"Game.scene.Camera\", new double[]{0,0,0}, 5, 1, 2, Ease.OutCubic);",
+        "Luau": "Camera.orbit(\"Game.scene.Camera\", {0,0,0}, 5, 1, 2, Ease.OutCubic)",
+        "C": "Camera.orbit(\"Game.scene.Camera\", (RusticVector3){0,0,0}, 5, 1, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.orbit(\"Game.scene.Camera\", new double[]{0,0,0}, 5, 1, 2, Ease.OutCubic);",
+        "PHP": "Camera::orbit(\"Game.scene.Camera\", [0,0,0], 5, 1, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.orbit(\"Game.scene.Camera\", [0,0,0], 5, 1, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.shake",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic)",
+        "JavaScript": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic);",
+        "Python": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic)",
+        "C++": "Camera::shake(\"Game.scene.Camera\", 0.1, 0.5, Ease::OutCubic);",
+        "C#": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic);",
+        "Luau": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic)",
+        "C": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic, NULL);",
+        "Java": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic);",
+        "PHP": "Camera::shake(\"Game.scene.Camera\", 0.1, 0.5, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.shake(\"Game.scene.Camera\", 0.1, 0.5, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Camera.transition",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Camera.transition(\"Game.scene.Camera\", {0,4,10}, {0,0,0,1}, 1.0, 2, Ease.OutCubic)",
+        "JavaScript": "Camera.transition(\"Game.scene.Camera\", [0,4,10], [0,0,0,1], 1.0, 2, Ease.OutCubic);",
+        "Python": "Camera.transition(\"Game.scene.Camera\", [0,4,10], [0,0,0,1], 1.0, 2, Ease.OutCubic)",
+        "C++": "Camera::transition(\"Game.scene.Camera\", {0,4,10}, {0,0,0,1}, 1.0, 2, Ease::OutCubic);",
+        "C#": "Camera.transition(\"Game.scene.Camera\", new double[]{0,4,10}, new double[]{0,0,0,1}, 1.0, 2, Ease.OutCubic);",
+        "Luau": "Camera.transition(\"Game.scene.Camera\", {0,4,10}, {0,0,0,1}, 1.0, 2, Ease.OutCubic)",
+        "C": "Camera.transition(\"Game.scene.Camera\", (RusticVector3){0,4,10}, (RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,0,0,1}}, 1.0, 2, Ease.OutCubic, NULL);",
+        "Java": "Camera.transition(\"Game.scene.Camera\", new double[]{0,4,10}, new double[]{0,0,0,1}, 1.0, 2, Ease.OutCubic);",
+        "PHP": "Camera::transition(\"Game.scene.Camera\", [0,4,10], [0,0,0,1], 1.0, 2, Ease::OutCubic);",
+        "HTML / inline JS": "Camera.transition(\"Game.scene.Camera\", [0,4,10], [0,0,0,1], 1.0, 2, Ease.OutCubic);"
+      }
+    }
+  ],
+  "operation-handles": [
+    {
+      "title": "handle.state",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nlocal state = handle.state()",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nconst state = handle.state();",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nstate = handle.state()",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nauto state = handle->state();",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nvar state = handle.state();",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nlocal state = handle.state()",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nRusticOperationState state = Gameplay.state(handle);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nvar state = handle.state();",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$state = $handle->state();",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nconst state = handle.state();"
+      }
+    },
+    {
+      "title": "handle.pause",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.pause()",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.pause();",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nhandle.pause()",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nhandle->pause();",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.pause();",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.pause()",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nGameplay.pause(handle);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.pause();",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$handle->pause();",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.pause();"
+      }
+    },
+    {
+      "title": "handle.resume",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.resume()",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.resume();",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nhandle.resume()",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nhandle->resume();",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.resume();",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.resume()",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nGameplay.resume(handle);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.resume();",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$handle->resume();",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.resume();"
+      }
+    },
+    {
+      "title": "handle.cancel",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.cancel()",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.cancel();",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nhandle.cancel()",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nhandle->cancel();",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.cancel();",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.cancel()",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nGameplay.cancel(handle);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.cancel();",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$handle->cancel();",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.cancel();"
+      }
+    },
+    {
+      "title": "handle.reverse",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.reverse()",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.reverse();",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nhandle.reverse()",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nhandle->reverse();",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.reverse();",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.reverse()",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nGameplay.reverse(handle);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.reverse();",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$handle->reverse();",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.reverse();"
+      }
+    },
+    {
+      "title": "handle.onFinished",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.onFinished(function() rustic.log(\"info\", \"done\") end)",
+        "JavaScript": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.onFinished(() => rustic.log(\"info\", \"done\"));",
+        "Python": "handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nhandle.onFinished(lambda : rustic.log(\"info\", \"done\"))",
+        "C++": "auto handle = Tween::move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nhandle->onFinished([]() { rustic.log(\"info\", \"done\"); });",
+        "C#": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.onFinished(() => rustic.log(\"info\", \"done\"));",
+        "Luau": "local handle = Tween.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nhandle.onFinished(function() rustic.log(\"info\", \"done\") end)",
+        "C": "RusticGameplayHandle handle = Tween.move(rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic, NULL);\nGameplay.onFinished(handle, on_done);",
+        "Java": "var handle = Tween.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nhandle.onFinished(() -> rustic.log(\"info\", \"done\"));",
+        "PHP": "$handle = Tween::move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$handle->onFinished(fn() => $rustic->log(\"info\", \"done\"));",
+        "HTML / inline JS": "const handle = Tween.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nhandle.onFinished(() => rustic.log(\"info\", \"done\"));"
+      }
+    }
+  ],
+  "audio": [
+    {
+      "title": "Audio.play",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "Audio.playAt",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.playAt(\"assets/music.ogg\", {0,0,0})",
+        "JavaScript": "const voice = Audio.playAt(\"assets/music.ogg\", [0,0,0]);",
+        "Python": "voice = Audio.playAt(\"assets/music.ogg\", [0,0,0])",
+        "C++": "auto voice = Audio::playAt(\"assets/music.ogg\", {0,0,0});",
+        "C#": "var voice = Audio.playAt(\"assets/music.ogg\", new double[]{0,0,0});",
+        "Luau": "local voice = Audio.playAt(\"assets/music.ogg\", {0,0,0})",
+        "C": "RusticAudioVoice voice = Audio.playAt(\"assets/music.ogg\", (RusticVector3){0,0,0}, NULL);",
+        "Java": "var voice = Audio.playAt(\"assets/music.ogg\", new double[]{0,0,0}, 1, 1, false);",
+        "PHP": "$voice = Audio::playAt(\"assets/music.ogg\", [0,0,0]);",
+        "HTML / inline JS": "const voice = Audio.playAt(\"assets/music.ogg\", [0,0,0]);"
+      }
+    },
+    {
+      "title": "Audio.volume",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.volume(voice, 0.5)",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.volume(voice, 0.5);",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nAudio.volume(voice, 0.5)",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nAudio::volume(voice, 0.5);",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nAudio.volume(voice, 0.5);",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.volume(voice, 0.5)",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.volume(voice, 0.5);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nAudio.volume(voice, 0.5);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\nAudio::volume($voice, 0.5);",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.volume(voice, 0.5);"
+      }
+    },
+    {
+      "title": "Audio.pitch",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.pitch(voice, 1.2)",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.pitch(voice, 1.2);",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nAudio.pitch(voice, 1.2)",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nAudio::pitch(voice, 1.2);",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nAudio.pitch(voice, 1.2);",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.pitch(voice, 1.2)",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.pitch(voice, 1.2);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nAudio.pitch(voice, 1.2);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\nAudio::pitch($voice, 1.2);",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.pitch(voice, 1.2);"
+      }
+    },
+    {
+      "title": "Audio.fadeIn",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeIn(voice, 2, Ease.OutCubic)",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeIn(voice, 2, Ease.OutCubic);",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeIn(voice, 2, Ease.OutCubic)",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nAudio::fadeIn(voice, 2, Ease::OutCubic);",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeIn(voice, 2, Ease.OutCubic);",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeIn(voice, 2, Ease.OutCubic)",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.fadeIn(voice, 2, Ease.OutCubic, NULL);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nAudio.fadeIn(voice, 2, Ease.OutCubic);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\nAudio::fadeIn($voice, 2, Ease::OutCubic);",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeIn(voice, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Audio.fadeOut",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeOut(voice, 2, Ease.OutCubic)",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeOut(voice, 2, Ease.OutCubic);",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeOut(voice, 2, Ease.OutCubic)",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nAudio::fadeOut(voice, 2, Ease::OutCubic);",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeOut(voice, 2, Ease.OutCubic);",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nAudio.fadeOut(voice, 2, Ease.OutCubic)",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.fadeOut(voice, 2, Ease.OutCubic, NULL);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nAudio.fadeOut(voice, 2, Ease.OutCubic);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\nAudio::fadeOut($voice, 2, Ease::OutCubic);",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nAudio.fadeOut(voice, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Audio.crossfade",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nlocal nextVoice = Audio.play(\"assets/music.ogg\")\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic)",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nconst nextVoice = Audio.play(\"assets/music.ogg\");\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic);",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nnextVoice = Audio.play(\"assets/music.ogg\")\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic)",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nauto nextVoice = Audio::play(\"assets/music.ogg\");\nAudio::crossfade(voice, nextVoice, 2, Ease::OutCubic);",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nvar nextVoice = Audio.play(\"assets/music.ogg\");\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic);",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nlocal nextVoice = Audio.play(\"assets/music.ogg\")\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic)",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nRusticAudioVoice nextVoice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic, NULL);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvar nextVoice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic);",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\n$nextVoice = Audio::play(\"assets/music.ogg\");\nAudio::crossfade($voice, $nextVoice, 2, Ease::OutCubic);",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nconst nextVoice = Audio.play(\"assets/music.ogg\");\nAudio.crossfade(voice, nextVoice, 2, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "voice.pause",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nvoice.pause();",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.pause(voice);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.pause();",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\n$voice->pause();",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();"
+      }
+    },
+    {
+      "title": "voice.resume",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nvoice.resume();",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.resume(voice);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.resume();",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\n$voice->resume();",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();"
+      }
+    },
+    {
+      "title": "voice.stop",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "JavaScript": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "voice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "auto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "var voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local voice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C": "RusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "var voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "const voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    },
+    {
+      "title": "Audio.load",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.load",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.play",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+      }
+    },
+    {
+      "title": "audio.pause",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.pause();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.pause(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.pause();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->pause();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();"
+      }
+    },
+    {
+      "title": "audio.resume",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.resume();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.resume(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.resume();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->resume();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();"
+      }
+    },
+    {
+      "title": "audio.stop",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    },
+    {
+      "title": "audio.Unload",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    },
+    {
+      "title": "audio.unload",
+      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "examples": {
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
+        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
+        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
+        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
+        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
+        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
+        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
+        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+      }
+    }
+  ],
+  "events": [
+    {
+      "title": "Events.on",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "JavaScript": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));",
+        "Python": "connection = Events.on(\"DoorOpened\", lambda *args: rustic.log(\"info\", \"event received\"))",
+        "C++": "auto connection = Events::on(\"DoorOpened\", [](const RusticValue::Array& args) { rustic.log(\"info\", \"event received\"); });",
+        "C#": "var connection = Events.on(\"DoorOpened\", args => rustic.log(\"info\", \"event received\"));",
+        "Luau": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "C": "RusticConnection connection = Events.on(\"DoorOpened\", on_event);",
+        "Java": "var connection = Events.on(\"DoorOpened\", args -> rustic.log(\"info\", \"event received\"));",
+        "PHP": "$connection = Events::on(\"DoorOpened\", fn(...$args) => $rustic->log(\"info\", \"event received\"));",
+        "HTML / inline JS": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));"
+      }
+    },
+    {
+      "title": "Events.once",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local connection = Events.once(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "JavaScript": "const connection = Events.once(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));",
+        "Python": "connection = Events.once(\"DoorOpened\", lambda *args: rustic.log(\"info\", \"event received\"))",
+        "C++": "auto connection = Events::once(\"DoorOpened\", [](const RusticValue::Array& args) { rustic.log(\"info\", \"event received\"); });",
+        "C#": "var connection = Events.once(\"DoorOpened\", args => rustic.log(\"info\", \"event received\"));",
+        "Luau": "local connection = Events.once(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "C": "RusticConnection connection = Events.once(\"DoorOpened\", on_event);",
+        "Java": "var connection = Events.once(\"DoorOpened\", args -> rustic.log(\"info\", \"event received\"));",
+        "PHP": "$connection = Events::once(\"DoorOpened\", fn(...$args) => $rustic->log(\"info\", \"event received\"));",
+        "HTML / inline JS": "const connection = Events.once(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));"
+      }
+    },
+    {
+      "title": "Events.connect",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local connection = Events.connect(rustic.entity_id(), \"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "JavaScript": "const connection = Events.connect(rustic.entity_id(), \"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));",
+        "Python": "connection = Events.connect(rustic.entity_id(), \"DoorOpened\", lambda *args: rustic.log(\"info\", \"event received\"))",
+        "C++": "auto connection = Events::connect(rustic.entity_id(), \"DoorOpened\", [](const RusticValue::Array& args) { rustic.log(\"info\", \"event received\"); });",
+        "C#": "var connection = Events.connect(rustic.entity_id(), \"DoorOpened\", args => rustic.log(\"info\", \"event received\"));",
+        "Luau": "local connection = Events.connect(rustic.entity_id(), \"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)",
+        "C": "RusticConnection connection = Events.connect(rustic.entity_id(), \"DoorOpened\", on_event, false);",
+        "Java": "var connection = Events.connect(rustic.entity_id(), \"DoorOpened\", args -> rustic.log(\"info\", \"event received\"));",
+        "PHP": "$connection = Events::connect($rustic->entity_id(), \"DoorOpened\", fn(...$args) => $rustic->log(\"info\", \"event received\"));",
+        "HTML / inline JS": "const connection = Events.connect(rustic.entity_id(), \"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));"
+      }
+    },
+    {
+      "title": "Events.emit",
+      "note": "Uses an object-scoped signal. Subscribe with Events.connect to receive it.",
+      "examples": {
+        "Lua 5.4": "Events.emit(\"DoorOpened\", {rustic.entity_id()}, rustic.entity_id())",
+        "JavaScript": "Events.emit(\"DoorOpened\", [rustic.entity_id()], rustic.entity_id());",
+        "Python": "Events.emit(\"DoorOpened\", [rustic.entity_id()], rustic.entity_id())",
+        "C++": "Events::emit(\"DoorOpened\", RusticValue::Array{rustic.entity_id()}, rustic.entity_id());",
+        "C#": "Events.emit(\"DoorOpened\", new object[]{rustic.entity_id()}, rustic.entity_id());",
+        "Luau": "Events.emit(\"DoorOpened\", {rustic.entity_id()}, rustic.entity_id())",
+        "C": "Events.emit(\"DoorOpened\", (RusticValue[]){{.type=RUSTIC_STRING,.string=rustic.entity_id()}}, 1, rustic.entity_id());",
+        "Java": "Events.emit(\"DoorOpened\", new Object[]{rustic.entity_id()}, rustic.entity_id());",
+        "PHP": "Events::emit(\"DoorOpened\", [$rustic->entity_id()], $rustic->entity_id());",
+        "HTML / inline JS": "Events.emit(\"DoorOpened\", [rustic.entity_id()], rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Events.disconnect",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)\nEvents.disconnect(connection)",
+        "JavaScript": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));\nEvents.disconnect(connection);",
+        "Python": "connection = Events.on(\"DoorOpened\", lambda *args: rustic.log(\"info\", \"event received\"))\nEvents.disconnect(connection)",
+        "C++": "auto connection = Events::on(\"DoorOpened\", [](const RusticValue::Array& args) { rustic.log(\"info\", \"event received\"); });\nEvents::disconnect(connection);",
+        "C#": "var connection = Events.on(\"DoorOpened\", args => rustic.log(\"info\", \"event received\"));\nEvents.disconnect(connection);",
+        "Luau": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)\nEvents.disconnect(connection)",
+        "C": "RusticConnection connection = Events.on(\"DoorOpened\", on_event);\nEvents.disconnect(connection);",
+        "Java": "var connection = Events.on(\"DoorOpened\", args -> rustic.log(\"info\", \"event received\"));\nEvents.disconnect(connection);",
+        "PHP": "$connection = Events::on(\"DoorOpened\", fn(...$args) => $rustic->log(\"info\", \"event received\"));\nEvents::disconnect($connection);",
+        "HTML / inline JS": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));\nEvents.disconnect(connection);"
+      }
+    },
+    {
+      "title": "connection.disconnect",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)\nconnection.disconnect()",
+        "JavaScript": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));\nconnection.disconnect();",
+        "Python": "connection = Events.on(\"DoorOpened\", lambda *args: rustic.log(\"info\", \"event received\"))\nconnection.disconnect()",
+        "C++": "auto connection = Events::on(\"DoorOpened\", [](const RusticValue::Array& args) { rustic.log(\"info\", \"event received\"); });\nconnection.disconnect();",
+        "C#": "var connection = Events.on(\"DoorOpened\", args => rustic.log(\"info\", \"event received\"));\nconnection.disconnect();",
+        "Luau": "local connection = Events.on(\"DoorOpened\", function(...) rustic.log(\"info\", \"event received\") end)\nconnection.disconnect()",
+        "C": "RusticConnection connection = Events.on(\"DoorOpened\", on_event);\nEvents.disconnect(connection);",
+        "Java": "var connection = Events.on(\"DoorOpened\", args -> rustic.log(\"info\", \"event received\"));\nconnection.disconnect();",
+        "PHP": "$connection = Events::on(\"DoorOpened\", fn(...$args) => $rustic->log(\"info\", \"event received\"));\n$connection->disconnect();",
+        "HTML / inline JS": "const connection = Events.on(\"DoorOpened\", (...args) => rustic.log(\"info\", \"event received\"));\nconnection.disconnect();"
+      }
+    }
+  ],
+  "path": [
+    {
+      "title": "Path.create",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")",
+        "JavaScript": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");",
+        "Python": "path = Path.create([[0,0,0], [10,0,0]], \"Linear\")",
+        "C++": "auto path = Path::create({{{0,0,0}}, {{10,0,0}}}, \"Linear\");",
+        "C#": "var path = Path.create(new double[][]{new double[]{0,0,0}, new double[]{10,0,0}}, \"Linear\");",
+        "Luau": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")",
+        "C": "RusticPathPoint points[] = {{{0,0,0}, \"Linear\"}, {{10,0,0}, \"Linear\"}};\nRusticPath path = Path.create(points, 2, \"Linear\");\nPath.destroy(&path);",
+        "Java": "var path = Path.create(new double[][]{{0,0,0}, {10,0,0}}, \"Linear\");",
+        "PHP": "$path = Path::create([[0,0,0], [10,0,0]], \"Linear\");",
+        "HTML / inline JS": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");"
+      }
+    },
+    {
+      "title": "Path.follow",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")\nPath.follow(rustic.entity_id(), path, {duration=2,orientToPath=true})",
+        "JavaScript": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");\nPath.follow(rustic.entity_id(), path, {duration:2,orientToPath:true});",
+        "Python": "path = Path.create([[0,0,0], [10,0,0]], \"Linear\")\nPath.follow(rustic.entity_id(), path, {'duration':2,'orientToPath':True})",
+        "C++": "auto path = Path::create({{{0,0,0}}, {{10,0,0}}}, \"Linear\");\nPath::follow(rustic.entity_id(), path, 2, Ease::OutCubic, false, false, true);",
+        "C#": "var path = Path.create(new double[][]{new double[]{0,0,0}, new double[]{10,0,0}}, \"Linear\");\nPath.follow(rustic.entity_id(), path, 2, Ease.OutCubic, false, false, true);",
+        "Luau": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")\nPath.follow(rustic.entity_id(), path, {duration=2,orientToPath=true})",
+        "C": "RusticPathPoint points[] = {{{0,0,0}, \"Linear\"}, {{10,0,0}, \"Linear\"}};\nRusticPath path = Path.create(points, 2, \"Linear\");\nPath.follow(rustic.entity_id(), path, 2, 0, Ease.OutCubic, false, false, true, NULL);\nPath.destroy(&path);",
+        "Java": "var path = Path.create(new double[][]{{0,0,0}, {10,0,0}}, \"Linear\");\nPath.follow(rustic.entity_id(), path, 2, Ease.OutCubic, false, false, true);",
+        "PHP": "$path = Path::create([[0,0,0], [10,0,0]], \"Linear\");\nPath::follow($rustic->entity_id(), $path, [\"duration\"=>2,\"orientToPath\"=>true]);",
+        "HTML / inline JS": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");\nPath.follow(rustic.entity_id(), path, {duration:2,orientToPath:true});"
+      }
+    },
+    {
+      "title": "Path.followSpeed / speed options",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")\nPath.follow(rustic.entity_id(), path, {speed=5,orientToPath=true})",
+        "JavaScript": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");\nPath.follow(rustic.entity_id(), path, {speed:5,orientToPath:true});",
+        "Python": "path = Path.create([[0,0,0], [10,0,0]], \"Linear\")\nPath.follow(rustic.entity_id(), path, {'speed':5,'orientToPath':True})",
+        "C++": "auto path = Path::create({{{0,0,0}}, {{10,0,0}}}, \"Linear\");\nPath::followSpeed(rustic.entity_id(), path, 5, Ease::OutCubic, false, false, true);",
+        "C#": "var path = Path.create(new double[][]{new double[]{0,0,0}, new double[]{10,0,0}}, \"Linear\");\nPath.followSpeed(rustic.entity_id(), path, 5, Ease.OutCubic, false, false, true);",
+        "Luau": "local path = Path.create({{0,0,0}, {10,0,0}}, \"Linear\")\nPath.follow(rustic.entity_id(), path, {speed=5,orientToPath=true})",
+        "C": "RusticPathPoint points[] = {{{0,0,0}, \"Linear\"}, {{10,0,0}, \"Linear\"}};\nRusticPath path = Path.create(points, 2, \"Linear\");\nPath.follow(rustic.entity_id(), path, 0, 5, Ease.OutCubic, false, false, true, NULL);\nPath.destroy(&path);",
+        "Java": "var path = Path.create(new double[][]{{0,0,0}, {10,0,0}}, \"Linear\");\nPath.followSpeed(rustic.entity_id(), path, 5, Ease.OutCubic, false, false, true);",
+        "PHP": "$path = Path::create([[0,0,0], [10,0,0]], \"Linear\");\nPath::follow($rustic->entity_id(), $path, [\"speed\"=>5,\"orientToPath\"=>true]);",
+        "HTML / inline JS": "const path = Path.create([[0,0,0], [10,0,0]], \"Linear\");\nPath.follow(rustic.entity_id(), path, {speed:5,orientToPath:true});"
+      }
+    },
+    {
+      "title": "Path.destroy (C storage)",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "-- This SDK manages path storage automatically; no destroy function.",
+        "JavaScript": "// This SDK manages path storage automatically; no destroy function.",
+        "Python": "# This SDK manages path storage automatically; no destroy function.",
+        "C++": "// This SDK manages path storage automatically; no destroy function.",
+        "C#": "// This SDK manages path storage automatically; no destroy function.",
+        "Luau": "-- This SDK manages path storage automatically; no destroy function.",
+        "C": "RusticPathPoint points[] = {{{0,0,0}, \"Linear\"}, {{10,0,0}, \"Linear\"}};\nRusticPath path = Path.create(points, 2, \"Linear\");\nPath.destroy(&path);",
+        "Java": "// This SDK manages path storage automatically; no destroy function.",
+        "PHP": "// This SDK manages path storage automatically; no destroy function.",
+        "HTML / inline JS": "// This SDK manages path storage automatically; no destroy function."
+      }
+    }
+  ],
+  "animation": [
+    {
+      "title": "Animation.register / registerClip",
+      "note": "Registers a one-second opacity clip named Reveal. Run this fixture before the playback, blend, marker and sequence-animation examples; they use Reveal on the same owner.",
+      "examples": {
+        "Lua 5.4": "local keys = {{time=0,value=0}, {time=1,value=1}}\nlocal clip = {name=\"Reveal\",duration=1,tracks={{target=\"Opacity\",keys=keys}}}\nAnimation.register(rustic.entity_id(), clip)",
+        "JavaScript": "const keys = [{time:0,value:0}, {time:1,value:1}];\nconst clip = {name:\"Reveal\",duration:1,tracks:[{target:\"Opacity\",keys}]};\nAnimation.register(rustic.entity_id(), clip);",
+        "Python": "keys = [{'time':0,'value':0}, {'time':1,'value':1}]\nclip = {'name':'Reveal','duration':1,'tracks':[{'target':'Opacity','keys':keys}]}\nAnimation.register(rustic.entity_id(), clip)",
+        "C++": "std::vector<Animation::Key> keys{{0, 0.0}, {1, 1.0}};\nAnimation::Clip clip{\"Reveal\", 1, {{\"Opacity\", keys}}, {}};\nAnimation::registerClip(rustic.entity_id(), clip);",
+        "C#": "var keys = new Animation.Key[]{new(0, 0.0), new(1, 1.0)};\nvar clip = new Animation.Clip(\"Reveal\", 1, new Animation.Track[]{new(\"Opacity\", keys)}, System.Array.Empty<Animation.Marker>());\nAnimation.register(rustic.entity_id(), clip);",
+        "Luau": "local keys = {{time=0,value=0}, {time=1,value=1}}\nlocal clip = {name=\"Reveal\",duration=1,tracks={{target=\"Opacity\",keys=keys}}}\nAnimation.register(rustic.entity_id(), clip)",
+        "C": "RusticKeyframe keys[] = {{0, {.type=RUSTIC_NUMBER,.number=0}, \"Linear\"}, {1, {.type=RUSTIC_NUMBER,.number=1}, \"Linear\"}};\nRusticAnimationTrack tracks[] = {{\"Opacity\", keys, 2}};\nRusticAnimationClip clip = {.name=\"Reveal\", .duration=1, .tracks=tracks, .trackCount=1};\nAnimation.registerClip(rustic.entity_id(), clip);",
+        "Java": "var keys = List.of(new Animation.Key(0, 0.0, Ease.Linear), new Animation.Key(1, 1.0, Ease.Linear));\nvar clip = new Animation.Clip(\"Reveal\", 1, List.of(new Animation.Track(\"Opacity\", keys)), List.of());\nAnimation.register(rustic.entity_id(), clip);",
+        "PHP": "$keys = [[\"time\"=>0,\"value\"=>0], [\"time\"=>1,\"value\"=>1]];\n$clip = [\"name\"=>\"Reveal\",\"duration\"=>1,\"tracks\"=>[[\"target\"=>\"Opacity\",\"keys\"=>$keys]]];\nAnimation::register($rustic->entity_id(), $clip);",
+        "HTML / inline JS": "const keys = [{time:0,value:0}, {time:1,value:1}];\nconst clip = {name:\"Reveal\",duration:1,tracks:[{target:\"Opacity\",keys}]};\nAnimation.register(rustic.entity_id(), clip);"
+      }
+    },
+    {
+      "title": "Animation.clips",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local clips = Animation.clips(rustic.entity_id())",
+        "JavaScript": "const clips = Animation.clips(rustic.entity_id());",
+        "Python": "clips = Animation.clips(rustic.entity_id())",
+        "C++": "auto clips = Animation::clips(rustic.entity_id());",
+        "C#": "var clips = Animation.clips(rustic.entity_id());",
+        "Luau": "local clips = Animation.clips(rustic.entity_id())",
+        "C": "RusticList clips = Animation.clips(rustic.entity_id());",
+        "Java": "var clips = Animation.clips(rustic.entity_id());",
+        "PHP": "$clips = Animation::clips($rustic->entity_id());",
+        "HTML / inline JS": "const clips = Animation.clips(rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Animation.load",
+      "note": "Provide the imported asset before Play and use a fresh target. Inspect Animation.clips for its actual clip names.",
+      "examples": {
+        "Lua 5.4": "Animation.load(rustic.entity_id(), \"assets/actor.glb\")",
+        "JavaScript": "Animation.load(rustic.entity_id(), \"assets/actor.glb\");",
+        "Python": "Animation.load(rustic.entity_id(), \"assets/actor.glb\")",
+        "C++": "Animation::load(rustic.entity_id(), \"assets/actor.glb\");",
+        "C#": "Animation.load(rustic.entity_id(), \"assets/actor.glb\");",
+        "Luau": "Animation.load(rustic.entity_id(), \"assets/actor.glb\")",
+        "C": "Animation.load(rustic.entity_id(), \"assets/actor.glb\");",
+        "Java": "Animation.load(rustic.entity_id(), \"assets/actor.glb\");",
+        "PHP": "Animation::load($rustic->entity_id(), \"assets/actor.glb\");",
+        "HTML / inline JS": "Animation.load(rustic.entity_id(), \"assets/actor.glb\");"
+      }
+    },
+    {
+      "title": "Animation.addMarker",
+      "note": "Register Reveal first; add the marker before playback.",
+      "examples": {
+        "Lua 5.4": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\")",
+        "JavaScript": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "Python": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\")",
+        "C++": "Animation::addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "C#": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "Luau": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\")",
+        "C": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "Java": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "PHP": "Animation::addMarker($rustic->entity_id(), \"Reveal\", 0.5, \"Halfway\");",
+        "HTML / inline JS": "Animation.addMarker(rustic.entity_id(), \"Reveal\", 0.5, \"Halfway\");"
+      }
+    },
+    {
+      "title": "Animation.play",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");"
+      }
+    },
+    {
+      "title": "Animation.blend",
+      "note": "This minimal example blends two instances of Reveal. Replace the names with two registered clips for a pose change.",
+      "examples": {
+        "Lua 5.4": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "JavaScript": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\");",
+        "Python": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "C++": "Animation::blend(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease::OutCubic);",
+        "C#": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic);",
+        "Luau": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "C": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic, NULL);",
+        "Java": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic);",
+        "PHP": "Animation::blend($rustic->entity_id(), \"Reveal\", \"Reveal\");",
+        "HTML / inline JS": "Animation.blend(rustic.entity_id(), \"Reveal\", \"Reveal\");"
+      }
+    },
+    {
+      "title": "Animation.transition",
+      "note": "This minimal example blends two instances of Reveal. Replace the names with two registered clips for a pose change.",
+      "examples": {
+        "Lua 5.4": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "JavaScript": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\");",
+        "Python": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "C++": "Animation::transition(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease::OutCubic);",
+        "C#": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic);",
+        "Luau": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\")",
+        "C": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic, NULL);",
+        "Java": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\", 0.3, Ease.OutCubic);",
+        "PHP": "Animation::transition($rustic->entity_id(), \"Reveal\", \"Reveal\");",
+        "HTML / inline JS": "Animation.transition(rustic.entity_id(), \"Reveal\", \"Reveal\");"
+      }
+    },
+    {
+      "title": "Animation.stop",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.stop(handle)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.stop(handle);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.stop(handle)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nAnimation::stop(handle);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.stop(handle);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.stop(handle)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.stop(handle);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.stop(handle);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\nAnimation::stop($handle);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.stop(handle);"
+      }
+    },
+    {
+      "title": "Animation.pause",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.pause(handle)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.pause(handle);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.pause(handle)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nAnimation::pause(handle);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.pause(handle);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.pause(handle)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.pause(handle);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.pause(handle);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\nAnimation::pause($handle);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.pause(handle);"
+      }
+    },
+    {
+      "title": "Animation.speed",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.speed(handle, 0.5)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.speed(handle, 0.5);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.speed(handle, 0.5)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nAnimation::speed(handle, 0.5);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.speed(handle, 0.5);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.speed(handle, 0.5)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.speed(handle, 0.5);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.speed(handle, 0.5);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\nAnimation::speed($handle, 0.5);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.speed(handle, 0.5);"
+      }
+    },
+    {
+      "title": "Animation.loop",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.loop(handle, false)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.loop(handle, false);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.loop(handle, False)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nAnimation::loop(handle, false);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.loop(handle, false);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nAnimation.loop(handle, false)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.loop(handle, false);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.loop(handle, false);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\nAnimation::loop($handle, false);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nAnimation.loop(handle, false);"
+      }
+    },
+    {
+      "title": "handle.stop",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.stop()",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.stop();",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.stop()",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nhandle->stop();",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.stop();",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.stop()",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.stop(handle);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.stop();",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\n$handle->stop();",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.stop();"
+      }
+    },
+    {
+      "title": "handle.speed",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.speed(0.5)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.speed(0.5);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.speed(0.5)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nhandle->speed(0.5);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.speed(0.5);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.speed(0.5)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.speed(handle, 0.5);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.speed(0.5);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\n$handle->speed(0.5);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.speed(0.5);"
+      }
+    },
+    {
+      "title": "handle.loop",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.loop(false)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.loop(false);",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.loop(False)",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nhandle->loop(false);",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.loop(false);",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.loop(false)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.loop(handle, false);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.loop(false);",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\n$handle->loop(false);",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.loop(false);"
+      }
+    },
+    {
+      "title": "handle.onMarker",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.onMarker(\"Halfway\", function() rustic.log(\"info\", \"done\") end)",
+        "JavaScript": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.onMarker(\"Halfway\", () => rustic.log(\"info\", \"done\"));",
+        "Python": "handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.onMarker(\"Halfway\", lambda : rustic.log(\"info\", \"done\"))",
+        "C++": "auto handle = Animation::play(rustic.entity_id(), \"Reveal\");\nhandle->onMarker(\"Halfway\", []() { rustic.log(\"info\", \"done\"); });",
+        "C#": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.onMarker(\"Halfway\", () => rustic.log(\"info\", \"done\"));",
+        "Luau": "local handle = Animation.play(rustic.entity_id(), \"Reveal\")\nhandle.onMarker(\"Halfway\", function() rustic.log(\"info\", \"done\") end)",
+        "C": "RusticGameplayHandle handle = Animation.play(rustic.entity_id(), \"Reveal\", NULL, NULL);\nAnimation.onMarker(handle, \"Halfway\", on_done);",
+        "Java": "var handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.onMarker(\"Halfway\", () -> rustic.log(\"info\", \"done\"));",
+        "PHP": "$handle = Animation::play($rustic->entity_id(), \"Reveal\");\n$handle->onMarker(\"Halfway\", fn() => $rustic->log(\"info\", \"done\"));",
+        "HTML / inline JS": "const handle = Animation.play(rustic.entity_id(), \"Reveal\");\nhandle.onMarker(\"Halfway\", () => rustic.log(\"info\", \"done\"));"
+      }
+    },
+    {
+      "title": "Animation.value",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local keys = {{time=0,value=0}, {time=1,value=1}}\nAnimation.value(keys, function(value) rustic.log(\"info\", \"sample received\") end)",
+        "JavaScript": "const keys = [{time:0,value:0}, {time:1,value:1}];\nAnimation.value(keys, (value) => rustic.log(\"info\", \"sample received\"));",
+        "Python": "keys = [{'time':0,'value':0}, {'time':1,'value':1}]\nAnimation.value(keys, lambda *args: rustic.log(\"info\", \"sample received\"))",
+        "C++": "std::vector<Animation::Key> keys{{0, 0.0}, {1, 1.0}};\nAnimation::value(keys, [](RusticValue value) { rustic.log(\"info\", \"sample received\"); });",
+        "C#": "var keys = new Animation.Key[]{new(0, 0.0), new(1, 1.0)};\nAnimation.value(keys, args => rustic.log(\"info\", \"sample received\"));",
+        "Luau": "local keys = {{time=0,value=0}, {time=1,value=1}}\nAnimation.value(keys, function(value) rustic.log(\"info\", \"sample received\") end)",
+        "C": "RusticKeyframe keys[] = {{0, {.type=RUSTIC_NUMBER,.number=0}, \"Linear\"}, {1, {.type=RUSTIC_NUMBER,.number=1}, \"Linear\"}};\nAnimation.value(keys, 2, on_sample, NULL);",
+        "Java": "var keys = List.of(new Animation.Key(0, 0.0, Ease.Linear), new Animation.Key(1, 1.0, Ease.Linear));\nAnimation.value(keys, args -> rustic.log(\"info\", \"sample received\"));",
+        "PHP": "$keys = [[\"time\"=>0,\"value\"=>0], [\"time\"=>1,\"value\"=>1]];\nAnimation::value($keys, fn(...$args) => $rustic->log(\"info\", \"sample received\"));",
+        "HTML / inline JS": "const keys = [{time:0,value:0}, {time:1,value:1}];\nAnimation.value(keys, (value) => rustic.log(\"info\", \"sample received\"));"
+      }
+    },
+    {
+      "title": "Animation.ik",
+      "note": "Create a direct Root \u2192 Middle \u2192 Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
+      "examples": {
+        "Lua 5.4": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
+        "JavaScript": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
+        "Python": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0])",
+        "C++": "Animation::ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0}, 1, Ease::OutCubic);",
+        "C#": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "Luau": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
+        "C": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", (RusticVector3){1,1,0}, (RusticVector3){0,0,1}, 1, 1, Ease.OutCubic, NULL);",
+        "Java": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", new double[]{1,1,0}, 1, Ease.OutCubic, 1, new double[]{0,0,1});",
+        "PHP": "Animation::ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
+        "HTML / inline JS": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);"
+      }
+    },
+    {
+      "title": "Animation.footPlacement",
+      "note": "Create a direct Root \u2192 Middle \u2192 Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
+      "examples": {
+        "Lua 5.4": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
+        "JavaScript": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
+        "Python": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0])",
+        "C++": "Animation::footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0}, 1, Ease::OutCubic);",
+        "C#": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "Luau": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
+        "C": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", (RusticVector3){1,1,0}, (RusticVector3){0,0,1}, 1, 1, Ease.OutCubic, NULL);",
+        "Java": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "PHP": "Animation::footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
+        "HTML / inline JS": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);"
+      }
+    },
+    {
+      "title": "Animation.lookAt",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Animation.lookAt(rustic.entity_id(), {1,1,0}, 1, Ease.OutCubic)",
+        "JavaScript": "Animation.lookAt(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic);",
+        "Python": "Animation.lookAt(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic)",
+        "C++": "Animation::lookAt(rustic.entity_id(), {1,1,0}, 1, Ease::OutCubic);",
+        "C#": "Animation.lookAt(rustic.entity_id(), new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "Luau": "Animation.lookAt(rustic.entity_id(), {1,1,0}, 1, Ease.OutCubic)",
+        "C": "Animation.lookAt(rustic.entity_id(), (RusticVector3){1,1,0}, 1, Ease.OutCubic, NULL);",
+        "Java": "Animation.lookAt(rustic.entity_id(), new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "PHP": "Animation::lookAt($rustic->entity_id(), [1,1,0], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Animation.lookAt(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Animation.headTracking",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Animation.headTracking(rustic.entity_id(), {1,1,0}, 1, Ease.OutCubic)",
+        "JavaScript": "Animation.headTracking(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic);",
+        "Python": "Animation.headTracking(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic)",
+        "C++": "Animation::headTracking(rustic.entity_id(), {1,1,0}, 1, Ease::OutCubic);",
+        "C#": "Animation.headTracking(rustic.entity_id(), new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "Luau": "Animation.headTracking(rustic.entity_id(), {1,1,0}, 1, Ease.OutCubic)",
+        "C": "Animation.headTracking(rustic.entity_id(), (RusticVector3){1,1,0}, 1, Ease.OutCubic, NULL);",
+        "Java": "Animation.headTracking(rustic.entity_id(), new double[]{1,1,0}, 1, Ease.OutCubic);",
+        "PHP": "Animation::headTracking($rustic->entity_id(), [1,1,0], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Animation.headTracking(rustic.entity_id(), [1,1,0], 1, Ease.OutCubic);"
+      }
+    },
+    {
+      "title": "Animation.recoil",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "Animation.recoil(rustic.entity_id(), {0,0,0,1}, 1, Ease.OutCubic)",
+        "JavaScript": "Animation.recoil(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic);",
+        "Python": "Animation.recoil(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic)",
+        "C++": "Animation::recoil(rustic.entity_id(), {0,0,0,1}, 1, Ease::OutCubic);",
+        "C#": "Animation.recoil(rustic.entity_id(), new double[]{0,0,0,1}, 1, Ease.OutCubic);",
+        "Luau": "Animation.recoil(rustic.entity_id(), {0,0,0,1}, 1, Ease.OutCubic)",
+        "C": "Animation.recoil(rustic.entity_id(), (RusticValue){.type=RUSTIC_VECTOR,.length=4,.vector={0,0,0,1}}, 1, Ease.OutCubic, NULL);",
+        "Java": "Animation.recoil(rustic.entity_id(), new double[]{0,0,0,1}, 1, Ease.OutCubic);",
+        "PHP": "Animation::recoil($rustic->entity_id(), [0,0,0,1], 1, Ease::OutCubic);",
+        "HTML / inline JS": "Animation.recoil(rustic.entity_id(), [0,0,0,1], 1, Ease.OutCubic);"
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "title": "Sequence.new / create / New",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.wait(1);\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.wait(1);\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.wait(&builder, 1);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.waitFor(1);\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->wait(1);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "Timeline.new / create / New",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Timeline.new()\nbuilder.wait(1)\nbuilder.play()",
+        "JavaScript": "const builder = Timeline.new();\nbuilder.wait(1);\nbuilder.play();",
+        "Python": "builder = Timeline.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C++": "auto builder = Timeline::create();\nbuilder.wait(1);\nbuilder.play();",
+        "C#": "var builder = Timeline.New();\nbuilder.wait(1);\nbuilder.play();",
+        "Luau": "local builder = Timeline.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C": "RusticSequence builder = Timeline.create();\nSequence.wait(&builder, 1);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Timeline.create();\nbuilder.waitFor(1);\nbuilder.play();",
+        "PHP": "$builder = Timeline::create();\n$builder->wait(1);\n$builder->play();",
+        "HTML / inline JS": "const builder = Timeline.new();\nbuilder.wait(1);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.move",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic)\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.move(rustic.entity_id(), {10,0,0}, 2, Ease::OutCubic);\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.move(rustic.entity_id(), {10,0,0}, 2, Ease.OutCubic)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.move(&builder, rustic.entity_id(), (RusticVector3){10,0,0}, 2, Ease.OutCubic);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.move(rustic.entity_id(), new double[]{10,0,0}, 2, Ease.OutCubic);\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->move($rustic->entity_id(), [10,0,0], 2, Ease::OutCubic);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.move(rustic.entity_id(), [10,0,0], 2, Ease.OutCubic);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.to",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic)\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease::OutCubic);\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic);\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.to(&builder, rustic.entity_id(), \"Opacity\", (RusticValue){.type=RUSTIC_NUMBER,.number=1}, 1, Ease.OutCubic);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic);\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->to($rustic->entity_id(), \"Opacity\", 1, 1, Ease::OutCubic);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.to(rustic.entity_id(), \"Opacity\", 1, 1, Ease.OutCubic);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.animation",
+      "note": "Sequence animation requires the registered Reveal fixture from the Animation page.",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.animation(rustic.entity_id(), \"Reveal\")\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.animation(rustic.entity_id(), \"Reveal\");\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.animation(rustic.entity_id(), \"Reveal\")\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.animation(rustic.entity_id(), \"Reveal\");\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.animation(rustic.entity_id(), \"Reveal\", new Animation.Options());\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.animation(rustic.entity_id(), \"Reveal\")\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.animation(&builder, rustic.entity_id(), \"Reveal\", NULL);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.animation(rustic.entity_id(), \"Reveal\", new Animation.Options());\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->animation($rustic->entity_id(), \"Reveal\");\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.animation(rustic.entity_id(), \"Reveal\");\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.wait",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.wait(1);\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.wait(1);\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.wait(&builder, 1);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.waitFor(1);\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->wait(1);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.call",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.call(function() rustic.log(\"info\", \"done\") end)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.call(() => rustic.log(\"info\", \"done\"));\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.call(lambda : rustic.log(\"info\", \"done\"))\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.call([]() { rustic.log(\"info\", \"done\"); });\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.call(() => rustic.log(\"info\", \"done\"));\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.call(function() rustic.log(\"info\", \"done\") end)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.call(&builder, on_done);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.call(() -> rustic.log(\"info\", \"done\"));\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->call(fn() => $rustic->log(\"info\", \"done\"));\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.call(() => rustic.log(\"info\", \"done\"));\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.parallel",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.parallel({Sequence.new().wait(1), Sequence.new().wait(2)})\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.parallel([Sequence.new().wait(1), Sequence.new().wait(2)]);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.parallel([Sequence.new().wait(1), Sequence.new().wait(2)])\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.parallel({Sequence::create().wait(1), Sequence::create().wait(2)});\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.parallel(new Sequence.Builder[]{Sequence.New().wait(1), Sequence.New().wait(2)});\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.parallel({Sequence.new().wait(1), Sequence.new().wait(2)})\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nRusticSequence branches[] = {Sequence.create(), Sequence.create()};\nSequence.wait(&branches[0], 1);\nSequence.wait(&branches[1], 2);\nSequence.parallel(&builder, branches, 2);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);\nSequence.destroy(&branches[0]);\nSequence.destroy(&branches[1]);",
+        "Java": "var builder = Sequence.create();\nbuilder.parallel(Sequence.create().waitFor(1), Sequence.create().waitFor(2));\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->parallel([Sequence::create()->wait(1), Sequence::create()->wait(2)]);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.parallel([Sequence.new().wait(1), Sequence.new().wait(2)]);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "builder.play",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "JavaScript": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();",
+        "Python": "builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C++": "auto builder = Sequence::create();\nbuilder.wait(1);\nbuilder.play();",
+        "C#": "var builder = Sequence.New();\nbuilder.wait(1);\nbuilder.play();",
+        "Luau": "local builder = Sequence.new()\nbuilder.wait(1)\nbuilder.play()",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.wait(&builder, 1);\nSequence.play(&builder, NULL);\nSequence.destroy(&builder);",
+        "Java": "var builder = Sequence.create();\nbuilder.waitFor(1);\nbuilder.play();",
+        "PHP": "$builder = Sequence::create();\n$builder->wait(1);\n$builder->play();",
+        "HTML / inline JS": "const builder = Sequence.new();\nbuilder.wait(1);\nbuilder.play();"
+      }
+    },
+    {
+      "title": "Sequence.destroy (C storage)",
+      "note": "",
+      "examples": {
+        "Lua 5.4": "-- This SDK manages builder storage automatically.",
+        "JavaScript": "// This SDK manages builder storage automatically.",
+        "Python": "# This SDK manages builder storage automatically.",
+        "C++": "// This SDK manages builder storage automatically.",
+        "C#": "// This SDK manages builder storage automatically.",
+        "Luau": "-- This SDK manages builder storage automatically.",
+        "C": "RusticSequence builder = Sequence.create();\nSequence.destroy(&builder);",
+        "Java": "// This SDK manages builder storage automatically.",
+        "PHP": "// This SDK manages builder storage automatically.",
+        "HTML / inline JS": "// This SDK manages builder storage automatically."
+      }
+    }
+  ]
+}

@@ -30,3 +30,9 @@ Programming Workspace after upgrading. Python imports the modules it uses, for e
 `from rustic import rustic, run, Tween, Animation, Physics, Audio, Clock`.
 
 PHP and HTML entries remain restricted to `ui/`; CSS alone executes no actions.
+
+`Interpolation` aliases `Smooth` except in C# and Java, where you use `Smooth`.
+`Clock.state()` is available in Lua, Luau, JavaScript, Python and HTML inline
+JavaScript; C#, C++, C, Java and PHP have no paused-state getter. C# and PHP
+can read the scale with `Clock.timeScale()` / `Clock::timeScale()`. C has no
+`Camera.current()` getter; use `Game.scene.Find` with the authored camera path.

@@ -9,7 +9,7 @@ const docs: Record<string, ApiDoc> = {
   gameplay: {
     title: "Shared gameplay actions (API 1.1)", summary: "Shared easing, tweens, movement, clip and procedural animation, timelines, timers, paths, cameras, physics, effects, audio and signals in all ten script types.",
     when: "Start an action during Start or an event callback. The scene advances it once per frame, even if the behavior has no Update function. Follow [Use gameplay actions](/docs/guides/gameplay-actions) for attachment, complete signatures and backend limits.",
-    calls: ["Tween.to / move / rotate / scale / value", "Movement.move / moveTo / rotateTo / lookAt / follow / orbit", "Animation.play / blend / transition / register / addMarker / value / ik", "Sequence / Timeline: move / to / wait / call / animation / parallel / play", "Timer.after / every", "Smooth / Interpolation: lerp / slerp / inverseLerp / remap / smoothDamp", "Path.create / follow", "Camera.moveTo / zoom / lookAt / follow / orbit / shake / transition", "Physics.raycast / sphereCast / overlap / force / impulse / explosion / knockback / launch", "Effects.fade / flash / shake / pulse", "Audio.play / playAt / fadeIn / fadeOut / crossfade / volume / pitch", "Events.on / once / emit / connect / disconnect", "Clock.timeScale / pause / resume", "handle.state / pause / resume / cancel / reverse / onFinished"],
+    calls: ["Tween.to / move / rotate / scale / value", "Movement.move / moveTo / rotateTo / lookAt / follow / orbit", "Animation.play / blend / transition / register / addMarker / value / ik", "Sequence / Timeline: move / to / wait / call / animation / parallel / play", "Timer.after / every", "Smooth / Interpolation: lerp / slerp / inverseLerp / remap / smoothDamp", "Path.create / follow", "Camera.moveTo / zoom / lookAt / follow / orbit / shake / transition", "Physics.raycast / sphereCast / overlap / force / impulse / explosion / knockback / launch", "Effects.fade / flash / shake / pulse", "Audio.load (Lua/Luau) / play / playAt / fadeIn / fadeOut / crossfade / volume / pitch", "Events.on / once / emit / connect / disconnect", "Clock.timeScale / pause / resume", "handle.state / pause / resume / cancel / reverse / onFinished"],
     parameters: [p("entity", "stable entity ID / resolved path", true, "Transform target; use an anchored Part to avoid competing gravity."), p("duration", "finite non-negative seconds", true, "Time to completion. Movement and tween helpers also provide duration or speed options."), p("easing", "Ease identifier", false, "Linear by default; all 31 shared curves are available.")],
     returns: "An operation handle. Completion is queued during Update. Cancellation and destroyed targets do not invoke completion.",
     examples: {
@@ -45,10 +45,10 @@ const docs: Record<string, ApiDoc> = {
     }, notes: [protocolNote],
   },
   transforms: {
-    title: "Transform API", summary: "Read or queue a world-space translation for the behavior owner.",
+    title: "Transform API", summary: "Read or queue a local translation for the behavior owner.",
     when: "Read before applying relative movement. Write from `Update` for presentation movement or `FixedUpdate` for simulation movement. Do not rewrite an unchanged position every frame.",
     calls: ["rustic.get_translation()", "rustic.set_translation(x, y, z)"],
-    parameters: [p("x", "finite number", true, "World-space X."), p("y", "finite number", true, "World-space Y."), p("z", "finite number", true, "World-space Z.")],
+    parameters: [p("x", "finite number", true, "Local X relative to the parent."), p("y", "finite number", true, "Local Y relative to the parent."), p("z", "finite number", true, "Local Z relative to the parent.")],
     returns: "Get returns three numbers. Set queues a mutation applied after the callback; it returns no entity value.",
     examples: {
       "Lua 5.4": "local x, y, z = rustic.get_translation()\nrustic.set_translation(x + 1, y, z)",
@@ -85,14 +85,14 @@ const docs: Record<string, ApiDoc> = {
   attributes: {
     title: "Built-in attribute API", summary: "Read or edit engine-owned attributes on the behavior entity or a named scene object.",
     when: "Use attributes for built-in entity state. Prefer `set_translation` for Position and `set_enabled` for Enabled when those dedicated calls better express intent.",
-    calls: ["rustic.get_attribute(name)", "rustic.edit_attribute(name, value)", "rustic.game.Scene.Root.Child.EditAttribute(name, value)"],
+    calls: ["rustic.get_attribute(name)", "rustic.edit_attribute(name, value)", "rustic.game.Scene.Root.Child.EditAttribute(name, value)", "rustic.edit_object_attribute(source, name, value) — embedded Lua / JavaScript", "rustic.game.Scene.Root.Child:GetAttribute(name) — embedded Lua only"],
     parameters: [p("name", "string", true, "Name, Position, Size, Color (RGB), CanTouch, CanCollide, Anchored, or Parent."), p("value", "attribute-specific", true, "Value matching the attribute type.")],
     returns: "Get returns the current value. Edit queues a typed mutation.",
     examples: {
       "Lua 5.4": "local name = rustic.get_attribute('Name')\nrustic.edit_attribute('Color', {1, .5, 0})",
       JavaScript: "const name = rustic.get_attribute('Name');\nrustic.edit_attribute('Color', [1, .5, 0]);",
       Python: "name = rustic.get_attribute('Name')\nrustic.edit_attribute('Color', [1, .5, 0])",
-      "C++": "auto name = rustic.get_attribute(\"Name\");\nrustic.edit_attribute(\"Color\", color);",
+      "C++": "auto name = rustic.get_attribute(\"Name\");\nrustic.edit_attribute(\"Color\", RusticValue::Array{1.0, .5, 0.0});",
       "C#": "string? name = (string?)rustic.get_attribute(\"Name\");\nrustic.edit_attribute(\"Color\",new double[]{1,.5,0});",
       Luau: "local name = rustic.get_attribute('Name')\nrustic.edit_attribute('Color',{1,.5,0})",
       C: "RusticValue name = rustic.get_attribute(\"Name\");\nrustic.edit_attribute(\"Color\",(RusticValue){.type=RUSTIC_VECTOR,.vector={1,.5,0},.length=3});",
@@ -145,7 +145,7 @@ const docs: Record<string, ApiDoc> = {
     examples: {
       "Lua 5.4": "Game.scene.setEnvironment({enabled=true,sun_intensity=1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment().sky_image)",
       JavaScript: "Game.scene.setEnvironment({enabled:true,sun_intensity:1});\nGame.scene.setSkyTexture('assets/skies/day.hdr');\nprint(Game.scene.getEnvironment().sky_image);",
-      Python: "from rustic import Game\nGame.scene.setEnvironment({'enabled':True,'sun_intensity':1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment()['sky_image'])",
+      Python: "from rustic import Game, rustic\nGame.scene.setEnvironment({'enabled':True,'sun_intensity':1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nrustic.log('info', Game.scene.getEnvironment()['sky_image'])",
       "C++": 'Game.scene.setEnvironment({{"enabled",true},{"sun_intensity",1.0}});\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nauto sky=Game.scene.getEnvironment().at("sky_image").string();',
       "C#": 'Game.scene.setEnvironment(new {enabled=true,sun_intensity=1});\nGame.scene.setSkyTexture("assets/skies/day.hdr");\nvar sky=Game.scene.getEnvironment().GetProperty("sky_image").GetString();',
       Luau: "Game.scene.setEnvironment({enabled=true,sun_intensity=1})\nGame.scene.setSkyTexture('assets/skies/day.hdr')\nprint(Game.scene.getEnvironment().sky_image)",
@@ -159,10 +159,10 @@ const docs: Record<string, ApiDoc> = {
   scene: {
     title: "Scene lookup API", summary: "Resolve stable scene paths to entity IDs and list paths in the play snapshot.",
     when: "Resolve references during `Start` and cache the stable ID when possible. List paths for discovery and tooling, not every frame.",
-    calls: ["Game.scene.Find(path)", "Game.scene.List()", "rustic.find_entity(name_or_id)"], parameters: [p("path", "string", true, "Stable scene path, name, or entity ID accepted by the adapter.")],
+    calls: ["Game.scene.Find(path)", "Game.scene.List()", "rustic.find_entity(name_or_id) — embedded Lua only"], parameters: [p("path", "string", true, "Stable scene path, name, or entity ID accepted by the adapter.")],
     returns: "Find returns an entity ID or no value. List returns entity IDs.",
     examples: {
-      "Lua 5.4": "local id,err=rustic.find_entity('Room.Player')\nlocal paths=Game.scene.List()", JavaScript: "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();", Python: "entity_id=Game.scene.Find('Room.Player')\npaths=Game.scene.List()", "C++": "auto id=Game.scene.Find(\"Room.Player\");\nauto paths=Game.scene.List();", "C#": "string? id=Game.scene.Find(\"Room.Player\");\nvar paths=Game.scene.List();", Luau: "local id = Game.scene.Find('Room.Player')\nlocal ids = Game.scene.List()", C: "const char *id = Game.scene.Find(\"Room.Player\");\nRusticList ids = Game.scene.List(\"Game.scene\");", Java: "String id = Game.scene.Find(\"Room.Player\");\nvar ids = Game.scene.List();", PHP: "$id = $Game->scene->Find(\"Room.Player\");\n$ids = $Game->scene->List();", "HTML / inline JS": "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();",
+      "Lua 5.4": "local id=Game.scene.Find('Room.Player')\nlocal found,err=rustic.find_entity('Room.Player')\nlocal paths=Game.scene.List()", JavaScript: "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();", Python: "entity_id=Game.scene.Find('Room.Player')\npaths=Game.scene.List()", "C++": "auto id=Game.scene.Find(\"Room.Player\");\nauto paths=Game.scene.List();", "C#": "string? id=Game.scene.Find(\"Room.Player\");\nvar paths=Game.scene.List();", Luau: "local id = Game.scene.Find('Room.Player')\nlocal ids = Game.scene.List()", C: "const char *id = Game.scene.Find(\"Room.Player\");\nRusticList ids = Game.scene.List(\"Game.scene\");", Java: "String id = Game.scene.Find(\"Room.Player\");\nvar ids = Game.scene.List();", PHP: "$id = $Game->scene->Find(\"Room.Player\");\n$ids = $Game->scene->List();", "HTML / inline JS": "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();",
     }, notes: [protocolNote],
   },
   instances: {
@@ -171,7 +171,7 @@ const docs: Record<string, ApiDoc> = {
     calls: ["instance.add(source, parent?)", "instance.clone(source, parent?)"], parameters: [p("source", "string", true, "Source asset or stable scene path."), p("parent", "string or null", false, "Destination parent stable entity ID; omit for the default root.")],
     returns: "No new entity ID. Creation is queued and applies after the callback in issue order.",
     examples: {
-      "Lua 5.4": "instance.add('Game.scene.Prefabs.Crate', nil)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", JavaScript: "instance.add('Game.scene.Prefabs.Crate');\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'));", Python: "instance.add('Game.scene.Prefabs.Crate',None)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", "C++": "instance.add(\"Game.scene.Prefabs.Crate\",std::nullopt);", "C#": "instance.add(\"Game.scene.Prefabs.Crate\",null);", Luau: "instance.add('Part',nil)\ninstance.clone('Room.Enemy',Game.scene.Find('Room'))", C: "instance.add(\"Part\",NULL);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", Java: "instance.add(\"Part\",null);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", PHP: "$instance->add(\"Part\",null);\n$instance->clone(\"Room.Enemy\",$Game->scene->Find(\"Room\"));", "HTML / inline JS": "instance.add('Game.scene.Prefabs.Crate');",
+      "Lua 5.4": "instance.add('Part', nil)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", JavaScript: "instance.add('Part');\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'));", Python: "instance.add('Part',None)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", "C++": "instance.add(\"Part\",std::nullopt);", "C#": "instance.add(\"Part\",null);", Luau: "instance.add('Part',nil)\ninstance.clone('Room.Enemy',Game.scene.Find('Room'))", C: "instance.add(\"Part\",NULL);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", Java: "instance.add(\"Part\",null);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", PHP: "$instance->add(\"Part\",null);\n$instance->clone(\"Room.Enemy\",$Game->scene->Find(\"Room\"));", "HTML / inline JS": "instance.add('Part');",
     }, notes: [protocolNote],
   },
   camera: {
@@ -183,6 +183,44 @@ const docs: Record<string, ApiDoc> = {
     notes: ["The target must resolve to a camera in the play snapshot.", protocolNote],
   },
 };
+
+
+// Every language block demonstrates every portable call listed by its topic.
+for (const language of languages) {
+  const end = ["Lua 5.4", "Luau", "Python"].includes(language) ? "" : ";";
+  const api = language === "PHP" ? "$rustic->" : "rustic.";
+  if (!docs.entity.examples[language].includes("fixed_delta_time")) {
+    const declaration = ({Luau: "local fixedDt", C: "double fixedDt", Java: "double fixedDt", PHP: "$fixedDt", "HTML / inline JS": "const fixedDt"} as Record<string, string>)[language];
+    docs.entity.examples[language] += `\n${declaration} = ${api}fixed_delta_time()${end}`;
+  }
+  const prefix = ({"Lua 5.4": "local", Luau: "local", JavaScript: "const", Python: "", "C++": "auto", "C#": "var", C: "RusticActionState", Java: "var", PHP: "", "HTML / inline JS": "const"} as Record<string, string>)[language];
+  const variable = (name: string) => language === "PHP" ? "$" + name : name;
+  docs.input.examples[language] += `\n${prefix ? prefix + " " : ""}${variable("action")} = ${api}input("Jump")${end}`;
+  const eventsPrefix = language === "C" ? "RusticKeyEvents" : prefix;
+  docs.input.examples[language] += `\n${eventsPrefix ? eventsPrefix + " " : ""}${variable("events")} = ${api}key_events()${end}`;
+  const boolPrefix = language === "C" ? "bool" : prefix;
+  docs.input.examples[language] += `\n${boolPrefix ? boolPrefix + " " : ""}${variable("anyPressed")} = ${api}any_key_pressed()${end}`;
+  if (!docs.instances.examples[language].includes("clone")) {
+    docs.instances.examples[language] += `\ninstance.clone("Game.scene.Enemy", Game.scene.Find("Game.scene.Room"));`;
+  }
+}
+const objectEdits: Record<string, string> = {
+  "Lua 5.4": 'rustic.game.Demo.Room.Player:EditAttribute("Color", {1,.5,0})',
+  Luau: 'rustic.game.Demo.Room.Player:EditAttribute("Color", {1,.5,0})',
+  JavaScript: 'rustic.game.Demo.Room.Player.EditAttribute("Color", [1,.5,0]);',
+  "HTML / inline JS": 'rustic.game.Demo.Room.Player.EditAttribute("Color", [1,.5,0]);',
+  Python: 'rustic.game.Demo.Room.Player.EditAttribute("Color", [1,.5,0])',
+  "C++": 'rustic.game["Demo"]["Room"]["Player"].EditAttribute("Color", RusticValue::Array{1.0,.5,0.0});',
+  "C#": 'rustic.game.Demo.Room.Player.EditAttribute("Color", new double[]{1,.5,0});',
+  Java: 'rustic.game.scene("Demo").object("Room.Player").EditAttribute("Color", new double[]{1,.5,0});',
+  C: 'rustic.game.EditAttribute("Demo", "Room.Player", "Color", (RusticValue){.type=RUSTIC_VECTOR,.vector={1,.5,0},.length=3});',
+  PHP: '$rustic->game->Demo->Room->Player->EditAttribute("Color", [1,.5,0]);',
+};
+for (const language of languages) docs.attributes.examples[language] += "\n" + objectEdits[language];
+docs.attributes.examples["Lua 5.4"] += '\nlocal targetColor = rustic.game.Demo.Room.Player:GetAttribute("Color")\nrustic.edit_object_attribute("rustic.game.Demo.Room.Player", "Color", {1,.5,0})';
+for (const language of ["JavaScript", "HTML / inline JS"]) docs.attributes.examples[language] += '\nrustic.edit_object_attribute("rustic.game.Demo.Room.Player", "Color", [1,.5,0]);';
+docs.attributes.notes?.push("The direct edit_object_attribute helper is available in embedded Lua and JavaScript (including HTML); other SDKs use the native scene-object call shown above. Only embedded Lua exposes a path-based GetAttribute. For the scene-object example, create a scene named Demo with Room → Player. Change those names to match your scene; see Edit scene objects for full setup.");
+for (const language of ["Lua 5.4", "JavaScript", "HTML / inline JS"]) docs.logging.examples[language] += `\nprint("spawned")${language === "Lua 5.4" ? "" : ";"}\nwarn("low health")${language === "Lua 5.4" ? "" : ";"}`;
 
 function simpleMutationExamples(dynamic: string, compiled: string): Record<string, string> {
   const php = dynamic.replace(/^(rustic|Game|instance)\./, "$$$1->") + ";";
@@ -208,9 +246,22 @@ export function buildApiMarkdown(id: string) {
   const variables = doc.parameters.length ? `| Variable | Type | Required | Description |\n| --- | --- | --- | --- |\n${doc.parameters.map((x) => `| \`${x.name}\` | ${x.type} | ${x.required ? "Yes" : "No"} | ${x.description} |`).join("\n")}` : "This API has no arguments.";
   const examples = languages.map((lang) => `### ${lang}\n\n\`\`\`${codeLanguage(lang)}\n${doc.examples[lang]}\n\`\`\``).join("\n\n");
   const notes = doc.notes?.length ? `\n\n## Constraints and behavior\n\n${doc.notes.map((x) => `- ${x}`).join("\n")}` : "";
-  return `# ${doc.title}\n\n${doc.summary}\n\n## When to call it\n\n${doc.when}\n\n## Calls\n\n${doc.calls.map((x) => `- \`${x}\``).join("\n")}\n\n## Variables\n\n${variables}\n\n## Return and timing\n\n${doc.returns}\n\n## Language examples\n\n${examples}${notes}`;
+  return `# ${doc.title}\n\n${doc.summary}\n\n## When to call it\n\n${doc.when}\n\n## Calls\n\n${doc.calls.map((x) => `- \`${x}\``).join("\n")}\n\n## Variables\n\n${variables}\n\n## Return and timing\n\n${doc.returns}\n\n## Language examples\n\nUse these snippets inside Start/on_start after generating the Programming Workspace and attaching the script. Python imports rustic, Game and instance from rustic; C++ includes rustic.hpp; C includes rustic.h; C# uses using static Rustic; Java runs inside a Rustic subclass; PHP declares global $rustic, $Game, $instance in its callback. HTML uses an inline script in a ui/ asset. See [Lifecycle callbacks](/docs/callbacks) for complete registration examples. Public-property examples require a declared integer health property. Scene examples require the named objects to exist before Play.\n\n${examples}${notes}`;
 }
 
 function codeLanguage(lang: string) { return ({ "Lua 5.4": "lua", JavaScript: "javascript", Python: "python", "C++": "cpp", "C#": "csharp", Luau: "lua", C: "c", Java: "java", PHP: "php", "HTML / inline JS": "javascript" } as Record<string, string>)[lang]; }
 function overview() { return `# Rustic scripting API\n\nThe reference is organized by what game code needs to do. Core operation pages include purpose, timing, variables, return behavior, and equivalent calls for all ten supported script types. The Gameplay APIs navigation section provides dedicated references for actions, easing, animation, composition, physics, audio, events and the scene clock. API 1.1 gameplay actions have an explicit language support matrix in [Use gameplay actions](/docs/guides/gameplay-actions).\n\n## Execution model\n\nGlobal scripts run before Scene scripts, then Object Component scripts. Mutations are queued and applied after the callback in issue order. Every gameplay language calls built-in functions. Lua, JavaScript, and Web use embedded bindings; external languages use engine-supplied SDKs with private transport.\n\n## Language support\n\n| Languages | Integration |\n| --- | --- |\n| Lua 5.4, JavaScript, HTML / inline JS | bundled embedded API |\n| Python, C#, C++, Luau, C, Java, PHP | engine-owned SDK and persistent external session |\n\n## Safety limits\n\nSource and responses are limited to 1 MiB. External callbacks have a three-second deadline. Boundary values are booleans, integers, finite numbers, strings, vectors, and optional stable entity IDs.`; }
-function callbacks() { return `# Lifecycle callbacks\n\nCallbacks are entry points invoked by Rustic. Define only those a behavior needs.\n\n## When each callback runs\n\n| Callback | When to use it | Variables |\n| --- | --- | --- |\n| \`OnCreate\` | One-time construction before startup. | None |\n| \`Start\` | Resolve references and initialize gameplay state. | None |\n| \`OnEnable\` | Resume state when the owner becomes enabled. | None |\n| \`FixedUpdate\` | Physics and deterministic simulation. | \`dt\`: required fixed-step seconds |\n| \`Update\` | Input, presentation, timers, and per-frame logic. | \`dt\`: required frame seconds |\n| \`OnDisable\` | Pause state when the owner becomes disabled. | None |\n| \`OnDestroy\` | Release instance resources before destruction. | None |\n| \`OnStop\` | Final play-session cleanup. | None |\n\n## Lua 5.4\n\n\`\`\`lua\nreturn { Start=function() end, Update=function(dt) end, FixedUpdate=function(dt) end, OnDestroy=function() end }\n\`\`\`\n\n## JavaScript and HTML / inline JS\n\n\`\`\`javascript\nglobalThis.behavior={Start(){},Update(dt){},FixedUpdate(dt){},OnDestroy(){}};\n\`\`\`\n\n## External languages\n\nRustic invokes callbacks through each language SDK. Python calls run(globals()); PHP calls rustic_run(callbacks); C and C++ register RusticBehavior slots; C# calls Run and Java calls run with a callback dispatcher; Luau returns a behavior table. External callback names are \`on_create\`, \`on_start\`, \`on_enable\`, \`fixed_update\`, \`update\`, \`on_disable\`, \`on_destroy\`, and \`on_stop\`. Omitted callbacks are handled automatically by the SDK; frame callbacks receive dt in seconds. Physics runs after FixedUpdate callbacks, including during Frame Advance. Gravity and solid box response work for built-in primitives, but the simulator does not dispatch collision or touch callbacks to any language.`; }
+function callbacks() {
+  const names = ["OnCreate", "Start", "OnEnable", "FixedUpdate", "Update", "OnDisable", "OnDestroy", "OnStop"];
+  const nativeNames = ["on_create", "on_start", "on_enable", "fixed_update", "update", "on_disable", "on_destroy", "on_stop"];
+  const lua = `return {\n${names.map((name) => `  ${name} = function(${name.includes("Update") ? "dt" : ""}) end,`).join("\n")}\n}`;
+  const js = `globalThis.behavior = {\n${names.map((name) => `  ${name}(${name.includes("Update") ? "dt" : ""}) {},`).join("\n")}\n};`;
+  const python = `from rustic import rustic, run\n\n${nativeNames.map((name) => `def ${name}(${name.includes("update") ? "dt" : ""}):\n    rustic.log("info", "${name}")`).join("\n\n")}\n\nrun(globals())`;
+  const cpp = `#include "rustic.hpp"\nint main() {\n  RusticBehavior behavior;\n${nativeNames.map((name) => `  behavior.${name} = [](${name.includes("update") ? "double dt" : ""}) { rustic.log("info", "${name}"); };`).join("\n")}\n  return rustic_run(behavior);\n}`;
+  const c = `#include "rustic.h"\n${nativeNames.map((name) => `static void ${name}(${name.includes("update") ? "double dt" : "void"}) { rustic.log("info", "${name}"); }`).join("\n")}\nint main(void) {\n  return rustic_run((RusticBehavior){\n${nativeNames.map((name) => `    .${name} = ${name},`).join("\n")}\n  });\n}`;
+  const csharp = `using static Rustic;\nRun((callback, dt) => {\n  switch (callback) {\n${nativeNames.map((name) => `    case "${name}": rustic.log("info", "${name}"); break;`).join("\n")}\n  }\n});`;
+  const java = `class RusticBehavior extends Rustic {\n  public static void main(String[] args) throws Exception {\n    run((callback, dt) -> {\n      switch (callback) {\n${nativeNames.map((name) => `        case "${name}" -> rustic.log("info", "${name}");`).join("\n")}\n      }\n    });\n  }\n}`;
+  const php = `<?php\nrequire __DIR__ . "/rustic.php";\n${nativeNames.map((name) => `function ${name}(${name.includes("update") ? "float $dt" : ""}): void {\n    global $rustic;\n    $rustic->log("info", "${name}");\n}`).join("\n")}\nrustic_run([\n${nativeNames.map((name) => `    "${name}" => "${name}",`).join("\n")}\n]);`;
+  const examples: Record<string, string> = {"Lua 5.4": lua, JavaScript: js, Python: python, "C++": cpp, "C#": csharp, Luau: lua, C: c, Java: java, PHP: php, "HTML / inline JS": js};
+  return `# Lifecycle callbacks\n\nCallbacks are entry points invoked by Rustic. Define only those a behavior needs.\n\n## When each callback runs\n\n| Callback | When to use it | Variables |\n| --- | --- | --- |\n| OnCreate | One-time construction before startup. | None |\n| Start | Resolve references and initialize gameplay state. | None |\n| OnEnable | Resume when the owner becomes enabled. | None |\n| FixedUpdate | Physics and simulation. | dt: fixed-step seconds |\n| Update | Input and presentation. | dt: frame seconds |\n| OnDisable | Pause when the owner becomes disabled. | None |\n| OnDestroy | Release instance resources. | None |\n| OnStop | Final play-session cleanup. | None |\n\n## Examples in every language\n\nThese registration examples include every callback. Replace each body with the logic you need. Follow your language guide to generate the workspace, install its toolchain, attach the script and press Play. External dispatchers receive dt; it is meaningful for update and fixed_update. Physics runs after FixedUpdate, but collision and touch callbacks are not dispatched. HTML examples go inside an inline script in a ui/ HTML asset.\n\n${languages.map((language) => `### ${language}\n\n\`\`\`${codeLanguage(language)}\n${examples[language]}\n\`\`\``).join("\n\n")}`;
+}

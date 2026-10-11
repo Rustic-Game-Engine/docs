@@ -5,6 +5,7 @@ import { allDocs, resolveDocSlug } from "./docs-catalog";
 import { buildApiMarkdown } from "./api-docs";
 import { apiCategories } from "./api-reference";
 import { buildApiCallMarkdown, buildApiCategoryMarkdown } from "./api-reference-markdown";
+import { buildFunctionExamples } from "./api-examples";
 import { normalizeSearchText, type SearchEntry } from "./docs-search";
 
 export function findDoc(slugParts?: string[]) {
@@ -28,7 +29,10 @@ export async function readDoc(source: string): Promise<string> {
     return buildApiCallMarkdown(category, call, doc.title, await readDoc(category.source));
   }
   if (source.startsWith("api:")) return buildApiMarkdown(source.slice(4));
-  return readFile(path.resolve(process.cwd(), source), "utf8");
+  const markdown = await readFile(path.resolve(process.cwd(), source), "utf8");
+  const apiPrefix = "docs/Scripting/API/";
+  const topic = source.startsWith(apiPrefix) ? source.slice(apiPrefix.length).replace(/\.md$/, "") : "";
+  return markdown + buildFunctionExamples(topic);
 }
 
 export async function buildSearchIndex(project: string): Promise<SearchEntry[]> {
