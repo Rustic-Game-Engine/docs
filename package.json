@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:api-examples": "node scripts/check-api-examples.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",

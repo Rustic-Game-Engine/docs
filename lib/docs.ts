@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { allDocs, resolveDocSlug } from "./docs-catalog";
 import { buildApiMarkdown } from "./api-docs";
+import { buildFunctionExamples } from "./api-examples";
 import { normalizeSearchText, type SearchEntry } from "./docs-search";
 
 export function findDoc(slugParts?: string[]) {
@@ -12,7 +13,10 @@ export function findDoc(slugParts?: string[]) {
 
 export async function readDoc(source: string) {
   if (source.startsWith("api:")) return buildApiMarkdown(source.slice(4));
-  return readFile(path.resolve(process.cwd(), source), "utf8");
+  const markdown = await readFile(path.resolve(process.cwd(), source), "utf8");
+  const apiPrefix = "docs/Scripting/API/";
+  const topic = source.startsWith(apiPrefix) ? source.slice(apiPrefix.length).replace(/\.md$/, "") : "";
+  return markdown + buildFunctionExamples(topic);
 }
 
 export async function buildSearchIndex(project: string): Promise<SearchEntry[]> {
