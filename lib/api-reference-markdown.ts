@@ -1,3 +1,4 @@
+import { buildCallExamples } from "./api-examples";
 import type { ApiCall, ApiCategory } from "./api-reference";
 // Capture uses Lua/Luau handles rather than the JavaScript playback facade.
 type CaptureReference = {
@@ -71,24 +72,6 @@ function section(markdown: string, heading: string) {
   return (end < 0 ? body : body.slice(0, end)).trim();
 }
 
-// Audio examples focus on the selected call; voice creation is setup for controls.
-const audioExamples: Record<string, string> = {
-  "get-output-devices": 'const devices = Audio.get_output_devices();\nprint(JSON.stringify(devices));',
-  "get-input-devices": 'const devices = Audio.get_input_devices();\nprint(JSON.stringify(devices));',
-  "set-output-device": 'const devices = Audio.get_output_devices();\nif (devices.length > 0) {\n  Audio.set_output_device(devices[0].id);\n}',
-  "set-input-device": 'const devices = Audio.get_input_devices();\nif (devices.length > 0) {\n  Audio.set_input_device(devices[0].id);\n}',
-  play: 'const voice = Audio.play("assets/music.ogg", {loop: true});',
-  "play-at": 'const voice = Audio.playAt("assets/music.ogg", [0, 0, 0]);',
-  "voice-pause": 'const voice = Audio.play("assets/music.ogg");\nvoice.pause();',
-  "voice-resume": 'const voice = Audio.play("assets/music.ogg");\nvoice.pause();\nTimer.after(1, () => voice.resume());',
-  "voice-stop": 'const voice = Audio.play("assets/music.ogg");\nvoice.stop();',
-  volume: 'const voice = Audio.play("assets/music.ogg");\nAudio.volume(voice, 0.5);',
-  pitch: 'const voice = Audio.play("assets/music.ogg");\nAudio.pitch(voice, 1.25);',
-  "fade-in": 'const voice = Audio.play("assets/music.ogg", {volume: 0});\nAudio.fadeIn(voice, 2, Ease.InSine);',
-  "fade-out": 'const voice = Audio.play("assets/music.ogg");\nAudio.fadeOut(voice, 1, Ease.OutSine);',
-  crossfade: 'const oldVoice = Audio.play("assets/music.ogg");\nconst newVoice = Audio.play("assets/next.ogg", {volume: 0});\nAudio.crossfade(oldVoice, newVoice, 2, Ease.InOutSine);',
-};
-
 const audioParameters: Record<string, string> = {
   id: "Opaque ID from the latest device list for the matching direction in this Play scene. Pass null to select the current system default; names are display labels, not IDs.",
   source: "Project-relative WAV/OGG asset path. Provide the file before Play.",
@@ -129,6 +112,17 @@ function parametersFor(call: ApiCall, shared: string) {
   return names.every((name) => documented.includes(name)) ? [...rows.slice(0, 2), ...selected].join("\n") : shared;
 }
 
+// Core snippets include prerequisite reads and writes, so keep each complete
+// language block. Filter helpers that only exist in embedded runtimes.
+function coreCallExamples(shared: string, name: string): string {
+  const examples = section(shared, "Language examples");
+  const parts = examples.split(/(?=^### )/m);
+  const supported = name === "rustic.find_entity" ? ["Lua 5.4"]
+    : ["print", "warn"].includes(name) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : null;
+  if (!supported) return examples;
+  return `Available in ${supported.join(", ")}.\n\n${parts.filter((part, index) => index === 0 || supported.includes(part.split("\n")[0].slice(4))).join("")}`;
+}
+
 export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title: string, shared: string) {
   const method = call.slug.split("/").pop()!;
   const audio = category.slug === "api/audio";
@@ -141,7 +135,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
       `## Setup and usage\n\n${captureSetup}`,
       `## Parameters\n\n${capture.parameters}`,
       `## Return and timing\n\n${capture.returns}`,
-      `## Usage example\n\n\`\`\`lua\n${capture.example}\n\`\`\``,
+      `## Language examples\n\n${["Lua 5.4", "Luau"].map((language) => `### ${language}\n\n\`\`\`lua\n${capture.example}\n\`\`\``).join("\n\n")}`,
       `## Capture limits and troubleshooting\n\n${captureConstraints}`,
     ].join("\n\n");
   }
@@ -154,11 +148,11 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   }).join("\n")}` : parametersFor(call, section(shared, "Parameters") || section(shared, "Variables"));
   const setup = section(shared, "Setup and language support") || section(shared, "When to call it");
   const returns = audio ? audioReturn(method) : section(shared, "Return and timing");
-  const originalExample = section(shared, "Example") || section(shared, "Language examples");
-  const name = call.signature.split("(")[0].split(".").pop()!;
-  // Keep complete working examples when they demonstrate this call, including
-  // any prerequisite operations. Other examples stay with their own API page.
-  const example = audio ? `\`\`\`javascript\nglobalThis.behavior = {\n  Start() {\n${audioExamples[method].split("\n").map((line) => `    ${line}`).join("\n")}\n  }\n};\n\`\`\`` : originalExample.includes(name) ? originalExample : "";
+  const name = call.signature.split("(")[0];
+  const topic = category.slug.slice(4);
+  const example = category.source.startsWith("api:")
+    ? coreCallExamples(shared, name)
+    : buildCallExamples(topic, name);
   const constraints = section(shared, "Behavior and limitations") || section(shared, "Constraints and behavior");
   // Example-specific outcomes belong alongside the example that demonstrates them.
   const sharedConstraints = constraints.split("\n").filter((line) => !/^- (Attach (the|this) example|The (Console|voice) |Provide assets\/music)/.test(line)).join("\n");
@@ -170,7 +164,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
     setup && `## Setup and usage\n\n${setup}`,
     `## Parameters\n\n${parameters}`,
     returns && `## Return and timing\n\n${returns}`,
-    example && `## Usage example\n\n${example}`,
+    example && `## Language examples\n\n${example}`,
     (audioDevice ? deviceConstraints : sharedConstraints) && `## Shared ${title} constraints\n\n${audioDevice ? deviceConstraints : sharedConstraints}`,
   ].filter(Boolean).join("\n\n");
 }

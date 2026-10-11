@@ -1303,6 +1303,70 @@
   ],
   "audio": [
     {
+      "title": "Audio.get_output_devices",
+      "note": "Native device enumeration and selection require the Windows player. Select an ID from the current enumeration of the same direction; refresh after hardware changes.",
+      "examples": {
+        "Lua 5.4": "local devices = Audio.get_output_devices()\nfor _, device in ipairs(devices) do\n  print(device.id, device.name)\nend",
+        "JavaScript": "const devices = Audio.get_output_devices();\nprint(JSON.stringify(devices));",
+        "Python": "devices = Audio.get_output_devices()\nfor device in devices:\n    rustic.log(\"info\", device[\"id\"] + \": \" + device[\"name\"])",
+        "C++": "auto devices = Audio::get_output_devices();\nfor (const auto &device : devices.array()) {\n  rustic.log(\"info\", device.at(\"id\").string() + \": \" + device.at(\"name\").string());\n}",
+        "C#": "var devices = Audio.get_output_devices();\nforeach (var device in devices.EnumerateArray()) {\n  rustic.log(\"info\", device.GetProperty(\"id\").GetString() + \": \" + device.GetProperty(\"name\").GetString());\n}",
+        "Luau": "local devices = Audio.get_output_devices()\nfor _, device in ipairs(devices) do\n  print(device.id, device.name)\nend",
+        "C": "RusticAudioDevices devices = Audio.get_output_devices();\nfor (size_t i = 0; i < devices.count; ++i) {\n  rustic.log(\"info\", devices.items[i].name);\n}",
+        "Java": "var devices = (java.util.List<?>)Audio.get_output_devices();\nfor (var item : devices) {\n  var device = (java.util.Map<?, ?>)item;\n  rustic.log(\"info\", device.get(\"id\") + \": \" + device.get(\"name\"));\n}",
+        "PHP": "$devices = Audio::get_output_devices();\nforeach ($devices as $device) {\n  $rustic->log(\"info\", $device[\"id\"] . \": \" . $device[\"name\"]);\n}",
+        "HTML / inline JS": "const devices = Audio.get_output_devices();\nprint(JSON.stringify(devices));"
+      }
+    },
+    {
+      "title": "Audio.set_output_device",
+      "note": "Native device enumeration and selection require the Windows player. Select an ID from the current enumeration of the same direction; refresh after hardware changes.",
+      "examples": {
+        "Lua 5.4": "local devices = Audio.get_output_devices()\nif #devices > 0 then\n  Audio.set_output_device(devices[1].id)\nend",
+        "JavaScript": "const devices = Audio.get_output_devices();\nif (devices.length > 0) {\n  Audio.set_output_device(devices[0].id);\n}",
+        "Python": "devices = Audio.get_output_devices()\nif devices:\n    Audio.set_output_device(devices[0][\"id\"])",
+        "C++": "auto devices = Audio::get_output_devices();\nif (!devices.array().empty()) {\n  Audio::set_output_device(devices.array()[0].at(\"id\"));\n}",
+        "C#": "var devices = Audio.get_output_devices();\nif (devices.GetArrayLength() > 0) {\n  Audio.set_output_device(devices[0].GetProperty(\"id\").GetString());\n}",
+        "Luau": "local devices = Audio.get_output_devices()\nif #devices > 0 then\n  Audio.set_output_device(devices[1].id)\nend",
+        "C": "RusticAudioDevices devices = Audio.get_output_devices();\nif (devices.count > 0) {\n  Audio.set_output_device(devices.items[0].id);\n}",
+        "Java": "var devices = (java.util.List<?>)Audio.get_output_devices();\nif (!devices.isEmpty()) {\n  var device = (java.util.Map<?, ?>)devices.get(0);\n  Audio.set_output_device((String)device.get(\"id\"));\n}",
+        "PHP": "$devices = Audio::get_output_devices();\nif (count($devices) > 0) {\n  Audio::set_output_device($devices[0][\"id\"]);\n}",
+        "HTML / inline JS": "const devices = Audio.get_output_devices();\nif (devices.length > 0) {\n  Audio.set_output_device(devices[0].id);\n}"
+      }
+    },
+    {
+      "title": "Audio.get_input_devices",
+      "note": "Native device enumeration and selection require the Windows player. Select an ID from the current enumeration of the same direction; refresh after hardware changes.",
+      "examples": {
+        "Lua 5.4": "local devices = Audio.get_input_devices()\nfor _, device in ipairs(devices) do\n  print(device.id, device.name)\nend",
+        "JavaScript": "const devices = Audio.get_input_devices();\nprint(JSON.stringify(devices));",
+        "Python": "devices = Audio.get_input_devices()\nfor device in devices:\n    rustic.log(\"info\", device[\"id\"] + \": \" + device[\"name\"])",
+        "C++": "auto devices = Audio::get_input_devices();\nfor (const auto &device : devices.array()) {\n  rustic.log(\"info\", device.at(\"id\").string() + \": \" + device.at(\"name\").string());\n}",
+        "C#": "var devices = Audio.get_input_devices();\nforeach (var device in devices.EnumerateArray()) {\n  rustic.log(\"info\", device.GetProperty(\"id\").GetString() + \": \" + device.GetProperty(\"name\").GetString());\n}",
+        "Luau": "local devices = Audio.get_input_devices()\nfor _, device in ipairs(devices) do\n  print(device.id, device.name)\nend",
+        "C": "RusticAudioDevices devices = Audio.get_input_devices();\nfor (size_t i = 0; i < devices.count; ++i) {\n  rustic.log(\"info\", devices.items[i].name);\n}",
+        "Java": "var devices = (java.util.List<?>)Audio.get_input_devices();\nfor (var item : devices) {\n  var device = (java.util.Map<?, ?>)item;\n  rustic.log(\"info\", device.get(\"id\") + \": \" + device.get(\"name\"));\n}",
+        "PHP": "$devices = Audio::get_input_devices();\nforeach ($devices as $device) {\n  $rustic->log(\"info\", $device[\"id\"] . \": \" . $device[\"name\"]);\n}",
+        "HTML / inline JS": "const devices = Audio.get_input_devices();\nprint(JSON.stringify(devices));"
+      }
+    },
+    {
+      "title": "Audio.set_input_device",
+      "note": "Native device enumeration and selection require the Windows player. Select an ID from the current enumeration of the same direction; refresh after hardware changes.",
+      "examples": {
+        "Lua 5.4": "local devices = Audio.get_input_devices()\nif #devices > 0 then\n  Audio.set_input_device(devices[1].id)\nend",
+        "JavaScript": "const devices = Audio.get_input_devices();\nif (devices.length > 0) {\n  Audio.set_input_device(devices[0].id);\n}",
+        "Python": "devices = Audio.get_input_devices()\nif devices:\n    Audio.set_input_device(devices[0][\"id\"])",
+        "C++": "auto devices = Audio::get_input_devices();\nif (!devices.array().empty()) {\n  Audio::set_input_device(devices.array()[0].at(\"id\"));\n}",
+        "C#": "var devices = Audio.get_input_devices();\nif (devices.GetArrayLength() > 0) {\n  Audio.set_input_device(devices[0].GetProperty(\"id\").GetString());\n}",
+        "Luau": "local devices = Audio.get_input_devices()\nif #devices > 0 then\n  Audio.set_input_device(devices[1].id)\nend",
+        "C": "RusticAudioDevices devices = Audio.get_input_devices();\nif (devices.count > 0) {\n  Audio.set_input_device(devices.items[0].id);\n}",
+        "Java": "var devices = (java.util.List<?>)Audio.get_input_devices();\nif (!devices.isEmpty()) {\n  var device = (java.util.Map<?, ?>)devices.get(0);\n  Audio.set_input_device((String)device.get(\"id\"));\n}",
+        "PHP": "$devices = Audio::get_input_devices();\nif (count($devices) > 0) {\n  Audio::set_input_device($devices[0][\"id\"]);\n}",
+        "HTML / inline JS": "const devices = Audio.get_input_devices();\nif (devices.length > 0) {\n  Audio.set_input_device(devices[0].id);\n}"
+      }
+    },
+    {
       "title": "Audio.play",
       "note": "",
       "examples": {
