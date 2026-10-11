@@ -9,9 +9,13 @@ const { buildApiCallMarkdown, buildApiCategoryMarkdown } = load("api-reference-m
 const { exampleLanguages } = load("api-examples.ts");
 const exampleData = JSON.parse(await readFile(new URL("../lib/api-example-data.json", import.meta.url), "utf8"));
 const captureSlugs = ["start-recording", "stop-recording", "start-hot-mic", "stop-hot-mic", "rec-stop-recording", "mic-stop-hot-mic", "capture-read", "capture-stop", "capture-unload"];
-const supportedLanguages = (call) => captureSlugs.includes(call.slug.split("/").pop()) ? ["Lua 5.4", "Luau"]
-  : call.title === "rustic.find_entity()" ? ["Lua 5.4"]
-  : ["print()", "warn()"].includes(call.title) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : [...exampleLanguages];
+const supportedLanguages = (call) => {
+  // Display titles omit receivers; signatures retain the API's identity.
+  const name = call.signature.split("(")[0];
+  return captureSlugs.includes(call.slug.split("/").pop()) ? ["Lua 5.4", "Luau"]
+    : name === "rustic.find_entity" ? ["Lua 5.4"]
+    : ["print", "warn"].includes(name) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : [...exampleLanguages];
+};
 
 const calls = apiCategories.flatMap((category) => category.calls);
 
