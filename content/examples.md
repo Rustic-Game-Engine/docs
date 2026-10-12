@@ -1,5 +1,7 @@
 # Examples repository
 
+> **Not Yet Implemented.** Intended development areas are plans, not available features.
+
 [Examples on GitHub](https://github.com/Rustic-Game-Engine/examples).
 
 ## Current contents and development language

@@ -13,7 +13,7 @@ export function normalizeSearchText(text: string) {
 
 export function searchKind(entry: Pick<SearchEntry, "slug">): "API reference" | "Tutorial" | "Guide" {
   return entry.slug.startsWith("api/") || entry.slug === "callbacks" ? "API reference"
-    : entry.slug.startsWith("tutorials/") ? "Tutorial" : "Guide";
+    : entry.slug.startsWith("tutorials/") || entry.slug.startsWith("guides/gameplay-actions") ? "Tutorial" : "Guide";
 }
 export type SearchResult = SearchEntry & { score: number };
 

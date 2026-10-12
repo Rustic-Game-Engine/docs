@@ -3,9 +3,9 @@
 [Back to Java](/docs/scripting/java).
 
 1. Install OpenJDK 11 or newer: java and javac on PATH. Restart the editor after changing PATH.
-   Run `cargo xtask doctor` from the Engine folder to check discovery.
+   Check the Project Manager’s **Settings** language tools and the editor **Console** for discovery errors. Contributors with a source checkout can optionally run `cargo xtask doctor` from `Engine/`.
 2. Open your game project and scene. Select a **Part** object for this movement example.
-3. Use **Programming > New Script > Object Component Script** and select Java.
+3. Use **Programming > Object Component Script** and select Java.
    Save the asset, then attach it to the selected object using
    **Programming > Attach Existing Script** or **+ Add Component** in the Inspector.
    Create global or scene scripts through their corresponding Programming commands.

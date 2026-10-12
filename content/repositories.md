@@ -1,4 +1,4 @@
-# Open-Sourced Docs
+# Open Source Development
 
 Rustic is developed across separate public repositories. Use this directory to choose what to build, find the right toolchain, and understand which projects have runnable code today. The repository contents below were checked on 10 October 2026.
 

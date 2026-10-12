@@ -3,11 +3,9 @@
 [Back to Luau](/docs/scripting/luau).
 
 1. Use the current Rustic installer, which bundles the Luau runtime. Rebuild or reinstall Rustic if the bundled host is missing.
-   Run `cargo xtask doctor` from the Engine folder to check discovery.
+   Check the Project Manager’s **Settings** language tools and the editor **Console** for discovery errors. Contributors with a source checkout can optionally run `cargo xtask doctor` from `Engine/`.
 2. Open your game project and scene. Select a **Part** object for this movement example.
-3. Use **Programming > New Script > Object Component Script** and select Luau.
-   Save the asset, then attach it to the selected object using
-   **Programming > Attach Existing Script** or **+ Add Component** in the Inspector.
+3. The inspected creation menu omits Luau. Create a `.luau` file under `scripts/` with an external editor. In Explorer, right-click the file and choose **Use Script As > Object Script** while your target object is selected. This registers the asset and attaches it. Subsequent attachment can use **+ Add Component**.
    Create global or scene scripts through their corresponding Programming commands.
    Keep the editor-assigned Asset ID; do not edit the registry or scene files by hand.
 4. Paste the [complete behavior example](/docs/scripting/luau/complete-behavior). Press **Play**, then hover or click the embedded

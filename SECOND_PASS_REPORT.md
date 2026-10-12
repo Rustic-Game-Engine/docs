@@ -134,3 +134,36 @@ the final check ran after the build and passed. No remote CI outcome is claimed.
 - HTML/CSS rendering guides and screenshots should expand when the planned game
   UI renderer exists. Likewise, add repository-specific example/hosting SDK guides
   only when implementations are published.
+
+## Integration with current main
+
+Merged docs main `0657761cc3b0fc8611275435af149e30f6bacddb` into this PR.
+Retained its installation/user journey, entity-service documentation, skip link,
+mobile focus/scroll handling, compatibility notes, source/lifecycle checks and
+legacy-route tests. Focused editor guides now appear in Editor Manual, and both
+beginner tutorial routes remain reachable. Both syntax-check paths and their
+optional flags are preserved through a small shared command runner. Relative
+links use main's unambiguous source resolver with the renderer's safe URL filter;
+reference tables retain keyboard access and column-header semantics.
+
+Merged validation: production export (434 pages), 32 tests, 410 canonical pages,
+18 aliases, 3,103 internal links/anchors, all exported links, 1,600 gameplay
+examples, lint, TypeScript and zero-vulnerability audit passed. Chromium passed
+16 tests with two intentional mobile-only skips, including the retained skip
+link. The search regression test accepts both legitimate beginner tutorials.
+
+The reviewed source baseline includes engine PR #30 at
+`efc834d838780dc955ac9a4fe5925a972f27b5ff`, which implements the entity services
+already documented on docs main. That engine PR was still open during validation;
+no engine PR was merged or modified. Source corroboration, C/C++/Python lifecycle
+SDK protocol fixtures and C/C++ declaration compilation passed against it.
+The fixtures execute SDK dispatch, not native Play. Syntax checks covered all
+published snippets via the retained main checker (399 JS, 194 Python, 493 Lua)
+and generated examples via the shared checker (344 JS/inline JS, 172 Python,
+192 Lua, 181 Luau); 172 C and 172 C++ examples compiled against the actual SDK.
+PHP/Java/C# tools remain unavailable locally. The scheduled source-drift job will
+correctly request review while engine main lacks the companion implementation.
+
+Main's newly added UI status text also retains this pass's distinction between
+planned HTML/CSS game UI and currently unimplemented layout. The Explorer move
+warning and entity-service setup use the verified editor controls.

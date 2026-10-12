@@ -25,6 +25,25 @@ function category(slug: string, source: string, signatures: string[]): ApiCatego
 }
 
 export const apiCategories: ApiCategory[] = [
+  category("entity-foundations", "docs/Scripting/API/entity-foundations.md", [
+    "Tags.add(entity, name)",
+    "Tags.remove(entity, name)",
+    "Tags.find_all(name)",
+    "Groups.create(name)",
+    "Groups.add(name, entity)",
+    "Groups.get_members(name)",
+    "Hierarchy.set_parent(entity, parent, keep_world = true)",
+    "Hierarchy.get_children(entity)",
+    "Hierarchy.detach(entity, keep_world = true)",
+    "Entity.destroy(entity)",
+    "Entity.destroy_after(entity, delay)",
+    "Entity.is_valid(entity)",
+    "Components.has(entity, name)",
+    "Components.get_all(entity)",
+    "Components.find_in_children(entity, name)",
+    "World.find_by_tag(name)",
+    "World.find_in_radius(center, radius)"
+]),
   category("animation", "docs/Scripting/API/animation.md", [
     "Animation.clips(entity)",
     "Animation.load(entity, source)",
@@ -223,7 +242,7 @@ export const apiCategories: ApiCategory[] = [
     "rustic.any_key_pressed()",
   ]),
   category("logging", "api:logging", [
-    "rustic.log(level, message, fields?)",
+    "rustic.log(level, message)",
     "print(...)",
     "warn(...)",
   ]),

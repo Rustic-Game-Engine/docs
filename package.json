@@ -11,9 +11,12 @@
     "check:api-examples": "node scripts/check-api-examples.mjs",
     "test": "tsx --test tests/*.test.mjs tests/*.test.tsx",
     "test:browser": "playwright test",
-    "check:docs": "tsx scripts/check-docs.mts",
-    "check:syntax": "node scripts/check-example-syntax.mjs",
-    "check:engine-drift": "node scripts/check-engine-drift.mjs"
+    "check:docs": "node scripts/check-docs.mjs && tsx scripts/check-docs.mts",
+    "check:syntax": "node scripts/check-syntax.mjs",
+    "check:engine-drift": "node scripts/check-engine-drift.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:engine-source": "node scripts/check-engine-source.mjs",
+    "test:sdk-lifecycle": "node scripts/check-sdk-lifecycle.mjs"
   },
   "dependencies": {
     "highlight.js": "^11.12.0",

@@ -45,11 +45,11 @@ const docs: Record<string, ApiDoc> = {
     }, notes: [protocolNote],
   },
   transforms: {
-    title: "Transform API", summary: "Read or queue a local translation for the behavior owner.",
+    title: "Transform API", summary: "Read or change a local translation for the behavior owner.",
     when: "Read before applying relative movement. Write from `Update` for presentation movement or `FixedUpdate` for simulation movement. Do not rewrite an unchanged position every frame.",
     calls: ["rustic.get_translation()", "rustic.set_translation(x, y, z)"],
     parameters: [p("x", "finite number", true, "Local X relative to the parent."), p("y", "finite number", true, "Local Y relative to the parent."), p("z", "finite number", true, "Local Z relative to the parent.")],
-    returns: "Get returns three numbers. Set queues a mutation applied after the callback; it returns no entity value.",
+    returns: "Get returns three numbers. Set returns no entity value. Lua applies the host write immediately; JavaScript/Web defer it until callback completion; external SDKs commit at the response or a synchronous query flush. See [execution behavior](/docs/guides/scripting#when-mutations-take-effect).",
     examples: {
       "Lua 5.4": "local x, y, z = rustic.get_translation()\nrustic.set_translation(x + 1, y, z)",
       JavaScript: "const [x, y, z] = rustic.get_translation();\nrustic.set_translation(x + 1, y, z);",
@@ -68,7 +68,7 @@ const docs: Record<string, ApiDoc> = {
     when: "Use properties for designer-configurable values such as speed, health, and damage. Read at setup or when needed; write only when gameplay changes the value.",
     calls: ["rustic.get_property(name)", "rustic.set_property(name, value)"],
     parameters: [p("name", "string", true, "Exact declared property name."), p("value", "EngineValue", true, "Value matching the property's existing type.")],
-    returns: "Get returns the stored value. Set queues an update and cannot create a missing property.",
+    returns: "Get returns the stored value. Set cannot create a missing property. Its write timing follows the [runtime execution rules](/docs/guides/scripting#when-mutations-take-effect).",
     examples: {
       "Lua 5.4": "local health = rustic.get_property('health')\nrustic.set_property('health', health - 10)",
       JavaScript: "const health = rustic.get_property('health');\nrustic.set_property('health', health - 10);",
@@ -87,7 +87,7 @@ const docs: Record<string, ApiDoc> = {
     when: "Use attributes for built-in entity state. Prefer `set_translation` for Position and `set_enabled` for Enabled when those dedicated calls better express intent.",
     calls: ["rustic.get_attribute(name)", "rustic.edit_attribute(name, value)", "rustic.game.Scene.Root.Child.EditAttribute(name, value)", "rustic.edit_object_attribute(source, name, value) — embedded Lua / JavaScript", "rustic.game.Scene.Root.Child:GetAttribute(name) — embedded Lua only"],
     parameters: [p("name", "string", true, "Name, Position, Size, Color (RGB), CanTouch, CanCollide, Anchored, or Parent."), p("value", "attribute-specific", true, "Value matching the attribute type.")],
-    returns: "Get returns the current value. Edit queues a typed mutation.",
+    returns: "Get returns the current value. Edit validates a typed mutation; [write timing depends on the runtime](/docs/guides/scripting#when-mutations-take-effect).",
     examples: {
       "Lua 5.4": "local name = rustic.get_attribute('Name')\nrustic.edit_attribute('Color', {1, .5, 0})",
       JavaScript: "const name = rustic.get_attribute('Name');\nrustic.edit_attribute('Color', [1, .5, 0]);",
@@ -123,17 +123,17 @@ const docs: Record<string, ApiDoc> = {
   logging: {
     title: "Logging API", summary: "Send a bounded diagnostic message to the live game console.",
     when: "Log lifecycle transitions and recoverable errors. Avoid per-frame logging outside short debugging sessions because bounded queues can drop excessive output.",
-    calls: ["rustic.log(level, message, fields?)", "print(...) — Lua and JavaScript info", "warn(...) — Lua and JavaScript warning"],
-    parameters: [p("level", "string", true, "debug, info, warn, or error."), p("message", "string", true, "Human-readable diagnostic text."), p("fields", "table / object", false, "Optional structured fields where supported; omit for portability.")],
+    calls: ["rustic.log(level, message)", "print(...) — Lua and JavaScript info", "warn(...) — Lua and JavaScript warning"],
+    parameters: [p("level", "string", true, "debug, info, warn, or error."), p("message", "string", true, "Human-readable diagnostic text.")],
     returns: "No value. The message is queued for the bounded console sink.",
     examples: simpleMutationExamples("rustic.log('info', 'player spawned')", "rustic.log(\"info\", \"player spawned\");"),
     notes: ["In Lua and JavaScript, print(...) writes an info entry and warn(...) writes a warning entry to the Rustic Console. Lua separates multiple arguments with tabs; JavaScript separates them with spaces. Use rustic.log for an explicit level. External programs must not print diagnostics to stdout; stdout is reserved for protocol responses.", protocolNote],
   },
   enabled: {
-    title: "Enabled state API", summary: "Queue an enabled-state change for the behavior owner.",
+    title: "Enabled state API", summary: "Change enabled state for the behavior owner.",
     when: "Disable an entity when its behavior should stop after the current callback. Re-enable it from a controlling behavior or editor action. Use a local boolean instead when the entity should remain active.",
     calls: ["rustic.set_enabled(enabled)"], parameters: [p("enabled", "boolean", true, "True to enable; false to disable.")],
-    returns: "No value. The change applies after the callback and can trigger enable/disable lifecycle callbacks.",
+    returns: "No value. Lua updates host state directly; JavaScript/Web and external SDKs use their command boundary. The scheduler observes the resulting enabled state for lifecycle transitions. See [execution behavior](/docs/guides/scripting#when-mutations-take-effect).",
     examples: simpleMutationExamples("rustic.set_enabled(false)", "rustic.set_enabled(false);"), notes: [protocolNote],
   },
   environment: {
@@ -166,10 +166,10 @@ const docs: Record<string, ApiDoc> = {
     }, notes: [protocolNote],
   },
   instances: {
-    title: "Instance creation API", summary: "Queue adding a source instance or cloning an existing entity.",
+    title: "Instance creation API", summary: "Add a source instance or clone an existing entity, with runtime-specific timing.",
     when: "Call for bounded gameplay events such as spawning a projectile, enemy, pickup, or effect. Avoid unbounded per-frame creation.",
     calls: ["instance.add(source, parent?)", "instance.clone(source, parent?)"], parameters: [p("source", "string", true, "Source asset or stable scene path."), p("parent", "string or null", false, "Destination parent stable entity ID; omit for the default root.")],
-    returns: "No new entity ID. Creation is queued and applies after the callback in issue order.",
+    returns: "Embedded Lua returns the new entity ID and creates immediately. JavaScript/Web and external SDK instance commands return no created ID and apply in command order at callback completion (or external query flush).",
     examples: {
       "Lua 5.4": "instance.add('Part', nil)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", JavaScript: "instance.add('Part');\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'));", Python: "instance.add('Part',None)\ninstance.clone('Game.scene.Enemy',Game.scene.Find('Game.scene.Room'))", "C++": "instance.add(\"Part\",std::nullopt);", "C#": "instance.add(\"Part\",null);", Luau: "instance.add('Part',nil)\ninstance.clone('Room.Enemy',Game.scene.Find('Room'))", C: "instance.add(\"Part\",NULL);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", Java: "instance.add(\"Part\",null);\ninstance.clone(\"Room.Enemy\",Game.scene.Find(\"Room\"));", PHP: "$instance->add(\"Part\",null);\n$instance->clone(\"Room.Enemy\",$Game->scene->Find(\"Room\"));", "HTML / inline JS": "instance.add('Part');",
     }, notes: [protocolNote],
@@ -178,7 +178,7 @@ const docs: Record<string, ApiDoc> = {
     title: "Current camera API", summary: "Select the camera used for the next game render.",
     when: "Call when gameplay changes viewpoints—vehicles, players, cutscenes, or returning to the main camera. Do not call every frame when unchanged.",
     calls: ["Game.setCurrentCamera(source)"], parameters: [p("source", "string or camera reference", true, "Stable camera entity ID or scene path.")],
-    returns: "No camera object. Selection is queued for the next render.",
+    returns: "No camera object. Lua selects immediately in the Play world; JavaScript/Web defer the selection until callback completion. External SDK commands commit at callback completion or query flush. Rendering observes the resulting active camera.",
     examples: simpleMutationExamples("Game.setCurrentCamera('Game.scene.Room.Camera')", "Game.setCurrentCamera(\"Game.scene.Room.Camera\");"),
     notes: ["The target must resolve to a camera in the play snapshot.", protocolNote],
   },
@@ -250,15 +250,15 @@ export function buildApiMarkdown(id: string) {
 }
 
 function codeLanguage(lang: string) { return ({ "Lua 5.4": "lua", JavaScript: "javascript", Python: "python", "C++": "cpp", "C#": "csharp", Luau: "lua", C: "c", Java: "java", PHP: "php", "HTML / inline JS": "javascript" } as Record<string, string>)[lang]; }
-function overview() { return `# Rustic scripting API\n\nThe reference is organized by what game code needs to do. Core operation pages include purpose, timing, variables, return behavior, and equivalent calls for all ten supported script types. The Gameplay APIs navigation section provides dedicated references for actions, easing, animation, composition, physics, audio, events and the scene clock. API 1.1 gameplay actions have an explicit language support matrix in [Use gameplay actions](/docs/guides/gameplay-actions).\n\n## Execution model\n\nGlobal scripts run before Scene scripts, then Object Component scripts. Mutations are queued and applied after the callback in issue order. Every gameplay language calls built-in functions. Lua, JavaScript, and Web use embedded bindings; external languages use engine-supplied SDKs with private transport.\n\n## Language support\n\n| Languages | Integration |\n| --- | --- |\n| Lua 5.4, JavaScript, HTML / inline JS | bundled embedded API |\n| Python, C#, C++, Luau, C, Java, PHP | engine-owned SDK and persistent external session |\n\n## Safety limits\n\nSource and responses are limited to 1 MiB. External callbacks have a three-second deadline. Boundary values are booleans, integers, finite numbers, strings, vectors, and optional stable entity IDs.`; }
+function overview() { return `# Rustic scripting API\n\nThe reference is organized by what game code needs to do. Core operation pages include purpose, timing, variables, return behavior, and equivalent calls for all ten supported script types. The Gameplay APIs navigation section provides dedicated references for actions, easing, animation, composition, physics, audio, events and the scene clock. API 1.1 gameplay actions have an explicit language support matrix in [Use gameplay actions](/docs/guides/gameplay-actions).\n\n## Execution model\n\nGlobal scripts run before Scene scripts, then Object Component scripts. Mutation timing depends on the adapter: Lua host writes are immediate; JavaScript/Web core writes are deferred; external SDK queries may flush pending commands. Read [Scopes, lifecycle and execution](/docs/guides/scripting#when-mutations-take-effect) for the exact distinctions. Every gameplay language calls built-in functions. Lua, JavaScript, and Web use embedded bindings; external languages use engine-supplied SDKs with private transport.\n\n## Language support\n\n| Languages | Integration |\n| --- | --- |\n| Lua 5.4, JavaScript, HTML / inline JS | bundled embedded API |\n| Python, C#, C++, Luau, C, Java, PHP | engine-owned SDK and persistent external session |\n\n## Safety limits\n\nSource and responses are limited to 1 MiB. External callbacks have a three-second deadline. Boundary values are booleans, integers, finite numbers, strings, vectors, and optional stable entity IDs.`; }
 function callbacks() {
   const names = ["OnCreate", "Start", "OnEnable", "FixedUpdate", "Update", "OnDisable", "OnDestroy", "OnStop"];
   const nativeNames = ["on_create", "on_start", "on_enable", "fixed_update", "update", "on_disable", "on_destroy", "on_stop"];
   const lua = `return {\n${names.map((name) => `  ${name} = function(${name.includes("Update") ? "dt" : ""}) end,`).join("\n")}\n}`;
   const js = `globalThis.behavior = {\n${names.map((name) => `  ${name}(${name.includes("Update") ? "dt" : ""}) {},`).join("\n")}\n};`;
   const python = `from rustic import rustic, run\n\n${nativeNames.map((name) => `def ${name}(${name.includes("update") ? "dt" : ""}):\n    rustic.log("info", "${name}")`).join("\n\n")}\n\nrun(globals())`;
-  const cpp = `#include "rustic.hpp"\nint main() {\n  RusticBehavior behavior;\n${nativeNames.map((name) => `  behavior.${name} = [](${name.includes("update") ? "double dt" : ""}) { rustic.log("info", "${name}"); };`).join("\n")}\n  return rustic_run(behavior);\n}`;
-  const c = `#include "rustic.h"\n${nativeNames.map((name) => `static void ${name}(${name.includes("update") ? "double dt" : "void"}) { rustic.log("info", "${name}"); }`).join("\n")}\nint main(void) {\n  return rustic_run((RusticBehavior){\n${nativeNames.map((name) => `    .${name} = ${name},`).join("\n")}\n  });\n}`;
+  const cpp = `#include "rustic.hpp"\nint main() {\n  RusticBehavior behavior;\n${nativeNames.map((name) => `  behavior.${name} = [](${name.includes("update") ? "double dt" : ""}) { ${name.includes("update") ? "(void)dt; " : ""}rustic.log("info", "${name}"); };`).join("\n")}\n  return rustic_run(behavior);\n}`;
+  const c = `#include "rustic.h"\n${nativeNames.map((name) => `static void ${name}(${name.includes("update") ? "double dt" : "void"}) { ${name.includes("update") ? "(void)dt; " : ""}rustic.log("info", "${name}"); }`).join("\n")}\nint main(void) {\n  return rustic_run((RusticBehavior){\n${nativeNames.map((name) => `    .${name} = ${name},`).join("\n")}\n  });\n}`;
   const csharp = `using static Rustic;\nRun((callback, dt) => {\n  switch (callback) {\n${nativeNames.map((name) => `    case "${name}": rustic.log("info", "${name}"); break;`).join("\n")}\n  }\n});`;
   const java = `class RusticBehavior extends Rustic {\n  public static void main(String[] args) throws Exception {\n    run((callback, dt) -> {\n      switch (callback) {\n${nativeNames.map((name) => `        case "${name}" -> rustic.log("info", "${name}");`).join("\n")}\n      }\n    });\n  }\n}`;
   const php = `<?php\nrequire __DIR__ . "/rustic.php";\n${nativeNames.map((name) => `function ${name}(${name.includes("update") ? "float $dt" : ""}): void {\n    global $rustic;\n    $rustic->log("info", "${name}");\n}`).join("\n")}\nrustic_run([\n${nativeNames.map((name) => `    "${name}" => "${name}",`).join("\n")}\n]);`;

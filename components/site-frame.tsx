@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Github, Menu, Moon, Search, Sun, X } from "lucide-react";
+import { Github, Menu, Moon, Search, Sun, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -28,8 +28,32 @@ export function SiteFrame({ children }: { children: ReactNode }) {
   const project = projectForPath(pathname);
   const searchHref = searchRouteFor(project);
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuTrigger = useRef<HTMLButtonElement>(null);
   const [dark, setDark] = useState(false);
+  const sidebarRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const sidebar = sidebarRef.current;
+    const menuButton = menuRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    sidebar?.querySelector<HTMLButtonElement>("button")?.focus();
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const items = Array.from(sidebar?.querySelectorAll<HTMLElement>("a, button, summary") ?? []);
+      const visible = items.filter((item) => item.getClientRects().length > 0);
+      const first = visible[0], last = visible[visible.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", trapFocus);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", trapFocus);
+      menuButton?.focus();
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
@@ -38,50 +62,35 @@ export function SiteFrame({ children }: { children: ReactNode }) {
         if (pathname === searchHref) document.querySelector<HTMLInputElement>(".search-field input")?.focus();
         else router.push(searchHref);
       }
-      if (event.key === "Escape" && menuOpen) { setMenuOpen(false); menuTrigger.current?.focus(); }
+      if (event.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [pathname, router, searchHref, menuOpen]);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const sidebar = document.getElementById("docs-sidebar");
-    sidebar?.querySelector<HTMLButtonElement>("button")?.focus();
-    const trap = (event: KeyboardEvent) => {
-      if (event.key !== "Tab") return;
-      const controls = Array.from(sidebar?.querySelectorAll<HTMLElement>('a, button, summary') ?? []).filter((element) => element.getClientRects().length > 0);
-      const first = controls[0], last = controls.at(-1);
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
-    };
-    document.addEventListener("keydown", trap);
-    return () => document.removeEventListener("keydown", trap);
-  }, [menuOpen]);
-  function closeMenu() { setMenuOpen(false); menuTrigger.current?.focus(); }
+  }, [pathname, router, searchHref]);
 
   return <div className={dark ? "site dark" : "site"}>
+    <a className="skip-link" href="#main-content">Skip to content</a>
     <header className="topbar">
       <Link className="brand" href="/" aria-label="Rustic docs home"><span className="brand-mark"><span /></span><span>RUSTIC</span><span className="brand-division">DOCS</span></Link>
       <Link className="search-trigger" href={searchHref}><Search size={17} /><span>Search documentation</span></Link>
-      <nav className="top-actions" aria-label="Site links"><span className="version-button">v0.1 <ChevronDown size={14} /></span><a href="https://github.com/Rustic-Game-Engine" aria-label="Rustic repositories on GitHub"><Github size={19} /></a><button className="icon-button" onClick={() => setDark((value) => !value)} aria-label="Toggle theme">{dark ? <Sun size={18} /> : <Moon size={18} />}</button><button ref={menuTrigger} className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation" aria-expanded={menuOpen} aria-controls="docs-sidebar"><Menu /></button></nav>
+      <nav className="top-actions" aria-label="Site links"><span className="version-button">Docs v0.1</span><a href="https://github.com/Rustic-Game-Engine" aria-label="Rustic repositories on GitHub"><Github size={19} /></a><button className="icon-button" onClick={() => setDark((value) => !value)} aria-label="Toggle theme">{dark ? <Sun size={18} /> : <Moon size={18} />}</button><button ref={menuRef} className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation" aria-expanded={menuOpen} aria-controls="docs-sidebar"><Menu /></button></nav>
     </header>
     <div className="docs-shell article-shell">
-      <aside id="docs-sidebar" className={menuOpen ? "sidebar open" : "sidebar"}>
-        <div className="sidebar-mobile-head"><span>Documentation</span><button onClick={closeMenu} aria-label="Close navigation"><X /></button></div>
+      <aside ref={sidebarRef} id="docs-sidebar" role={menuOpen ? "dialog" : undefined} aria-modal={menuOpen || undefined} aria-label="Documentation navigation" className={menuOpen ? "sidebar open" : "sidebar"}>
+        <div className="sidebar-mobile-head"><span>Documentation</span><button onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X /></button></div>
         <nav className="sidebar-content" aria-label="Documentation">
           <Link className="home-link" href="/" onClick={() => setMenuOpen(false)} aria-current={pathname === "/" || pathname === "/docs" ? "page" : undefined}>Welcome to Rustic</Link>
           <div className="project-switcher" aria-label="Documentation projects">{docSections.map((section) => <Link href={section.href} key={section.title} className={!isIndex && project === section.title ? "active" : ""} onClick={() => setMenuOpen(false)}>{section.title}</Link>)}</div>
           {docSections.filter((section) => isIndex || section.title === project).map((section) => <div className="nav-project" key={section.title}>
             <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}</Link>
             {(isIndex && section.title === "Engine" ? section.groups.slice(0, 1) : section.groups).map((group) => <section className="nav-section" key={group.label}>
-              <p>{group.label === "Open-Sourced Docs" ? "Overview" : group.label === "Engine source" ? "Engine" : group.label}</p>
+              <p>{group.label === "Open Source Development" ? "Overview" : group.label === "Engine source" ? "Engine" : group.label}</p>
               {group.docs.filter((doc) => !doc.parent).map((doc) => <DocNavigation key={doc.slug} doc={doc} docs={group.docs} pathname={canonicalPath} onNavigate={() => setMenuOpen(false)} />)}
             </section>)}
           </div>)}
         </nav>
       </aside>
-      {menuOpen && <button className="sidebar-scrim" onClick={closeMenu} aria-label="Close navigation" />}
+      {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
       {children}
     </div>
   </div>;

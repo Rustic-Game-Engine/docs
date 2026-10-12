@@ -60,6 +60,9 @@ const categoryGroups: DocGroup[] = [
     { slug: "guides/gameplay-actions/validation", title: "Validate gameplay services", description: "Validate gameplay services for Use gameplay actions.", source: "docs/Scripting/gameplayActions/validation.md", parent: "guides/gameplay-actions" },
     { slug: "guides/gameplay-actions/extension", title: "Extend gameplay services", description: "Extend gameplay services for Use gameplay actions.", source: "docs/Scripting/gameplayActions/extension.md", parent: "guides/gameplay-actions" },
     { slug: "guides/gameplay-architecture", title: "Gameplay API architecture", description: "Core services, property adapters, clip handles, timing and lifetime boundaries.", source: "docs/GAMEPLAY_API_ARCHITECTURE.md" },
+    { slug: "api/entity-foundations", title: "Entity foundations", description: "Tags, groups, safe hierarchy edits, destruction and live component/world queries.", source: "docs/Scripting/API/entity-foundations.md" },
+    { slug: "guides/entity-foundations", title: "Use entity foundations", description: "Attach scripts that organize and destroy scene objects through live shared services.", source: "docs/Scripting/API/entity-foundations.md" },
+    { slug: "guides/scripting-expansion-status", title: "Scripting expansion status", description: "Feature-by-feature implementation status, existing systems and blockers.", source: "docs/SCRIPTING_EXPANSION_STATUS.md" },
     { slug: "api/tween", title: "Tween", description: "Animate an entity property or script value without writing an Update loop.", source: "docs/Scripting/API/tween.md" },
     { slug: "api/ease", title: "Ease", description: "Choose one of 31 shared easing curves for actions and synchronous interpolation.", source: "docs/Scripting/API/ease.md" },
     { slug: "api/movement", title: "Movement", description: "Move, turn, follow and orbit objects with finite engine-scheduled actions.", source: "docs/Scripting/API/movement.md" },
@@ -183,13 +186,13 @@ const categoryGroups: DocGroup[] = [
     { slug: "scripting/web/available-inline-javascript-api", title: "Available inline JavaScript API", description: "Available inline JavaScript API for HTML/CSS.", source: "docs/Scripting/scriptingWeb/available-inline-javascript-api.md", parent: "scripting/web" },
     { slug: "scripting/web/security-and-limitations", title: "Security and limitations", description: "Security and limitations for HTML/CSS.", source: "docs/Scripting/scriptingWeb/security-and-limitations.md", parent: "scripting/web" },
   ] },
-  { label: "Open-Sourced Docs", docs: [
-    { slug: "open-source", title: "Open-Sourced Docs", description: "Repository development guides for the engine, docs, examples, and hosting SDK.", source: "content/repositories.md" },
+  { label: "Open Source Development", docs: [
+    { slug: "open-source", title: "Open Source Development", description: "Repository development guides for the engine, docs, examples, and hosting SDK.", source: "content/repositories.md" },
   ] },
   { label: "Engine source", docs: [
     { slug: "open-source/engine", title: "Engine repository", description: "Choose a focused guide to engine repository.", source: "content/engine-source.md" },
     { slug: "open-source/engine/introduction", title: "Introduction", description: "What Rustic Engine is, implemented features, and core technologies.", source: "content/engine/introduction.md", parent: "open-source/engine" },
-    { slug: "open-source/engine/getting-started", title: "Getting Started", description: "Clone, prepare, build, and run the engine from source.", source: "content/engine/getting-started.md", parent: "open-source/engine" },
+    { slug: "open-source/engine/getting-started", title: "Building Rustic Engine from Source", description: "Clone, prepare, build, and run the engine from source.", source: "content/engine/getting-started.md", parent: "open-source/engine" },
     { slug: "open-source/engine/architecture", title: "Architecture", description: "Editor, runtime, rendering, physics, scripting, and asset ownership.", source: "content/engine/architecture.md", parent: "open-source/engine" },
     { slug: "open-source/engine/project-structure", title: "Project Structure", description: "Navigate the Rust workspace, applications, crates, and game project files.", source: "content/engine/project-structure.md", parent: "open-source/engine" },
     { slug: "open-source/engine/rendering-system", title: "Rendering System", description: "Graphics backends, automatic selection, diagnostics, and performance.", source: "content/engine/rendering-system.md", parent: "open-source/engine" },
@@ -205,7 +208,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "open-source/engine/fork-build-and-run-your-own-version", title: "Fork, build, and run your own version", description: "Fork, build, and run your own version for Engine repository.", source: "content/engine-source/fork-build-and-run-your-own-version.md", parent: "open-source/engine" },
     { slug: "open-source/engine/good-development-starting-points", title: "Good development starting points", description: "Good development starting points for Engine repository.", source: "content/engine-source/good-development-starting-points.md", parent: "open-source/engine" },
     { slug: "open-source/engine/main-scripts-and-commands", title: "Main scripts and commands", description: "Main scripts and commands for Engine repository.", source: "content/engine-source/main-scripts-and-commands.md", parent: "open-source/engine" },
-    { slug: "open-source/engine/build-a-first-gameplay-behavior", title: "Build a first gameplay behavior", description: "Build a first gameplay behavior for Engine repository.", source: "content/engine-source/build-a-first-gameplay-behavior.md", parent: "open-source/engine" },
+    { slug: "open-source/engine/build-a-first-gameplay-behavior", title: "Build a first gameplay behavior", description: "Build a first gameplay behavior for Engine repository.", source: "content/user/first-game.md", parent: "open-source/engine" },
     { slug: "open-source/engine/diagnose-common-setup-failures", title: "Diagnose common setup failures", description: "Diagnose common setup failures for Engine repository.", source: "content/engine-source/diagnose-common-setup-failures.md", parent: "open-source/engine" },
   ] },
   { label: "Docs", docs: [
@@ -218,6 +221,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "open-source/docs/editing-pages", title: "Editing Existing Pages", description: "Find authoritative sources and correct outdated information and links.", source: "content/docs/editing-pages.md", parent: "open-source/docs" },
     { slug: "open-source/docs/validation", title: "Validation and engine sync", description: "Run site/browser checks, validate script syntax and review engine API drift.", source: "content/docs/validation.md", parent: "open-source/docs" },
     { slug: "open-source/docs/code-examples", title: "Code Examples", description: "Standards for scripting API samples, setup, lifecycle, and expected results.", source: "content/docs/code-examples.md", parent: "open-source/docs" },
+    { slug: "open-source/docs/maintenance", title: "Documentation maintenance", description: "Authoritative sources, synchronization, route checks and validation.", source: "content/docs/maintenance.md", parent: "open-source/docs" },
     { slug: "open-source/docs/versioning", title: "Versioning", description: "Maintain compatibility notes and plan documentation for multiple engine versions.", source: "content/docs/versioning.md", parent: "open-source/docs" },
     { slug: "open-source/docs/translations", title: "Translations", description: "Propose languages, review translations, and understand locale support needed.", source: "content/docs/translations.md", parent: "open-source/docs" },
     { slug: "open-source/docs/contributing", title: "Contributing", description: "Submit and review documentation changes with the required website checks.", source: "content/docs/contributing.md", parent: "open-source/docs" },
@@ -241,7 +245,53 @@ const categoryGroups: DocGroup[] = [
   ] },
 ];
 
-export const docGroups: DocGroup[] = categoryGroups.map((group) => ({
+const userGroups: DocGroup[] = [
+  { label: "Getting Started", docs: [
+    { slug: "engine", title: "Introduction to Rustic Engine", description: "Start here: installation, projects and your first playable scene.", source: "content/engine.md" },
+    { slug: "getting-started/installation", title: "Requirements and installation", description: "Verified Windows downloads, platform requirements and first launch.", source: "content/user/installation.md" },
+    { slug: "getting-started/create-project", title: "Create and reopen a project", description: "Project Manager, default scene, saving and reopening.", source: "content/user/create-project.md" },
+  ] },
+  { label: "Editor Manual", docs: [
+    { slug: "editor/overview", title: "Editor workflow", description: "Hierarchy, Explorer, Inspector, viewport, assets, lighting and saving.", source: "content/user/editor.md" },
+  ] },
+  { label: "Gameplay and Scripting", docs: [
+    { slug: "guides/scripting", title: "Scopes, lifecycle and execution", description: "Script attachment, discovery, runtime mutation timing and communication.", source: "content/user/scripting.md" },
+  ] },
+  { label: "Engine Systems", docs: [
+    { slug: "guides/systems", title: "Systems overview", description: "Rendering, physics, animation, audio, input, cameras and UI limitations.", source: "content/user/systems.md" },
+  ] },
+  { label: "API Reference", docs: [] },
+  { label: "Building and Publishing", docs: [
+    { slug: "building/publishing", title: "Playtesting and publishing", description: "Local Play, debugging, project sharing and current export limitations.", source: "content/user/publishing.md" },
+  ] },
+  { label: "Tutorials and Examples", docs: [
+    { slug: "tutorials/first-game", title: "Your first playable scene", description: "Create a cube controller, falling physics box, camera and logs; save and reopen.", source: "content/user/first-game.md" },
+  ] },
+  { label: "Troubleshooting and Releases", docs: [
+    { slug: "troubleshooting", title: "Troubleshooting", description: "Installation, scripts, input, physics, permissions and saving failures.", source: "content/user/troubleshooting.md" },
+    { slug: "reference/compatibility", title: "Feature status and compatibility", description: "Verified implementation status, language APIs and platform restrictions.", source: "content/user/compatibility.md" },
+    { slug: "reference/versions", title: "Versions and changes", description: "Docs v0.1, engine releases and Script API 1.0/1.1 are separate identifiers.", source: "content/user/versions.md" },
+  ] },
+];
+
+// User task groups and routes are independent of documentation/engine versions.
+// Original entries stay reachable; only their sidebar grouping changes.
+const sourceGroups = ["Open Source Development", "Engine source", "Docs", "Examples", "Hosting SDK"];
+const organizedGroups = userGroups.map((group) => ({ ...group, docs: [...group.docs] }));
+for (const group of categoryGroups.filter((group) => !sourceGroups.includes(group.label))) {
+  for (const doc of group.docs) {
+    if (doc.slug === "engine") continue;
+    const target = doc.slug.startsWith("guides/editor") ? "Editor Manual"
+      : doc.slug.startsWith("tutorials/") ? "Tutorials and Examples"
+      : doc.slug.startsWith("api/") ? "API Reference"
+      : group.label === "Scripting languages" || doc.slug === "callbacks" || doc.slug.includes("gameplay-programming") || doc.slug.includes("scene-objects") ? "Gameplay and Scripting"
+      : doc.slug.startsWith("guides/gameplay-actions") ? "Tutorials and Examples" : "Engine Systems";
+    organizedGroups.find((entry) => entry.label === target)!.docs.push(doc);
+  }
+}
+organizedGroups.push(...categoryGroups.filter((group) => sourceGroups.includes(group.label)));
+
+export const docGroups: DocGroup[] = organizedGroups.map((group) => ({
   ...group,
   docs: group.docs.flatMap((doc) => {
     const category = apiCategories.find((entry) => entry.slug === doc.slug);
@@ -256,10 +306,9 @@ export const docGroups: DocGroup[] = categoryGroups.map((group) => ({
   }),
 }));
 
-const sourceGroups = ["Open-Sourced Docs", "Engine source", "Docs", "Examples", "Hosting SDK"];
 export const docSections = [
   { title: "Engine", href: "/docs/engine", groups: docGroups.filter((group) => !sourceGroups.includes(group.label)) },
-  { title: "Open-Sourced Docs", href: "/docs/open-source", groups: docGroups.filter((group) => sourceGroups.includes(group.label)) },
+  { title: "Open Source Development", href: "/docs/open-source", groups: docGroups.filter((group) => sourceGroups.includes(group.label)) },
 ];
 
 export const docAliases: Record<string, string> = {
@@ -291,9 +340,9 @@ export function routeFor(slug: string) { return slug ? `/docs/${slug}` : "/docs"
 
 export function projectForPath(pathname: string) {
   const canonicalPath = canonicalDocPath(pathname);
-  return canonicalPath === "/docs/open-source" || canonicalPath.startsWith("/docs/open-source/") ? "Open-Sourced Docs" : "Engine";
+  return canonicalPath === "/docs/open-source" || canonicalPath.startsWith("/docs/open-source/") ? "Open Source Development" : "Engine";
 }
 
 export function searchRouteFor(project: string) {
-  return project === "Open-Sourced Docs" ? "/docs/open-source/search" : "/docs/search";
+  return project === "Open Source Development" ? "/docs/open-source/search" : "/docs/search";
 }

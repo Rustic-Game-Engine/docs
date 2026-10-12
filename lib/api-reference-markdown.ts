@@ -62,7 +62,7 @@ const captureConstraints = "- Capture handles belong to their script. Destroying
 
 export function buildApiCategoryMarkdown(category: ApiCategory, title: string, description: string, shared = "") {
   const guidance = shared.split(/(?=^## )/m).slice(1).filter((part) => !/^## (Calls|Example|Language examples|Examples for every function)(?:\n|$)/.test(part)).join("");
-  return `# ${title}\n\n${description}\n\nChoose an API to see its signature, parameters, examples and behavior.\n\n## APIs\n\n${category.calls.map((call) => `- [${call.title}](/docs/${call.slug})`).join("\n")}\n\n${guidance}`;
+  return `# ${title}\n\n${description}\n\n[Feature status and language/platform compatibility](/docs/reference/compatibility)\n\nChoose an API to see its signature, parameters, examples and behavior.\n\n## APIs\n\n${category.calls.map((call) => `- [${call.title}](/docs/${call.slug})`).join("\n")}\n\n${guidance ? `## Module guide\n\n${guidance}` : ""}`;
 }
 
 function section(markdown: string, heading: string) {
@@ -75,7 +75,7 @@ function section(markdown: string, heading: string) {
 
 const audioParameters: Record<string, string> = {
   id: "Opaque ID from the latest device list for the matching direction in this Play scene. Pass null to select the current system default; names are display labels, not IDs.",
-  source: "Project-relative WAV/OGG asset path. Provide the file before Play.",
+  source: "Project-relative WAV, MP3, AAC, FLAC or OGG asset path. Provide the file before Play.",
   options: "Optional playback options: loop, volume and pitch.",
   position: "World vector used for distance attenuation relative to the active camera.",
   voice: "Voice returned by Audio.play or Audio.playAt.",
@@ -124,7 +124,38 @@ function coreCallExamples(shared: string, name: string): string {
   return `Available in ${supported.join(", ")}.\n\n${parts.filter((part, index) => index === 0 || supported.includes(part.split("\n")[0].slice(4))).join("")}`;
 }
 
+function compatibilityFor(category: ApiCategory, call: ApiCall, capture: boolean) {
+  const name = call.signature.split("(")[0];
+  const languages = name === "Clock.state" ? "Lua 5.4, Luau, JavaScript, Python and HTML/inline JavaScript. Other SDK examples show available alternatives, not a Clock.state implementation"
+    : capture ? "Lua 5.4 and Luau"
+    : name === "rustic.find_entity" ? "Lua 5.4"
+    : ["print", "warn"].includes(name) ? "Lua 5.4, JavaScript and HTML/inline JavaScript"
+    : "C, C++, C#, Python, JavaScript, Lua 5.4, Luau, Java, PHP and HTML/inline JavaScript (binding spellings and return shapes differ)";
+  const platforms = category.slug === "api/audio"
+    ? "Native devices and microphone input require Windows. Game-output recording and the mixer can run headlessly. Other operating systems do not supply the Windows native device backend."
+    : "Use a compatible native engine build and the language tools required by your binding. This does not establish browser/mobile export or release qualification for every OS.";
+  return `## Compatibility\n\n**Supported languages:** ${languages}.\n\n${platforms}\n\nThe signature below is the shared reference notation; language examples show the actual binding syntax. Question marks mark optional arguments and explicit defaults are shown where recorded. Do not copy reference notation as a typed declaration.\n\nSee [Feature status and compatibility](/docs/reference/compatibility) for API 1.0/1.1 and per-method restrictions. Engine release tags and Docs v0.1 are independent versions.`;
+}
+
+function relatedFor(category: ApiCategory, call: ApiCall) {
+  return `## Related APIs\n\n${category.calls.filter((entry) => entry.slug !== call.slug).slice(0, 5).map((entry) => `- [${entry.title}](/docs/${entry.slug})`).join("\n")}\n\n[All ${category.slug.slice(4)} APIs](/docs/${category.slug})`;
+}
+
 export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title: string, shared: string) {
+  if (category.slug === "api/entity-foundations") {
+    const name = call.signature.split("(")[0];
+    return [
+      `# ${call.title}`,
+      `[${title}](/docs/${category.slug})`,
+      `## Signature\n\n\`${call.signature}\``,
+      `## Purpose and example\n\n${section(shared, name)}`,
+      `## Language examples\n\n${buildCallExamples("entity-foundations", name)}`,
+      `## Setup and language support\n\n${section(shared, "Setup and language support")}`,
+      `## Parameters\n\n${section(shared, "Parameters")}`,
+      `## Return and timing\n\n${section(shared, "Return and timing")}`,
+      `## Behavior and limitations\n\n${section(shared, "Behavior and limitations")}`,
+    ].join("\n\n");
+  }
   const method = call.slug.split("/").pop()!;
   const audio = category.slug === "api/audio";
   const capture = audio ? audioCaptureReference[method] : undefined;
@@ -132,12 +163,14 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
     return [
       `# ${call.title}`,
       `[${title}](/docs/${category.slug})`,
+      compatibilityFor(category, call, Boolean(capture)),
       `## Signature\n\n\`${call.signature}\``,
       `## Setup and usage\n\n${captureSetup}`,
       `## Parameters\n\n${capture.parameters}`,
       `## Return and timing\n\n${capture.returns}`,
       `## Language examples\n\n${["Lua 5.4", "Luau"].map((language) => `### ${language}\n\n\`\`\`lua\n${capture.example}\n\`\`\``).join("\n\n")}`,
       `## Capture limits and troubleshooting\n\n${captureConstraints}`,
+      relatedFor(category, call),
     ].join("\n\n");
   }
   const audioDevice = audio && ["get-output-devices", "get-input-devices", "set-output-device", "set-input-device"].includes(method);
@@ -161,11 +194,15 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   return [
     `# ${call.title}`,
     `[${title}](/docs/${category.slug})`,
+      compatibilityFor(category, call, Boolean(capture)),
     `## Signature\n\n\`${call.signature}\``,
     setup && `## Setup and usage\n\n${setup}`,
-    `## Parameters\n\n${parameters}`,
+    `## Parameters\n\n${parameters || "See the category conventions and the language-specific examples below; no additional parameter contract is asserted here."}`,
     returns && `## Return and timing\n\n${returns}`,
+    `## Execution behavior\n\nCore write timing differs between immediate Lua host calls, deferred JavaScript/Web commands and external SDK query flushes. Scheduled actions advance with the scene clock; synchronous queries evaluate at the call. Follow [execution rules](/docs/guides/scripting#when-mutations-take-effect) and the return/timing notes for this category.`,
     example && `## Language examples\n\n${example}`,
     (audioDevice ? deviceConstraints : sharedConstraints) && `## Shared ${title} constraints\n\n${audioDevice ? deviceConstraints : sharedConstraints}`,
+    `## Errors and debugging\n\nRead the constraints above and the Console diagnostic. Invalid types, non-finite values, stale targets or unavailable native services can fail validation. A failed callback disables the behavior; a failed source reload keeps the last good instance. Exact error messages depend on the language adapter. See [Troubleshooting](/docs/troubleshooting).`,
+    relatedFor(category, call),
   ].filter(Boolean).join("\n\n");
 }

@@ -5,29 +5,13 @@ import Link from "next/link";
 import { type ReactNode, useMemo, useState } from "react";
 import ReactMarkdown, { defaultUrlTransform } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { allDocs, routeFor } from "../lib/docs-catalog";
+import { resolveDocHref as resolveSourceHref } from "../lib/docs-markdown";
 import { remarkDocumentation } from "../lib/markdown-model";
 import { highlightCode, type SyntaxNode } from "../lib/syntax-highlighting";
 import { LanguageTabs } from "./language-tabs";
 
 export function resolveDocHref(href: string, sourcePath?: string) {
-  const safe = defaultUrlTransform(href);
-  if (!safe || /^(https?:|mailto:|#|\/)/.test(safe)) return safe;
-  const [source, fragment] = safe.split("#", 2);
-  const clean = source.replaceAll("\\", "/");
-  const base = sourcePath?.split("/").slice(0, -1) ?? [];
-  for (const part of clean.split("/")) {
-    if (part === "..") base.pop(); else if (part !== ".") base.push(part);
-  }
-  const relative = base.join("/").toLowerCase();
-  const filename = clean.split("/").pop()?.toLowerCase();
-  const matches = allDocs.filter((doc) => {
-    const path = (doc.sourcePath ?? doc.source).toLowerCase();
-    return path === relative || path.endsWith(clean.toLowerCase());
-  });
-  const match = matches.find((doc) => (doc.sourcePath ?? doc.source).toLowerCase() === relative) ?? matches[0]
-    ?? allDocs.filter((doc) => (doc.sourcePath ?? doc.source).split("/").pop()?.toLowerCase() === filename).at(0);
-  return match ? `${routeFor(match.slug)}${fragment ? `#${fragment}` : ""}` : safe;
+  return resolveSourceHref(defaultUrlTransform(href), sourcePath);
 }
 function syntaxNodes(nodes: SyntaxNode[]): ReactNode[] {
   return nodes.map((node, index) => {
@@ -59,7 +43,9 @@ export function Markdown({ source, sourcePath }: { source: string; sourcePath?: 
       const value = code.children.map((child) => child.type === "text" ? child.value : "").join("").replace(/\n$/, "");
       return <CodeBlock code={value} language={language} />;
     },
-    table: ({ children }) => <div className="table-wrap"><table>{children}</table></div>,
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- Horizontal table scrolling needs keyboard access.
+    table: ({ children }) => <div className="table-wrap" role="region" tabIndex={0} aria-label="Scrollable reference table"><table>{children}</table></div>,
+    th: ({ children }) => <th scope="col">{children}</th>,
     // Native images are compatible with static export; captions use Markdown's title.
     img: ({ src, alt, title }) => <span className="doc-image"><img src={src} alt={alt ?? ""} loading="lazy" decoding="async" />{title && <span className="doc-image-caption">{title}</span>}</span>,
     div: ({ node, children, ...props }) => node?.properties["data-language-group"] ? <LanguageTabs>{children}</LanguageTabs> : <div {...props}>{children}</div>,

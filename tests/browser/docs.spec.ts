@@ -30,6 +30,9 @@ test("keyboard tabs, focus, deep links and copying", async ({ page, context }) =
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto(`${api}#javascript`);
   await expect(page.getByRole("tab", { name: "JavaScript", exact: true })).toHaveAttribute("aria-selected", "true");
+  await page.getByRole("link", { name: "Skip to content" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#main-content")).toBeFocused();
   const tab = page.getByRole("tab", { name: "JavaScript", exact: true }); await tab.focus(); await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("tab", { name: "Python", exact: true })).toBeFocused();
   await page.keyboard.press("End"); await expect(page.getByRole("tab", { name: "Show All Languages" })).toBeFocused();
@@ -47,7 +50,8 @@ test("search finds hidden-language examples and filters page types", async ({ pa
   await page.getByRole("combobox", { name: "Page type" }).selectOption("API reference");
   for (const href of await page.locator(".search-index-list a").evaluateAll((links) => links.map((link) => link.getAttribute("href")))) expect(href).toMatch(/^\/docs\/api\//);
   await page.getByRole("combobox", { name: "Page type" }).selectOption("Tutorial"); await input.fill("first playable");
-  await expect(page.locator(".search-index-list a")).toHaveCount(1);
+  await expect(page.locator('.search-index-list a[href="/docs/tutorials/first-playable-scene"]')).toBeVisible();
+  for (const href of await page.locator(".search-index-list a").evaluateAll((links) => links.map((link) => link.getAttribute("href")))) expect(href).toMatch(/^\/docs\/tutorials\//);
   await page.keyboard.press("Escape"); await expect(input).toHaveValue("");
   await page.keyboard.press("Control+k"); await expect(input).toBeFocused();
 });

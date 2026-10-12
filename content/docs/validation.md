@@ -13,13 +13,14 @@ npm run check:engine-drift
 npm run build
 npm test
 npm run check:docs
+npm run check:links
 npx tsc --noEmit
 npm audit --audit-level=moderate
 npx playwright install --with-deps chromium
 npm run test:browser
 ```
 
-Build before `npm test` and `check:docs`: reference/export tests inspect `out/`. Browser tests serve the **static export**, not a Next.js server. The quality workflow checks desktop (1440×1000), tablet (820×1180) and mobile (390×844) with Chromium. Failures retain screenshots, traces and an HTML report in GitHub Actions artifacts. Report results actually executed; adding a CI step is not evidence that a remote CI run passed.
+Build before `npm test`, `check:docs` and `check:links`: reference/export tests inspect `out/`. Browser tests serve the **static export**, not a Next.js server. The quality workflow checks desktop (1440×1000), tablet (820×1180) and mobile (390×844) with Chromium. Failures retain screenshots, traces and an HTML report in GitHub Actions artifacts. Report results actually executed; adding a CI step is not evidence that a remote CI run passed.
 
 The Markdown tests cover nested CommonMark/GFM, malformed input, raw HTML and URL safety, images/captions, heading IDs, internal links and language-section grouping. Export checks validate canonical routes, aliases, parent relationships and internal anchors. Raw HTML is discarded; do not enable executable HTML to implement a documentation widget.
 
@@ -65,3 +66,14 @@ Use real editor screenshots only. Store optimised images in `public/` and use a 
 ```
 
 This is an authoring syntax example, not a supplied screenshot asset. Images render responsively with lazy loading and captions in both themes. No native-editor screenshots are included in this pass: the cloud workspace has source but no runnable editor binary or desktop capture session. Capture and annotate genuine Inspector, Explorer, hierarchy, viewport and attachment workflows on a supported desktop before adding assets. Avoid invented UI and placeholder images.
+
+## Companion entity-service baseline
+
+After merging docs main through `0657761`, the reviewed baseline also includes
+the documented entity services from engine PR #30, revision
+`efc834d8` (the full revision is recorded in `lib/engine-api-baseline.json`).
+Those docs had already landed on docs main while the companion engine PR remained
+open. The scheduled comparison against engine main will correctly request source
+review until that implementation lands; this does not block ordinary docs builds.
+C/C++ API snippets and C/C++/Python lifecycle protocol fixtures were validated
+against that companion implementation. This is SDK validation, not native Play.

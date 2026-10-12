@@ -36,8 +36,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lua5.4 php-cli
       - run: npm run check:syntax
       - run: npm run check:engine-drift
+      - run: node scripts/check-docs.mjs
       - run: npm run check:api-examples
       - run: npm run build
+        if: ${{ !cancelled() }}
+      - run: npm run check:links
         if: ${{ !cancelled() }}
       - run: npm test
         if: ${{ !cancelled() }}

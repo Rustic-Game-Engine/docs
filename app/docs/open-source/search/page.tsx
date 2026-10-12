@@ -3,10 +3,10 @@ import { DocsSearch } from "@/components/docs-search";
 import { buildSearchIndex } from "@/lib/docs";
 
 export const metadata: Metadata = {
-  title: "Search · Open-Sourced Docs",
+  title: "Search · Open Source Development",
   description: "Search the Rustic open-source repository documentation.",
 };
 
 export default async function OpenSourceSearchPage() {
-  return <DocsSearch project="Open-Sourced Docs" entries={await buildSearchIndex("Open-Sourced Docs")} />;
+  return <DocsSearch project="Open Source Development" entries={await buildSearchIndex("Open Source Development")} />;
 }

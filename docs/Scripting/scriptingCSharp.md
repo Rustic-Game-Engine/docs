@@ -1,7 +1,7 @@
 # Scripting Rustic games with C#
 
 C# behaviors use the built-in Rustic API. Define callbacks and call
-`rustic.get_translation()` (PHP: `$rustic->get_translation()`). Rustic supplies the
+`rustic.get_translation()`. Rustic supplies the
 SDK, dispatches lifecycle calls, and handles communication internally. Scripts do
 not parse requests, build commands, serialize JSON, or print responses.
 

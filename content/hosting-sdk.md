@@ -1,5 +1,7 @@
 # Hosting SDK repository
 
+> **Not Yet Implemented.** Intended development areas are plans, not available features.
+
 [Hosting SDK on GitHub](https://github.com/Rustic-Game-Engine/hosting-sdk).
 
 ## Current contents and development language
