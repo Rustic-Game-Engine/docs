@@ -8,7 +8,7 @@ Rustic supports C, C++, C#, Python, JavaScript, Lua 5.4, Luau, Java, PHP and HTM
 
 The editor scans recognized project source extensions and registers stable asset identities. Registered moves/renames preserve attachments. It maintains `config/scripts.ron`; users should not edit that registry or hand-write component JSON. Scripts under `scripts/` include `.lua`, `.luau`, `.js`, `.py`, `.c`, `.cpp`, `.cs`, `.java`; PHP/Web assets belong under `ui/`. Discovery does not guarantee an external compiler/interpreter is installed.
 
-**Luau caveat:** `.luau` discovery, SDK and host are implemented, but the inspected script-creation menu omits Luau. Create a `.luau` file under `scripts/` in an external editor and select a target object, then right-click the file in Explorer and choose **Use Script As > Object Script** to register and attach it. Check Console discovery errors. The menu limitation does not make Luau interchangeable with Lua 5.4.
+**Luau caveat:** `.luau` discovery, SDK and host are implemented, but the inspected script-creation menu omits Luau. Create a `.luau` file under `scripts/` in an external editor and select a target object, then right-click the file in Explorer and choose **Set As > Object Component Script** to register and attach it. Check Console discovery errors. The menu limitation does not make Luau interchangeable with Lua 5.4.
 
 ## Scope and execution order
 

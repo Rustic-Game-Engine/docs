@@ -13,13 +13,19 @@ Expected result: an imported model appears as a scene object. A recognised exten
 
 ## Files and scripts
 
-The project separates assets, scenes, scripts, `ui/` Web assets, and configuration. **Programming → Object Component Script** creates and registers a script for the selected object; global and scene startup scopes also exist. Existing registered scripts can be attached through **Programming → Attach Existing Script** or Inspector. Double-clicking a script opens the external editor; right-click offers attachment scopes. See [the scripting guides](/docs/scripting/lua) for each language's setup, including Luau registration and optional external runtimes.
+The project separates assets, scenes, scripts, `ui/` Web assets, and configuration. **Programming → Object Component Script** creates and registers a script for the selected object; global and scene startup scopes also exist. Existing registered scripts can be attached through **Programming → Attach Existing Script** or Inspector. Double-clicking a script opens the external editor. Right-click (or two-finger click on a trackpad) offers **Set As → Global Startup Script**, **Scene Startup Script**, or **Object Component Script**. Select the target scene object first to enable Object Component Script. See [the scripting guides](/docs/scripting/lua) for each language's setup, including Luau registration and optional external runtimes.
 
-## Move or rename assets carefully
+## Rename, move, copy, cut and delete
 
-Explorer supports dragging a file/directory to another project directory, including the root. The move rejects unsafe paths, missing destinations, name collisions and moving a directory into itself. **The current move performs a filesystem rename only:** it does not migrate manifest paths, scene references, companion files or sidecar metadata. Back up first and update affected references before Play.
+Hovering over a row does not start a move. Press and hold the primary mouse button on the item name, then drag to another project folder or the root. A folder's arrow expands or collapses it; dragging its name moves only that folder, and dragging a child moves the child.
 
-There is no verified inline asset-rename control. Rename using the file manager only when you can also maintain those references. Preserve `.rmeta` alongside its source. Do not hand-edit scene attachments to contain script paths instead of registered IDs.
+Click a file or folder name once to edit it inline. The field appears after the short double-click window so double-click can still open a file. Press **Enter** or click elsewhere to save; **Escape** cancels. Use a single filename, including its extension. Empty names, path separators and existing names are rejected; Console explains the failure.
+
+Right-click an item, or use a two-finger trackpad click, for **Copy**, **Cut**, **Paste** and **Delete**. Copy/Cut stores an item in the editor clipboard; Paste on a folder uses that folder, and Paste on a file uses its containing folder. Right-click empty tree space for **Paste at Project Root**. Copies get a numbered name when needed. Cut leaves the source in place until a successful Paste. Delete moves the entry into `.rustic/trash/<identifier>/`; recover it with your operating system's file manager. Scene Undo does not undo filesystem actions.
+
+These controls require a writable project and stopped Play. Moves and renames keep a file's `.rmeta` sidecar alongside it. Copies omit `.rmeta` so a new asset identity can be assigned on import or script registration. **Manifest paths, scene references and companion-file links are not rewritten.** Update affected references before Play; copied scripts must be registered using the script scope commands. A folder copy does not rewrite references within its files. Operations reject traversal, symbolic links, missing destinations, move collisions and moving/copying a folder into itself.
+
+World/Local space applies to scene transforms: switch to **Project → Scene**, right-click the object and choose **Use World Space** or **Use Local Space**. This changes the active transform gizmo axes without changing the object's transform.
 
 ## Known limitations and diagnosis
 
