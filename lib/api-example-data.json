@@ -2078,7 +2078,7 @@
     },
     {
       "title": "Animation.ik",
-      "note": "Create a direct Root \u2192 Middle \u2192 Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
+      "note": "Create a direct Root → Middle → Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
       "examples": {
         "Lua 5.4": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
         "JavaScript": "Animation.ik(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
@@ -2094,7 +2094,7 @@
     },
     {
       "title": "Animation.footPlacement",
-      "note": "Create a direct Root \u2192 Middle \u2192 Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
+      "note": "Create a direct Root → Middle → Tip joint chain with nonzero bone lengths before Play. Target is a world-space position.",
       "examples": {
         "Lua 5.4": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", {1,1,0})",
         "JavaScript": "Animation.footPlacement(\"Game.scene.Root\", \"Game.scene.Root.Middle\", \"Game.scene.Root.Middle.Tip\", [1,1,0]);",
@@ -2316,6 +2316,280 @@
         "Java": "// This SDK manages builder storage automatically.",
         "PHP": "// This SDK manages builder storage automatically.",
         "HTML / inline JS": "// This SDK manages builder storage automatically."
+      }
+    }
+  ],
+  "entity-foundations": [
+    {
+      "title": "Tags.add",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Tags.add(rustic.entity_id(), \"enemy\")",
+        "JavaScript": "Tags.add(rustic.entity_id(), \"enemy\");",
+        "Python": "Tags.add(rustic.entity_id(), \"enemy\")",
+        "C++": "Tags::add(rustic.entity_id(), \"enemy\");",
+        "C#": "Tags.add(rustic.entity_id(), \"enemy\");",
+        "Luau": "Tags.add(rustic.entity_id(), \"enemy\")",
+        "C": "Tags.add(rustic.entity_id(), \"enemy\");",
+        "Java": "Tags.add(rustic.entity_id(), \"enemy\");",
+        "PHP": "Tags::add($rustic->entity_id(), \"enemy\");",
+        "HTML / inline JS": "Tags.add(rustic.entity_id(), \"enemy\");"
+      }
+    },
+    {
+      "title": "Tags.remove",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.remove(rustic.entity_id(), \"enemy\")",
+        "JavaScript": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.remove(rustic.entity_id(), \"enemy\");",
+        "Python": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.remove(rustic.entity_id(), \"enemy\")",
+        "C++": "Tags::add(rustic.entity_id(), \"enemy\");\nTags::remove(rustic.entity_id(), \"enemy\");",
+        "C#": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.remove(rustic.entity_id(), \"enemy\");",
+        "Luau": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.remove(rustic.entity_id(), \"enemy\")",
+        "C": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.remove(rustic.entity_id(), \"enemy\");",
+        "Java": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.remove(rustic.entity_id(), \"enemy\");",
+        "PHP": "Tags::add($rustic->entity_id(), \"enemy\");\nTags::remove($rustic->entity_id(), \"enemy\");",
+        "HTML / inline JS": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.remove(rustic.entity_id(), \"enemy\");"
+      }
+    },
+    {
+      "title": "Tags.find_all",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.find_all(\"enemy\")",
+        "JavaScript": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.find_all(\"enemy\");",
+        "Python": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.find_all(\"enemy\")",
+        "C++": "Tags::add(rustic.entity_id(), \"enemy\");\nTags::find_all(\"enemy\");",
+        "C#": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.find_all(\"enemy\");",
+        "Luau": "Tags.add(rustic.entity_id(), \"enemy\")\nTags.find_all(\"enemy\")",
+        "C": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.find_all(\"enemy\");",
+        "Java": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.find_all(\"enemy\");",
+        "PHP": "Tags::add($rustic->entity_id(), \"enemy\");\nTags::find_all(\"enemy\");",
+        "HTML / inline JS": "Tags.add(rustic.entity_id(), \"enemy\");\nTags.find_all(\"enemy\");"
+      }
+    },
+    {
+      "title": "Groups.create",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Groups.create(\"enemies\")",
+        "JavaScript": "Groups.create(\"enemies\");",
+        "Python": "Groups.create(\"enemies\")",
+        "C++": "Groups::create(\"enemies\");",
+        "C#": "Groups.create(\"enemies\");",
+        "Luau": "Groups.create(\"enemies\")",
+        "C": "Groups.create(\"enemies\");",
+        "Java": "Groups.create(\"enemies\");",
+        "PHP": "Groups::create(\"enemies\");",
+        "HTML / inline JS": "Groups.create(\"enemies\");"
+      }
+    },
+    {
+      "title": "Groups.add",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Groups.create(\"enemies\")\nGroups.add(\"enemies\", rustic.entity_id())",
+        "JavaScript": "Groups.create(\"enemies\");\nGroups.add(\"enemies\", rustic.entity_id());",
+        "Python": "Groups.create(\"enemies\")\nGroups.add(\"enemies\", rustic.entity_id())",
+        "C++": "Groups::create(\"enemies\");\nGroups::add(\"enemies\", rustic.entity_id());",
+        "C#": "Groups.create(\"enemies\");\nGroups.add(\"enemies\", rustic.entity_id());",
+        "Luau": "Groups.create(\"enemies\")\nGroups.add(\"enemies\", rustic.entity_id())",
+        "C": "Groups.create(\"enemies\");\nGroups.add(\"enemies\", rustic.entity_id());",
+        "Java": "Groups.create(\"enemies\");\nGroups.add(\"enemies\", rustic.entity_id());",
+        "PHP": "Groups::create(\"enemies\");\nGroups::add(\"enemies\", $rustic->entity_id());",
+        "HTML / inline JS": "Groups.create(\"enemies\");\nGroups.add(\"enemies\", rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Groups.get_members",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Groups.create(\"enemies\")\nGroups.get_members(\"enemies\")",
+        "JavaScript": "Groups.create(\"enemies\");\nGroups.get_members(\"enemies\");",
+        "Python": "Groups.create(\"enemies\")\nGroups.get_members(\"enemies\")",
+        "C++": "Groups::create(\"enemies\");\nGroups::get_members(\"enemies\");",
+        "C#": "Groups.create(\"enemies\");\nGroups.get_members(\"enemies\");",
+        "Luau": "Groups.create(\"enemies\")\nGroups.get_members(\"enemies\")",
+        "C": "Groups.create(\"enemies\");\nGroups.get_members(\"enemies\");",
+        "Java": "Groups.create(\"enemies\");\nGroups.get_members(\"enemies\");",
+        "PHP": "Groups::create(\"enemies\");\nGroups::get_members(\"enemies\");",
+        "HTML / inline JS": "Groups.create(\"enemies\");\nGroups.get_members(\"enemies\");"
+      }
+    },
+    {
+      "title": "Hierarchy.set_parent",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Hierarchy.set_parent(rustic.entity_id(), nil, true)",
+        "JavaScript": "Hierarchy.set_parent(rustic.entity_id(), null, true);",
+        "Python": "Hierarchy.set_parent(rustic.entity_id(), None, True)",
+        "C++": "Hierarchy::set_parent(rustic.entity_id(), \"\", true);",
+        "C#": "Hierarchy.set_parent(rustic.entity_id(), null, true);",
+        "Luau": "Hierarchy.set_parent(rustic.entity_id(), nil, true)",
+        "C": "Hierarchy.set_parent(rustic.entity_id(), NULL, true);",
+        "Java": "Hierarchy.set_parent(rustic.entity_id(), null, true);",
+        "PHP": "Hierarchy::set_parent($rustic->entity_id(), null, true);",
+        "HTML / inline JS": "Hierarchy.set_parent(rustic.entity_id(), null, true);"
+      }
+    },
+    {
+      "title": "Hierarchy.get_children",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Hierarchy.get_children(rustic.entity_id())",
+        "JavaScript": "Hierarchy.get_children(rustic.entity_id());",
+        "Python": "Hierarchy.get_children(rustic.entity_id())",
+        "C++": "Hierarchy::get_children(rustic.entity_id());",
+        "C#": "Hierarchy.get_children(rustic.entity_id());",
+        "Luau": "Hierarchy.get_children(rustic.entity_id())",
+        "C": "Hierarchy.get_children(rustic.entity_id());",
+        "Java": "Hierarchy.get_children(rustic.entity_id());",
+        "PHP": "Hierarchy::get_children($rustic->entity_id());",
+        "HTML / inline JS": "Hierarchy.get_children(rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Hierarchy.detach",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Hierarchy.detach(rustic.entity_id(), true)",
+        "JavaScript": "Hierarchy.detach(rustic.entity_id(), true);",
+        "Python": "Hierarchy.detach(rustic.entity_id(), True)",
+        "C++": "Hierarchy::detach(rustic.entity_id(), true);",
+        "C#": "Hierarchy.detach(rustic.entity_id(), true);",
+        "Luau": "Hierarchy.detach(rustic.entity_id(), true)",
+        "C": "Hierarchy.detach(rustic.entity_id(), true);",
+        "Java": "Hierarchy.detach(rustic.entity_id(), true);",
+        "PHP": "Hierarchy::detach($rustic->entity_id(), true);",
+        "HTML / inline JS": "Hierarchy.detach(rustic.entity_id(), true);"
+      }
+    },
+    {
+      "title": "Entity.destroy",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Entity.destroy(rustic.entity_id())",
+        "JavaScript": "Entity.destroy(rustic.entity_id());",
+        "Python": "Entity.destroy(rustic.entity_id())",
+        "C++": "Entity::destroy(rustic.entity_id());",
+        "C#": "Entity.destroy(rustic.entity_id());",
+        "Luau": "Entity.destroy(rustic.entity_id())",
+        "C": "Entity.destroy(rustic.entity_id());",
+        "Java": "Entity.destroy(rustic.entity_id());",
+        "PHP": "Entity::destroy($rustic->entity_id());",
+        "HTML / inline JS": "Entity.destroy(rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Entity.destroy_after",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Entity.destroy_after(rustic.entity_id(), 1)",
+        "JavaScript": "Entity.destroy_after(rustic.entity_id(), 1);",
+        "Python": "Entity.destroy_after(rustic.entity_id(), 1)",
+        "C++": "Entity::destroy_after(rustic.entity_id(), 1);",
+        "C#": "Entity.destroy_after(rustic.entity_id(), 1);",
+        "Luau": "Entity.destroy_after(rustic.entity_id(), 1)",
+        "C": "Entity.destroy_after(rustic.entity_id(), 1);",
+        "Java": "Entity.destroy_after(rustic.entity_id(), 1);",
+        "PHP": "Entity::destroy_after($rustic->entity_id(), 1);",
+        "HTML / inline JS": "Entity.destroy_after(rustic.entity_id(), 1);"
+      }
+    },
+    {
+      "title": "Entity.is_valid",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Entity.is_valid(rustic.entity_id())",
+        "JavaScript": "Entity.is_valid(rustic.entity_id());",
+        "Python": "Entity.is_valid(rustic.entity_id())",
+        "C++": "Entity::is_valid(rustic.entity_id());",
+        "C#": "Entity.is_valid(rustic.entity_id());",
+        "Luau": "Entity.is_valid(rustic.entity_id())",
+        "C": "Entity.is_valid(rustic.entity_id());",
+        "Java": "Entity.is_valid(rustic.entity_id());",
+        "PHP": "Entity::is_valid($rustic->entity_id());",
+        "HTML / inline JS": "Entity.is_valid(rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Components.has",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Components.has(rustic.entity_id(), \"rustic.transform\")",
+        "JavaScript": "Components.has(rustic.entity_id(), \"rustic.transform\");",
+        "Python": "Components.has(rustic.entity_id(), \"rustic.transform\")",
+        "C++": "Components::has(rustic.entity_id(), \"rustic.transform\");",
+        "C#": "Components.has(rustic.entity_id(), \"rustic.transform\");",
+        "Luau": "Components.has(rustic.entity_id(), \"rustic.transform\")",
+        "C": "Components.has(rustic.entity_id(), \"rustic.transform\");",
+        "Java": "Components.has(rustic.entity_id(), \"rustic.transform\");",
+        "PHP": "Components::has($rustic->entity_id(), \"rustic.transform\");",
+        "HTML / inline JS": "Components.has(rustic.entity_id(), \"rustic.transform\");"
+      }
+    },
+    {
+      "title": "Components.get_all",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Components.get_all(rustic.entity_id())",
+        "JavaScript": "Components.get_all(rustic.entity_id());",
+        "Python": "Components.get_all(rustic.entity_id())",
+        "C++": "Components::get_all(rustic.entity_id());",
+        "C#": "Components.get_all(rustic.entity_id());",
+        "Luau": "Components.get_all(rustic.entity_id())",
+        "C": "Components.get_all(rustic.entity_id());",
+        "Java": "Components.get_all(rustic.entity_id());",
+        "PHP": "Components::get_all($rustic->entity_id());",
+        "HTML / inline JS": "Components.get_all(rustic.entity_id());"
+      }
+    },
+    {
+      "title": "Components.find_in_children",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\")",
+        "JavaScript": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\");",
+        "Python": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\")",
+        "C++": "Components::find_in_children(rustic.entity_id(), \"rustic.transform\");",
+        "C#": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\");",
+        "Luau": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\")",
+        "C": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\");",
+        "Java": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\");",
+        "PHP": "Components::find_in_children($rustic->entity_id(), \"rustic.transform\");",
+        "HTML / inline JS": "Components.find_in_children(rustic.entity_id(), \"rustic.transform\");"
+      }
+    },
+    {
+      "title": "World.find_by_tag",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "Tags.add(rustic.entity_id(), \"enemy\")\nWorld.find_by_tag(\"enemy\")",
+        "JavaScript": "Tags.add(rustic.entity_id(), \"enemy\");\nWorld.find_by_tag(\"enemy\");",
+        "Python": "Tags.add(rustic.entity_id(), \"enemy\")\nWorld.find_by_tag(\"enemy\")",
+        "C++": "Tags::add(rustic.entity_id(), \"enemy\");\nWorld::find_by_tag(\"enemy\");",
+        "C#": "Tags.add(rustic.entity_id(), \"enemy\");\nWorld.find_by_tag(\"enemy\");",
+        "Luau": "Tags.add(rustic.entity_id(), \"enemy\")\nWorld.find_by_tag(\"enemy\")",
+        "C": "Tags.add(rustic.entity_id(), \"enemy\");\nWorld.find_by_tag(\"enemy\");",
+        "Java": "Tags.add(rustic.entity_id(), \"enemy\");\nWorld.find_by_tag(\"enemy\");",
+        "PHP": "Tags::add($rustic->entity_id(), \"enemy\");\nWorld::find_by_tag(\"enemy\");",
+        "HTML / inline JS": "Tags.add(rustic.entity_id(), \"enemy\");\nWorld.find_by_tag(\"enemy\");"
+      }
+    },
+    {
+      "title": "World.find_in_radius",
+      "note": "Use a live component owner. Lists return stable IDs or component schema names; see the function reference for exact returns. Destroy examples end this owner’s lifetime.",
+      "examples": {
+        "Lua 5.4": "World.find_in_radius({0, 0, 0}, 5)",
+        "JavaScript": "World.find_in_radius([0, 0, 0], 5);",
+        "Python": "World.find_in_radius([0, 0, 0], 5)",
+        "C++": "World::find_in_radius(RusticVector3{0, 0, 0}, 5);",
+        "C#": "World.find_in_radius(new double[]{0, 0, 0}, 5);",
+        "Luau": "World.find_in_radius({0, 0, 0}, 5)",
+        "C": "World.find_in_radius((RusticVector3){0, 0, 0}, 5);",
+        "Java": "World.find_in_radius(new double[]{0, 0, 0}, 5);",
+        "PHP": "World::find_in_radius([0, 0, 0], 5);",
+        "HTML / inline JS": "World.find_in_radius([0, 0, 0], 5);"
       }
     }
   ]
