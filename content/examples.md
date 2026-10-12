@@ -1,5 +1,7 @@
 # Examples repository
 
+> **Not Yet Implemented.** This public repository has no runnable implementation. Its intended role and contribution ideas below are plans, not available features.
+
 [Open the examples repository on GitHub](https://github.com/Rustic-Game-Engine/examples).
 
 This repository is intended to host example games, sample projects, and code demonstrations showing Rustic's features, APIs, and development workflows. It should be the place to learn from a small complete project and adapt it into your own game.

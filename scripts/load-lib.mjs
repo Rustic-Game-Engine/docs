@@ -8,7 +8,8 @@ export const load = (file) => {
   const exports = {};
   const source = readFileSync(new URL(`../lib/${file}`, import.meta.url), "utf8");
   const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
-  runInNewContext(compiled, { exports, require: (id) => {
+  runInNewContext(compiled, { exports, process, require: (id) => {
+    if (id === "server-only") return {};
     if (id.startsWith("./") && !id.endsWith(".json")) return load(`${id.slice(2)}.ts`);
     return require(id === "./api-example-data.json" ? "../lib/api-example-data.json" : id);
   } });

@@ -6,6 +6,9 @@ generated API content is in `lib/api-docs.ts` and navigation in `lib/docs-catalo
 No engine checkout or sibling directory is required.
 
 Markdown was imported from `Engine/docs` at engine commit `3db0126b`.
+This audit checked behavior against engine commit `017db99b7025eeda96acf21967664153a2df0795`.
+See [maintenance](/docs/open-source/docs/maintenance) for route/link checks and source synchronization.
+
 Engine-local documentation remains in the engine repository; changes affecting
 published guides and API references must also be made here.
 

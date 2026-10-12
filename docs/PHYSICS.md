@@ -79,7 +79,7 @@ Scene paths can also target other objects; see the **Edit scene objects** guide.
   holes are solid, and rotated slopes do not produce true slope sliding. Thin planes
   and 2D shapes have a minimum collision half-thickness of 0.025 units.
 - Bodies have equal mass and translate without rotating, bouncing, friction,
-  joints, forces, configurable gravity, raycasts, or a velocity Script API.
+  joints or configurable gravity. API 1.1 adds live primitive raycasts, sphere casts, overlaps, forces, impulses and velocity changes; see [Physics queries and forces](/docs/api/physics-actions). These APIs do not replace the box collision model.
 - Swept box checks reduce tunnelling during simulated falls. Script teleports and
   script-moved anchored platforms are not swept. Fast multi-body impacts and large
   stacks are approximate; use separated starting positions and modest scene sizes.

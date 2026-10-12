@@ -18,7 +18,7 @@ export async function readDoc(source: string): Promise<string> {
     const category = apiCategories.find((entry) => entry.slug === source.slice(13));
     const doc = allDocs.find((entry) => entry.slug === category?.slug);
     if (!category || !doc) throw new Error(`Unknown API category: ${source}`);
-    return buildApiCategoryMarkdown(category, doc.title, doc.description);
+    return buildApiCategoryMarkdown(category, doc.title, doc.description, await readDoc(category.source));
   }
   if (source.startsWith("api-call:")) {
     const slug = source.slice(9);

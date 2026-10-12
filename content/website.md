@@ -2,7 +2,7 @@
 
 [Open the docs repository on GitHub](https://github.com/Rustic-Game-Engine/docs).
 
-This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. Its source-development guide sits alongside the other repositories under [Open-Sourced Docs](/docs/open-source). It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
+This repository contains the documentation website you are reading: the welcoming landing page, engine guides, gameplay API reference, scripting tutorials, repository guides, and search. Its source-development guide sits alongside the other repositories under [Open Source Development](/docs/open-source). It is a standalone project at the repository root and builds without an engine checkout. Use it to contribute documentation or develop your own version of the site.
 
 ## Topics
 

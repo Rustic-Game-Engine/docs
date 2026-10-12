@@ -1,31 +1,21 @@
 # Using Rustic Engine
 
-Create 2D and 3D games with the native Rustic editor. This section explains how to use the engine: create gameplay scripts, attach behaviors, work with scene objects, and use the API in Play.
+Rustic Engine is a native Rust editor and runtime for 2D and 3D scenes, with gameplay scripting in ten script types. It is under active development: read the [feature status and compatibility reference](/docs/reference/compatibility) before depending on a system.
 
-## Start making a game
+## Getting started
 
-1. Open the Rustic project manager, create or import a project, and open it in the editor.
-2. Read [Gameplay programming](/docs/guides/gameplay-programming) for script creation, attachment, execution, and reload behavior.
-3. Choose a language. The [Lua guide](/docs/scripting/lua) includes setup and a copyable keyboard controller; [JavaScript](/docs/scripting/javascript) is another starting point.
-4. Attach the script to the intended entity, enter Play, and inspect the console. Follow the language guide's expected results and troubleshooting steps.
+1. [Check requirements and install](/docs/getting-started/installation). Windows pre-alpha installers are published; other platforms have different availability.
+2. [Launch and create a project](/docs/getting-started/create-project).
+3. [Learn the editor](/docs/editor/overview).
+4. [Build your first playable scene](/docs/tutorials/first-game): move a cube with keyboard input, add a falling physics box, read logs, save and reopen.
+5. Continue with [gameplay and scripting](/docs/guides/scripting), [engine systems](/docs/guides/systems), and the [API reference](/docs/api/overview).
 
-## Prerequisites for gameplay
+Lua 5.4 is a useful first language because its runtime is bundled. Luau, JavaScript and HTML/inline JavaScript also have engine-provided runtimes. Python, C, C++, C#, Java and PHP require their own tools; install only the tools your game uses. HTML/CSS support executes JavaScript behaviors; it does not render browser UI.
 
-You need a working Rustic editor installation and a project. Bundled Lua, Luau, JavaScript/QuickJS, and Web support let you start without installing every optional language. Python, C/C++, C#, Java, and PHP may require external toolchains; follow the relevant language guide.
+## Build and troubleshoot
 
-You do not need to modify or compile the Rust engine to write a gameplay behavior using an installed editor. Source-build and installer instructions live in the separate [engine open-source documentation](/docs/open-source/engine).
+[Playtesting and publishing](/docs/building/publishing) explains Play modes, debugging and current export limitations. [Troubleshooting](/docs/troubleshooting) covers startup, attachment, input and saving problems. [Versions and changes](/docs/reference/versions) distinguishes the website, engine release and scripting API.
 
-## Explore the engine API
+## Contribute to Rustic Engine
 
-- [API overview](/docs/api/overview): concepts, supported languages, and execution rules.
-- [Lifecycle callbacks](/docs/callbacks): setup, frames, physics, and teardown.
-- [Scene objects](/docs/guides/scene-objects): target objects by name and hierarchy.
-- [Gameplay actions](/docs/guides/gameplay-actions): animation, movement, timing, audio, and callbacks.
-- [Physics](/docs/guides/physics): primitive bodies, gravity, collision, and current limits.
-- [Cameras and lights](/docs/guides/cameras-and-lights): scene camera and lighting behavior.
-
-Rustic is under active development. Each guide describes the implemented behavior and its current limitations; use the guide's examples and diagnostic steps when something does not behave as expected.
-
-## Develop the engine itself
-
-For Rust architecture, repository setup, prerequisites, build commands, source entry points, and main scripts, visit [Open-Sourced Docs → Engine](/docs/open-source/engine). The [Open-Sourced Docs directory](/docs/open-source) also covers the docs, examples, and hosting SDK repositories.
+Ordinary users of an installed editor do not need Rust or Cargo. For source setup, architecture, tests and contribution policies, use [Open Source Development](/docs/open-source). It covers the public engine, docs, examples and hosting-sdk repositories; examples and hosting-sdk are **Not Yet Implemented**.

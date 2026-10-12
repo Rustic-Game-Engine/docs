@@ -9,7 +9,12 @@
     "lint": "eslint",
     "test:api-reference": "node --test tests/api-reference.test.mjs",
     "check:api-examples": "node scripts/check-api-examples.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:engine-source": "node scripts/check-engine-source.mjs",
+    "check:syntax": "node scripts/check-snippet-syntax.mjs",
+    "test:sdk-lifecycle": "node scripts/check-sdk-lifecycle.mjs"
   },
   "dependencies": {
     "highlight.js": "^11.12.0",

@@ -1,5 +1,7 @@
 # Hosting SDK repository
 
+> **Not Yet Implemented.** This public repository has no runnable implementation. Its intended role and contribution ideas below are plans, not available features.
+
 [Open the hosting SDK repository on GitHub](https://github.com/Rustic-Game-Engine/hosting-sdk).
 
 The public hosting SDK repository is intended for software that integrates cloud game-server deployment, autoscaling, monitoring, and infrastructure management. It is a separate project from the native engine, examples, and documentation site.

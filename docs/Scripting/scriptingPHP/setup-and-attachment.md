@@ -3,9 +3,9 @@
 [Back to PHP](/docs/scripting/php).
 
 1. Install PHP CLI on PATH; create assets under ui/. Restart the editor after changing PATH.
-   Run `cargo xtask doctor` from the Engine folder to check discovery.
+   Check the Project Manager’s **Settings** language tools and the editor **Console** for discovery errors. Contributors with a source checkout can optionally run `cargo xtask doctor` from `Engine/`.
 2. Open your game project and scene. Select a **Part** object for this movement example.
-3. Use **Programming > New Script > Object Component Script** and select PHP.
+3. Use **Programming > Object Component Script** and select PHP.
    Save the asset, then attach it to the selected object using
    **Programming > Attach Existing Script** or **+ Add Component** in the Inspector.
    Create global or scene scripts through their corresponding Programming commands.

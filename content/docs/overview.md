@@ -4,7 +4,7 @@ The Rustic documentation website covers engine users and contributors to the pub
 
 ## Two reading paths
 
-**Engine** contains engine usage, gameplay API reference, language guides, and scene tutorials. **Open-Sourced Docs** contains development guides for the engine, docs site, examples, and hosting SDK repositories. Keep source-development instructions in the contributor sections so game authors can find usage instructions easily.
+**Engine** contains engine usage, gameplay API reference, language guides, and scene tutorials. **Open Source Development** contains development guides for the engine, docs site, examples, and hosting SDK repositories. Keep source-development instructions in the contributor sections so game authors can find usage instructions easily.
 
 The [engine contributor guides](/docs/open-source/engine) explain how to build and change the engine. The [docs repository guide](/docs/open-source/docs) introduces this website's framework and development commands.
 

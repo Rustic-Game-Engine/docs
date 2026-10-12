@@ -30,9 +30,8 @@ return {
 ```
 
 Canonical public names are `Start`, `FixedUpdate`, `Update`, `OnEnable`,
-`OnDisable`, and `OnDestroy`. The legacy spellings `on_start`, `fixed_update`,
-`update`, `on_enable`, `on_disable`, and `on_destroy` still work. The legacy internal
-hooks `on_create` and `on_stop` are also recognized. If both canonical and legacy
+`OnDisable`, `OnDestroy`, `OnCreate`, and `OnStop`. The legacy spellings `on_start`, `fixed_update`,
+`update`, `on_enable`, `on_disable`, and `on_destroy` still work. `on_create` and `on_stop` are compatible spellings of `OnCreate` and `OnStop`. `Stop` is not a callback; use `OnStop` for teardown before owner cleanup. If both canonical and legacy
 names are present, the canonical callback wins. Use `FixedUpdate(dt)` for physics and
 deterministic movement; use `Update(dt)` for frame-rate work.
 `OnStart` is **not** a Lua callback name. A script with `OnStart` can load successfully

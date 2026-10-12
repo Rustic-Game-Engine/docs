@@ -331,3 +331,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rust); outline-
 
 .repository-cards { margin-top: 32px; }
 .repository-cards h2 { margin: 0 0 11px; font-size: 1.14rem; letter-spacing: -.025em; }
+
+/* Keep reference content and controls usable without changing Rustic branding. */
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); padding: 10px 16px; background: var(--surface); color: var(--ink); border: 2px solid var(--rust); }
+.skip-link:focus { transform: translateY(0); }
+summary:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+.markdown h1, .markdown h4 { scroll-margin-top: 90px; }
+.markdown :not(pre) > code { overflow-wrap: anywhere; }
+.markdown th { white-space: nowrap; }
+.markdown tbody tr:nth-child(even) { background: color-mix(in srgb, var(--soft) 45%, transparent); }
+.doc-code pre { max-width: 100%; }
+.on-page a { overflow-wrap: anywhere; }
+.search-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.search-filters button { padding: 8px 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.search-filters button[aria-pressed="true"] { background: var(--rust-deep); color: white; }
+@media (max-width: 760px) {
+  .sidebar:not(.open) { visibility: hidden; }
+  .top-actions .version-button { display: flex; font-size: .65rem; }
+  .project-switcher { grid-template-columns: 1fr; }
+}
