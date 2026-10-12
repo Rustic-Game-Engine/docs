@@ -4,6 +4,7 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { Script } from "node:vm";
 import { load } from "./load-lib.mjs";
+import { phpSource } from "./snippet-source.mjs";
 
 const data = JSON.parse(readFileSync(new URL("../lib/api-example-data.json", import.meta.url)));
 const { buildApiMarkdown } = load("api-docs.ts");
@@ -49,7 +50,7 @@ try {
     if (!available(command)) { console.log(`SKIP ${language} syntax: ${command} unavailable.`); continue; }
     for (const entry of groups(language)) {
       const file = path.join(directory, language === "PHP" ? "example.php" : "example.lua");
-      writeFileSync(file, language === "PHP" ? `<?php\n${entry.code}\n` : entry.code);
+      writeFileSync(file, language === "PHP" ? phpSource(entry.code) : entry.code);
       run(command, [...args, file], entry.label);
     }
     console.log(`${language} syntax: ${groups(language).length} snippets; no engine runtime execution.`);

@@ -167,3 +167,18 @@ correctly request review while engine main lacks the companion implementation.
 Main's newly added UI status text also retains this pass's distinction between
 planned HTML/CSS game UI and currently unimplemented layout. The Explorer move
 warning and entity-service setup use the verified editor controls.
+
+## CI syntax and browser setup corrections
+
+CI exposed an opening-tag bug in the PHP validator: it prepended `<?php` to
+complete lifecycle examples that already contained that tag. The validator now
+preserves full files and wraps only fragments; regression tests use the actual
+published lifecycle example and a fragment containing a tag inside a string.
+All 172 PHP snippets passed `php -l` locally with a temporary Debian PHP 8.4.24
+binary. This verifies syntax, not PHP engine execution. The local test suite now
+has 34 passing tests; lint, build, TypeScript and the dependency audit passed.
+
+The initial syntax failure also skipped Chromium installation while the browser
+tests continued. Browser setup now runs unless cancelled, and the tests require
+successful setup. This retains independent browser validation after another
+check fails without producing missing-executable errors.

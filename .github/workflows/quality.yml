@@ -50,9 +50,12 @@ jobs:
         if: ${{ !cancelled() }}
       - run: npm run check:docs
         if: ${{ !cancelled() }}
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser
+      - name: Install Chromium
+        id: browser_setup
         if: ${{ !cancelled() }}
+        run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
       - name: Preserve browser diagnostics
         if: ${{ failure() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
