@@ -397,8 +397,12 @@ No cloud hosting, database, billing, infrastructure or other unrelated repo chan
 
 CI evidence: [required all-adapter conformance and Windows qualification run](https://github.com/Rustic-Game-Engine/engine/actions/runs/38194965716).
 The adapter-conformance, dependency/license, secret-scan and workflow-syntax jobs
-passed. Windows installer qualification is still running as of this record; do
-not call the full expansion complete or claim a fresh installer until it succeeds.
+passed. Windows installer qualification **passed** for engine commit `efc834d8`; the
+workflow produced and uploaded a fresh `Engine/dist/RusticGameEngine-Setup-*.exe`
+(its upload step fails if that file is absent). The artifact is `windows-installer`,
+created 2026-10-12 15:23:50 Pacific/Auckland, 21,661,942 bytes, ID `11723192155`.
+[Download the installer artifact](https://github.com/Rustic-Game-Engine/engine/actions/runs/38194965716/artifacts/11723192155).
+The full comprehensive expansion remains unfinished.
 
 Review: engine [#30](https://github.com/Rustic-Game-Engine/engine/pull/30),
 API documentation [#31](https://github.com/Rustic-Game-Engine/docs/pull/31) (merged
