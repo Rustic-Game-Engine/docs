@@ -353,18 +353,23 @@ installer/hardware qualification remain separate from API test results.
 ## Executed validation (Linux)
 
 - `cargo test -p engine-world -p engine-play -p engine-scripting --locked`:
-  **137 passed**, 0 failures (30 world, 67 play, 40 scripting).
+  **138 passed**, 0 failures (31 world, 67 play, 40 scripting).
 - `cargo check --workspace --all-targets --locked`: passed, including editor/runtime.
 - Clippy for all targets of the three changed crates with `-D warnings`: passed.
 - `cargo fmt --all --check` and Git whitespace checks: passed.
 - Live foundation fixtures: Lua 5.4, Luau, JavaScript, HTML inline JavaScript,
-  Python, C and C++ passed. C#, Java and PHP fixtures were **skipped** because
-  those toolchains are unavailable. Their SDK code is included but unverified here.
+  Python, C and C++ passed. Installed .NET SDK 10.0.401 in the workspace and
+  reran the fixture: C# also passed. Java and PHP fixtures were **skipped** because
+  those toolchains are unavailable. The CI adapter-conformance job runs the entity fixture with all toolchains
+  installed and fails if any required adapter is missing. That job **passed** on
+  engine commit `efc834d8`, including Java and PHP: all supported adapters are now
+  verified in CI, with local execution coverage explicitly distinguished above.
 - Built the separate bundled Luau host and put it on PATH for the Rust tests.
   This also resolved the original audio-recording test's missing-host failure.
 - Both published Lua/Python example scripts executed in the real world adapter.
 - Docs: lint with zero warnings, static build, TypeScript check, moderate npm audit
-  (0 vulnerabilities), 17 site tests, API reference/example validation all passed.
+  (0 vulnerabilities), 24 site tests on the updated docs main, API reference/example validation,
+  snippet syntax, documentation structure and exported-link checks all passed.
   The example validator checks coverage/rendering (1600 existing/new snippets);
   it does not execute every documented snippet in every external toolchain.
 - Local Windows installer command failed: `powershell` is absent on this Linux
@@ -376,7 +381,7 @@ installer/hardware qualification remain separate from API test results.
 Engine implementation: `crates/engine-world/src/foundations.rs`, `world.rs`,
 `lib.rs`; `crates/engine-play/src/entity_services.rs`, `script_runtime.rs`, `lib.rs`.
 Bindings/editor hints: `crates/engine-scripting/src/lua.rs`, `cpp_sdk.rs`,
-`workspace.rs`, and `sdk/{gameplay.lua,gameplay.js,rustic.h,rustic.py,rustic.php,
+`workspace.rs`, `.github/workflows/quality.yml`, and `sdk/{gameplay.lua,gameplay.js,rustic.h,rustic.py,rustic.php,
 Rustic.cs,Rustic.java,entity-api.lua,entity-api.d.ts}`.
 Engine docs: this checklist, `Scripting/API/entity-foundations.md`,
 `Scripting/README.md`. Tested examples: `examples/entity-foundations/`.
@@ -389,3 +394,17 @@ individual API pages. Signatures and language differences are listed in the
 
 Examples repository: `entity-foundations/{README.md,behavior.lua,behavior.py}`.
 No cloud hosting, database, billing, infrastructure or other unrelated repo changed.
+
+CI evidence: [required all-adapter conformance and Windows qualification run](https://github.com/Rustic-Game-Engine/engine/actions/runs/38194965716).
+The adapter-conformance, dependency/license, secret-scan and workflow-syntax jobs
+passed. Windows installer qualification **passed** for engine commit `efc834d8`; the
+workflow produced and uploaded a fresh `Engine/dist/RusticGameEngine-Setup-*.exe`
+(its upload step fails if that file is absent). The artifact is `windows-installer`,
+created 2026-10-12 15:23:50 Pacific/Auckland, 21,661,942 bytes, ID `11723192155`.
+[Download the installer artifact](https://github.com/Rustic-Game-Engine/engine/actions/runs/38194965716/artifacts/11723192155).
+The full comprehensive expansion remains unfinished.
+
+Review: engine [#30](https://github.com/Rustic-Game-Engine/engine/pull/30),
+API documentation [#31](https://github.com/Rustic-Game-Engine/docs/pull/31) (merged
+while work continued), validation update [#33](https://github.com/Rustic-Game-Engine/docs/pull/33),
+examples [#1](https://github.com/Rustic-Game-Engine/examples/pull/1).
