@@ -141,6 +141,20 @@ function relatedFor(category: ApiCategory, call: ApiCall) {
 }
 
 export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title: string, shared: string) {
+  if (category.slug === "api/entity-foundations") {
+    const name = call.signature.split("(")[0];
+    return [
+      `# ${call.title}`,
+      `[${title}](/docs/${category.slug})`,
+      `## Signature\n\n\`${call.signature}\``,
+      `## Purpose and example\n\n${section(shared, name)}`,
+      `## Language examples\n\n${buildCallExamples("entity-foundations", name)}`,
+      `## Setup and language support\n\n${section(shared, "Setup and language support")}`,
+      `## Parameters\n\n${section(shared, "Parameters")}`,
+      `## Return and timing\n\n${section(shared, "Return and timing")}`,
+      `## Behavior and limitations\n\n${section(shared, "Behavior and limitations")}`,
+    ].join("\n\n");
+  }
   const method = call.slug.split("/").pop()!;
   const audio = category.slug === "api/audio";
   const capture = audio ? audioCaptureReference[method] : undefined;
