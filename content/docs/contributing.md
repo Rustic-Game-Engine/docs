@@ -20,6 +20,8 @@ npx tsc --noEmit
 npm audit --audit-level=moderate
 ```
 
+Use [Validation and engine sync](/docs/open-source/docs/validation) for documentation, example, link and browser checks and for their precise limits.
+
 The quality workflow uses these checks for pull requests, main-branch pushes, and merge queues. Keep `node_modules/`, `.next/`, `out/`, and TypeScript build-info files out of Git. Preview changed routes, navigation, search, code copying, and mobile layout. State separately whether gameplay samples were exercised in the engine; a site build does not execute them.
 
 ## Pull requests and review

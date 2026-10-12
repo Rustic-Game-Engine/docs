@@ -15,4 +15,4 @@ Use the [status and compatibility reference](/docs/reference/compatibility) to d
 | Events / timers / clock | [Gameplay actions](/docs/guides/gameplay-actions) | [Events](/docs/api/events), [Timer](/docs/api/timer), [Clock](/docs/api/clock) |
 | UI script assets | [HTML/CSS](/docs/scripting/web) | [JavaScript behavior API](/docs/scripting/javascript/api-reference) |
 
-HTML support does not implement browser layout, DOM or network access. The public [hosting-sdk](/docs/open-source/hosting-sdk) is **Not Yet Implemented**; there is no documented multiplayer or managed-hosting SDK workflow to follow. [Standalone](/docs/building/publishing) is a local Play mode, not a completed export target.
+Current HTML support does not implement rendered layout, a DOM or network access. HTML-based game UI with CSS styling is planned; see the Web guide for current behavior. The public [hosting-sdk](/docs/open-source/hosting-sdk) is **Not Yet Implemented**; there is no documented multiplayer or managed-hosting SDK workflow to follow. [Standalone](/docs/building/publishing) is a local Play mode, not a completed export target.

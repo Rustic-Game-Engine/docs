@@ -9,7 +9,7 @@ import tseslint from "typescript-eslint";
 // Use these recommended configs directly while eslint-config-next pulls in
 // unpatched braces through fast-glob (GHSA-vfj7-8cjw-p6xm).
 export default defineConfig([
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  globalIgnores([".next/**", "out/**", "build/**", "playwright-report/**", "test-results/**", "next-env.d.ts"]),
   js.configs.recommended,
   tseslint.configs.recommended,
   {

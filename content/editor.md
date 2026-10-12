@@ -1,0 +1,34 @@
+# Editor overview
+
+The Rustic editor is a native application for authoring scenes and running gameplay. **Docs v0.1** is the documentation edition; it is separate from Script API 1.0/1.1. Start with an installed editor and runtime, or follow the [source setup](/docs/open-source/engine/getting-started) if you are building Rustic yourself.
+
+## Open and save a project
+
+Prerequisites: a working desktop graphics session and a writable project location.
+
+1. In Project Manager, choose **New project**, enter a name and location, choose a template, then **Create project**. For an existing project, choose **Import…**, select its location, and **Import project**.
+2. Choose **Open project**. The editor shows the project name in the toolbar. A locked project may open read-only; the **READ ONLY** indicator means authoring changes cannot be saved.
+3. Use the **Project** panel's **Scene** tab for objects and **Explorer** tab for files. Select an object to show its properties in **Inspector**.
+4. Save with **File → Save scene**. Check Console for `Scene saved transactionally` or a save error. Game Settings exposes autosave; when enabled, changed scenes are saved automatically, with a periodic save check at 30 seconds.
+
+Expected result: your project opens with its scene, and a successful save persists authored changes. Save explicitly before closing or copying a project.
+
+## Layout, panels and toolbar
+
+The workspace includes 3D/2D viewports, Game Project Explorer, Inspector and Console. Drag panel tabs to change docking. **View → Reset dock layout** restores the default dock arrangement. **View** can open a missing 3D or 2D viewport and offers **Inspector on native viewport**. Workspace preferences persist, but this does not promise that every arbitrary dock geometry survives reopening.
+
+**File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
+
+## Focused workflows
+
+- [Scene hierarchy](/docs/guides/editor/scene-hierarchy): create, select, name and parent objects.
+- [Explorer and assets](/docs/guides/editor/explorer): import models, manage files and diagnose asset errors.
+- [Inspector](/docs/guides/editor/inspector): transforms, attributes and script attachments.
+- [Viewport tools](/docs/guides/editor/viewport): camera navigation, picking and gizmos.
+- [Cameras, lighting and environment](/docs/guides/editor/cameras-lighting): prepare the game view.
+- [Playtesting and debugging](/docs/guides/editor/playtesting): pause, step, read diagnostics and review runtime changes.
+- [First playable scene](/docs/tutorials/first-playable-scene): a short beginner walkthrough.
+
+## Known limitations
+
+Scripts open in an external editor, rather than an embedded code panel. A panel label or legacy workspace schema does not establish an implemented control. The focused guides describe controls verified in `Engine/apps/editor/src/main.rs` and the authoring document model.

@@ -10,7 +10,9 @@ Rustic Engine is a native Rust editor and runtime for 2D and 3D scenes, with gam
 4. [Build your first playable scene](/docs/tutorials/first-game): move a cube with keyboard input, add a falling physics box, read logs, save and reopen.
 5. Continue with [gameplay and scripting](/docs/guides/scripting), [engine systems](/docs/guides/systems), and the [API reference](/docs/api/overview).
 
-Lua 5.4 is a useful first language because its runtime is bundled. Luau, JavaScript and HTML/inline JavaScript also have engine-provided runtimes. Python, C, C++, C#, Java and PHP require their own tools; install only the tools your game uses. HTML/CSS support executes JavaScript behaviors; it does not render browser UI.
+Lua 5.4 is a useful first language because its runtime is bundled. Luau, JavaScript and HTML/inline JavaScript also have engine-provided runtimes. Python, C, C++, C#, Java and PHP require their own tools; install only the tools your game uses. HTML/CSS support currently executes JavaScript behaviors without rendering layout. HTML-based game UI with CSS styling is planned.
+
+For focused panel workflows, follow [Editor overview](/docs/guides/editor). The [quick startup exercise](/docs/tutorials/first-playable-scene) is a shorter attachment/logging check before the full controller tutorial.
 
 ## Build and troubleshoot
 

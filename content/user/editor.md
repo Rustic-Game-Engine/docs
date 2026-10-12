@@ -2,6 +2,10 @@
 
 Use [Create a project](/docs/getting-started/create-project) before this guide. The native editor separates the authored scene from the isolated Play runtime. You can dock panels; **View > Reset dock layout** restores the default arrangement and **View > Open …** restores closed panels.
 
+## Focused editor guides
+
+Use [Editor overview](/docs/guides/editor) for step-by-step guides to hierarchy, Explorer, Inspector, viewport tools, cameras/lighting and Playtesting.
+
 ## Project Manager
 
 **New project** creates a project from a template, **Import…** registers an existing project, and **Open project** launches its editor. **Settings** shows optional language tools; **Diagnostics** helps investigate launch errors. Removing a project card is different from deleting its files.
@@ -11,7 +15,7 @@ Use [Create a project](/docs/getting-started/create-project) before this guide. 
 | Area | Practical task |
 | --- | --- |
 | Project > Scene | Select objects, arrange their parent hierarchy, and use **+ Add** to create a Folder, camera, light or built-in primitive. |
-| Project > Explorer | Browse project files, script assets and imported models. Moving registered scripts within editor workflows preserves their stable Asset IDs. |
+| Project > Explorer | Browse project files, script assets and imported models. Filesystem drag moves do not update script registrations or companion metadata; maintain references and sidecars explicitly. See [Explorer and assets](/docs/guides/editor/explorer). |
 | Inspector | Edit the selected object’s name, transform, primitive parameters, attributes, camera/light settings and script attachments. |
 | Console | Read editor/runtime messages and source diagnostics. **Copy** copies output; **Clear** clears the visible log. Click a source location to open the external editor. |
 

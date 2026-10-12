@@ -332,6 +332,23 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--rust); outline-
 .repository-cards { margin-top: 32px; }
 .repository-cards h2 { margin: 0 0 11px; font-size: 1.14rem; letter-spacing: -.025em; }
 
+.language-examples { margin: 24px 0; min-width: 0; }
+.language-tabs { display: flex; overflow-x: auto; gap: 4px; padding: 6px 2px; border-bottom: 1px solid var(--line); }
+.language-tabs button { flex-shrink: 0; padding: 8px 10px; border: 1px solid var(--line); background: var(--soft); color: var(--ink); font: inherit; font-size: .8rem; cursor: pointer; }
+.language-tabs button[aria-selected="true"] { border-color: var(--rust); color: var(--rust-deep); background: var(--surface); }
+.language-examples [role="tabpanel"]:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+.doc-image { display: inline-block; max-width: 100%; }
+.doc-image img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); }
+.doc-image-caption { display: block; margin-top: 8px; color: var(--muted); font-size: .85rem; }
+.markdown .contains-task-list { list-style: none; padding-left: 0; }
+.search-filter { display: flex; gap: 12px; align-items: center; margin-top: 20px; }
+.search-filter select { padding: 8px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); }
+
+@media (max-width: 760px) {
+  .sidebar { visibility: hidden; }
+  .sidebar.open { visibility: visible; }
+}
+
 /* Keep reference content and controls usable without changing Rustic branding. */
 .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-160%); padding: 10px 16px; background: var(--surface); color: var(--ink); border: 2px solid var(--rust); }
 .skip-link:focus { transform: translateY(0); }

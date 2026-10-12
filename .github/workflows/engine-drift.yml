@@ -1,0 +1,44 @@
+name: Engine API drift review
+on:
+  schedule:
+    - cron: '24 4 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: docs
+          persist-credentials: false
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: Rustic-Game-Engine/engine
+          path: engine
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
+      - run: npm ci
+        working-directory: docs
+      - name: Compare source review inputs and compile against actual SDKs
+        working-directory: docs
+        shell: bash
+        run: |
+          set -o pipefail
+          drift_status=0
+          npm run check:engine-drift -- --engine ../engine/Engine 2>&1 | tee engine-drift-report.txt || drift_status=$?
+          sdk_status=0
+          npm run check:syntax -- --engine ../engine/Engine 2>&1 | tee sdk-check-report.txt || sdk_status=$?
+          if [ "$drift_status" -ne 0 ] || [ "$sdk_status" -ne 0 ]; then exit 1; fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: engine-api-review
+          path: docs/*-report.txt
+          retention-days: 14

@@ -25,7 +25,7 @@ This reference was checked against engine commit `017db99b7025eeda96acf219676641
 | Scripting | Implemented | Ten script types, isolated execution and per-binding differences. Luau creation-menu omission is documented in [Scripting](/docs/guides/scripting). |
 | Keyboard input | Implemented | Embedded Play held WASD/arrows/Shift only. Named actions, key edges and separate-window forwarding are Not Yet Implemented. |
 | Cameras | Implemented | Active scene camera and action helpers; [Cameras and lights](/docs/guides/cameras-and-lights). |
-| Browser-style UI rendering | Unsupported | HTML extracts inline JavaScript; CSS has no rendered layout/DOM. See [HTML/CSS](/docs/scripting/web). |
+| HTML/CSS game UI rendering | Planned | Current HTML assets execute inline/linked JavaScript; rendered HTML layout and CSS styling are not implemented yet. Full browser DOM compatibility is not an established contract. See [HTML/CSS](/docs/scripting/web). |
 | Networking / hosting SDK | Not Yet Implemented | Public hosting-sdk has no implementation. Audio hot mic has no automatic network transport. Runtime/editor IPC is not multiplayer networking. |
 | Standalone Play | Implemented | A supervised runtime shell for testing; [Playtesting](/docs/building/publishing). |
 | Game export / platform packaging | Planned | Architecture describes export; current xtask has no export command. No supported distributable-game workflow is claimed. |

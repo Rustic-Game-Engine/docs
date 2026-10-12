@@ -6,8 +6,7 @@ same callback, including queries from another scripting language.
 
 ## Setup and language support
 
-Create an object in the editor. Use **Programming > New Script > Object Component
-Script**, choose a language, and attach the script to that object with **+ Add
+Create an object in the editor. Use **Programming > Object Component Script**, choose a language, and attach the script to that object with **+ Add
 Component** or by dragging it from Explorer. Press **Play**. Do not edit scene or
 manifest files to attach a behavior. Stop Play to restore the authored scene.
 

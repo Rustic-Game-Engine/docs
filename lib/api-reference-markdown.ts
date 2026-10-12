@@ -61,7 +61,8 @@ const captureConstraints = "- Capture handles belong to their script. Destroying
 
 
 export function buildApiCategoryMarkdown(category: ApiCategory, title: string, description: string, shared = "") {
-  return `# ${title}\n\n${description}\n\n[Feature status and language/platform compatibility](/docs/reference/compatibility)\n\nChoose an API to see its signature, parameters, examples and behavior.\n\n## APIs\n\n${category.calls.map((call) => `- [${call.title}](/docs/${call.slug})`).join("\n")}\n\n${shared ? `## Module guide\n\n${shared.replace(/^# [^\n]+\n*/, "").replace(/^## Calls$/gm, "## Module signatures")}` : ""}`;
+  const guidance = shared.split(/(?=^## )/m).slice(1).filter((part) => !/^## (Calls|Example|Language examples|Examples for every function)(?:\n|$)/.test(part)).join("");
+  return `# ${title}\n\n${description}\n\n[Feature status and language/platform compatibility](/docs/reference/compatibility)\n\nChoose an API to see its signature, parameters, examples and behavior.\n\n## APIs\n\n${category.calls.map((call) => `- [${call.title}](/docs/${call.slug})`).join("\n")}\n\n${guidance ? `## Module guide\n\n${guidance}` : ""}`;
 }
 
 function section(markdown: string, heading: string) {

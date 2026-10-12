@@ -32,8 +32,11 @@ jobs:
           cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run lint -- --max-warnings=0
+      - name: Install optional syntax tools
+        run: sudo apt-get update && sudo apt-get install -y lua5.4 php-cli
       - run: npm run check:syntax
-      - run: npm run check:docs
+      - run: npm run check:engine-drift
+      - run: node scripts/check-docs.mjs
       - run: npm run check:api-examples
       - run: npm run build
         if: ${{ !cancelled() }}
@@ -45,3 +48,20 @@ jobs:
         if: ${{ !cancelled() }}
       - run: npm audit --audit-level=moderate
         if: ${{ !cancelled() }}
+      - run: npm run check:docs
+        if: ${{ !cancelled() }}
+      - name: Install Chromium
+        id: browser_setup
+        if: ${{ !cancelled() }}
+        run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+        if: ${{ !cancelled() && steps.browser_setup.outcome == 'success' }}
+      - name: Preserve browser diagnostics
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-diagnostics
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
