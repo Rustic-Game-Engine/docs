@@ -76,3 +76,13 @@ test("punctuated titles and literal API identifiers remain searchable", () => {
   assert.equal(searchDocs([entry("Transforms", "set_translation and +=")], "+=").length, 1);
   assert.equal(searchDocs([entry("Transforms", "set_translation")], "translation").length, 1);
 });
+
+test("alternate language spellings and page filters keep the correct content types", async () => {
+  const { searchKind } = await import('../lib/docs-search.ts');
+  assert.equal(searchDocs([entry('JavaScript', 'const x = 1')], 'js')[0].title, 'JavaScript');
+  assert.equal(searchDocs([entry('C#')], 'csharp')[0].title, 'C#');
+  assert.equal(searchDocs([entry('C++')], 'cpp')[0].title, 'C++');
+  assert.equal(searchKind({ slug: 'api/audio/start-recording' }), 'API reference');
+  assert.equal(searchKind({ slug: 'tutorials/first-playable-scene' }), 'Tutorial');
+  assert.equal(searchKind({ slug: 'guides/editor/inspector' }), 'Guide');
+});

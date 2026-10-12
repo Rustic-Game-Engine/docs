@@ -17,7 +17,7 @@ function category(slug: string, source: string, signatures: string[]): ApiCatego
     segments.add(segment);
     return {
       slug: `api/${slug}/${segment}`,
-      title: `${method}${signature.includes("(") ? "()" : ""}`,
+      title: `${name}${signature.includes("(") ? "()" : ""}`,
       signature,
       description: `Signature, parameters, timing and usage for ${name}.`,
     };

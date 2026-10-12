@@ -6,8 +6,18 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
+    { slug: "tutorials/first-playable-scene", title: "First playable scene", description: "Create an object, attach Lua and test the startup callback.", source: "content/tutorials/first-playable-scene.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
+  ] },
+  { label: "Editor guides", docs: [
+    { slug: "guides/editor", title: "Editor overview", description: "Open and save projects, navigate panels and choose an editor workflow.", source: "content/editor.md" },
+    { slug: "guides/editor/scene-hierarchy", title: "Scene hierarchy", description: "Verified editor steps, expected results and current limits for scene hierarchy.", source: "content/editor/scene-hierarchy.md", parent: "guides/editor" },
+    { slug: "guides/editor/explorer", title: "Explorer and assets", description: "Verified editor steps, expected results and current limits for explorer and assets.", source: "content/editor/explorer.md", parent: "guides/editor" },
+    { slug: "guides/editor/inspector", title: "Inspector", description: "Verified editor steps, expected results and current limits for inspector.", source: "content/editor/inspector.md", parent: "guides/editor" },
+    { slug: "guides/editor/viewport", title: "Viewport tools", description: "Verified editor steps, expected results and current limits for viewport tools.", source: "content/editor/viewport.md", parent: "guides/editor" },
+    { slug: "guides/editor/cameras-lighting", title: "Cameras, lighting and environment", description: "Verified editor steps, expected results and current limits for cameras, lighting and environment.", source: "content/editor/cameras-lighting.md", parent: "guides/editor" },
+    { slug: "guides/editor/playtesting", title: "Playtesting and debugging", description: "Verified editor steps, expected results and current limits for playtesting and debugging.", source: "content/editor/playtesting.md", parent: "guides/editor" },
   ] },
   { label: "Core API", docs: [
     { slug: "api/entity", title: "Entity & time", description: "Read the current entity ID and frame timing.", source: "content/entity-and-time.md" },
@@ -206,6 +216,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "open-source/docs/writing-guidelines", title: "Writing Guidelines", description: "Supported Markdown, terminology, accuracy, and reproducible examples.", source: "content/docs/writing-guidelines.md", parent: "open-source/docs" },
     { slug: "open-source/docs/adding-documentation", title: "Adding Documentation", description: "Create pages and sections, register routes, and verify publication.", source: "content/docs/adding-documentation.md", parent: "open-source/docs" },
     { slug: "open-source/docs/editing-pages", title: "Editing Existing Pages", description: "Find authoritative sources and correct outdated information and links.", source: "content/docs/editing-pages.md", parent: "open-source/docs" },
+    { slug: "open-source/docs/validation", title: "Validation and engine sync", description: "Run site/browser checks, validate script syntax and review engine API drift.", source: "content/docs/validation.md", parent: "open-source/docs" },
     { slug: "open-source/docs/code-examples", title: "Code Examples", description: "Standards for scripting API samples, setup, lifecycle, and expected results.", source: "content/docs/code-examples.md", parent: "open-source/docs" },
     { slug: "open-source/docs/versioning", title: "Versioning", description: "Maintain compatibility notes and plan documentation for multiple engine versions.", source: "content/docs/versioning.md", parent: "open-source/docs" },
     { slug: "open-source/docs/translations", title: "Translations", description: "Propose languages, review translations, and understand locale support needed.", source: "content/docs/translations.md", parent: "open-source/docs" },
@@ -223,20 +234,10 @@ const categoryGroups: DocGroup[] = [
     { slug: "open-source/docs/development/cloudflare-pages-deployment", title: "Cloudflare Pages deployment", description: "Cloudflare Pages deployment for Development & deployment.", source: "README/cloudflare-pages-deployment.md", parent: "open-source/docs/development" },
   ] },
   { label: "Examples", docs: [
-    { slug: "open-source/examples", title: "Examples repository", description: "Choose a focused guide to examples repository.", source: "content/examples.md" },
-    { slug: "open-source/examples/current-contents-and-development-language", title: "Current contents and development language", description: "Current contents and development language for Examples repository.", source: "content/examples/current-contents-and-development-language.md", parent: "open-source/examples" },
-    { slug: "open-source/examples/prerequisites", title: "Prerequisites", description: "Prerequisites for Examples repository.", source: "content/examples/prerequisites.md", parent: "open-source/examples" },
-    { slug: "open-source/examples/start-your-own-example-project", title: "Start your own example project", description: "Start your own example project for Examples repository.", source: "content/examples/start-your-own-example-project.md", parent: "open-source/examples" },
-    { slug: "open-source/examples/main-scripts-and-useful-starting-points", title: "Main scripts and useful starting points", description: "Main scripts and useful starting points for Examples repository.", source: "content/examples/main-scripts-and-useful-starting-points.md", parent: "open-source/examples" },
-    { slug: "open-source/examples/license-and-common-pitfalls", title: "License and common pitfalls", description: "License and common pitfalls for Examples repository.", source: "content/examples/license-and-common-pitfalls.md", parent: "open-source/examples" },
+    { slug: "open-source/examples", title: "Examples repository", description: "Planned sample projects; current contents, license and contribution guidance.", source: "content/examples.md" },
   ] },
   { label: "Hosting SDK", docs: [
-    { slug: "open-source/hosting-sdk", title: "Hosting SDK repository", description: "Choose a focused guide to hosting sdk repository.", source: "content/hosting-sdk.md" },
-    { slug: "open-source/hosting-sdk/current-contents-and-development-language", title: "Current contents and development language", description: "Current contents and development language for Hosting SDK repository.", source: "content/hosting-sdk/current-contents-and-development-language.md", parent: "open-source/hosting-sdk" },
-    { slug: "open-source/hosting-sdk/prerequisites", title: "Prerequisites", description: "Prerequisites for Hosting SDK repository.", source: "content/hosting-sdk/prerequisites.md", parent: "open-source/hosting-sdk" },
-    { slug: "open-source/hosting-sdk/start-your-own-version", title: "Start your own version", description: "Start your own version for Hosting SDK repository.", source: "content/hosting-sdk/start-your-own-version.md", parent: "open-source/hosting-sdk" },
-    { slug: "open-source/hosting-sdk/main-scripts-and-implementation-entry-points", title: "Main scripts and implementation entry points", description: "Main scripts and implementation entry points for Hosting SDK repository.", source: "content/hosting-sdk/main-scripts-and-implementation-entry-points.md", parent: "open-source/hosting-sdk" },
-    { slug: "open-source/hosting-sdk/license-and-related-projects", title: "License and related projects", description: "License and related projects for Hosting SDK repository.", source: "content/hosting-sdk/license-and-related-projects.md", parent: "open-source/hosting-sdk" },
+    { slug: "open-source/hosting-sdk", title: "Hosting SDK repository", description: "Planned hosting integration SDK; current status and contribution guidance.", source: "content/hosting-sdk.md" },
   ] },
 ];
 
@@ -262,6 +263,17 @@ export const docSections = [
 ];
 
 export const docAliases: Record<string, string> = {
+  "open-source/examples/current-contents-and-development-language": "open-source/examples",
+  "open-source/examples/prerequisites": "open-source/examples",
+  "open-source/examples/start-your-own-example-project": "open-source/examples",
+  "open-source/examples/main-scripts-and-useful-starting-points": "open-source/examples",
+  "open-source/examples/license-and-common-pitfalls": "open-source/examples",
+  "open-source/hosting-sdk/current-contents-and-development-language": "open-source/hosting-sdk",
+  "open-source/hosting-sdk/prerequisites": "open-source/hosting-sdk",
+  "open-source/hosting-sdk/start-your-own-version": "open-source/hosting-sdk",
+  "open-source/hosting-sdk/main-scripts-and-implementation-entry-points": "open-source/hosting-sdk",
+  "open-source/hosting-sdk/license-and-related-projects": "open-source/hosting-sdk",
+
   "api/entity/identity": "api/entity/entity-id",
   "api/entity/frame-time": "api/entity",
   "repositories": "open-source",

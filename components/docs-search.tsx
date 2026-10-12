@@ -5,12 +5,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { docSections, routeFor } from "@/lib/docs-catalog";
 
-import { searchDocs, type SearchEntry } from "@/lib/docs-search";
+import { searchDocs, searchKind, type SearchEntry } from "@/lib/docs-search";
 
 export function DocsSearch({ project, entries }: { project: string; entries: SearchEntry[] }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const results = searchDocs(entries, query);
+  const [kind, setKind] = useState("All");
+  const results = searchDocs(entries, query).filter((entry) => kind === "All" || searchKind(entry) === kind);
   const section = docSections.find((section) => section.title === project);
   const isEngine = project === "Engine";
 
@@ -28,6 +29,7 @@ export function DocsSearch({ project, entries }: { project: string; entries: Sea
         <section className="search-hero" aria-labelledby="search-title">
           <div className="search-hero-copy"><p><span /> DOCUMENT INDEX</p><h1 id="search-title">Search {isEngine ? "engine documentation" : "open-source documentation"}</h1><div className="search-lede">{isEngine ? "Find engine APIs, gameplay guides, and scripting examples." : "Find repository setup, contribution, and deployment guides."}</div></div>
           <div className="search-field"><Search size={21} /><input ref={inputRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by API, concept, or guide…" aria-label={`Search ${project} documentation`} /></div>
+          <label className="search-filter">Page type<select value={kind} onChange={(event) => setKind(event.target.value)}>{["All", "Tutorial", "Guide", "API reference"].map((value) => <option key={value}>{value}</option>)}</select></label>
         </section>
         <section className="search-index" aria-label="Documentation index">
           <div className="search-index-head"><div><span>INDEX</span><h2>{query ? "Matching documentation" : "Browse all documentation"}</h2></div><p><strong>{String(results.length).padStart(2, "0")}</strong> / {String(entries.length).padStart(2, "0")} ENTRIES</p></div>

@@ -1,6 +1,7 @@
 import exampleData from "./api-example-data.json";
 
-export const exampleLanguages = ["Lua 5.4", "JavaScript", "Python", "C++", "C#", "Luau", "C", "Java", "PHP", "HTML / inline JS"] as const;
+import { exampleLanguages } from "./script-languages";
+export { exampleLanguages } from "./script-languages";
 const fences = ["lua", "javascript", "python", "cpp", "csharp", "lua", "c", "java", "php", "javascript"];
 type Example = { title: string; note: string; examples: Record<string, string> };
 const examples: Record<string, Example[]> = exampleData;

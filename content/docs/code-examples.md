@@ -29,3 +29,5 @@ Lua modules return a behavior table; JavaScript assigns `globalThis.behavior`; e
 ## Verify examples and reference pages
 
 Check examples against `Engine/crates/engine-scripting/`, its starter SDKs, adapter tests, and runtime behavior. Prefer deterministic, short samples with clear expected output. Keep engine-local language guides, this site's published guides, and `lib/api-docs.ts` consistent. Website quality checks cannot prove that a gameplay example executes; report the engine validation you actually performed.
+
+Follow [Validation and engine sync](/docs/open-source/docs/validation) for syntax tools, SDK compilation, language tabs and reviewed drift baselines.

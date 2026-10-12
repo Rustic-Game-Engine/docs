@@ -120,8 +120,20 @@ test("recording and hot mic APIs are registered and publish Lua/Luau usage", asy
     assert.match(markdown, /```lua/);
     assert.ok(!markdown.includes("```javascript"), slug);
     assert.ok(!markdown.includes("undefined"), slug);
+    assert.match(markdown, /OnStop = function/);
+    assert.doesNotMatch(markdown, /\bStop = function/);
     const exported = await readFile(new URL(`../out/docs/${call.slug}.html`, import.meta.url), "utf8");
     assert.ok(exported.includes(call.title), slug);
     assert.ok(exported.includes("64 MiB"), slug);
   }
+});
+
+test("Web docs distinguish current behavior from planned HTML/CSS rendering and retain linked scripts", async () => {
+  const overview = await readFile(new URL('../docs/Scripting/scriptingWeb.md', import.meta.url), 'utf8');
+  const behavior = await readFile(new URL('../docs/Scripting/scriptingWeb/html-behavior.md', import.meta.url), 'utf8');
+  assert.match(overview, /HTML-based game UI, with CSS styling, is the intended direction/);
+  assert.match(overview, /\*\*planned\*\*, not implemented/);
+  assert.match(behavior, /linked `<script src=/);
+  assert.match(behavior, /Absolute paths and any `\.\.` path component/);
+  assert.match(behavior, /`OnCreate`/); assert.match(behavior, /`OnStop`/);
 });

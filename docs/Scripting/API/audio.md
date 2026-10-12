@@ -212,7 +212,7 @@ return {
   Start = function()
     rec = rustic.game:startRecording()
   end,
-  Stop = function()
+  OnStop = function()
     rec:stopRecording()
     local packet = rec:read()
     -- packet.samples contains interleaved floating-point PCM.
@@ -269,7 +269,7 @@ return {
     -- Feed packet.samples, packet.sampleRate and packet.channels to your
     -- audio processing or relay code. peak can drive a microphone meter.
   end,
-  Stop = function()
+  OnStop = function()
     mic:stopHotMic()
     mic:unload()
   end

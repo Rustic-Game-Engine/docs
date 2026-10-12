@@ -11,6 +11,10 @@ export function normalizeSearchText(text: string) {
   return text.toLowerCase().replace(/\s+/g, " ").trim();
 }
 
+export function searchKind(entry: Pick<SearchEntry, "slug">): "API reference" | "Tutorial" | "Guide" {
+  return entry.slug.startsWith("api/") || entry.slug === "callbacks" ? "API reference"
+    : entry.slug.startsWith("tutorials/") ? "Tutorial" : "Guide";
+}
 export type SearchResult = SearchEntry & { score: number };
 
 function words(text: string) {
@@ -52,7 +56,7 @@ function titleWordScore(term: string, word: string) {
 }
 
 export function searchDocs(entries: SearchEntry[], query: string): SearchResult[] {
-  const normalizedQuery = normalizeSearchText(query);
+  const normalizedQuery = normalizeSearchText(query).replace(/\bjs\b/g, "javascript").replace(/\bcsharp\b/g, "c#").replace(/\bcpp\b/g, "c++").replace(/\bplaytest\b/g, "playtesting");
   if (!normalizedQuery) return entries.map((entry) => ({ ...entry, score: 0 }));
 
   const terms = [...new Set(words(normalizedQuery))];

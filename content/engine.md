@@ -2,6 +2,8 @@
 
 Create 2D and 3D games with the native Rustic editor. This section explains how to use the engine: create gameplay scripts, attach behaviors, work with scene objects, and use the API in Play.
 
+Start with [Editor overview](/docs/guides/editor) and the [first playable scene tutorial](/docs/tutorials/first-playable-scene).
+
 ## Start making a game
 
 1. Open the Rustic project manager, create or import a project, and open it in the editor.

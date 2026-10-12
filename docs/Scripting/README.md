@@ -18,7 +18,7 @@ extension you create in the Explorer:
 
 Every gameplay language uses engine-owned built-in functions. Scripts define
 callbacks and call the API; no user-written JSON request/response loop is needed.
-CSS is styling only; use inline JavaScript in HTML for gameplay API calls.
+CSS styling for rendered HTML game UI is planned. Today CSS-only assets are validated no-op behaviors; use inline JavaScript in HTML for gameplay API calls.
 
 ## Rules shared by every language
 

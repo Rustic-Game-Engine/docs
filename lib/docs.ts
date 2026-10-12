@@ -18,7 +18,7 @@ export async function readDoc(source: string): Promise<string> {
     const category = apiCategories.find((entry) => entry.slug === source.slice(13));
     const doc = allDocs.find((entry) => entry.slug === category?.slug);
     if (!category || !doc) throw new Error(`Unknown API category: ${source}`);
-    return buildApiCategoryMarkdown(category, doc.title, doc.description);
+    return buildApiCategoryMarkdown(category, doc.title, doc.description, (await readDoc(category.source)).split("\n## Examples for every function")[0]);
   }
   if (source.startsWith("api-call:")) {
     const slug = source.slice(9);
@@ -42,6 +42,6 @@ export async function buildSearchIndex(project: string): Promise<SearchEntry[]> 
     description: doc.description,
     group: doc.group,
     project: doc.project,
-    searchText: normalizeSearchText(`${doc.title} ${doc.description} ${doc.group} ${await readDoc(doc.source)}`),
+    searchText: normalizeSearchText(`${doc.title} ${doc.description} ${doc.group} ${await readDoc(doc.source)} ${doc.slug.replaceAll("/", " ")}`),
   })));
 }
