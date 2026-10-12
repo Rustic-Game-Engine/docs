@@ -18,7 +18,7 @@ return {
    document name, not the script filename or project name.
 2. Create a root object named **Room**, then a child named **Player**. Give siblings
    unique names. The full object path is `Room.Player`.
-3. Use **Programming > New Script > Object Component Script**, select Lua, and
+3. Use **Programming > Object Component Script**, select Lua, and
    paste the example. Save it. Select another object such as **Controller** and
    attach the script using **Programming > Attach Existing Script** or
    **+ Add Component** in the Inspector. Scene/global startup scripts can also

@@ -1,7 +1,7 @@
 # Scripting Rustic games with Lua 5.4
 
 Lua 5.4 is the most direct Rustic scripting option: the runtime is bundled, each
-script is an isolated module, and Script API mutations are applied immediately.
+script is an isolated module, and core host writes are applied immediately. Scheduled actions and event delivery follow the shared runtime scheduler; see [execution behavior](/docs/guides/scripting#when-mutations-take-effect).
 Create a `.lua` file through the Explorer's scripting commands; do not create an
 Asset ID or edit a scene file manually.
 

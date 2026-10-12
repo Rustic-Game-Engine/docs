@@ -2,11 +2,7 @@
 
 [Back to Gameplay programming](/docs/guides/gameplay-programming).
 
-Rustic's agent instructions and Codex/Claude integration files live in editor app
-data. Use the `rustic-workspace` MCP tools to inspect or edit them; see
-[AI agents and editor app data](AGENT_INTEGRATION.md) for setup and examples.
-
-- `scripts/*.{lua,js,py,cs,c,cpp,java}` is user-owned gameplay source.
+- `scripts/*.{lua,luau,js,py,cs,c,cpp,java}` is user-owned gameplay source.
 - `scene/{scene-name}.scene` contains authored scenes. Existing
   `scenes/*.rscene` projects remain supported and are saved in place.
 - `ui/*.{html,css,js,php}` is user-owned game UI source. HTML, CSS, and PHP

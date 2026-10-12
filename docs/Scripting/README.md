@@ -18,12 +18,14 @@ extension you create in the Explorer:
 
 Every gameplay language uses engine-owned built-in functions. Scripts define
 callbacks and call the API; no user-written JSON request/response loop is needed.
-CSS is styling only; use inline JavaScript in HTML for gameplay API calls.
+CSS-only assets are valid no-op behaviors: browser layout/style rendering is unsupported. Use inline JavaScript in HTML for gameplay API calls.
 
 ## Rules shared by every language
 
 Create, move, rename, and attach scripts in the editor. Never edit
 `config/scripts.ron`, a `.scene` file, or generated metadata to connect a script.
+Luau is implemented but omitted from the current creation menu; use [Luau setup](/docs/scripting/luau/setup-and-attachment) for the Explorer registration workflow.
+
 Rustic assigns an Asset ID when the script is created or imported; scene and object
 records retain that ID even if the source file moves.
 
@@ -34,14 +36,12 @@ See the [Lua input guide](/docs/scripting/lua/input) for supported names, setup,
 copyable controller, and troubleshooting. The same held-key limitation applies
 to other script languages.
 
-Use **Programming > New Script** to create a **Global Startup Script**, **Scene
+Use **Programming** to create a **Global Startup Script**, **Scene
 Startup Script**, or **Object Component Script**. Use **Programming > Attach Existing
 Script**, **+ Add Component** in the Inspector, or drag a script from Explorer onto
 the viewport to attach an existing component script to the selected object.
 
-New scenes live at `scene/{scene-name}.scene`. The older `scenes/*.rscene` layout,
-legacy `entry_script` settings are ignored, and snake-case callbacks remain readable and are saved in
-place. Do not migrate an old project by hand.
+New scenes live at `scene/{scene-name}.scene`. The older `scenes/*.rscene` layout remains readable and is saved in place. Legacy `entry_script` settings are ignored; snake-case callbacks remain compatible. Do not migrate an old project by hand.
 
 Execution is deterministic: global scope before scene scope before component scope;
 then ascending execution-order value; then entity ID; then script Asset ID; then

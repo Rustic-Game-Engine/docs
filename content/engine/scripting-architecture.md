@@ -6,7 +6,7 @@
 
 Lua 5.4 and JavaScript use embedded bindings backed by mlua and QuickJS. Python, C, C++, C#, Java, PHP, and Luau use persistent isolated sessions. Luau's engine-owned host is built separately. HTML inline JavaScript uses the JavaScript API; CSS is styling. HTML, CSS, and PHP UI entries must belong under `ui/`.
 
-External adapters receive callback state and return mutations applied after the callback in issue order. Generated SDKs handle that protocol; ordinary gameplay examples should use the SDK instead of implementing a JSON request loop. Read each [language guide](/docs/scripting/lua) for syntax and toolchain requirements.
+External adapters receive callback snapshots and normally commit mutation commands at callback response. Synchronous queries first flush pending writes in issue order; simple getters still read their callback snapshot. Lua core writes are immediate, while JavaScript/Web core writes are deferred. See [execution behavior](/docs/guides/scripting#when-mutations-take-effect). Generated SDKs handle that protocol; ordinary gameplay examples should use the SDK instead of implementing a JSON request loop. Read each [language guide](/docs/scripting/lua) for syntax and toolchain requirements.
 
 ## Components and lifecycle
 

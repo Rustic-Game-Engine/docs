@@ -17,7 +17,7 @@ function category(slug: string, source: string, signatures: string[]): ApiCatego
     segments.add(segment);
     return {
       slug: `api/${slug}/${segment}`,
-      title: `${method}${signature.includes("(") ? "()" : ""}`,
+      title: `${name}${signature.includes("(") ? "()" : ""}`,
       signature,
       description: `Signature, parameters, timing and usage for ${name}.`,
     };
@@ -223,7 +223,7 @@ export const apiCategories: ApiCategory[] = [
     "rustic.any_key_pressed()",
   ]),
   category("logging", "api:logging", [
-    "rustic.log(level, message, fields?)",
+    "rustic.log(level, message)",
     "print(...)",
     "warn(...)",
   ]),

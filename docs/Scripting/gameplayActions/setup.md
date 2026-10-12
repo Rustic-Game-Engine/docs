@@ -5,7 +5,7 @@
 1. Open a game project and scene. Create/select a **Part**.
 2. Set its **Anchored** attribute to true so gravity does not compete with scripted
    movement. Action transforms are local to the object's parent.
-3. Use **Programming > New Script > Object Component Script**, select Lua 5.4, and
+3. Use **Programming > Object Component Script**, select Lua 5.4, and
    save it under `scripts/`. Attach it through **Programming > Attach Existing
    Script**, **+ Add Component** in the Inspector, or drag it onto the object.
 4. Replace its source with the complete example below and press **Play**. The object
