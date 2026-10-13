@@ -10,3 +10,19 @@ On Windows, Setup offers these external toolchains as optional Gameplay Language
 installs every selected item through Windows Package Manager. Lua, JavaScript, and
 HTML/CSS are bundled. Additional toolchains can be installed later using **Rustic Game
 Engine > Language Toolchain Manager** in the Start menu or by rerunning Setup.
+
+Setup uses one hidden PowerShell process for all selected toolchains and skips tools
+that are already installed. A PowerShell launch failure or a WinGet initialization
+failure stops the batch instead of retrying the failing host for every language.
+Rustic itself remains installed; you can start with the bundled languages and retry
+optional tools later from **Language Toolchain Manager**.
+
+If Setup reports error `142` or `0xc0000142`, keep the full message: these are distinct
+codes, and the failing executable matters. The Setup failure dialog includes the
+launch error or exit code and the path to its log. Setup saves a log in `%TEMP%`
+(`Setup Log ...txt`) automatically; use `/LOG="C:\path\setup.log"` to choose a location.
+If PowerShell started, check the original user's
+`%LOCALAPPDATA%\Rustic Game Engine\logs\toolchain-install.log` for the failed package
+and WinGet output. If no transcript exists, inspect the Setup log for a PowerShell
+startup failure. Repair the failing PowerShell or Microsoft App Installer installation
+before retrying; opening Windows Terminal is not required by Setup.
