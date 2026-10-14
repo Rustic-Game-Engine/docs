@@ -41,21 +41,21 @@ This reference was checked against engine commit `017db99b7025eeda96acf219676641
 | --- | --- | --- | --- |
 | Lua 5.4 (.lua) | Bundled embedded Lua | Implemented; immediate core host writes, new instance ID returned | Recording, hot mic and reusable loading implemented |
 | Luau (.luau) | Engine-provided external host | Implemented; SDK command/query boundary | Recording, hot mic and reusable loading implemented |
-| JavaScript (.js) | Bundled QuickJS | Implemented; deferred core writes, synchronous queries | Capture and reusable loading unsupported |
-| Python (.py) | Python toolchain | Implemented via SDK | Capture and reusable loading unsupported |
-| C (.c) | C17 compiler | Implemented via SDK; explicit callback/storage conventions | Capture and reusable loading unsupported |
-| C++ (.cpp) | C++ toolchain | Implemented via typed SDK | Capture and reusable loading unsupported |
-| C# (.cs) | .NET SDK | Implemented via SDK | Capture and reusable loading unsupported |
-| Java (.java) | java and javac | Implemented via SDK | Capture and reusable loading unsupported |
-| PHP (.php in ui/) | PHP CLI | Implemented via SDK | Capture and reusable loading unsupported |
-| HTML/inline JS (.html in ui/) | QuickJS extraction, no browser | Implemented JavaScript behavior surface; CSS-only is a no-op | Capture and reusable loading unsupported |
+| JavaScript (.js) | Bundled QuickJS | Implemented; deferred core writes, synchronous queries | Recording, hot mic and reusable loading implemented |
+| Python (.py) | Python toolchain | Implemented via SDK | Recording, hot mic and reusable loading implemented |
+| C (.c) | C17 compiler | Implemented via SDK; explicit callback/storage conventions | Recording, hot mic and reusable loading implemented |
+| C++ (.cpp) | C++ toolchain | Implemented via typed SDK | Recording, hot mic and reusable loading implemented |
+| C# (.cs) | .NET SDK | Implemented via SDK | Recording, hot mic and reusable loading implemented |
+| Java (.java) | java and javac | Implemented via SDK | Recording, hot mic and reusable loading implemented |
+| PHP (.php in ui/) | PHP CLI | Implemented via SDK | Recording, hot mic and reusable loading implemented |
+| HTML/inline JS (.html in ui/) | QuickJS extraction, no browser | Implemented JavaScript behavior surface; CSS-only is a no-op | Recording, hot mic and reusable loading implemented |
 
 ### Method-specific differences
 
-- `rustic.find_entity` and object-path `GetAttribute` convenience calls are embedded Lua-specific in the published reference. Prefer each language’s scene lookup guide; general scene lookup support does not imply identical helper names.
-- `Clock.state` is exposed in embedded Lua/JavaScript, Luau and Python; other SDKs provide setter controls. C#/PHP additionally expose a scale getter. See [Clock](/docs/api/clock).
+- Every gameplay binding exposes live rustic.find_entity and object attribute reads. Use rustic.get_object_attribute(source, name), or the path proxy getter. Native spellings differ.
+- Clock.state is available in every gameplay language; native return types follow their SDK.
 - Audio device enumeration/selection exists in all ten script types but native devices require Windows. Non-Windows enumeration returns empty lists; device selection raises an error. Microphone capture requires Windows permissions and uses the system default input, independently of selected input-device metadata.
-- Lua/Luau game-output recording can run headlessly; microphone recording and hot mic require Windows. Recording captures audio, not video. Read and unload capture handles before owner cleanup; see [Audio recording](/docs/api/audio/start-recording).
+- Game-output recording in every gameplay language can run headlessly; microphone recording and hot mic require Windows. Recording captures audio, not video. Read and unload capture handles before owner cleanup; see [Audio recording](/docs/api/audio/start-recording).
 - Collision callback names are not evidence of event delivery: no collision/touch callbacks are emitted by the primitive simulator.
 
 ## Platform compatibility

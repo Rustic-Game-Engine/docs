@@ -31,8 +31,7 @@ Programming Workspace after upgrading. Python imports the modules it uses, for e
 
 PHP and HTML entries remain restricted to `ui/`; CSS alone executes no actions.
 
-`Interpolation` aliases `Smooth` except in C# and Java, where you use `Smooth`.
-`Clock.state()` is available in Lua, Luau, JavaScript, Python and HTML inline
-JavaScript; C#, C++, C, Java and PHP have no paused-state getter. C# and PHP
-can read the scale with `Clock.timeScale()` / `Clock::timeScale()`. C has no
-`Camera.current()` getter; use `Game.scene.Find` with the authored camera path.
+Interpolation aliases Smooth in every SDK. Clock.state() returns scale and paused
+in every gameplay language. C uses RusticClockState and sets time scale with
+Clock.timeScale(value); C++ returns RusticValue, C# returns JsonElement, and Java
+returns a map.

@@ -10,7 +10,7 @@ export const engineSources = [
   "crates/engine-scripting/src/model.rs", "crates/engine-scripting/src/runtime.rs",
   "crates/engine-scripting/src/lua.rs", "crates/engine-scripting/src/javascript.rs",
   "crates/engine-scripting/src/external_runtime.rs", "crates/engine-scripting/src/cpp_sdk.rs",
-  ...["rustic.h", "rustic.py", "rustic.php", "rustic.luau", "Rustic.java", "Rustic.cs", "gameplay.lua", "gameplay.js"].map((file) => `crates/engine-scripting/src/sdk/${file}`),
+  ...["rustic.h", "rustic.py", "rustic.php", "rustic.luau", "Rustic.java", "Rustic.cs", "gameplay.lua", "gameplay.js", "media-api.lua", "media-api.d.ts"].map((file) => `crates/engine-scripting/src/sdk/${file}`),
   ...["mod.rs", "query.rs", "audio.rs", "signals.rs", "ease.rs"].map((file) => `crates/engine-core/src/gameplay/${file}`),
   ...["audio_output.rs", "audio_input.rs", "audio_capture.rs", "script_runtime.rs"].map((file) => `crates/engine-play/src/${file}`),
 ];

@@ -9,13 +9,7 @@ const { buildApiCallMarkdown, buildApiCategoryMarkdown } = load("api-reference-m
 const { exampleLanguages } = load("api-examples.ts");
 const exampleData = JSON.parse(await readFile(new URL("../lib/api-example-data.json", import.meta.url), "utf8"));
 const captureSlugs = ["start-recording", "stop-recording", "start-hot-mic", "stop-hot-mic", "rec-stop-recording", "mic-stop-hot-mic", "capture-read", "capture-stop", "capture-unload"];
-const supportedLanguages = (call) => {
-  // Display titles omit receivers; signatures retain the API's identity.
-  const name = call.signature.split("(")[0];
-  return captureSlugs.includes(call.slug.split("/").pop()) ? ["Lua 5.4", "Luau"]
-    : name === "rustic.find_entity" ? ["Lua 5.4"]
-    : ["print", "warn"].includes(name) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : [...exampleLanguages];
-};
+const supportedLanguages = () => [...exampleLanguages];
 
 const calls = apiCategories.flatMap((category) => category.calls);
 
@@ -109,19 +103,18 @@ test("static export publishes every category and call with the category breadcru
 });
 
 
-test("recording and hot mic APIs are registered and publish Lua/Luau usage", async () => {
+test("recording and hot mic APIs preserve routes and publish every language binding", async () => {
   const category = apiCategories.find((entry) => entry.slug === "api/audio");
   const shared = await readFile(new URL(`../${category.source}`, import.meta.url), "utf8");
   for (const slug of captureSlugs) {
     const call = category.calls.find((entry) => entry.slug === `api/audio/${slug}`);
     assert.ok(call, `Missing published capture API: ${slug}`);
     const markdown = buildApiCallMarkdown(category, call, "Audio", shared);
-    assert.match(markdown, /Available in Lua 5.4 and Luau/);
+    assert.match(markdown, /Available in every supported gameplay language/);
     assert.match(markdown, /```lua/);
-    assert.ok(!markdown.includes("```javascript"), slug);
+    assert.ok(markdown.includes("```javascript"), slug);
     assert.ok(!markdown.includes("undefined"), slug);
-    assert.match(markdown, /OnStop = function/);
-    assert.doesNotMatch(markdown, /\bStop = function/);
+    for (const language of exampleLanguages) assert.ok(markdown.includes("### "+language), slug);
     const exported = await readFile(new URL(`../out/docs/${call.slug}.html`, import.meta.url), "utf8");
     assert.ok(exported.includes(call.title), slug);
     assert.ok(exported.includes("64 MiB"), slug);
