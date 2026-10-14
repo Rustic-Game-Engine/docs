@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { exampleLanguages } from "../../lib/script-languages";
 
 const api = "/docs/api/transforms/set-translation";
 test("representative routes, themes and responsive layout", async ({ page }) => {
@@ -12,7 +13,7 @@ test("representative routes, themes and responsive layout", async ({ page }) => 
   await page.getByRole("button", { name: "Toggle theme" }).click(); await expect(page.locator(".site")).not.toHaveClass(/dark/);
   expect(errors).toEqual([]);
 });
-test("language preference persists across navigation and refresh, supports unsupported APIs and comparison", async ({ page }) => {
+test("language preference persists across navigation and refresh, supports recording and comparison", async ({ page }) => {
   await page.goto(api);
   await expect(page.getByRole("tab", { name: "Lua 5.4", exact: true })).toHaveAttribute("aria-selected", "true");
   await page.getByRole("tab", { name: "Python", exact: true }).click();
@@ -22,9 +23,13 @@ test("language preference persists across navigation and refresh, supports unsup
   await page.locator("article").getByRole("link", { name: "rustic.get_translation()", exact: true }).click();
   await expect(page.getByRole("tab", { name: "Python", exact: true })).toHaveAttribute("aria-selected", "true");
   await page.reload(); await expect(page.getByRole("tab", { name: "Python", exact: true })).toHaveAttribute("aria-selected", "true");
-  await page.goto("/docs/api/audio/start-recording"); await expect(page.getByRole("status")).toContainText("No Python example");
+  await page.goto("/docs/api/audio/start-recording");
+  await expect(page.getByRole("tab", { name: "Python", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator('[data-language="Python"]')).toBeVisible();
+  await expect(page.locator('[data-language="Python"]')).toContainText("Game.startRecording()");
+  await expect(page.getByText("No Python example", { exact: false })).toHaveCount(0);
   await page.getByRole("tab", { name: "Show All Languages" }).click();
-  await expect(page.locator('[data-language="Lua 5.4"]')).toBeVisible(); await expect(page.locator('[data-language="Luau"]')).toBeVisible();
+  for (const language of exampleLanguages) await expect(page.locator(`[data-language="${language}"]`)).toBeVisible();
 });
 test("keyboard tabs, focus, deep links and copying", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
