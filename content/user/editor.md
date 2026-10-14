@@ -23,7 +23,7 @@ A folder organizes hierarchy; a primitive is renderable geometry. A script compo
 
 ## Viewport navigation
 
-These controls apply to the authoring viewport when hovered/focused and no text field captures keyboard input:
+These controls apply to the **3D** authoring viewport when hovered or focused. Click it to take keyboard focus back from an Inspector or Explorer text field. Navigation pauses when the editor window loses focus; stop Play to move the authoring camera.
 
 | Control | Action |
 | --- | --- |

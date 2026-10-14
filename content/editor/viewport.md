@@ -4,12 +4,14 @@ Prerequisites: a loaded writable scene with an object. Stop Play for authoring n
 
 ## Navigate and select
 
-1. Hover or click the authoring viewport. Avoid typing into another text field while using navigation keys.
+1. Stop Play and hover or click the **3D** authoring viewport. Clicking gives the viewport keyboard focus, so navigation continues even if the pointer moves outside it. If an Inspector field or Explorer rename field has focus, click the viewport to return keyboard control to it.
 2. Orbit with middle-button drag, right-button drag, or left-button drag away from the gizmo. **Shift + middle drag** pans; the wheel dollies.
 3. Use **W/A/S/D** to move the editor camera and **Q/E** for horizontal panning.
 4. Click a rendered object to select it. **F** or **Frame (F)** frames the selection; **Home** or **Reset (Home)** resets the editor camera.
 
 Expected result: only the authoring camera moves. The selected entity remains available in Inspector. Clicking empty space clears selection unless Shift or the command modifier is held; this is not a multi-selection promise.
+
+Hold a movement key for continuous navigation; release it to stop. **W/S** move forward/backward, **A/D** move left/right, and **Q/E** pan left/right. These keys do not navigate the 2D authoring viewport. Navigation pauses when the editor window loses focus. If keys appear unresponsive, stop Play, activate the editor window, then click the 3D viewport to leave any focused text field. In Play, WASD is forwarded to scripts instead of moving the authoring camera.
 
 ## Move, rotate and scale
 
