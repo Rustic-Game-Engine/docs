@@ -27,7 +27,18 @@ Create, move, rename, and attach scripts in the editor. Never edit
 Luau is implemented but omitted from the current creation menu; use [Luau setup](/docs/scripting/luau/setup-and-attachment) for the Explorer registration workflow.
 
 Rustic assigns an Asset ID when the script is created or imported; scene and object
-records retain that ID even if the source file moves.
+records retain that ID even if the source file moves. Rename an attached script in
+**Explorer** by double-clicking its name, entering the new name, and pressing
+**Enter**. Keep a supported script extension (for example, `player.lua` to
+`controller.lua`). The editor updates the link automatically: press **Play**
+to run the renamed script without reattaching it or editing its source. This works
+for global startup, scene startup, and object component scripts, and also when
+moving a script or renaming/moving its containing folder in Explorer.
+
+Web UI scripts must remain under `ui/`. If the editor cannot save the updated
+script registry, it undoes the move and reports the error in the Console; fix the
+reported file access problem and retry. Renames made outside the engine do not
+update these links automatically.
 
 **Play keyboard status:** The embedded Play viewport currently forwards only held
 WASD, arrow, and Shift keys to scripts. Press/release events, named input actions,
