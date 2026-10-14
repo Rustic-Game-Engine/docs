@@ -85,8 +85,8 @@ const docs: Record<string, ApiDoc> = {
   attributes: {
     title: "Built-in attribute API", summary: "Read or edit engine-owned attributes on the behavior entity or a named scene object.",
     when: "Use attributes for built-in entity state. Prefer `set_translation` for Position and `set_enabled` for Enabled when those dedicated calls better express intent.",
-    calls: ["rustic.get_attribute(name)", "rustic.edit_attribute(name, value)", "rustic.game.Scene.Root.Child.EditAttribute(name, value)", "rustic.edit_object_attribute(source, name, value) — embedded Lua / JavaScript", "rustic.game.Scene.Root.Child:GetAttribute(name) — embedded Lua only"],
-    parameters: [p("name", "string", true, "Name, Position, Size, Color (RGB), CanTouch, CanCollide, Anchored, or Parent."), p("value", "attribute-specific", true, "Value matching the attribute type.")],
+    calls: ["rustic.get_attribute(name)", "rustic.edit_attribute(name, value)", "rustic.game.Scene.Root.Child.EditAttribute(name, value)", "rustic.edit_object_attribute(source, name, value)", "rustic.game.Scene.Root.Child:GetAttribute(name)", "rustic.get_object_attribute(source, name)"],
+    parameters: [p("source", "string", true, "Stable entity ID or full rustic.game.Scene.Root.Child path for object helpers."), p("name", "string", true, "Name, Position, Size, Color (RGB), CanTouch, CanCollide, Anchored, or Parent."), p("value", "attribute-specific", true, "Value matching the attribute type.")],
     returns: "Get returns the current value. Edit validates a typed mutation; [write timing depends on the runtime](/docs/guides/scripting#when-mutations-take-effect).",
     examples: {
       "Lua 5.4": "local name = rustic.get_attribute('Name')\nrustic.edit_attribute('Color', {1, .5, 0})",
@@ -123,7 +123,7 @@ const docs: Record<string, ApiDoc> = {
   logging: {
     title: "Logging API", summary: "Send a bounded diagnostic message to the live game console.",
     when: "Log lifecycle transitions and recoverable errors. Avoid per-frame logging outside short debugging sessions because bounded queues can drop excessive output.",
-    calls: ["rustic.log(level, message)", "print(...) — Lua and JavaScript info", "warn(...) — Lua and JavaScript warning"],
+    calls: ["rustic.log(level, message)", "print(...) — native bindings use rustic.print(message)", "warn(...) — native bindings use rustic.warn(message)"],
     parameters: [p("level", "string", true, "debug, info, warn, or error."), p("message", "string", true, "Human-readable diagnostic text.")],
     returns: "No value. The message is queued for the bounded console sink.",
     examples: simpleMutationExamples("rustic.log('info', 'player spawned')", "rustic.log(\"info\", \"player spawned\");"),
@@ -157,9 +157,9 @@ const docs: Record<string, ApiDoc> = {
     notes: ["Unknown settings and invalid values raise errors without mutating the environment. Exposure is limited to [-20,20]; colors/intensities/distances must be finite and non-negative; sun direction must be finite and nonzero.", "setSkyTexture changes only the image; set enabled=true separately. The renderer checks the image on the next frame. The panorama does not generate image-based lighting or reflections.", "Changes affect the running scene and do not save to the editor or appear in Apply Runtime Changes. Restart Play to restore authored settings.", protocolNote],
   },
   scene: {
-    title: "Scene lookup API", summary: "Resolve stable scene paths to entity IDs and list paths in the play snapshot.",
+    title: "Scene lookup API", summary: "Resolve stable scene paths to entity IDs and list entity IDs in the play snapshot.",
     when: "Resolve references during `Start` and cache the stable ID when possible. List paths for discovery and tooling, not every frame.",
-    calls: ["Game.scene.Find(path)", "Game.scene.List()", "rustic.find_entity(name_or_id) — embedded Lua only"], parameters: [p("path", "string", true, "Stable scene path, name, or entity ID accepted by the adapter.")],
+    calls: ["Game.scene.Find(path)", "Game.scene.List()", "rustic.find_entity(name_or_id)"], parameters: [p("path", "string", true, "Stable scene path, name, or entity ID accepted by the adapter.")],
     returns: "Find returns an entity ID or no value. List returns entity IDs.",
     examples: {
       "Lua 5.4": "local id=Game.scene.Find('Room.Player')\nlocal found,err=rustic.find_entity('Room.Player')\nlocal paths=Game.scene.List()", JavaScript: "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();", Python: "entity_id=Game.scene.Find('Room.Player')\npaths=Game.scene.List()", "C++": "auto id=Game.scene.Find(\"Room.Player\");\nauto paths=Game.scene.List();", "C#": "string? id=Game.scene.Find(\"Room.Player\");\nvar paths=Game.scene.List();", Luau: "local id = Game.scene.Find('Room.Player')\nlocal ids = Game.scene.List()", C: "const char *id = Game.scene.Find(\"Room.Player\");\nRusticList ids = Game.scene.List(\"Game.scene\");", Java: "String id = Game.scene.Find(\"Room.Player\");\nvar ids = Game.scene.List();", PHP: "$id = $Game->scene->Find(\"Room.Player\");\n$ids = $Game->scene->List();", "HTML / inline JS": "const id=Game.scene.Find('Room.Player');\nconst paths=Game.scene.List();",
@@ -264,4 +264,35 @@ function callbacks() {
   const php = `<?php\nrequire __DIR__ . "/rustic.php";\n${nativeNames.map((name) => `function ${name}(${name.includes("update") ? "float $dt" : ""}): void {\n    global $rustic;\n    $rustic->log("info", "${name}");\n}`).join("\n")}\nrustic_run([\n${nativeNames.map((name) => `    "${name}" => "${name}",`).join("\n")}\n]);`;
   const examples: Record<string, string> = {"Lua 5.4": lua, JavaScript: js, Python: python, "C++": cpp, "C#": csharp, Luau: lua, C: c, Java: java, PHP: php, "HTML / inline JS": js};
   return `# Lifecycle callbacks\n\nCallbacks are entry points invoked by Rustic. Define only those a behavior needs.\n\n## When each callback runs\n\n| Callback | When to use it | Variables |\n| --- | --- | --- |\n| OnCreate | One-time construction before startup. | None |\n| Start | Resolve references and initialize gameplay state. | None |\n| OnEnable | Resume when the owner becomes enabled. | None |\n| FixedUpdate | Physics and simulation. | dt: fixed-step seconds |\n| Update | Input and presentation. | dt: frame seconds |\n| OnDisable | Pause when the owner becomes disabled. | None |\n| OnDestroy | Release instance resources. | None |\n| OnStop | Final play-session cleanup. | None |\n\n## Examples in every language\n\nThese registration examples include every callback. Replace each body with the logic you need. Follow your language guide to generate the workspace, install its toolchain, attach the script and press Play. External dispatchers receive dt; it is meaningful for update and fixed_update. Physics runs after FixedUpdate, but collision and touch callbacks are not dispatched. HTML examples go inside an inline script in a ui/ HTML asset.\n\n${languages.map((language) => `### ${language}\n\n\`\`\`${codeLanguage(language)}\n${examples[language]}\n\`\`\``).join("\n\n")}`;
+}
+
+for (const language of ["Python", "C", "C++", "C#", "Java"]) docs.logging.examples[language] +=
+  language === "Python" ? '\nrustic.print("spawned")\nrustic.warn("low health")' : '\nrustic.print("spawned");\nrustic.warn("low health");';
+docs.logging.examples.PHP += '\n$rustic->print("spawned");\n$rustic->warn("low health");';
+docs.logging.examples.Luau += '\nprint("spawned")\nwarn("low health")';
+
+const liveReads: Record<string, string> = {
+ "Lua 5.4": "local position = rustic.get_object_attribute(rustic.entity_id(), 'Position')",
+ Luau: "local position = rustic.get_object_attribute(rustic.entity_id(), 'Position')",
+ JavaScript: "const position = rustic.get_object_attribute(rustic.entity_id(), 'Position');",
+ "HTML / inline JS": "const position = rustic.get_object_attribute(rustic.entity_id(), 'Position');",
+ Python: "position = rustic.get_object_attribute(rustic.entity_id(), 'Position')",
+ C: 'RusticValue position = rustic.get_object_attribute(rustic.entity_id(), "Position");',
+ "C++": 'auto position = rustic.get_object_attribute(rustic.entity_id(), "Position");',
+ "C#": 'var position = rustic.get_object_attribute(rustic.entity_id(), "Position");',
+ Java: 'var position = rustic.get_object_attribute(rustic.entity_id(), "Position");',
+ PHP: '$position = $rustic->get_object_attribute($rustic->entity_id(), "Position");',
+};
+for (const language of languages) {
+ docs.attributes.examples[language] += "\n" + liveReads[language];
+ const edit = docs.attributes.examples[language].split("\n").find((line) => line.includes("edit_attribute("))!;
+ docs.attributes.examples[language] += "\n" + edit.replace("edit_attribute(", "edit_object_attribute(" + (language === "PHP" ? "$rustic->entity_id(), " : "rustic.entity_id(), "));
+ const lookup = language === "PHP" ? '$found = $rustic->find_entity($rustic->entity_id());'
+   : language === "Python" ? "found = rustic.find_entity(rustic.entity_id())"
+   : language === "Lua 5.4" || language === "Luau" ? "local foundById = rustic.find_entity(rustic.entity_id())"
+   : language === "C" ? "const char *found = rustic.find_entity(rustic.entity_id());"
+   : language === "C++" ? "auto found = rustic.find_entity(rustic.entity_id());"
+   : language === "JavaScript" || language === "HTML / inline JS" ? "const found = rustic.find_entity(rustic.entity_id());"
+   : "var found = rustic.find_entity(rustic.entity_id());";
+ docs.scene.examples[language] += "\n" + lookup;
 }

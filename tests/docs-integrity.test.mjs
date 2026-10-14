@@ -44,7 +44,7 @@ test("capture teardown uses OnStop and references actual restrictions", async ()
   const doc = await readDoc("api-call:api/audio/stop-recording");
   assert.match(doc, /OnStop = function/);
   assert.doesNotMatch(doc, /\bStop = function/);
-  assert.match(doc, /Lua 5.4 and Luau/);
+  assert.match(doc, /every supported gameplay language/);
   assert.match(doc, /Microphone input requires Windows/);
 });
 

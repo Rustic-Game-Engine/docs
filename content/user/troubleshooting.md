@@ -28,7 +28,7 @@ Read-only projects may have another active editor holding the lock or a future u
 
 ## Audio and platform differences
 
-Native playback/devices and microphone input require Windows in this implementation. Game-output recording works headlessly in Lua/Luau; hot mic does not. Denied microphone access, absent devices, stale device IDs and unsupported formats can raise script errors. The selected input device does not redirect Lua/Luau capture from the system default. See [Audio](/docs/api/audio) and [Compatibility](/docs/reference/compatibility).
+Native playback/devices and microphone input require Windows in this implementation. Game-output recording works headlessly in every gameplay language; hot mic does not. Denied microphone access, absent devices, stale device IDs and unsupported formats can raise script errors. The selected input device does not redirect capture from the system default. See [Audio](/docs/api/audio) and [Compatibility](/docs/reference/compatibility).
 
 ## Reporting a problem
 

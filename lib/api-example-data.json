@@ -510,17 +510,17 @@
     },
     {
       "title": "Clock.state",
-      "note": "Clock.state is available in embedded Lua/JavaScript, Luau and Python. Other SDKs expose setters only (C# and PHP also allow timeScale() to read scale).",
+      "note": "Every gameplay binding exposes Clock.state; C returns RusticClockState, C++ returns RusticValue, C# returns JsonElement, and Java returns a map.",
       "examples": {
         "Lua 5.4": "local state = Clock.state()",
         "JavaScript": "const state = Clock.state();",
         "Python": "state = Clock.state()",
-        "C++": "// This SDK has no Clock.state getter; set the clock with Clock::timeScale(1).",
-        "C#": "var scale = Clock.timeScale();\n// C# exposes the scale getter but no paused-state snapshot.",
+        "C++": "auto state = Clock::state();",
+        "C#": "var state = Clock.state();",
         "Luau": "local state = Clock.state()",
-        "C": "// This SDK has no Clock.state getter; set the clock with Clock.timeScale(1).",
-        "Java": "// This SDK has no Clock.state getter; set the clock with Clock.timeScale(1).",
-        "PHP": "$scale = Clock::timeScale();\n// PHP exposes the scale getter but no paused-state snapshot.",
+        "C": "RusticClockState state = Clock.state();",
+        "Java": "var state = Clock.state();",
+        "PHP": "$state = Clock::state();",
         "HTML / inline JS": "const state = Clock.state();"
       }
     }
@@ -1068,7 +1068,7 @@
         "C++": "auto camera = Camera::current();",
         "C#": "var camera = Camera.current();",
         "Luau": "local camera = Camera.current()",
-        "C": "const char *camera = Game.scene.Find(\"Game.scene.Camera\");\n// C has no Camera.current getter; resolve the authored camera explicitly.",
+        "C": "const char *camera = Camera.current();",
         "Java": "var camera = Camera.current();",
         "PHP": "$camera = Camera::current();",
         "HTML / inline JS": "const camera = Camera.current();"
@@ -1528,130 +1528,338 @@
     },
     {
       "title": "Audio.load",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play()",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");"
       }
     },
     {
       "title": "audio.load",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
-        "Luau": "local audio = rustic.game.assets[\"music.ogg\"]:load()\naudio:load() -- Already loaded: returns the same handle.",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:load()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.load();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.load()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.load();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.load();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:load()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.unload(&audio);\naudio = Audio.load(\"assets/music.ogg\");",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.load();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->load();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.load();"
       }
     },
     {
       "title": "audio.play",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\nlocal voice = audio:play({loop=true, volume=0.5})",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.play();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.play()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.play();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.play();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.play(audio, NULL);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.play();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->play();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.play();"
       }
     },
     {
       "title": "audio.pause",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.pause()",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.pause();",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.pause(voice);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.pause();",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->pause();",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.pause();"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:pause()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.pause();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.pause()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.pause();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.pause();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:pause()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.pause(audio);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.pause();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->pause();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.pause();"
       }
     },
     {
       "title": "audio.resume",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.resume()",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.resume();",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:pause()\naudio:resume()",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.resume(voice);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.resume();",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->resume();",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.resume();"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:resume()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.resume();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.resume()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.resume();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.resume();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:resume()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.resume(audio);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.resume();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->resume();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.resume();"
       }
     },
     {
       "title": "audio.stop",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:stop()",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:stop()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.stop();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.stop()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.stop();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.stop();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:stop()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.stop(audio);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.stop();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->stop();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.stop();"
       }
     },
     {
       "title": "audio.Unload",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:Unload() -- Stops playback and frees the decoded clip.",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:Unload()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.Unload();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.Unload()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.Unload();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.Unload();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:Unload()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.unload(&audio);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.Unload();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->Unload();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.Unload();"
       }
     },
     {
       "title": "audio.unload",
-      "note": "Loaded audio handles and asset-proxy methods are available only in Lua 5.4 and Luau. Supply assets/music.ogg before Play. Other languages use immediate Audio.play and voice controls, shown below; stopping a voice does not create a reusable loaded handle.",
+      "note": "Reusable loaded audio works in every gameplay language. Supply assets/music.ogg before Play. Stop retains decoded PCM; unload releases it. C uses LoadedAudio service functions and obtains a new handle from Audio.load to reload.",
       "examples": {
-        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
-        "JavaScript": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Python": "# Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvoice = Audio.play(\"assets/music.ogg\")\nvoice.stop()",
-        "C++": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nauto voice = Audio::play(\"assets/music.ogg\");\nvoice.stop();",
-        "C#": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();",
-        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:play()\naudio:unload() -- Stops playback and frees the decoded clip.",
-        "C": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nRusticAudioVoice voice = Audio.play(\"assets/music.ogg\", NULL);\nAudio.stop(voice);",
-        "Java": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nvar voice = Audio.play(\"assets/music.ogg\", 1, 1, false);\nvoice.stop();",
-        "PHP": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\n$voice = Audio::play(\"assets/music.ogg\");\n$voice->stop();",
-        "HTML / inline JS": "// Loaded audio handles are Lua/Luau only; this SDK uses immediate playback.\nconst voice = Audio.play(\"assets/music.ogg\");\nvoice.stop();"
+        "Lua 5.4": "local audio = Audio.load(\"assets/music.ogg\")\naudio:unload()",
+        "JavaScript": "const audio = Audio.load(\"assets/music.ogg\");\naudio.unload();",
+        "Python": "audio = Audio.load(\"assets/music.ogg\")\naudio.unload()",
+        "C++": "auto audio = Audio::load(\"assets/music.ogg\");\naudio.unload();",
+        "C#": "var audio = Audio.load(\"assets/music.ogg\");\naudio.unload();",
+        "Luau": "local audio = Audio.load(\"assets/music.ogg\")\naudio:unload()",
+        "C": "RusticLoadedAudio audio = Audio.load(\"assets/music.ogg\");\nLoadedAudio.unload(&audio);",
+        "Java": "var audio = Audio.load(\"assets/music.ogg\");\naudio.unload();",
+        "PHP": "$audio = Audio::load(\"assets/music.ogg\");\n$audio->unload();",
+        "HTML / inline JS": "const audio = Audio.load(\"assets/music.ogg\");\naudio.unload();"
+      }
+    },
+    {
+      "title": "Game.startRecording",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()",
+        "JavaScript": "const capture = Game.startRecording();",
+        "Python": "capture = Game.startRecording()",
+        "C++": "auto capture = Game.startRecording();",
+        "C#": "var capture = Game.startRecording();",
+        "Luau": "local capture = Game.startRecording()",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);",
+        "Java": "var capture = Game.startRecording();",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();",
+        "HTML / inline JS": "const capture = Game.startRecording();"
+      }
+    },
+    {
+      "title": "Game.stopRecording",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "JavaScript": "const capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Python": "capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C++": "auto capture = Game.startRecording();\nGame.stopRecording(&capture);",
+        "C#": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Luau": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nGame.stopRecording(&capture);",
+        "Java": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$Game->stopRecording($capture);",
+        "HTML / inline JS": "const capture = Game.startRecording();\nGame.stopRecording(capture);"
+      }
+    },
+    {
+      "title": "Game.startHotMic",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startHotMic()",
+        "JavaScript": "const capture = Game.startHotMic();",
+        "Python": "capture = Game.startHotMic()",
+        "C++": "auto capture = Game.startHotMic();",
+        "C#": "var capture = Game.startHotMic();",
+        "Luau": "local capture = Game.startHotMic()",
+        "C": "RusticCaptureHandle capture = Game.startHotMic();",
+        "Java": "var capture = Game.startHotMic();",
+        "PHP": "global $Game;\n$capture = $Game->startHotMic();",
+        "HTML / inline JS": "const capture = Game.startHotMic();"
+      }
+    },
+    {
+      "title": "Game.stopHotMic",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "JavaScript": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Python": "capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C++": "auto capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "C#": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Luau": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C": "RusticCaptureHandle capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "Java": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startHotMic();\n$Game->stopHotMic($capture);",
+        "HTML / inline JS": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);"
+      }
+    },
+    {
+      "title": "rustic.game:startRecording",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()",
+        "JavaScript": "const capture = Game.startRecording();",
+        "Python": "capture = Game.startRecording()",
+        "C++": "auto capture = Game.startRecording();",
+        "C#": "var capture = Game.startRecording();",
+        "Luau": "local capture = Game.startRecording()",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);",
+        "Java": "var capture = Game.startRecording();",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();",
+        "HTML / inline JS": "const capture = Game.startRecording();"
+      }
+    },
+    {
+      "title": "rustic.game:stopRecording",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "JavaScript": "const capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Python": "capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C++": "auto capture = Game.startRecording();\nGame.stopRecording(&capture);",
+        "C#": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Luau": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nGame.stopRecording(&capture);",
+        "Java": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$Game->stopRecording($capture);",
+        "HTML / inline JS": "const capture = Game.startRecording();\nGame.stopRecording(capture);"
+      }
+    },
+    {
+      "title": "rustic.game:startHotMic",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startHotMic()",
+        "JavaScript": "const capture = Game.startHotMic();",
+        "Python": "capture = Game.startHotMic()",
+        "C++": "auto capture = Game.startHotMic();",
+        "C#": "var capture = Game.startHotMic();",
+        "Luau": "local capture = Game.startHotMic()",
+        "C": "RusticCaptureHandle capture = Game.startHotMic();",
+        "Java": "var capture = Game.startHotMic();",
+        "PHP": "global $Game;\n$capture = $Game->startHotMic();",
+        "HTML / inline JS": "const capture = Game.startHotMic();"
+      }
+    },
+    {
+      "title": "rustic.game:stopHotMic",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "JavaScript": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Python": "capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C++": "auto capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "C#": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Luau": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C": "RusticCaptureHandle capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "Java": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startHotMic();\n$Game->stopHotMic($capture);",
+        "HTML / inline JS": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);"
+      }
+    },
+    {
+      "title": "rec:stopRecording",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "JavaScript": "const capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Python": "capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C++": "auto capture = Game.startRecording();\nGame.stopRecording(&capture);",
+        "C#": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "Luau": "local capture = Game.startRecording()\nGame.stopRecording(capture)",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nGame.stopRecording(&capture);",
+        "Java": "var capture = Game.startRecording();\nGame.stopRecording(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$Game->stopRecording($capture);",
+        "HTML / inline JS": "const capture = Game.startRecording();\nGame.stopRecording(capture);"
+      }
+    },
+    {
+      "title": "mic:stopHotMic",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "JavaScript": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Python": "capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C++": "auto capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "C#": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "Luau": "local capture = Game.startHotMic()\nGame.stopHotMic(capture)",
+        "C": "RusticCaptureHandle capture = Game.startHotMic();\nGame.stopHotMic(&capture);",
+        "Java": "var capture = Game.startHotMic();\nGame.stopHotMic(capture);",
+        "PHP": "global $Game;\n$capture = $Game->startHotMic();\n$Game->stopHotMic($capture);",
+        "HTML / inline JS": "const capture = Game.startHotMic();\nGame.stopHotMic(capture);"
+      }
+    },
+    {
+      "title": "capture:read",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\nlocal packet = capture:read()",
+        "JavaScript": "const capture = Game.startRecording();\nconst packet = capture.read();",
+        "Python": "capture = Game.startRecording()\npacket = capture.read()",
+        "C++": "auto capture = Game.startRecording();\nauto packet = capture.read();",
+        "C#": "var capture = Game.startRecording();\nvar packet = capture.read();",
+        "Luau": "local capture = Game.startRecording()\nlocal packet = capture:read()",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nRusticCaptureData packet = Capture.read(capture);",
+        "Java": "var capture = Game.startRecording();\nvar packet = capture.read();",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$packet = $capture->read();",
+        "HTML / inline JS": "const capture = Game.startRecording();\nconst packet = capture.read();"
+      }
+    },
+    {
+      "title": "capture:stop",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\ncapture:stop()",
+        "JavaScript": "const capture = Game.startRecording();\ncapture.stop();",
+        "Python": "capture = Game.startRecording()\ncapture.stop()",
+        "C++": "auto capture = Game.startRecording();\ncapture.stop();",
+        "C#": "var capture = Game.startRecording();\ncapture.stop();",
+        "Luau": "local capture = Game.startRecording()\ncapture:stop()",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nCapture.stop(capture);",
+        "Java": "var capture = Game.startRecording();\ncapture.stop();",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$capture->stop();",
+        "HTML / inline JS": "const capture = Game.startRecording();\ncapture.stop();"
+      }
+    },
+    {
+      "title": "capture:unload",
+      "note": "Run inside Start or another callback. Retain the handle across callbacks to record a longer session. Hot microphone input requires Windows; capture samples are interleaved PCM. Native SDKs show their equivalent method syntax. Lua also retains the rustic.game and handle-specific stop aliases. See APIs in every language for setup and platform limits.",
+      "examples": {
+        "Lua 5.4": "local capture = Game.startRecording()\ncapture:unload()",
+        "JavaScript": "const capture = Game.startRecording();\ncapture.unload();",
+        "Python": "capture = Game.startRecording()\ncapture.unload()",
+        "C++": "auto capture = Game.startRecording();\ncapture.unload();",
+        "C#": "var capture = Game.startRecording();\ncapture.unload();",
+        "Luau": "local capture = Game.startRecording()\ncapture:unload()",
+        "C": "RusticCaptureHandle capture = Game.startRecording(NULL, NULL);\nCapture.unload(capture);",
+        "Java": "var capture = Game.startRecording();\ncapture.unload();",
+        "PHP": "global $Game;\n$capture = $Game->startRecording();\n$capture->unload();",
+        "HTML / inline JS": "const capture = Game.startRecording();\ncapture.unload();"
       }
     }
   ],

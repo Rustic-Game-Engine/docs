@@ -10,7 +10,7 @@ function category(slug: string, source: string, signatures: string[]): ApiCatego
     const method = name.split(/[.:]/).pop()!;
     // Include the receiver when a category exposes both service and handle calls.
     const receiver = name.split(/[.:]/).slice(0, -1).join(".");
-    const local = ["voice", "handle", "connection", "builder", "rec", "mic", "capture"].includes(receiver);
+    const local = ["voice", "handle", "connection", "builder", "rec", "mic", "capture", "loaded"].includes(receiver);
     let segment = `${local ? `${receiver}-` : ""}${method}`
       .replace(/([a-z0-9])([A-Z])/g, "$1-$2").replaceAll("_", "-").toLowerCase();
     if (segments.has(segment)) segment = `${receiver.split(".").pop()!.toLowerCase()}-${segment}`;
@@ -72,6 +72,14 @@ export const apiCategories: ApiCategory[] = [
     "Audio.get_input_devices()",
     "Audio.set_output_device(id = null)",
     "Audio.set_input_device(id = null)",
+    "Audio.load(source)",
+    "audio.load()",
+    "audio.play(options?)",
+    "audio.stop()",
+    "audio.pause()",
+    "audio.resume()",
+    "audio.unload()",
+    "audio.Unload()",
     "Audio.play(source, options?)",
     "Audio.playAt(source, position, options?)",
     "voice.pause()",
@@ -91,6 +99,10 @@ export const apiCategories: ApiCategory[] = [
     "capture:read()",
     "capture:stop()",
     "capture:unload()",
+    "Game.startRecording(path?, options?)",
+    "Game.stopRecording(recording?)",
+    "Game.startHotMic()",
+    "Game.stopHotMic(mic?)",
   ]),
   category("camera-actions", "docs/Scripting/API/camera-actions.md", [
     "Camera.current()",
@@ -233,6 +245,8 @@ export const apiCategories: ApiCategory[] = [
   category("attributes", "api:attributes", [
     "rustic.get_attribute(name)",
     "rustic.edit_attribute(name, value)",
+    "rustic.get_object_attribute(source, name)",
+    "rustic.edit_object_attribute(source, name, value)",
     "rustic.game.Scene.Root.Child.EditAttribute(name, value)",
   ]),
   category("input", "api:input", [
@@ -256,7 +270,7 @@ export const apiCategories: ApiCategory[] = [
   ]),
   category("scene", "api:scene", [
     "Game.scene.Find(path)",
-    "Game.scene.List()",
+    "Game.scene.List(path?)",
     "rustic.find_entity(name_or_id)",
   ]),
   category("instances", "api:instances", [

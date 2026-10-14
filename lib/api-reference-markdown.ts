@@ -1,6 +1,6 @@
 import { buildCallExamples } from "./api-examples";
 import type { ApiCall, ApiCategory } from "./api-reference";
-// Capture uses Lua/Luau handles rather than the JavaScript playback facade.
+// Capture uses the same engine-owned service across every gameplay binding.
 type CaptureReference = {
   parameters: string;
   returns: string;
@@ -16,7 +16,7 @@ const audioCaptureReference: Record<string, CaptureReference> = {
   },
   "stop-recording": {
     parameters: "| Parameter | Meaning |\n| --- | --- |\n| recording | Optional recording handle owned by this script. Omit it to stop all of this script's recordings. |",
-    returns: "Stops recording and finalizes any WAV file. Returns the supplied handle, or nil when omitted. Retained PCM remains readable until unload or owner cleanup. Repeated stops are safe.",
+    returns: "Stops recording and finalizes any WAV file. Lua/Luau return the supplied handle or nil; other bindings return no value. Retained PCM remains readable until unload or owner cleanup. Repeated stops are safe.",
     example: 'local rec\nreturn {\n  Start = function() rec = rustic.game:startRecording() end,\n  OnStop = function()\n    rustic.game:stopRecording(rec)\n    local packet = rec:read()\n    print(#packet.samples)\n    rec:unload()\n  end\n}',
   },
   "start-hot-mic": {
@@ -26,7 +26,7 @@ const audioCaptureReference: Record<string, CaptureReference> = {
   },
   "stop-hot-mic": {
     parameters: "| Parameter | Meaning |\n| --- | --- |\n| mic | Optional hot mic handle owned by this script. Omit it to stop all of this script's hot microphones. |",
-    returns: "Closes the input device and discards unread hot mic input. Returns the supplied handle, or nil when omitted. Repeated stops are safe.",
+    returns: "Closes the input device and discards unread hot mic input. Lua/Luau return the supplied handle or nil; other bindings return no value. Repeated stops are safe.",
     example: 'local mic\nreturn {\n  Start = function() mic = rustic.game:startHotMic() end,\n  OnStop = function() rustic.game:stopHotMic(mic); mic:unload() end\n}',
   },
   "rec-stop-recording": {
@@ -46,7 +46,7 @@ const audioCaptureReference: Record<string, CaptureReference> = {
   },
   "capture-stop": {
     parameters: noParameters,
-    returns: "Stops this recording or hot mic, returning the same handle. This is an alias for stopRecording() on recordings and stopHotMic() on hot microphones.",
+    returns: "Stops this recording or hot mic. Lua/Luau return the same handle; other bindings return no value. This is an alias for stopRecording() on recordings and stopHotMic() on hot microphones.",
     example: 'local capture\nreturn {\n  Start = function() capture = rustic.game:startRecording() end,\n  OnStop = function() capture:stop(); capture:unload() end\n}',
   },
   "capture-unload": {
@@ -56,8 +56,8 @@ const audioCaptureReference: Record<string, CaptureReference> = {
   },
 };
 
-const captureSetup = "Available in Lua 5.4 and Luau. Create an Object Component script in `scripts/`, attach it to an enabled scene object, and press **Play**. Start capture in Start or another callback. Use colon syntax. Microphone input requires Windows and OS microphone access. Recording captures audio, not video.";
-const captureConstraints = "- Capture handles belong to their script. Destroying the owner, ending Play or successful reload closes devices, finalizes files and releases handles. Read retained data in OnStop before cleanup.\n- Each script may retain at most four capture handles; call `:unload()` after use. Recordings retain at most 64 MiB of PCM, including recordings written to files (about 175 seconds of stereo game audio). Exceeding the limit stops capture and read/stop report an error.\n- Hot mic queues at most two seconds of input. Read regularly, using multiple reads if needed. `droppedSamples` reports lost input. Microphone samples are finite floats in `[-1, 1]`; channel count and rate come from the device.\n- Default F32, I16 and U16 microphone formats are supported. Missing devices, denied access, unsupported formats, startup timeouts and disconnection raise errors. Catch expected failures with `pcall`.\n- A recording destination must be a new `.wav` file in an existing writable directory. Game mixer recording also works headlessly.\n\nSee [the recording and hot mic guide](/docs/guides/gameplay-actions/audio#record-audio-and-read-a-hot-microphone-lua-and-luau) for full setup and examples.";
+const captureSetup = "Available in every supported gameplay language. Create an Object Component script in `scripts/`, attach it to an enabled scene object, and press **Play**. Start capture in Start or another callback. Native SDKs use their own member syntax; Lua uses colons. Microphone input requires Windows and OS microphone access. Recording captures audio, not video.";
+const captureConstraints = "- Capture handles belong to their script. Destroying the owner, ending Play or successful reload closes devices, finalizes files and releases handles. Read retained data in OnStop before cleanup.\n- Each script may retain at most four capture handles; call `:unload()` after use. Recordings retain at most 64 MiB of PCM, including recordings written to files (about 175 seconds of stereo game audio). Exceeding the limit stops capture and read/stop report an error.\n- Hot mic queues at most two seconds of input. Read regularly, using multiple reads if needed. `droppedSamples` reports lost input. Microphone samples are finite floats in `[-1, 1]`; channel count and rate come from the device.\n- Default F32, I16 and U16 microphone formats are supported. Missing devices, denied access, unsupported formats, startup timeouts and disconnection raise errors. Catch expected failures with `pcall`.\n- A recording destination must be a new `.wav` file in an existing writable directory. Game mixer recording also works headlessly.\n\nSee [the recording and hot mic guide](/docs/guides/api-languages) for full setup and examples.";
 
 
 export function buildApiCategoryMarkdown(category: ApiCategory, title: string, description: string, shared = "") {
@@ -90,7 +90,9 @@ const audioParameters: Record<string, string> = {
 function audioReturn(method: string) {
   if (["get-output-devices", "get-input-devices"].includes(method)) return "Returns a list of device records containing string id and name fields. Empty lists are valid on hosts without devices. Enumeration currently requires Windows; headless platforms return an empty list.";
   if (method === "set-output-device") return "Returns no value. Switches this scene's mixer output to the selected Windows device. Mixer voices retain their playback cursors; queued output samples are discarded, so a brief interruption is possible. A failed switch preserves the previous output.";
-  if (method === "set-input-device") return "Returns no value. Validates and retains this scene's selected Windows input device. This call does not start microphone capture or route sound to playback. Lua/Luau recording and hot mic capture currently use the system default input independently of this selection.";
+  if (method === "set-input-device") return "Returns no value. Validates and retains this scene's selected Windows input device. This call does not start microphone capture or route sound to playback. Recording and hot mic capture currently use the system default input independently of this selection.";
+  if (method === "load") return "Decodes and retains the clip without starting playback; returns a reusable loaded audio handle.";
+  if (method.startsWith("audio-")) return "Operates on a reusable loaded clip. load returns the same handle; play returns a voice; stop/pause/resume/unload return no value. C reload obtains a new Audio.load handle. Stop retains PCM; unload frees it.";
   if (["play", "play-at"].includes(method)) return "Returns a voice object with an ID and playback controls.";
   if (["fade-in", "fade-out", "crossfade"].includes(method)) return "Returns an operation handle. The shared scheduler advances the fade using scene-clock time.";
   return "Updates the voice playback directly without creating an operation handle.";
@@ -114,22 +116,15 @@ function parametersFor(call: ApiCall, shared: string) {
 }
 
 // Core snippets include prerequisite reads and writes, so keep each complete
-// language block. Filter helpers that only exist in embedded runtimes.
-function coreCallExamples(shared: string, name: string): string {
+// language block for every supported binding.
+function coreCallExamples(shared: string): string {
   const examples = section(shared, "Language examples");
-  const parts = examples.split(/(?=^### )/m);
-  const supported = name === "rustic.find_entity" ? ["Lua 5.4"]
-    : ["print", "warn"].includes(name) ? ["Lua 5.4", "JavaScript", "HTML / inline JS"] : null;
-  if (!supported) return examples;
-  return `Available in ${supported.join(", ")}.\n\n${parts.filter((part, index) => index === 0 || supported.includes(part.split("\n")[0].slice(4))).join("")}`;
+  return examples;
 }
 
-function compatibilityFor(category: ApiCategory, call: ApiCall, capture: boolean) {
+function compatibilityFor(category: ApiCategory, call: ApiCall) {
   const name = call.signature.split("(")[0];
-  const languages = name === "Clock.state" ? "Lua 5.4, Luau, JavaScript, Python and HTML/inline JavaScript. Other SDK examples show available alternatives, not a Clock.state implementation"
-    : capture ? "Lua 5.4 and Luau"
-    : name === "rustic.find_entity" ? "Lua 5.4"
-    : ["print", "warn"].includes(name) ? "Lua 5.4, JavaScript and HTML/inline JavaScript"
+  const languages = ["print", "warn"].includes(name) ? "Lua 5.4, Luau, JavaScript and HTML/inline JavaScript; other languages use rustic.print/rustic.warn"
     : "C, C++, C#, Python, JavaScript, Lua 5.4, Luau, Java, PHP and HTML/inline JavaScript (binding spellings and return shapes differ)";
   const platforms = category.slug === "api/audio"
     ? "Native devices and microphone input require Windows. Game-output recording and the mixer can run headlessly. Other operating systems do not supply the Windows native device backend."
@@ -158,17 +153,18 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   }
   const method = call.slug.split("/").pop()!;
   const audio = category.slug === "api/audio";
-  const capture = audio ? audioCaptureReference[method] : undefined;
+  const capture = audio ? audioCaptureReference[method.replace(/^game-/, "")] : undefined;
   if (capture) {
     return [
       `# ${call.title}`,
       `[${title}](/docs/${category.slug})`,
-      compatibilityFor(category, call, Boolean(capture)),
+      compatibilityFor(category, call),
       `## Signature\n\n\`${call.signature}\``,
       `## Setup and usage\n\n${captureSetup}`,
       `## Parameters\n\n${capture.parameters}`,
       `## Return and timing\n\n${capture.returns}`,
-      `## Language examples\n\n${["Lua 5.4", "Luau"].map((language) => `### ${language}\n\n\`\`\`lua\n${capture.example}\n\`\`\``).join("\n\n")}`,
+      `## Language examples\n\n${buildCallExamples("audio", call.signature.split("(")[0])}`,
+      `## Complete Lua lifecycle example\n\n\`\`\`lua\n${capture.example}\n\`\`\``,
       `## Capture limits and troubleshooting\n\n${captureConstraints}`,
       relatedFor(category, call),
     ].join("\n\n");
@@ -185,7 +181,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   const name = call.signature.split("(")[0];
   const topic = category.slug.slice(4);
   const example = category.source.startsWith("api:")
-    ? coreCallExamples(shared, name)
+    ? coreCallExamples(shared)
     : buildCallExamples(topic, name);
   const constraints = section(shared, "Behavior and limitations") || section(shared, "Constraints and behavior");
   // Example-specific outcomes belong alongside the example that demonstrates them.
@@ -194,7 +190,7 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
   return [
     `# ${call.title}`,
     `[${title}](/docs/${category.slug})`,
-      compatibilityFor(category, call, Boolean(capture)),
+      compatibilityFor(category, call),
     `## Signature\n\n\`${call.signature}\``,
     setup && `## Setup and usage\n\n${setup}`,
     `## Parameters\n\n${parameters || "See the category conventions and the language-specific examples below; no additional parameter contract is asserted here."}`,
