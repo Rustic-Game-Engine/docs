@@ -4,6 +4,7 @@ import { DocsLanding } from "@/components/docs-landing";
 import { DocsShell } from "@/components/docs-shell";
 import { allDocs, docAliases, routeFor } from "@/lib/docs-catalog";
 import { findDoc, readDoc } from "@/lib/docs";
+import { markdownRouteFor } from "@/lib/site-url";
 
 export const dynamicParams = false;
 
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/docs/[[...slug]]"
   const { slug } = await params;
   if (!slug?.length) return { title: "Welcome · Rustic Engine Docs", description: "Start building with Rustic Engine or contribute to the documentation website." };
   const doc = findDoc(slug);
-  return doc ? { title: `${doc.title} · Rustic Engine Docs`, description: doc.description, alternates: { canonical: routeFor(doc.slug) } } : {};
+  return doc ? { title: `${doc.title} · Rustic Engine Docs`, description: doc.description, alternates: { canonical: routeFor(doc.slug), types: { "text/markdown": markdownRouteFor(doc.slug), "text/plain": "/llms.txt" } } } : {};
 }
 
 export default async function DocumentationPage({ params }: PageProps<"/docs/[[...slug]]">) {

@@ -5,6 +5,19 @@ this repository’s `docs/` folder during the build;
 generated API content is in `lib/api-docs.ts` and navigation in `lib/docs-catalog.ts`.
 No engine checkout or sibling directory is required.
 
+## Reading with AI agents
+
+Agents can start at `/llms.txt`, which lists every published page with a link to
+its plain Markdown at `/markdown/<doc-slug>.md`. `/llms-full.txt` contains the
+complete documentation, including generated API references and every language
+example. These files are generated from the same catalog and sources as the
+HTML pages on each build, so they stay synchronized automatically.
+
+HTML pages advertise their Markdown alternative and the agent index in their
+head metadata, and navigation links directly to the agent index.
+`/robots.txt` permits crawling and points to `/sitemap.xml`.
+Canonical URLs use `lib/site-url.ts`; update it when hosting a fork elsewhere.
+
 Markdown was imported from `Engine/docs` at engine commit `3db0126b`.
 This audit checked behavior against engine commit `017db99b7025eeda96acf21967664153a2df0795`.
 See [maintenance](/docs/open-source/docs/maintenance) for route/link checks and source synchronization.
