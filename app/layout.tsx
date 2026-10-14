@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Manrope } from "next/font/google";
 import { SiteFrame } from "@/components/site-frame";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans" });
@@ -11,9 +12,11 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Rustic Engine Docs",
   description: "Guides and API reference for building games with Rustic Engine.",
   icons: { icon: "/favicon.svg" },
+  alternates: { types: { "text/plain": "/llms.txt" } },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
