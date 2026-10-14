@@ -46,7 +46,7 @@ test("every exported Markdown documentation link targets an exported file", asyn
 
 test("HTML advertises plain text and Markdown and crawlers discover canonical pages", async () => {
   const html = await exported("docs/api/audio/stop-recording.html");
-  assert.match(html, /href="\/llms\.txt">Documentation for AI agents<\/a>/);
+  assert.doesNotMatch(html, /<a\b[^>]*href="\/llms\.txt"/);
   assert.match(html, /<link[^>]+type="text\/markdown"[^>]+href="https:\/\/rustic-game-engine\.pages\.dev\/markdown\/api\/audio\/stop-recording\.md"/);
   assert.match(html, /<link[^>]+type="text\/plain"[^>]+href="https:\/\/rustic-game-engine\.pages\.dev\/llms\.txt"/);
   const sitemap = await exported("sitemap.xml");

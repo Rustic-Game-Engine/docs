@@ -80,7 +80,6 @@ export function SiteFrame({ children }: { children: ReactNode }) {
         <div className="sidebar-mobile-head"><span>Documentation</span><button onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X /></button></div>
         <nav className="sidebar-content" aria-label="Documentation">
           <Link className="home-link" href="/" onClick={() => setMenuOpen(false)} aria-current={pathname === "/" || pathname === "/docs" ? "page" : undefined}>Welcome to Rustic</Link>
-          <a className="home-link" href="/llms.txt">Documentation for AI agents</a>
           <div className="project-switcher" aria-label="Documentation projects">{docSections.map((section) => <Link href={section.href} key={section.title} className={!isIndex && project === section.title ? "active" : ""} onClick={() => setMenuOpen(false)}>{section.title}</Link>)}</div>
           {docSections.filter((section) => isIndex || section.title === project).map((section) => <div className="nav-project" key={section.title}>
             <Link className="nav-project-title" href={section.href} onClick={() => setMenuOpen(false)}>{section.title}</Link>
