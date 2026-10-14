@@ -83,6 +83,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "api/operation-handles", title: "Operation handles", description: "Inspect, pause, resume, cancel and observe engine-scheduled actions.", source: "docs/Scripting/API/operation-handles.md" },
   ] },
   { label: "Scene API", docs: [
+    { slug: "guides/api-paths", title: "Call APIs through paths", description: "Use scene object, global service and Explorer file API paths in every scripting language.", source: "docs/Scripting/apiPaths.md" },
     { slug: "guides/scene-objects", title: "Edit scene objects", description: "Target an object by scene name and hierarchy in any script language.", source: "docs/Scripting/sceneObjects.md" },
     { slug: "api/environment", title: "Scene environment", description: "Read and change sky textures, ambient and sun lighting, and haze from every script language.", source: "api:environment" },
     { slug: "api/scene", title: "Scene lookup", description: "Find entities and enumerate stable scene paths.", source: "api:scene" },
