@@ -41,3 +41,7 @@ on `globalThis.behavior` run.
 
 HTML layout and CSS styling for game UI are planned. The sample above exercises
 JavaScript callbacks only; it does not currently display a rendered HTML body.
+
+A missing linked script is skipped with a runtime warning for that play session.
+Remaining linked and inline scripts continue running. Restore the file, stop Play,
+and start Play again to load it. Missing files are not retried during the session.
