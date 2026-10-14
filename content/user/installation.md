@@ -29,7 +29,8 @@ A working native graphics driver, writable project directory and space for proje
 
 ## Installation and startup problems
 
-- **Optional tool install failed:** inspect Setup/Language Toolchain Manager output and Windows Package Manager availability. Start with bundled Lua; other languages can wait.
+- **Optional tool install failed:** Setup runs one hidden PowerShell process for all selected languages and skips already-installed tools. A host initialization failure stops the batch and reports one optional-toolchain error; the engine remains installed. Retry later from **Language Toolchain Manager** after repairing the failing PowerShell or Microsoft App Installer installation. Setup does not require Windows Terminal.
+- **Error `142` or `0xc0000142` during Setup:** retain the complete message; these are distinct codes. The failure dialog shows the launch error or exit code and the Setup log path. Setup automatically creates `Setup Log ...txt` in `%TEMP%`; run the installer with `/LOG="C:\path\setup.log"` to choose a location. If PowerShell started, its transcript is in the original user's `%LOCALAPPDATA%\Rustic Game Engine\logs\toolchain-install.log`. If that file is absent, the Setup log still records PowerShell startup failures. Start with bundled Lua while diagnosing optional tools.
 - **Tool installed but not discovered:** restart Rustic after changing PATH. Use Project Manager **Settings** and the editor Console to inspect language availability.
 - **Access denied:** choose a writable project directory. Avoid a protected installation location; check the actual OS permission error.
 - **Editor does not launch or the viewport stays blank:** inspect Project Manager **Diagnostics**, then editor Console output. Check graphics-driver/backend errors and [Troubleshooting](/docs/troubleshooting).
