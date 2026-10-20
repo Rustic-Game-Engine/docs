@@ -14,7 +14,8 @@ Engine > Language Toolchain Manager** in the Start menu or by rerunning Setup.
 Setup uses one PowerShell process without allocating a console for all selected
 toolchains and skips tools that are already installed. A bundled GUI setup helper
 launches PowerShell and the agent integration installer under the original user's
-account. The project manager is a Windows GUI executable, so launching it from the
+account. The manager also starts WinGet without a console, capturing its stdout and
+stderr in the toolchain log. The project manager is a Windows GUI executable, so launching it from the
 Finish screen also avoids console-host initialization. Hiding a console window alone
 does not prevent console-host startup failures.
 
