@@ -13,7 +13,10 @@ have three seconds to finish. An exception, invalid engine value, process exit,
 timeout, or rejected call disables the behavior. Failed build/reload validation
 keeps the last good instance running.
 
-- **Toolchain unavailable:** check PATH in the editor's environment, then restart it.
+- **Toolchain unavailable:** check that `clang.exe` (Windows) or your chosen C
+  compiler exists. On Windows, add a custom compiler folder to the saved user/system
+  PATH and press **Play** again. On other platforms, restart the editor after a PATH
+  change.
 - **Nothing moves:** check attachment, owner transform, Play focus, and held KeyW.
 - **Property rejected:** declare it in the editor and preserve its type.
 - **Wrong parent:** pass the ID returned by Find, not the path string.

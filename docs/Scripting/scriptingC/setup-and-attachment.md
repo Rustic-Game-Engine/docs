@@ -2,7 +2,10 @@
 
 [Back to C](/docs/scripting/c).
 
-1. Install Clang, GCC, or MSVC on PATH (C17). Restart the editor after changing PATH.
+1. Install Clang, GCC, or MSVC (C17). On Windows, Rustic also checks the saved
+   system/user PATH and registered or standard LLVM install folders. After installation
+   or a saved PATH change, press **Play** to recheck. On other platforms, put the
+   compiler on PATH before starting the editor.
    Check the Project Manager’s **Settings** language tools and the editor **Console** for discovery errors. Contributors with a source checkout can optionally run `cargo xtask doctor` from `Engine/`.
 2. Open your game project and scene. Select a **Part** object for this movement example.
 3. Use **Programming > Object Component Script** and select C.
