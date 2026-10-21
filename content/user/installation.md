@@ -19,10 +19,24 @@ There is no account or Rust toolchain setup step.
 
 Newer Windows x64 releases, including the project's pre-alpha releases, download
 in the background. The updater verifies the installer's size and SHA-256 against
-GitHub before running Setup. Save your work and close Project Manager, every
-editor and any running games or workers normally: installation waits until they
-are closed. Start Rustic again to use the updated version. The updater never
-forces an editor closed or reboots Windows. Setup retains the installation
+GitHub before running Setup. If Rustic is open, it asks once whether to install
+that release. Choose **Not now** or close the prompt to dismiss it; this is
+remembered across app restarts. A small **Update** button stays in the top-right
+title bar, immediately left of the minimize/maximize/close controls, in both
+Project Manager and the editor. A newer release can show a new prompt.
+
+Choose **Install update** in the prompt or click **Update** later. Editors with
+unsaved scenes ask to save before closing; failed saves leave the editor open.
+Active Play sessions stop for runtime-change review. After installation succeeds,
+Project Manager and each editor closed for the update reopen using the new version,
+with each editor restoring its original project. Paths with spaces and Unicode
+are supported. Reopened applications run as the original user.
+
+You can cancel closing and keep working. Close standalone games/workers separately;
+installation waits for all Rustic processes from that installation. An automatic
+update after a normal app exit does not reopen it, and failed installations do not
+replay sessions. The updater never force-closes editors or reboots Windows.
+Setup retains the installation
 directory, installation scope, selected languages and shortcut/PATH settings;
 an all-users installation can still show Windows' elevation prompt.
 
