@@ -34,6 +34,12 @@ are supported. Reopened applications run as the original user.
 
 You can cancel closing and keep working. Close standalone games/workers separately;
 installation waits for all Rustic processes from that installation. An automatic
+update request does not close windows you open afterward. If another process still
+blocks a requested update after two minutes, the updater cancels the close request
+and restores closed windows with the currently installed version and original
+projects. **Update** stays available, and installation can run after a later normal
+exit. A process whose installation path cannot be read also blocks Setup safely.
+An automatic
 update after a normal app exit does not reopen it, and failed installations do not
 replay sessions. The updater never force-closes editors or reboots Windows.
 Setup retains the installation
@@ -50,8 +56,20 @@ to compare releases.
 For download, checksum, API rate-limit or Setup failures, inspect
 `%LOCALAPPDATA%\Rustic Game Engine\updates\<installation-key>\update.log` and
 `update-setup.log` in the same folder. Failed checks retry hourly while Rustic is
-open or on a later launch. If an update is waiting, close all Rustic processes;
+open or on a later launch. While waiting, `update.log` lists remaining Rustic
+process names and IDs once a minute. Retries reuse downloaded installers after
+rechecking their size and checksum. If an update is waiting, close all Rustic processes;
 you can also install the release manually from its GitHub page.
+
+If an older build immediately closes newly opened editors while an update waits,
+close Project Manager, run this PowerShell command, then reopen Rustic:
+
+```powershell
+Get-ChildItem "$env:LOCALAPPDATA\Rustic Game Engine\updates" -Filter install-request.txt -Recurse -File | Remove-Item
+```
+
+This only clears the queued close request. It does not remove projects, update
+settings or downloaded installers. Install a corrected release to prevent repeats.
 
 ## System requirements and platform status
 
