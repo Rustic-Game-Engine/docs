@@ -2,13 +2,42 @@
 
 ## Available builds
 
-**Windows: experimental pre-alpha builds.** The engine’s [GitHub releases](https://github.com/Rustic-Game-Engine/engine/releases) publish x64 setup executables. On 12 October 2026 the newest published release tag was **v0.5-Pre-Alpha**. Choose the release explicitly: GitHub’s “latest” shortcut can exclude pre-releases. Read its notes, download the attached `RusticGameEngine-Setup-*.exe`, run Setup, and launch Rustic from its Start-menu entry.
+**Windows: experimental pre-alpha builds.** The engine’s [GitHub releases](https://github.com/Rustic-Game-Engine/engine/releases) publish x64 setup executables. Choose the release explicitly: GitHub’s “latest” shortcut can exclude pre-releases. Read its notes, download the attached `RusticGameEngine-Setup-*.exe`, run Setup, and launch Rustic from its Start-menu entry.
 
 This is an engine release tag, separate from **Docs v0.1**. An installer filename’s package version is not the documentation version. No download is hosted by this docs site.
 
 Setup bundles Project Manager, editor, runtime and asset worker; Lua 5.4, JavaScript/QuickJS, HTML/inline JS and the Luau host are engine-provided. Optional Python, C/C++, C#, Java and PHP tools can be selected in Setup or installed later through the **Language Toolchain Manager**. These tools use Windows Package Manager. You do not need Rust, Cargo or Inno Setup to use the installed editor.
 
 If a release asset is unavailable, a successful [Windows installer workflow](https://github.com/Rustic-Game-Engine/engine/actions/workflows/windows-installer.yml) can provide an artifact to users with GitHub access. Extract the artifact ZIP before running Setup. Artifacts expire; a workflow existing does not guarantee a successful downloadable run.
+
+## Automatic Windows updates
+
+Windows builds that include the automatic updater check GitHub Releases when
+Project Manager or the editor starts, then hourly while Rustic is open. Older
+installations need one manual upgrade to an installer containing this feature.
+There is no account or Rust toolchain setup step.
+
+Newer Windows x64 releases, including the project's pre-alpha releases, download
+in the background. The updater verifies the installer's size and SHA-256 against
+GitHub before running Setup. Save your work and close Project Manager, every
+editor and any running games or workers normally: installation waits until they
+are closed. Start Rustic again to use the updated version. The updater never
+forces an editor closed or reboots Windows. Setup retains the installation
+directory, installation scope, selected languages and shortcut/PATH settings;
+an all-users installation can still show Windows' elevation prompt.
+
+This applies to installed Windows builds whose exact build commit has a published
+release. Source builds, unpublished workflow artifacts, Linux and macOS do not
+install updates automatically. Releases missing a single x64 installer or GitHub's
+SHA-256 metadata are skipped. A build whose release has not been published yet
+waits to avoid downgrading; the installer filename's package version is not used
+to compare releases.
+
+For download, checksum, API rate-limit or Setup failures, inspect
+`%LOCALAPPDATA%\Rustic Game Engine\updates\<installation-key>\update.log` and
+`update-setup.log` in the same folder. Failed checks retry hourly while Rustic is
+open or on a later launch. If an update is waiting, close all Rustic processes;
+you can also install the release manually from its GitHub page.
 
 ## System requirements and platform status
 
