@@ -19,6 +19,11 @@ The workspace includes 3D/2D viewports, Game Project Explorer, Inspector and Con
 
 **File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
 
+Interface controls, folders and non-script file types use bundled Lucide icons.
+Script and programming-language icons keep their existing designs. Move, Rotate,
+Scale and playback controls still have text labels. Icons work offline without
+installing a font or downloading an icon pack.
+
 ## Focused workflows
 
 - [Scene hierarchy](/docs/guides/editor/scene-hierarchy): create, select, name and parent objects.
