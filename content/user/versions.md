@@ -11,6 +11,12 @@ The latest release observed on 12 October 2026 was **v0.5-Pre-Alpha**; this is a
 
 ## Engine and API changes
 
+Installed Windows builds that include the automatic updater check for newer
+GitHub releases, including pre-alpha releases, and install after all Rustic
+applications close. Read [Automatic Windows updates](/docs/getting-started/installation#automatic-windows-updates)
+for the one-time manual upgrade from older builds, Windows elevation prompts,
+release matching and failure logs.
+
 Read the actual [release notes](https://github.com/Rustic-Game-Engine/engine/releases) before upgrading. This page does not fabricate a changelog or promise that older installers support every currently documented API. Keep backups of authored projects and review schema migration/compatibility notes. [Feature status](/docs/reference/compatibility) lists current restrictions, including input, audio, UI and export.
 
 ## Documentation maintenance
