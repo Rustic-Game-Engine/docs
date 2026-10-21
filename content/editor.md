@@ -8,7 +8,7 @@ Prerequisites: a working desktop graphics session and a writable project locatio
 
 1. In Project Manager, choose **New project**, enter a name and location, choose a template, then **Create project**. For an existing project, choose **Import…**, select its location, and **Import project**.
 2. Choose **Open project**. The editor shows the project name in the toolbar. A locked project may open read-only; the **READ ONLY** indicator means authoring changes cannot be saved.
-3. Use the **Project** panel's **Scene** tab for objects and **Explorer** tab for files. Select an object to show its properties in **Inspector**. The settings gear at the top right of Project opens **Change scene**, which loads another scene with its objects and environment.
+3. Use the **Project** panel's **Scene** tab for objects and **Explorer** tab for files. Select an object to show its properties in **Inspector**. The settings gear at the top right of Project opens **Change scene**, which loads another scene with its objects and environment. Right-click a scene in that list for **Rename** and **Set as start scene**; the start choice is saved for the next project opening.
 4. Save with **File → Save scene**. Check Console for `Scene saved transactionally` or a save error. Game Settings exposes autosave; when enabled, changed scenes are saved automatically, with a periodic save check at 30 seconds.
 
 Expected result: your project opens with its scene, and a successful save persists authored changes. Save explicitly before closing or copying a project.
