@@ -15,9 +15,31 @@ Expected result: your project opens with its scene, and a successful save persis
 
 ## Layout, panels and toolbar
 
-The workspace includes 3D/2D viewports, Game Project Explorer, Inspector and Console. Drag panel tabs to change docking. **View → Reset dock layout** restores the default dock arrangement. **View** can open a missing 3D or 2D viewport and offers **Inspector on native viewport**. Workspace preferences persist, but this does not promise that every arbitrary dock geometry survives reopening.
+The workspace includes 3D/2D viewports, Game Project Explorer, Inspector and Console. Drag panel tabs to change docking. **View → Reset dock layout** restores the default dock arrangement. **View** includes egui's built-in dark/light/system theme controls and can open a missing 3D or 2D viewport or the **Scene Graph** and offers **Inspector on native viewport**. Workspace preferences persist, but this does not promise that every arbitrary dock geometry survives reopening.
 
 **File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
+
+The editor and Project Manager use standard [egui](https://www.egui.rs/#demo)
+widgets and built-in themes. Panel docking uses
+[egui_tiles](https://github.com/rerun-io/egui_crates/tree/main/crates/egui_tiles),
+transform handles use [transform-gizmo](https://urholaukkarinen.github.io/transform-gizmo/),
+and Scene Graph uses [egui-snarl](https://zakarumych.github.io/egui-snarl/).
+
+### View the scene as a graph
+
+1. Open a project and choose **View → Open Scene Graph**.
+2. Each scene entity appears as a node. Wires run from a parent's **Children** pin
+   to its child's **Parent** pin.
+3. Click a node's name to select its entity in Inspector. Drag node headers to
+   arrange the view; use egui-snarl's canvas pan and zoom gestures to navigate.
+4. Create, rename, delete, or reparent objects in **Project → Scene**. Return to
+   Scene Graph to see the updated hierarchy.
+
+Expected result: the graph reflects the loaded scene and shares Inspector
+selection. An empty scene displays guidance to add an object. Graph node
+positions last while the scene remains loaded; wire gestures do not change parenting.
+Use the Project scene tree to change parent links and the normal Undo/Redo menu
+to undo those edits. This view does not execute visual scripts.
 
 Interface controls, folders and non-script file types use bundled Lucide icons.
 Script and programming-language icons keep their existing designs. Move, Rotate,

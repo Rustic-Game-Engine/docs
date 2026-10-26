@@ -16,15 +16,16 @@ Hold a movement key for continuous navigation; release it to stop. **W/S** move 
 ## Move, rotate and scale
 
 1. Select the object and choose **Move**, **Rotate** or **Scale** in the main toolbar.
-2. Drag the visible axis handle or rotation ring. Check the new local values in Inspector.
-3. For exact placement, enter numeric values in Inspector's Transform section.
-4. Save the scene; use **Edit → Undo** to revert an unintended change.
+2. Choose **World** or **Local** axes above the viewport. Drag a transform-gizmo axis, plane handle, rotation ring, or scale handle. Check the new local values in Inspector.
+3. Enable **Snap** above the viewport for stepped movement. The adjacent value controls translation distance, rotation degrees, or scale increments for the selected tool.
+4. For exact placement, enter numeric values in Inspector's Transform section.
+5. Save the scene; use **Edit → Undo** to revert an unintended change.
 
-Expected result: the selected object's transform changes with a refreshed preview. Camera orbit and gizmo drags have different targets; begin the drag on the handle to manipulate the object.
+Expected result: the selected object's transform changes with a refreshed preview. Releasing a handle records one Undo entry for the whole drag, including a release outside the viewport. Camera orbit and gizmo drags have different targets; begin the drag on the handle to manipulate the object.
 
 ## Viewport modes and limits
 
-The editor offers 3D and 2D viewport panels. These are authoring views; do not infer undocumented wireframe, material-preview or snapping modes. Picking depends on the rendered scene, so use the hierarchy when an object is obscured or cannot be picked.
+The editor offers 3D and 2D viewport panels. These are authoring views; do not infer undocumented wireframe or material-preview modes. Transform handles operate in the 3D authoring viewport while Play is stopped. Read-only projects do not expose editable handles. Some world-space rotations or scales beneath a nonuniformly scaled parent would require shear, which the scene transform format cannot store; those results are rejected. Use a uniformly scaled parent or edit local values in Inspector in that case. Picking depends on the rendered scene, so use the hierarchy when an object is obscured or cannot be picked.
 
 In Play, input is forwarded to gameplay and the active **game camera** determines the runtime view. The editor camera's authoring pose does not automatically become the game camera pose. Use **Align to editor view** on a camera in Inspector when you want to copy that pose.
 
