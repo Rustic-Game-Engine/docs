@@ -13,15 +13,19 @@ If a release asset is unavailable, a successful [Windows installer workflow](htt
 ## Automatic Windows updates
 
 Windows builds that include the automatic updater check GitHub Releases when
-Project Manager or the editor starts, then hourly while Rustic is open. Older
-installations need one manual upgrade to an installer containing this feature.
+Project Manager or the editor starts, then hourly while Rustic is open, including
+while a downloaded update is waiting for the apps to close. A newer release
+replaces the waiting update after verification. Older installations need one
+manual upgrade to an installer containing this feature.
 There is no account or Rust toolchain setup step.
 
 Newer Windows x64 releases, including the project's pre-alpha releases, download
 in the background. The updater verifies the installer's size and SHA-256 against
-GitHub before running Setup. If Rustic is open, it asks once whether to install
-that release. Choose **Not now** or close the prompt to dismiss it; this is
-remembered across app restarts. A small **Update** button stays in the top-right
+GitHub before running Setup. If Rustic is open, the focused window asks once
+whether to install that release. Background or minimized windows leave the popup
+for the next focused Rustic window and still show the **Update** button. Choose
+**Not now** or close the prompt to dismiss it; this is remembered across app
+restarts. A small **Update** button stays in the top-right
 title bar, immediately left of the minimize/maximize/close controls, in both
 Project Manager and the editor. A newer release can show a new prompt.
 
@@ -60,6 +64,9 @@ open or on a later launch. While waiting, `update.log` lists remaining Rustic
 process names and IDs once a minute. Retries reuse downloaded installers after
 rechecking their size and checksum. If an update is waiting, close all Rustic processes;
 you can also install the release manually from its GitHub page.
+If no popup appears, focus Project Manager or the editor and wait a second. If the
+notification was already claimed (including by a background window in an older
+build), use **Update**; restarting does not reset that release's reminder.
 
 If an older build immediately closes newly opened editors while an update waits,
 close Project Manager, run this PowerShell command, then reopen Rustic:
