@@ -8,14 +8,22 @@ Prerequisites: a working desktop graphics session and a writable project locatio
 
 1. In Project Manager, choose **New project**, enter a name and location, choose a template, then **Create project**. For an existing project, choose **Import…**, select its location, and **Import project**.
 2. Choose **Open project**. The editor shows the project name in the toolbar. A locked project may open read-only; the **READ ONLY** indicator means authoring changes cannot be saved.
-3. Use the **Project** panel's **Scene** tab for objects and **Explorer** tab for files. Select an object to show its properties in **Inspector**. The settings gear at the top right of Project opens **Change scene**, which loads another scene with its objects and environment. Right-click a scene in that list for **Rename** and **Set as start scene**; the start choice is saved for the next project opening.
+3. Use **Scene Explorer** for objects and **Explorer** for files. Select an object to show its properties in **Properties** (the Inspector). The settings gear at the top right of either explorer opens **Change scene**, which loads another scene with its objects and environment. Right-click a scene in that list for **Rename** and **Set as start scene**; the start choice is saved for the next project opening.
 4. Save with **File → Save scene**. Check Console for `Scene saved transactionally` or a save error. Game Settings exposes autosave; when enabled, changed scenes are saved automatically, with a periodic save check at 30 seconds.
 
 Expected result: your project opens with its scene, and a successful save persists authored changes. Save explicitly before closing or copying a project.
 
 ## Layout, panels and toolbar
 
-The workspace includes 3D/2D viewports, Game Project Explorer, Inspector and Console. Drag panel tabs to change docking. **View → Reset dock layout** restores the default dock arrangement. **View** includes egui's built-in dark/light/system theme controls and can open a missing 3D or 2D viewport or the **Scene Graph** and offers **Inspector on native viewport**. Workspace preferences persist, but this does not promise that every arbitrary dock geometry survives reopening.
+The workspace includes 3D/2D viewports and separate **Scene Explorer**, **Explorer**, **Properties** (Inspector), and **Terminal** (Console) dock tabs. Scene Explorer and Explorer initially share a tab group, but each can be moved independently.
+
+1. Press and hold a panel's tab header, then drag it to another tab bar to group it there.
+2. Drag toward a panel edge and release on the docking preview to split the space and show both panels at once.
+3. Drag tabs along a tab bar to reorder them. Even a panel alone in a split keeps its tab header.
+
+Expected result: you can keep the scene tree, files, selected object's properties, and runtime logs visible in your preferred arrangement. **Terminal** retains the runtime log filters, Copy and Clear controls; it is not a shell prompt. Panel docking does not change scene data or undo history.
+
+**View → Reset dock layout** restores the default arrangement if you lose track of a panel. **View** includes egui's built-in dark/light/system theme controls, can open a missing 3D or 2D viewport or **Scene Graph**, and offers **Inspector on native viewport**. Workspace preferences persist, but arbitrary dock geometry currently resets when reopening a project. Older combined Project workspaces receive separate scene and file panes automatically.
 
 **File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
 
@@ -32,7 +40,7 @@ and Scene Graph uses [egui-snarl](https://zakarumych.github.io/egui-snarl/).
    to its child's **Parent** pin.
 3. Click a node's name to select its entity in Inspector. Drag node headers to
    arrange the view; use egui-snarl's canvas pan and zoom gestures to navigate.
-4. Create, rename, delete, or reparent objects in **Project → Scene**. Return to
+4. Create, rename, delete, or reparent objects in **Scene Explorer**. Return to
    Scene Graph to see the updated hierarchy.
 
 Expected result: the graph reflects the loaded scene and shares Inspector
