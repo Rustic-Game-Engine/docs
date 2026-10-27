@@ -13,8 +13,8 @@ If a release asset is unavailable, a successful [Windows installer workflow](htt
 ## Automatic Windows updates
 
 Windows builds that include the automatic updater check GitHub Releases when
-Project Manager or the editor starts, then hourly while Rustic is open, including
-while a downloaded update is waiting for the apps to close. A newer release
+Project Manager or the editor starts, then every two minutes while Rustic is open,
+including while a downloaded update is waiting for the apps to close. A newer release
 replaces the waiting update after verification. Older installations need one
 manual upgrade to an installer containing this feature.
 There is no account or Rust toolchain setup step.
@@ -37,7 +37,12 @@ with each editor restoring its original project. Paths with spaces and Unicode
 are supported. Reopened applications run as the original user.
 
 You can cancel closing and keep working. Close standalone games/workers separately;
-installation waits for all Rustic processes from that installation. An automatic
+installation waits for all Rustic processes from that installation. Once desktop
+windows, games and workers close, the updater stops that installation's agent
+backends, including those kept alive by external MCP clients. It checks once a
+second during Setup and stops backends that clients restart, including while
+optional language tools install. Backends from other installations stay running.
+Reconnect the Rustic MCP server in your agent client after installation. An automatic
 update request does not close windows you open afterward. If another process still
 blocks a requested update after two minutes, the updater cancels the close request
 and restores closed windows with the currently installed version and original
@@ -59,8 +64,8 @@ to compare releases.
 
 For download, checksum, API rate-limit or Setup failures, inspect
 `%LOCALAPPDATA%\Rustic Game Engine\updates\<installation-key>\update.log` and
-`update-setup.log` in the same folder. Failed checks retry hourly while Rustic is
-open or on a later launch. While waiting, `update.log` lists remaining Rustic
+`update-setup.log` in the same folder. Failed checks retry every two minutes while
+Rustic is open or on a later launch. While waiting, `update.log` lists remaining Rustic
 process names and IDs once a minute. Retries reuse downloaded installers after
 rechecking their size and checksum. If an update is waiting, close all Rustic processes;
 you can also install the release manually from its GitHub page.
