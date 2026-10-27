@@ -13,6 +13,6 @@ Play, New Window, and Standalone render the live scene through its current activ
 - Orthographic vertical size: changes the visible world-space height without perspective foreshortening.
 - Near/Far clip: limits visible depth.
 
-The game view currently renders at 640 by 360, with a fixed 16:9 aspect ratio and letterboxing. Editor navigation and gizmos are separate from the game camera. Stop restores the editor view. Simulation changes to camera or parent transforms are reflected in subsequent game frames.
+The game view keeps a fixed 16:9 aspect ratio with letterboxing and renders at the physical pixel size of the visible game area. Embedded Play follows the editor panel size and display scaling; New Window and Standalone follow their own window size and display scaling. Resizing requests a new render target instead of enlarging a fixed 640 by 360 image. Game frames are limited to 4096 pixels on either axis; larger views scale the bounded frame. Editor navigation and gizmos are separate from the game camera. Stop restores the editor view. Simulation changes to camera or parent transforms are reflected in subsequent game frames.
 
 Selecting a camera displays a cyan frustum and center trajectory in the editor viewport. The guide follows the camera transform, projection, aspect ratio, clipping settings, and zoom. Very long far clipping distances are shortened in the editor guide so the scene remains usable; this does not change rendering.
