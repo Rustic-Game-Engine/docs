@@ -1,6 +1,8 @@
-# Inspector
+# Properties (Inspector)
 
-Prerequisites: open a writable scene, stop Play, and select an entity in **Project → Scene** or the viewport. No selection shows **Nothing selected**. Scene sky and atmosphere settings are available independently of object selection.
+Open the **Properties** dock tab to edit the selected object. Drag its tab header to move or group it with other panels.
+
+Prerequisites: open a writable scene, stop Play, and select an entity in **Scene Explorer** or the viewport. No selection shows **Nothing selected**. Scene sky and atmosphere settings are available independently of object selection.
 
 ## Change properties and transforms
 
