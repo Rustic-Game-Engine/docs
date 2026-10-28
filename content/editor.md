@@ -23,7 +23,9 @@ The workspace includes 3D/2D viewports and separate **Scene Explorer**, **Explor
 
 Expected result: you can keep the scene tree, files, selected object's properties, and runtime logs visible in your preferred arrangement. **Terminal** retains the runtime log filters, Copy and Clear controls; it is not a shell prompt. Panel docking does not change scene data or undo history.
 
-**View → Reset dock layout** restores the default arrangement if you lose track of a panel. **View** includes egui's built-in dark/light/system theme controls, can open a missing 3D or 2D viewport or **Scene Graph**, and offers **Inspector on native viewport**. Workspace preferences persist, but arbitrary dock geometry currently resets when reopening a project. Older combined Project workspaces receive separate scene and file panes automatically.
+**View → Reset dock layout** restores the default arrangement if you lose track of a panel. **View** includes egui's built-in dark/light/system theme controls, includes checked toggles under **Panels** for **3D Viewport**, **2D Viewport**, **Scene Graph**, **Scene Explorer**, **Explorer**, **Properties**, and **Terminal**, and offers **Inspector on native viewport**. Workspace preferences persist, but arbitrary dock geometry currently resets when reopening a project. Older combined Project workspaces receive separate scene and file panes automatically.
+
+To hide a panel, open **View** and clear its checkbox under **Panels**. Check it again to restore and select its tab in the same dock group. An inactive tab in a group remains checked: the checkbox controls whether it is available, not whether it is the selected tab. Panel visibility is saved when the editor closes and restored the next time you open the project. Hiding every panel leaves an empty workspace; the View menu remains available. **Reset dock layout** clears hidden-panel choices and restores the default arrangement of the enabled panels.
 
 **File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
 
@@ -35,7 +37,7 @@ and Scene Graph uses [egui-snarl](https://zakarumych.github.io/egui-snarl/).
 
 ### View the scene as a graph
 
-1. Open a project and choose **View → Open Scene Graph**.
+1. Open a project and choose **View → Scene Graph**.
 2. Each scene entity appears as a node. Wires run from a parent's **Children** pin
    to its child's **Parent** pin.
 3. Click a node's name to select its entity in Inspector. Drag node headers to
