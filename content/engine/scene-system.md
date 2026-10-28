@@ -19,7 +19,9 @@ The current scene schema is version 2. Version 1 migrates in memory; future sche
 ## Editor and runtime ownership
 
 Scripts use [`game.scene`](/docs/guides/scene-lifecycle) to load scenes, switch
-only to loaded scenes, and unload their worlds and runtime resources. Loading
+to saved scenes with automatic loading, and unload their worlds and runtime resources.
+Scenes automatically loaded by switching unload on switching away; explicitly
+loaded scenes remain resident. Loading
 does not activate a scene; unloading the active scene clears the selection.
 Global scripts remain available across transitions. Rust hosts can also use
 `engine_world::SceneManager` for lower-level ECS world ownership.

@@ -159,7 +159,7 @@ const docs: Record<string, ApiDoc> = {
             "name": "scene",
             "type": "document name string",
             "required": true,
-            "description": "Name returned by load, or the initially opened scene document name. Case-sensitive. Loading requires both the name and scene ID to be unique among loaded scenes."
+            "description": "Document name; switchTo also accepts a relative file path and tries to load a missing destination. Names are case-sensitive. Automatic name discovery searches scene/ and scenes/ and requires an unambiguous valid document."
         }
     ],
     "returns": "load returns the document name; isLoaded returns a boolean; getLoaded returns loaded names in sorted order; getActive returns the selected name or nil/null/None. switchTo and unload return no value. C uses RusticList for getLoaded; C++ returns a RusticValue array and a nullable RusticValue for getActive. Calls update membership/selection immediately; scene activation, teardown and final release happen after the current callback batch.",
@@ -176,9 +176,9 @@ const docs: Record<string, ApiDoc> = {
         "HTML / inline JS": "const level = game.scene.load('scene/level.scene');\ngame.scene.switchTo(level);\ngame.scene.unload('Menu');\nif (!game.scene.isLoaded(level)) throw Error('Level missing');"
     },
     "notes": [
-        "Loading creates a world without selecting it. Scene/object startup scripts run on first activation. Inactive loaded scenes retain state and do not tick or render. Switching back does not rerun Start.",
+        "Loading creates a world without selecting it. Scene/object startup scripts run on first activation. Explicitly loaded inactive scenes retain state and do not tick or render. Switching back to those scenes does not rerun Start. switchTo automatically loads missing destinations by name or path, and switching away releases scenes loaded this way. Switching to the same scene preserves it.",
         "Unloading discards unsaved runtime state, destroys scene/object script instances and releases world, physics, audio and capture state. No unloaded scene cache is retained. Global scripts survive and can load/select a scene when none is active. Shared renderer/asset caches have their own lifetime.",
-        "Switching to an unloaded name, duplicate loads, unknown unloads, invalid or incompatible files and checksum failures raise errors. Failed load/switch operations preserve the selection. Loading never silently recovers a backup. Lifecycle mutations are unavailable during final Play teardown.",
+        "A missing or ambiguous saved destination, duplicate loads, unknown unloads, invalid or incompatible files and checksum failures raise errors. Failed load/switch operations preserve the selection. Loading never silently recovers a backup. Lifecycle mutations are unavailable during final Play teardown.",
         "The example requires Menu to be the initially open document name. Save Level before starting Play; scene files are staged from scene/ and scenes/. C uses Game.scene; PHP uses $game->scene. CSS is styling only; HTML uses inline JavaScript."
     ]
 },
