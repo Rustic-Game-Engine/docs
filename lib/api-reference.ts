@@ -263,6 +263,14 @@ export const apiCategories: ApiCategory[] = [
   category("enabled", "api:enabled", [
     "rustic.set_enabled(enabled)",
   ]),
+  category("scene-lifecycle", "api:scene-lifecycle", [
+    "game.scene.load(path)",
+    "game.scene.unload(scene)",
+    "game.scene.switchTo(scene)",
+    "game.scene.isLoaded(scene)",
+    "game.scene.getLoaded()",
+    "game.scene.getActive()",
+  ]),
   category("environment", "api:environment", [
     "Game.scene.getEnvironment()",
     "Game.scene.setEnvironment(settings)",

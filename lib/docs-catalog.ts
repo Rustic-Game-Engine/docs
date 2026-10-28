@@ -5,7 +5,7 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
-    { slug: "guides/scene-lifecycle", title: "Load, unload and switch scenes (Rust)", description: "Explicit ownership and active selection of loaded scene worlds in Rust hosts.", source: "docs/scene-lifecycle.md" },
+    { slug: "guides/scene-lifecycle", title: "Load, unload and switch scenes", description: "Manage scene loading, switching and memory lifetime from every scripting language.", source: "docs/scene-lifecycle.md" },
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "tutorials/first-playable-scene", title: "First playable scene", description: "Create an object, attach Lua and test the startup callback.", source: "content/tutorials/first-playable-scene.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
@@ -86,6 +86,7 @@ const categoryGroups: DocGroup[] = [
   { label: "Scene API", docs: [
     { slug: "guides/api-paths", title: "Call APIs through paths", description: "Use scene object, global service and Explorer file API paths in every scripting language.", source: "docs/Scripting/apiPaths.md" },
     { slug: "guides/scene-objects", title: "Edit scene objects", description: "Target an object by scene name and hierarchy in any script language.", source: "docs/Scripting/sceneObjects.md" },
+    { slug: "api/scene-lifecycle", title: "Scene lifecycle", description: "Load, unload and switch scenes from every supported scripting language.", source: "api:scene-lifecycle" },
     { slug: "api/environment", title: "Scene environment", description: "Read and change sky textures, ambient and sun lighting, and haze from every script language.", source: "api:environment" },
     { slug: "api/scene", title: "Scene lookup", description: "Find entities and enumerate stable scene paths.", source: "api:scene" },
     { slug: "api/instances", title: "Add & clone instances", description: "Queue creation from a source path with an optional parent.", source: "api:instances" },

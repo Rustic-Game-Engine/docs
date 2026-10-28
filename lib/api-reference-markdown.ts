@@ -177,7 +177,15 @@ export function buildApiCallMarkdown(category: ApiCategory, call: ApiCall, title
     return `| ${name} | ${meaning} |`;
   }).join("\n")}` : parametersFor(call, section(shared, "Parameters") || section(shared, "Variables"));
   const setup = section(shared, "Setup and language support") || section(shared, "When to call it");
-  const returns = audio ? audioReturn(method) : section(shared, "Return and timing");
+  const sceneReturns: Record<string, string> = {
+    load: "Returns the loaded document name as a string. Builds a world without activating it or running scene startup callbacks. Duplicate names/IDs and invalid files raise errors without changing the loaded set.",
+    unload: "Returns no value. Removes the name immediately; scene/object teardown and final world/runtime resource release happen after the callback batch. Unloading the active scene clears selection. Unsaved state is discarded.",
+    "switch-to": "Returns no value. Selects a document name or relative scene file path, automatically loading it if needed. Switching away automatically unloads scenes loaded this way, after the callback batch. Explicitly loaded scenes remain resident. Missing, ambiguous or invalid destinations raise an error without releasing the current scene. Switching to the same scene preserves its state.",
+    "is-loaded": "Returns true when this document name is in the loaded set, otherwise false. It does not read scene files or implicitly load a scene.",
+    "get-loaded": "Returns loaded document names in deterministic name order: a native list in Lua/Luau, JavaScript, Python, C#, Java and PHP; RusticList in C; a RusticValue array in C++.",
+    "get-active": "Returns the selected document name or nil/null/None if none is selected. C++ returns a nullable RusticValue; check is_null() before string(). Selection changes synchronously, before runtime activation completes.",
+  };
+  const returns = category.slug === "api/scene-lifecycle" ? sceneReturns[method] : audio ? audioReturn(method) : section(shared, "Return and timing");
   const name = call.signature.split("(")[0];
   const topic = category.slug.slice(4);
   const example = category.source.startsWith("api:")
