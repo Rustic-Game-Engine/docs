@@ -136,6 +136,52 @@ const docs: Record<string, ApiDoc> = {
     returns: "No value. Lua updates host state directly; JavaScript/Web and external SDKs use their command boundary. The scheduler observes the resulting enabled state for lifecycle transitions. See [execution behavior](/docs/guides/scripting#when-mutations-take-effect).",
     examples: simpleMutationExamples("rustic.set_enabled(false)", "rustic.set_enabled(false);"), notes: [protocolNote],
   },
+  "scene-lifecycle": {
+    "title": "Scene lifecycle API",
+    "summary": "Load, unload and switch scenes explicitly from every supported scripting language. Only loaded scene worlds stay resident.",
+    "when": "Save Menu and Level as distinct scene documents, with Level at scene/level.scene. Put one example inside a generated Start/on_start callback, preferably a Global Startup Script, open Menu, then press Play. Keep the language template imports and callback registration. See [Load, unload and switch scenes](/docs/guides/scene-lifecycle) for exact setup, memory lifetime and errors.",
+    "calls": [
+        "game.scene.load(path)",
+        "game.scene.unload(scene)",
+        "game.scene.switchTo(scene)",
+        "game.scene.isLoaded(scene)",
+        "game.scene.getLoaded()",
+        "game.scene.getActive()"
+    ],
+    "parameters": [
+        {
+            "name": "path",
+            "type": "relative project path",
+            "required": true,
+            "description": "A saved scene file in the Play snapshot, such as scene/level.scene. Parent traversal and paths outside the snapshot are rejected."
+        },
+        {
+            "name": "scene",
+            "type": "document name string",
+            "required": true,
+            "description": "Name returned by load, or the initially opened scene document name. Case-sensitive. Loading requires both the name and scene ID to be unique among loaded scenes."
+        }
+    ],
+    "returns": "load returns the document name; isLoaded returns a boolean; getLoaded returns loaded names in sorted order; getActive returns the selected name or nil/null/None. switchTo and unload return no value. C uses RusticList for getLoaded; C++ returns a RusticValue array and a nullable RusticValue for getActive. Calls update membership/selection immediately; scene activation, teardown and final release happen after the current callback batch.",
+    "examples": {
+        "Lua 5.4": "local level = game.scene.load('scene/level.scene')\nassert(game.scene.isLoaded(level))\ngame.scene.switchTo(level)\ngame.scene.unload('Menu')\nprint(game.scene.getActive(), #game.scene.getLoaded())",
+        "JavaScript": "const level = game.scene.load('scene/level.scene');\ngame.scene.switchTo(level);\ngame.scene.unload('Menu');\nprint(game.scene.getActive(), game.scene.getLoaded());",
+        "Python": "from rustic import game\nlevel = game.scene.load('scene/level.scene')\ngame.scene.switchTo(level)\ngame.scene.unload('Menu')\nassert game.scene.isLoaded(level)",
+        "C++": "auto level = game.scene.load(\"scene/level.scene\");\ngame.scene.switchTo(level);\ngame.scene.unload(\"Menu\");\nif (!game.scene.isLoaded(level)) throw std::runtime_error(\"Level missing\");",
+        "C#": "var level = game.scene.load(\"scene/level.scene\");\ngame.scene.switchTo(level);\ngame.scene.unload(\"Menu\");\nif (!game.scene.isLoaded(level)) throw new System.Exception(\"Level missing\");",
+        "Luau": "local level = game.scene.load('scene/level.scene')\ngame.scene.switchTo(level)\ngame.scene.unload('Menu')\nassert(game.scene.isLoaded(level))",
+        "C": "const char *level = Game.scene.load(\"scene/level.scene\");\nGame.scene.switchTo(level);\nGame.scene.unload(\"Menu\");\nif (!Game.scene.isLoaded(level)) r_fail(\"Level missing\");",
+        "Java": "String level = game.scene.load(\"scene/level.scene\");\ngame.scene.switchTo(level);\ngame.scene.unload(\"Menu\");\nif (!game.scene.isLoaded(level)) throw new RuntimeException(\"Level missing\");",
+        "PHP": "global $game;\n$level = $game->scene->load(\"scene/level.scene\");\n$game->scene->switchTo($level);\n$game->scene->unload(\"Menu\");\nif (!$game->scene->isLoaded($level)) throw new Exception(\"Level missing\");",
+        "HTML / inline JS": "const level = game.scene.load('scene/level.scene');\ngame.scene.switchTo(level);\ngame.scene.unload('Menu');\nif (!game.scene.isLoaded(level)) throw Error('Level missing');"
+    },
+    "notes": [
+        "Loading creates a world without selecting it. Scene/object startup scripts run on first activation. Inactive loaded scenes retain state and do not tick or render. Switching back does not rerun Start.",
+        "Unloading discards unsaved runtime state, destroys scene/object script instances and releases world, physics, audio and capture state. No unloaded scene cache is retained. Global scripts survive and can load/select a scene when none is active. Shared renderer/asset caches have their own lifetime.",
+        "Switching to an unloaded name, duplicate loads, unknown unloads, invalid or incompatible files and checksum failures raise errors. Failed load/switch operations preserve the selection. Loading never silently recovers a backup. Lifecycle mutations are unavailable during final Play teardown.",
+        "The example requires Menu to be the initially open document name. Save Level before starting Play; scene files are staged from scene/ and scenes/. C uses Game.scene; PHP uses $game->scene. CSS is styling only; HTML uses inline JavaScript."
+    ]
+},
   environment: {
     title: "Scene environment API", summary: "Read and update all loaded-scene sky, ambient light, sun light and haze settings in every scripting language.",
     when: "Call during Start or a later gameplay callback. Attach a scene startup or object component script, copy panoramas into the project before Play, and enable the environment. See [Sky & atmosphere](/docs/guides/scene-environment) for complete setup and all 13 fields.",

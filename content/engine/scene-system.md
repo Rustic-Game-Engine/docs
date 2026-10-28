@@ -18,11 +18,11 @@ The current scene schema is version 2. Version 1 migrates in memory; future sche
 
 ## Editor and runtime ownership
 
-Rust hosts can use [`SceneManager`](/docs/guides/scene-lifecycle) to explicitly
-load worlds, switch only to loaded worlds, and drop worlds on unload. Loading
+Scripts use [`game.scene`](/docs/guides/scene-lifecycle) to load scenes, switch
+only to loaded scenes, and unload their worlds and runtime resources. Loading
 does not activate a scene; unloading the active scene clears the selection.
-This API manages world ownership; hosts coordinate scripting, physics, audio
-and rendering separately.
+Global scripts remain available across transitions. Rust hosts can also use
+`engine_world::SceneManager` for lower-level ECS world ownership.
 
 The editor owns the authored document. Play starts from an immutable staged snapshot and creates a separate runtime world. Stopping Play does not automatically overwrite the authored scene; the runtime-change review/apply operation is explicit and undoable.
 
