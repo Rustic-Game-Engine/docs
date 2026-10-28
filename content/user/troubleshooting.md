@@ -24,7 +24,7 @@ Hover/click embedded Play before using held WASD/arrows/Shift. Other keys, press
 
 ## Files, saving and reopening
 
-Read-only projects may have another active editor holding the lock or a future unsupported scene schema. Save via **File > Save scene**, keep source assets/sidecars together, and save script files separately. Stop Play and discard runtime changes unless you intend to apply them. Inspect the actual permission/recovery diagnostic before altering files; [Scene System](/docs/open-source/engine/scene-system) describes backups and schema migration.
+Read-only projects may have another active editor holding the lock or a future unsupported scene schema. Close the editor that owns the project, then reopen the read-only instance to edit. Normal editor closure releases the writer lock immediately, even if a subprocess is starting. The persistent `temp/editor.writer.lock` file alone does not mean an editor is still running; do not delete it to bypass an active lock. Save via **File > Save scene**, keep source assets/sidecars together, and save script files separately. Stop Play and discard runtime changes unless you intend to apply them. Inspect the actual permission/recovery diagnostic before altering files; [Scene System](/docs/open-source/engine/scene-system) describes backups and schema migration.
 
 ## Audio and platform differences
 
