@@ -1,5 +1,5 @@
 {
-  "revision": "d8d47866c29a0f268d75169920afd8ac6bb43fa2",
+  "revision": "74042ac1e7af771664558285d4c589f52f7187a4",
   "documented": {
     "languages": [
       "Lua 5.4",
@@ -1126,7 +1126,7 @@
       ]
     },
     "crates/engine-play/src/scene_lifecycle.rs": {
-      "sha256": "c5a3ae1c4b57ebb4e1668212d81ac329fe2e971e2472d8c6af512c697d771dfc",
+      "sha256": "9ce9f6045f2321a24649ff72a5eee0fce87e237a39431eb1624d0cc8b27e1614",
       "declarations": [
         "pub fn drain_logs(&self) -> Vec<(String, String)> {",
         "pub fn fixed_update(&mut self, delta: f64) {",
