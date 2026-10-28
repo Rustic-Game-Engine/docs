@@ -5,6 +5,7 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
+    { slug: "guides/scene-lifecycle", title: "Load, unload and switch scenes (Rust)", description: "Explicit ownership and active selection of loaded scene worlds in Rust hosts.", source: "docs/scene-lifecycle.md" },
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "tutorials/first-playable-scene", title: "First playable scene", description: "Create an object, attach Lua and test the startup callback.", source: "content/tutorials/first-playable-scene.md" },
     { slug: "api/overview", title: "API overview", description: "Rustic API concepts, language support, and execution rules.", source: "api:overview" },
