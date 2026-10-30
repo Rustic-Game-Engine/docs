@@ -56,7 +56,7 @@ This reference was checked against engine commit `017db99b7025eeda96acf219676641
 - Clock.state is available in every gameplay language; native return types follow their SDK.
 - Audio device enumeration/selection exists in all ten script types but native devices require Windows. Non-Windows enumeration returns empty lists; device selection raises an error. Microphone capture requires Windows permissions and uses the system default input, independently of selected input-device metadata.
 - Game-output recording in every gameplay language can run headlessly; microphone recording and hot mic require Windows. Recording captures audio, not video. Read and unload capture handles before owner cleanup; see [Audio recording](/docs/api/audio/start-recording).
-- Collision callback names are not evidence of event delivery: no collision/touch callbacks are emitted by the primitive simulator.
+- Collision callback names are not evidence of event delivery: no physics collision contact callbacks are emitted by the primitive simulator. Touchscreen contacts and CanTouch-gated object clicks are available through [Input](/docs/api/touch-input) in embedded Play.
 
 ## Platform compatibility
 
