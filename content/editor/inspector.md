@@ -11,7 +11,7 @@ Prerequisites: open a writable scene, stop Play, and select an entity in **Scene
 3. For primitives/meshes, edit **Color**, **Can touch**, **Can collide** and **Anchored**. Parametric primitives also expose a **Geometry** section.
 4. Save through **File → Save scene**; use **Edit → Undo** for a mistaken edit.
 
-Expected result: validated authoring changes appear in the preview and saved scene. **Can touch** is reserved for touch events; it does not enable solid collisions. **Can collide** and **Anchored** affect built-in primitive physics in Play. Imported mesh collision is not established by those checkboxes.
+Expected result: validated authoring changes appear in the preview and saved scene. **Can touch** enables object clicks and touchscreen taps in embedded Play; it does not enable solid collisions. See [Touchscreen input and object clicks](/docs/api/touch-input). **Can collide** and **Anchored** affect built-in primitive physics in Play. Imported mesh collision is not established by those checkboxes.
 
 ## Attach a script and edit public properties
 
