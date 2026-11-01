@@ -27,3 +27,5 @@ Use your language's logging API from a lifecycle callback. Verify scope, Script 
 Expected result: runtime changes are never silently applied to authoring state. This review covers the supported property changes reported by the runtime, not arbitrary filesystem changes, all runtime-created entities or every script's internal variables.
 
 Related: [lifecycle callbacks](/docs/callbacks), [logging API](/docs/api/logging), [Inspector](/docs/guides/editor/inspector), [troubleshooting](/docs/open-source/engine/troubleshooting).
+
+To distribute a game beyond editor testing, use **File → Build Project…**. Follow [Build and distribute a project](/docs/guides/editor/build-project) for packaging and clean-machine checks.
