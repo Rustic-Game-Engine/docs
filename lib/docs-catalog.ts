@@ -12,6 +12,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
   ] },
   { label: "Editor guides", docs: [
+    { slug: "guides/editor/build-project", title: "Build and distribute a project", description: "Package Windows games, design installers, export static websites and build compatible Android templates.", source: "docs/PROJECT_BUILDS.md", parent: "guides/editor" },
     { slug: "guides/editor", title: "Editor overview", description: "Open and save projects, navigate panels and choose an editor workflow.", source: "content/editor.md" },
     { slug: "guides/editor/scene-hierarchy", title: "Scene hierarchy", description: "Verified editor steps, expected results and current limits for scene hierarchy.", source: "content/editor/scene-hierarchy.md", parent: "guides/editor" },
     { slug: "guides/editor/explorer", title: "Explorer and assets", description: "Verified editor steps, expected results and current limits for explorer and assets.", source: "content/editor/explorer.md", parent: "guides/editor" },

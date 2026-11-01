@@ -69,3 +69,5 @@ installing a font or downloading an icon pack.
 ## Known limitations
 
 Scripts open in an external editor, rather than an embedded code panel. A panel label or legacy workspace schema does not establish an implemented control. The focused guides describe controls verified in `Engine/apps/editor/src/main.rs` and the authoring document model.
+
+Build distributable output from **File → Build Project…**. See [Build and distribute a project](/docs/guides/editor/build-project) for Windows games and custom installers, static websites, and Android template requirements.
