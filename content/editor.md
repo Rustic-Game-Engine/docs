@@ -27,6 +27,8 @@ Expected result: you can keep the scene tree, files, selected object's propertie
 
 To hide a panel, open **View** and clear its checkbox under **Panels**. Check it again to restore and select its tab in the same dock group. An inactive tab in a group remains checked: the checkbox controls whether it is available, not whether it is the selected tab. Panel visibility is saved when the editor closes and restored the next time you open the project. Hiding every panel leaves an empty workspace; the View menu remains available. **Reset dock layout** clears hidden-panel choices and restores the default arrangement of the enabled panels.
 
+Choose **View → Light** for light panel backgrounds and dark text, **Dark** for dark backgrounds, or **System** to follow the operating system's appearance. The background follows the selected theme throughout the dock workspace, including empty panels and split gaps. Rendered scene colors follow the scene's settings.
+
 **File** contains scene saving, Game Settings and renderer refresh. **Edit** provides Undo/Redo. **Programming** creates and attaches scripts, opens an external code editor, and offers Reload Scripts/Restart Play while running. **Move**, **Rotate** and **Scale** select the gizmo operation. The Play toolbar controls runtime sessions.
 
 The editor and Project Manager use standard [egui](https://www.egui.rs/#demo)
