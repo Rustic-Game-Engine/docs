@@ -51,7 +51,7 @@ Stop play and resolve any runtime-change review before editing or switching.
 Call `editor_status` again after switching to get that scene's object IDs.
 `scene_summary` reads the saved file; `editor_status` reads the live document.
 
-`object_create` accepts `name` and `kind`: `empty`, `camera`, `light`, or `blockout`.
+`object_create` accepts `name` and `kind`: `folder`, `empty`, `camera`, `light`, or `blockout`, with optional `parent`.
 Use its returned `entity_id` with `object_update`, for example:
 
 ```json
@@ -74,6 +74,15 @@ Part attributes merge supplied fields; camera, light and scripts replace the
 whole component value. Read their exact JSON structure from `editor_status`.
 A null camera/light removes it. Invalid batches fail without partial object edits.
 `editor_undo` and `editor_redo` handle object edits. Save with `scene_save`.
+
+## Organize folders and object subtrees
+
+Read `scene_explorer_guide` for the bundled hierarchy organization skill.
+`object_create` with `kind:"folder"` creates actual scene explorer folders;
+`object_duplicate` copies an object/folder and all descendants with fresh IDs;
+`object_delete` removes the selected subtree with undo. Use `object_update` to
+rename or reparent. See [Organize the scene explorer](/docs/guides/ai-agents/organize-scene-explorer)
+for copyable examples, parent/transform behavior, recursive deletion and saving.
 
 ## Model, preview, then place
 
