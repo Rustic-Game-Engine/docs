@@ -7,6 +7,8 @@ generated programming workspace still belong to the game project.
 
 ## Topics
 
+- [Organize the scene explorer](/docs/guides/ai-agents/organize-scene-explorer)
+
 - [Author scenes, models and playtests](/docs/guides/ai-agents/author-scenes-models-and-playtest)
 
 - [Connect an agent](/docs/guides/ai-agents/connect-an-agent)

@@ -13,7 +13,7 @@ const categoryGroups: DocGroup[] = [
   ] },
   { label: "Editor guides", docs: [
     { slug: "guides/editor/surface-textures", title: "Surface textures and PBR maps", description: "Browse optional surface maps, drop HDR/PBR images onto meshes and attach Texture children.", source: "docs/SURFACE_TEXTURES.md", parent: "guides/editor" },
-    { slug: "guides/editor/build-project", title: "Build and distribute a project", description: "Package Windows games, design installers, export static websites and build compatible Android templates.", source: "docs/PROJECT_BUILDS.md", parent: "guides/editor" },
+    { slug: "guides/editor/build-project", title: "Build and distribute a project", description: "Package Windows games, design installers, export playable websites and build Android apps.", source: "docs/PROJECT_BUILDS.md", parent: "guides/editor" },
     { slug: "guides/editor", title: "Editor overview", description: "Open and save projects, navigate panels and choose an editor workflow.", source: "content/editor.md" },
     { slug: "guides/editor/scene-hierarchy", title: "Scene hierarchy", description: "Verified editor steps, expected results and current limits for scene hierarchy.", source: "content/editor/scene-hierarchy.md", parent: "guides/editor" },
     { slug: "guides/editor/explorer", title: "Explorer and assets", description: "Verified editor steps, expected results and current limits for explorer and assets.", source: "content/editor/explorer.md", parent: "guides/editor" },
@@ -108,6 +108,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "guides/ai-agents/connect-an-agent", title: "Connect an agent", description: "Connect an agent for AI agents & app data.", source: "docs/AGENT_INTEGRATION/connect-an-agent.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents/read-and-edit-agent-information", title: "Read and edit agent information", description: "Read and edit agent information for AI agents & app data.", source: "docs/AGENT_INTEGRATION/read-and-edit-agent-information.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents/storage-and-migration", title: "Storage and migration", description: "Storage and migration for AI agents & app data.", source: "docs/AGENT_INTEGRATION/storage-and-migration.md", parent: "guides/ai-agents" },
+    { slug: "guides/ai-agents/organize-scene-explorer", title: "Organize the scene explorer", description: "Use AI tools to create folders, organize hierarchy parents and duplicate or delete object subtrees with undo.", source: "docs/AGENT_INTEGRATION/organize-scene-explorer.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents/author-scenes-models-and-playtest", title: "Author scenes, models and playtests", description: "Use direct editor tools for modeling, scene authoring, script scopes and keyboard playtesting.", source: "docs/AGENT_INTEGRATION/author-scenes-models-and-playtest.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents/limits-and-troubleshooting", title: "Limits and troubleshooting", description: "Limits and troubleshooting for AI agents & app data.", source: "docs/AGENT_INTEGRATION/limits-and-troubleshooting.md", parent: "guides/ai-agents" },
     { slug: "guides/gameplay-programming", title: "Gameplay programming", description: "Choose a focused guide to gameplay programming.", source: "docs/GAMEPLAY_PROGRAMMING.md" },
