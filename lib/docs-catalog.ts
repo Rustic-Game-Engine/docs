@@ -12,6 +12,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
   ] },
   { label: "Editor guides", docs: [
+    { slug: "guides/editor/surface-textures", title: "Surface textures and PBR maps", description: "Browse optional surface maps, drop HDR/PBR images onto meshes and attach Texture children.", source: "docs/SURFACE_TEXTURES.md", parent: "guides/editor" },
     { slug: "guides/editor/build-project", title: "Build and distribute a project", description: "Package Windows games, design installers, export playable websites and build Android apps.", source: "docs/PROJECT_BUILDS.md", parent: "guides/editor" },
     { slug: "guides/editor", title: "Editor overview", description: "Open and save projects, navigate panels and choose an editor workflow.", source: "content/editor.md" },
     { slug: "guides/editor/scene-hierarchy", title: "Scene hierarchy", description: "Verified editor steps, expected results and current limits for scene hierarchy.", source: "content/editor/scene-hierarchy.md", parent: "guides/editor" },
@@ -103,6 +104,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "guides/scene-environment/lighting-and-haze", title: "Lighting and haze", description: "Lighting and haze for Sky & atmosphere.", source: "docs/SCENE_ENVIRONMENT/lighting-and-haze.md", parent: "guides/scene-environment" },
     { slug: "guides/scene-environment/diagnose-problems", title: "Diagnose problems", description: "Diagnose problems for Sky & atmosphere.", source: "docs/SCENE_ENVIRONMENT/diagnose-problems.md", parent: "guides/scene-environment" },
     { slug: "guides/physics", title: "Basic physics", description: "Gravity, falling primitives, collision, anchored floors, and current limits.", source: "docs/PHYSICS.md" },
+    { slug: "guides/ai-agents/surface-textures", title: "Author HDR/PBR textures", description: "Use agent tools and the rustic-textures skill to inspect maps, attach Texture children and configure HDR skies.", source: "docs/AGENT_TEXTURES.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents", title: "AI agents & app data", description: "Choose a focused guide to ai agents & app data.", source: "docs/AGENT_INTEGRATION.md" },
     { slug: "guides/ai-agents/connect-an-agent", title: "Connect an agent", description: "Connect an agent for AI agents & app data.", source: "docs/AGENT_INTEGRATION/connect-an-agent.md", parent: "guides/ai-agents" },
     { slug: "guides/ai-agents/read-and-edit-agent-information", title: "Read and edit agent information", description: "Read and edit agent information for AI agents & app data.", source: "docs/AGENT_INTEGRATION/read-and-edit-agent-information.md", parent: "guides/ai-agents" },

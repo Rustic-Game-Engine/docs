@@ -45,3 +45,7 @@ World/Local space applies to scene transforms: switch to **Scene Explorer**, rig
 - For attachment failures, check `config/scripts.ron`, scope, language and toolchain; copying a script into a folder alone does not register it.
 
 Related: [Inspector](/docs/guides/editor/inspector), [Playtesting](/docs/guides/editor/playtesting).
+
+## Surface textures
+
+See [Surface textures and PBR maps](/docs/guides/editor/surface-textures) for file browsing, optional map slots, drag-and-drop onto objects, and Texture child objects.
