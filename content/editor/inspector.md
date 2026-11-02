@@ -30,3 +30,7 @@ A camera selection exposes active state, priority, zoom, projection and clipping
 During Play, selected-entity telemetry can supply live transforms, attributes and script state. Authoring and runtime are distinct; do not assume that live values are saved or that every Inspector edit is a runtime edit. After Stop, review/apply or discard the proposed runtime changes.
 
 Related: [public properties API](/docs/api/properties), [physics](/docs/guides/physics), [Playtesting](/docs/guides/editor/playtesting).
+
+## Surface textures
+
+See [Surface textures and PBR maps](/docs/guides/editor/surface-textures) for file browsing, optional map slots, drag-and-drop onto objects, and Texture child objects.

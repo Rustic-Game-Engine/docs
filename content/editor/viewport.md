@@ -30,3 +30,7 @@ The editor offers 3D and 2D viewport panels. These are authoring views; do not i
 In Play, input is forwarded to gameplay and the active **game camera** determines the runtime view. The editor camera's authoring pose does not automatically become the game camera pose. Use **Align to editor view** on a camera in Inspector when you want to copy that pose.
 
 Related: [Inspector](/docs/guides/editor/inspector), [camera setup](/docs/guides/editor/cameras-lighting), [Playtesting](/docs/guides/editor/playtesting).
+
+## Surface textures
+
+See [Surface textures and PBR maps](/docs/guides/editor/surface-textures) for file browsing, optional map slots, drag-and-drop onto objects, and Texture child objects.
