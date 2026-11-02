@@ -15,7 +15,7 @@
 Each SDK handles omitted callbacks automatically. Supported names are `on_create`,
 `on_start`, `on_enable`, `fixed_update`, `update`, `on_disable`, `on_destroy`, and
 `on_stop`. Only frame callbacks take dt. Luau also accepts the capitalized Lua
-aliases. External collision callbacks remain unavailable. API 1.1 adds shared
+aliases. Collision subscriptions are available through `Physics.onCollisionEnter/Stay/Exit`; see [Contacts and slopes](/docs/api/physics-actions/contacts). API 1.1 adds shared
 `Events` to every supported script type, backed by the same scene services.
 See [Shared gameplay actions](Scripting/gameplayActions.md) for coverage and setup. Use `rustic.log` for game diagnostics and run scripts through Play.
 
