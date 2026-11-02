@@ -19,22 +19,23 @@ Setup installs per user into `%LOCALAPPDATA%\Programs\<Application name>`, adds 
 
 The game opens its own window and isolated simulation, forwards keyboard, primary mouse and touch input, and stops the simulation when the window closes. Logs are written under `%LOCALAPPDATA%\RusticGames\<Application name>\logs` on Windows. Lua 5.4, JavaScript and HTML/CSS script support are bundled. Available sibling DLLs and `rustic-luau-host.exe` are copied. Other external script languages still require their supported toolchains on the player's machine; test the result on a clean machine.
 
-## Static website
+## Playable website
 
-Prepare an existing static site in the project's `web/` folder, or select another project-relative folder. It must contain `index.html`.
+Select **Website (playable game)** and click **Build Project**. The editor exports the current game automatically: its scene snapshot, registered scripts, assets, HTML/CSS game UI, browser player and compiled WebAssembly runtime. **Do not create a `web/` folder or prepare a separate website.** No game server is required.
 
-```text
-MyProject/
-  web/
-    index.html
-    styles.css
-    images/
-      logo.png
+The output's `website/` directory contains `index.html`, `player.js`, `rustic-browser.js`, `rustic-browser.wasm`, the game file manifest, `data/`, and a `readme.md` with local preview and publishing instructions. Publish the complete directory to any static web host, including a subdirectory. For a local preview:
+
+```sh
+python -m http.server 8080 --directory <output>/website
 ```
 
-Select **Website (static files)** and build. Upload the contents of the output's `website/` folder to a static web host. For a local preview, run `python -m http.server 8080 --directory <output>/website` and open `http://localhost:8080`.
+Open `http://localhost:8080`. The game starts automatically with no engine-added menu, Play button, or loading overlay; only startup failures display an error. The browser runs the shared Rustic game simulation, physics, scene loading, renderer, Lua/JavaScript behaviors and audio locally. Keyboard input goes to the focused game canvas; mouse and touch input are mapped to the letterboxed game image. Click, tap, or press a key in the game to enable audio; browsers require a player interaction before sound can start. Opening `index.html` directly through `file://` does not work because browsers restrict file fetches.
 
-This target copies deployable website files. Framework projects must first produce a static export; server-rendered applications need their own server deployment. This does not compile Rustic scenes to WebAssembly or supply the Rustic gameplay API in the browser. Browser game exports need a separate compatible web runtime. Symbolic links are rejected, and `.git`, `.gradle`, and `node_modules` directories are excluded. Android template copies also exclude `build` and `builds` directories to avoid stale artifacts.
+Use a recent browser with WebAssembly exception handling and WebGL 2. The generated player reports missing/corrupted files, unsupported graphics and runtime initialization failures. Game files are verified before scripts execute. Browser file writes use the runtime's in-memory filesystem and disappear on reload. Native microphone capture and native audio-device selection are unavailable; ordinary game audio uses Web Audio.
+
+**Script compatibility:** direct web and Android exports currently support Lua 5.4, JavaScript and HTML/CSS behaviors. Scripts that need external desktop processes (including Luau, Python, C/C++, C#, Java and PHP) cause an explicit build error. Standalone PHP pages also cause an error. They are not silently omitted or converted. Use supported behaviors for these targets.
+
+Installed engine distributions bundle `browser-runtime/` beside the editor. Game authors do not need Emscripten to export when those resources are installed. Source developers must build that runtime once with `python tools/build-browser-runtime.py` from the engine workspace, after activating Emscripten SDK 6.0.13 and installing Rust, Python 3 and libclang. The default output is `target/distribution/browser-runtime/`; keep it beside the editor executable. For a `dev-fast` editor, pass `--profile dev-fast`.
 
 ## Android APK and AAB
 
@@ -52,7 +53,9 @@ An APK can be installed on a compatible device with `adb install <output>/artifa
 
 - **Build is disabled:** check the Required messages. Read-only editors cannot build; close the other writable editor and reopen the project. Windows packaging requires a Windows host and its bundled runtime. Inno Setup is configured automatically only when creating setup; a missing default compiler does not disable the build.
 - **Inno Setup configuration failed:** check the displayed error, internet access to GitHub releases, and permission to install in your local Programs folder and update your user PATH, then retry **Build Project**. A failed signature check stops installation. You can also install Inno Setup 6 manually and enter its existing absolute `ISCC.exe` path. Invalid custom paths are reported in **Required**; reset the field to `ISCC.exe` for automatic setup. Inspect compiler failures for invalid version or image resources.
-- **Website index missing:** select the folder containing the final `index.html`, not the framework source directory.
+- **Website fails to load:** serve the complete generated `website/` directory over HTTP/HTTPS rather than opening `index.html` directly. Check the displayed error, browser console, and WebGL 2/WebAssembly support.
+- **Browser runtime missing:** install an engine distribution with `browser-runtime/` or build the resources from source as described above.
+- **Website has no sound:** click, tap, or press a key in the game to enable browser audio.
 - **Resource path rejected:** use a path inside the project without `..` or absolute components. Remove symbolic links from website/Android build inputs. Choose a source folder outside the builds directory; outputs cannot be nested in their input.
 - **Gradle fails:** the dialog includes its exit status and output. Check JDK/SDK compatibility, wrapper resources, required platform packages, SDK licenses, network access for Gradle dependencies, and release signing configuration.
 - **Game fails to launch:** distribute the whole `game/` folder or run setup; do not move only the executable. Restore modified/missing data files, check game logs, graphics drivers, and external language toolchains.
