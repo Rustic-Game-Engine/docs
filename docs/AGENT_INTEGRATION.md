@@ -7,6 +7,8 @@ generated programming workspace still belong to the game project.
 
 ## Topics
 
+- [Author HDR/PBR textures](/docs/guides/ai-agents/surface-textures)
+
 - [Organize the scene explorer](/docs/guides/ai-agents/organize-scene-explorer)
 
 - [Author scenes, models and playtests](/docs/guides/ai-agents/author-scenes-models-and-playtest)
