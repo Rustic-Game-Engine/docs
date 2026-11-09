@@ -6,6 +6,12 @@ APIs. Create `.js` or `.mjs` gameplay files with the editor so an Asset ID and t
 chosen global, scene, or component attachment are created automatically.
 
 
+JavaScript placed under the project's top-level `ui/` folder (including nested
+folders) is automatically categorized as Web/UI code. It keeps the same lifecycle,
+scene access and `Events` APIs; attachments still determine when it runs. See
+[UI JavaScript and gameplay signals](/docs/scripting/web#javascript-in-ui) for setup,
+a working example and runtime limitations.
+
 ## Topics
 
 - [Behavior lifecycle](/docs/scripting/javascript/behavior-lifecycle)

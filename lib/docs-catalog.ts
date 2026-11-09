@@ -5,6 +5,7 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
+    { slug: "guides/custom-installer", title: "Custom installer API", description: "Design installer screens and consume progress from any UI language.", source: "docs/custom-installer.md" },
     { slug: "guides/scene-lifecycle", title: "Load, unload and switch scenes", description: "Manage scene loading, switching and memory lifetime from every scripting language.", source: "docs/scene-lifecycle.md" },
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "tutorials/first-playable-scene", title: "First playable scene", description: "Create an object, attach Lua and test the startup callback.", source: "content/tutorials/first-playable-scene.md" },
@@ -81,6 +82,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "api/camera-actions", title: "Camera actions", description: "Move, aim, zoom, follow and shake a game camera using shared actions.", source: "docs/Scripting/API/camera-actions.md" },
     { slug: "api/physics-actions", title: "Physics queries and forces", description: "Query live primitive colliders and change simulated body velocity.", source: "docs/Scripting/API/physics-actions.md" },
     { slug: "api/physics-actions/queries", title: "Physics queries", description: "Find primitive colliders with raycasts, sphere casts and overlaps.", source: "docs/Scripting/API/physics-actions/queries.md", parent: "api/physics-actions" },
+    { slug: "api/physics-actions/contacts", title: "Contacts, friction and slopes", description: "Subscribe to collisions, configure friction and query ground support.", source: "docs/Scripting/API/physics-actions/contacts.md", parent: "api/physics-actions" },
     { slug: "api/physics-actions/forces", title: "Physics forces", description: "Apply forces, impulses and velocity changes to simulated bodies.", source: "docs/Scripting/API/physics-actions/forces.md", parent: "api/physics-actions" },
     { slug: "api/scene-effects", title: "Scene Effects API", description: "Create and control typed effect components, configure simulation, sample wind and subscribe to particle events.", source: "docs/Scripting/API/scene-effects.md" },
     { slug: "api/effects", title: "Effects", description: "Fade, flash, shake and pulse entity properties with shared easing.", source: "docs/Scripting/API/effects.md" },
