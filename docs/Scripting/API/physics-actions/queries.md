@@ -39,7 +39,7 @@ globalThis.behavior = {
 ## Behavior and limitations
 
 - Attach to a Part above an anchored collidable floor. The query reports the nearest hit.
-- Queries use primitive world AABBs including parent transforms. SphereCast uses rounded sphere/box contacts; model meshes do not automatically acquire primitive colliders.
+- Raycasts and sphere casts use oriented primitive bounds including parent transforms; sphere casts retain rounded sphere/box contacts. Overlap and explosion candidate searches use conservative world AABBs. Sheared transforms use enclosing AABBs. Imported models require primitive collision proxies.
 
 - See [Basic physics](/docs/guides/physics) for collider setup, gravity and collision limits.
 - Check script attachment, enabled state and the Console when an operation fails.

@@ -6,14 +6,12 @@ Global scripts are instantiated first when the game starts. Scene scripts are ne
 when their scene loads. Component scripts are instantiated with their object and are
 disabled/unregistered with it. Only callbacks actually supplied by a script are
 invoked. The canonical callbacks are `Start`, `Update`, `FixedUpdate`,
-`OnCollisionEnter`, `OnCollisionStay`, `OnCollisionExit`, `OnEnable`, `OnDisable`, and
-`OnDestroy`. Original snake-case callback names continue to work.
+`OnEnable`, `OnDisable`, and `OnDestroy`. Original snake-case callback names continue to work. Collision notifications use explicit Physics event subscriptions.
 
 The basic Play simulator runs gravity and primitive box collision response after
 `FixedUpdate`, including in scenes with no scripts. `Anchored` prevents physics
 movement; `CanCollide` must be enabled on both objects for solid response. Collision
-callback names are reserved: the simulator does not dispatch collision or touch
-events. See `PHYSICS.md` for floor setup, falling objects, and current limitations.
+subscriptions use `Physics.onCollisionEnter/Stay/Exit`, delivered during Update after resolution. Merely declaring an OnCollisionEnter lifecycle function does not subscribe. See [Contacts and slopes](/docs/api/physics-actions/contacts).
 
 Execution is deterministic: scope (global, scene, component), explicit execution
 order, entity Asset ID, script Asset ID, then attachment order. Scripts communicate
@@ -40,7 +38,7 @@ The global `rustic` table exposes `entity_id`, `get_translation`, `set_translati
 `find_entity`, `get_attribute`/`GetAttribute`, `edit_attribute`/`EditAttribute`,
 `input`, `log`, `delta_time`, `fixed_delta_time`, `get_property`, `set_property`, and
 `set_enabled`. The built-in attributes are `Name`, `Position`, `Size`, `Color`,
-`CanTouch`, `CanCollide`, `Anchored`, and `Parent`.
+`CanTouch`, `CanCollide`, `Anchored`, `Friction`, and `Parent`.
 Lua also provides `print(...)` for an info Console entry and `warn(...)` for a
 warning Console entry. Use `rustic.log(level, message)` to choose a different level.
 
