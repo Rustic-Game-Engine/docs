@@ -5,6 +5,7 @@ export type DocGroup = { label: string; docs: DocEntry[] };
 
 const categoryGroups: DocGroup[] = [
   { label: "Start here", docs: [
+    { slug: "guides/custom-installer", title: "Custom installer API", description: "Design installer screens and consume progress from any UI language.", source: "docs/custom-installer.md" },
     { slug: "guides/scene-lifecycle", title: "Load, unload and switch scenes", description: "Manage scene loading, switching and memory lifetime from every scripting language.", source: "docs/scene-lifecycle.md" },
     { slug: "engine", title: "Using Rustic Engine", description: "Create a game, attach scripts, and learn how to use the editor and gameplay API.", source: "content/engine.md" },
     { slug: "tutorials/first-playable-scene", title: "First playable scene", description: "Create an object, attach Lua and test the startup callback.", source: "content/tutorials/first-playable-scene.md" },
