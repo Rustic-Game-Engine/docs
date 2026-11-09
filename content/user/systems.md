@@ -5,6 +5,7 @@ Use the [status and compatibility reference](/docs/reference/compatibility) to d
 | System | Start here | API reference |
 | --- | --- | --- |
 | Rendering / scene lighting | [Sky and atmosphere](/docs/guides/scene-environment), [Rendering System](/docs/open-source/engine/rendering-system) | [Environment](/docs/api/environment) |
+| Scene effects / VFX | [Scene effects and presets](/docs/guides/scene-effects) | [Typed configuration](/docs/guides/scene-effects/configuration) |
 | Primitive physics | [Basic physics](/docs/guides/physics) | [Queries and forces](/docs/api/physics-actions) |
 | Animation | [Imported clips](/docs/guides/gameplay-actions/imported-animation), [Layering](/docs/guides/gameplay-actions/animation-layers) | [Animation](/docs/api/animation) |
 | Tweening / easing | [Animate properties](/docs/guides/gameplay-actions/properties) | [Tween](/docs/api/tween), [Ease](/docs/api/ease) |

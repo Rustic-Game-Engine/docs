@@ -12,6 +12,8 @@ const categoryGroups: DocGroup[] = [
     { slug: "callbacks", title: "Lifecycle callbacks", description: "Choose the correct callback for setup, frames, physics, and teardown.", source: "api:callbacks" },
   ] },
   { label: "Editor guides", docs: [
+    { slug: "guides/scene-effects", title: "Scene Effects and VFX", description: "Author, preview, script and save scene effects, presets and composites; renderer compatibility and limitations.", source: "docs/SCENE_EFFECTS.md" },
+    { slug: "guides/scene-effects/configuration", title: "Effect configuration reference", description: "Typed fields and defaults for all 26 scene effects and their shared appearance configuration.", source: "docs/SCENE_EFFECTS_REFERENCE.md", parent: "guides/scene-effects" },
     { slug: "guides/editor/surface-textures", title: "Surface textures and PBR maps", description: "Browse optional surface maps, drop HDR/PBR images onto meshes and attach Texture children.", source: "docs/SURFACE_TEXTURES.md", parent: "guides/editor" },
     { slug: "guides/editor/build-project", title: "Build and distribute a project", description: "Package Windows games, design installers, export playable websites and build Android apps.", source: "docs/PROJECT_BUILDS.md", parent: "guides/editor" },
     { slug: "guides/editor", title: "Editor overview", description: "Open and save projects, navigate panels and choose an editor workflow.", source: "content/editor.md" },
@@ -81,6 +83,7 @@ const categoryGroups: DocGroup[] = [
     { slug: "api/physics-actions/queries", title: "Physics queries", description: "Find primitive colliders with raycasts, sphere casts and overlaps.", source: "docs/Scripting/API/physics-actions/queries.md", parent: "api/physics-actions" },
     { slug: "api/physics-actions/contacts", title: "Contacts, friction and slopes", description: "Subscribe to collisions, configure friction and query ground support.", source: "docs/Scripting/API/physics-actions/contacts.md", parent: "api/physics-actions" },
     { slug: "api/physics-actions/forces", title: "Physics forces", description: "Apply forces, impulses and velocity changes to simulated bodies.", source: "docs/Scripting/API/physics-actions/forces.md", parent: "api/physics-actions" },
+    { slug: "api/scene-effects", title: "Scene Effects API", description: "Create and control typed effect components, configure simulation, sample wind and subscribe to particle events.", source: "docs/Scripting/API/scene-effects.md" },
     { slug: "api/effects", title: "Effects", description: "Fade, flash, shake and pulse entity properties with shared easing.", source: "docs/Scripting/API/effects.md" },
     { slug: "api/audio", title: "Audio", description: "Record audio, read microphone PCM and load reusable audio in every gameplay language; select Windows audio devices and play and fade WAV, MP3, AAC, FLAC, and OGG voices.", source: "docs/Scripting/API/audio.md" },
     { slug: "api/events", title: "Events and signals", description: "Communicate through queued global events and object-scoped signals across scripting languages.", source: "docs/Scripting/API/events.md" },
