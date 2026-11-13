@@ -5,13 +5,13 @@ Prerequisites: a loaded writable scene with an object. Stop Play for authoring n
 ## Navigate and select
 
 1. Stop Play and hover or click the **3D** authoring viewport. Clicking gives the viewport keyboard focus, so navigation continues even if the pointer moves outside it. If an Inspector field or Explorer rename field has focus, click the viewport to return keyboard control to it.
-2. Orbit with middle-button drag, right-button drag, or left-button drag away from the gizmo. **Shift + middle drag** pans; the wheel dollies.
-3. Use **W/A/S/D** to move the editor camera and **Q/E** for horizontal panning.
+2. Look around with right-button drag or left-button drag away from the gizmo; this turns from the camera’s current position. Use middle-button drag to orbit around the focus point. **Shift + middle drag** pans; the wheel dollies.
+3. Use **W/A/S/D** to fly the editor camera, **Q/E** to descend/rise, and **Shift** to move four times faster.
 4. Click a rendered object to select it. **F** or **Frame (F)** frames the selection; **Home** or **Reset (Home)** resets the editor camera.
 
 Expected result: only the authoring camera moves. The selected entity remains available in Inspector. Clicking empty space clears selection unless Shift or the command modifier is held; this is not a multi-selection promise.
 
-Hold a movement key for continuous navigation; release it to stop. **W/S** move forward/backward, **A/D** move left/right, and **Q/E** pan left/right. These keys do not navigate the 2D authoring viewport. Navigation pauses when the editor window loses focus. If keys appear unresponsive, stop Play, activate the editor window, then click the 3D viewport to leave any focused text field. In Play, WASD is forwarded to scripts instead of moving the authoring camera.
+Hold a movement key for continuous navigation; release it to stop. **W/S** move forward/backward, **A/D** move left/right, and **Q/E** move down/up along world vertical. Flight speed is 5 world units per second, or 20 with Shift, independent of wheel zoom. For example, right-drag to face a doorway, hold **W** to fly through it, then hold **E** to rise. Looking around does not move the camera position; middle-drag orbit does. These keys do not navigate the 2D authoring viewport. Navigation pauses when the editor window loses focus. If keys appear unresponsive, stop Play, activate the editor window, then click the 3D viewport to leave any focused text field. In Play, WASD is forwarded to scripts instead of moving the authoring camera.
 
 ## Move, rotate and scale
 
