@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import { access } from "node:fs/promises";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
 import { load } from "./load-lib.mjs";
 
 const { allDocs, docAliases } = load("docs-catalog.ts");
@@ -17,20 +19,29 @@ const pages = new Map(await Promise.all(allDocs.map(async (doc) => {
   return [doc.slug, await readDoc(doc.source)];
 })));
 const errors = [];
+const parser = unified().use(remarkParse);
+function* destinations(node) {
+  if (node.type === "link" || node.type === "image") yield node.url;
+  for (const child of node.children ?? []) yield* destinations(child);
+}
 for (const doc of allDocs) {
   const markdown = pages.get(doc.slug);
   assert.equal((markdown.match(/^```/gm)?.length ?? 0) % 2, 0, `Unbalanced code fence: ${doc.slug}`);
   assert.ok(!/\bStop = function/.test(markdown), `Unrecognized Stop callback: ${doc.slug}`);
   assert.ok(/^# /m.test(markdown), `Missing title: ${doc.slug}`);
-  const prose = markdown.replace(/^```[^\n]*\n[\s\S]*?^```/gm, "");
-  for (const match of prose.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)) {
-    const href = resolveDocHref(match[1], doc.sourcePath ?? doc.source);
+  for (const url of destinations(parser.parse(markdown))) {
+    const href = resolveDocHref(url, doc.sourcePath ?? doc.source);
     if (/^(https?:|mailto:)/.test(href)) continue;
+    if (href.startsWith("/images/")) {
+      try { await access(`public${href.split(/[?#]/)[0]}`); }
+      catch { errors.push(`${doc.slug}: missing image ${href}`); }
+      continue;
+    }
     const [pathname, hash] = href.split("#");
     if (pathname === "/" || pathname === "/docs" || pathname.endsWith("/search")) continue;
     const slug = pathname ? pathname.replace(/^\/docs\//, "") : doc.slug;
     const target = docAliases[slug] ?? slug;
-    if (!pages.has(target)) errors.push(`${doc.slug}: ${match[1]} -> ${href}`);
+    if (!pages.has(target)) errors.push(`${doc.slug}: ${url} -> ${href}`);
     else if (hash && !markdownHeadings(pages.get(target)).some((heading) => heading.id === hash)) errors.push(`${doc.slug}: missing fragment ${href}`);
   }
 }

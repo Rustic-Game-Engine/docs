@@ -2,6 +2,10 @@
 
 Rustic Engine is a native Rust editor and runtime for 2D and 3D scenes, with gameplay scripting in ten script types. It is under active development: read the [feature status and compatibility reference](/docs/reference/compatibility) before depending on a system.
 
+
+
+[![Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.](/images/engine/workspace-cube-properties.png "The native Rustic workspace with the sample Cube selected.")](/images/engine/workspace-cube-properties.png)
+
 ## Getting started
 
 1. [Check requirements and install](/docs/getting-started/installation). Windows pre-alpha installers are published; other platforms have different availability.

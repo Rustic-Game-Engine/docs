@@ -1,0 +1,210 @@
+[
+  {
+    "file": "content/engine.md",
+    "line": 7,
+    "asset": "/images/engine/workspace-cube-properties.png",
+    "full_size": "/images/engine/workspace-cube-properties.png",
+    "alt": "Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.",
+    "caption": "The native Rustic workspace with the sample Cube selected."
+  },
+  {
+    "file": "content/user/create-project.md",
+    "line": 19,
+    "asset": "/images/engine/create-project-form-detail.png",
+    "full_size": "/images/engine/getting-started-01-create-project-form.png",
+    "alt": "Project creation form showing name, parent folder and Empty3d template.",
+    "caption": "Example Empty3d creation form; this capture was canceled. Choose your own writable parent folder."
+  },
+  {
+    "file": "content/user/create-project.md",
+    "line": 29,
+    "asset": "/images/engine/workspace-cube-properties.png",
+    "full_size": "/images/engine/workspace-cube-properties.png",
+    "alt": "Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.",
+    "caption": "The native Rustic workspace with the sample Cube selected."
+  },
+  {
+    "file": "content/editor.md",
+    "line": 18,
+    "asset": "/images/engine/workspace-cube-properties.png",
+    "full_size": "/images/engine/workspace-cube-properties.png",
+    "alt": "Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.",
+    "caption": "The native Rustic workspace with the sample Cube selected."
+  },
+  {
+    "file": "content/editor/inspector.md",
+    "line": 28,
+    "asset": "/images/engine/programming-03-attach-existing-picker.png",
+    "full_size": "/images/engine/programming-03-attach-existing-picker.png",
+    "alt": "Cube gameplay scripts section with Add Component picker offering scripts example behavior Lua.",
+    "caption": "With Cube selected, + Add Component lists a registered Lua script. The sample already has an attachment; avoid adding it twice."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/project-layout-and-ownership.md",
+    "line": 21,
+    "asset": "/images/engine/programming-04-attached-script-and-explorer.png",
+    "full_size": "/images/engine/programming-04-attached-script-and-explorer.png",
+    "alt": "Cube with one enabled Lua behavior and Explorer listing the source script, main scene, registry and UI directory.",
+    "caption": "The source file in Explorer and the enabled behavior attached to Cube."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/project-layout-and-ownership.md",
+    "line": 25,
+    "asset": "/images/engine/programming-01-scope-menu.png",
+    "full_size": "/images/engine/programming-01-scope-menu.png",
+    "alt": "Programming menu showing global startup, scene startup and object component script scopes.",
+    "caption": "Choose global, scene, or object-component scope from Programming."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/project-layout-and-ownership.md",
+    "line": 29,
+    "asset": "/images/engine/programming-scope-language-detail.png",
+    "full_size": "/images/engine/programming-02-component-languages.png",
+    "alt": "Programming scope and component language menus, including Lua 5.4.",
+    "caption": "Scope and language menus in the captured build. Luau is absent from this menu; availability depends on the installed build."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/project-layout-and-ownership.md",
+    "line": 33,
+    "asset": "/images/engine/script-asset-lifecycle.svg",
+    "full_size": "/images/engine/script-asset-lifecycle.svg",
+    "alt": "User-owned source is registered with a stable Asset ID, attached by scope, validated and instantiated in Play.",
+    "caption": "Conceptual script lifecycle. Source belongs to you; the registry and attachment identities are managed by the editor."
+  },
+  {
+    "file": "docs/Scripting/scriptingLua/attach-and-choose-a-scope.md",
+    "line": 14,
+    "asset": "/images/engine/programming-01-scope-menu.png",
+    "full_size": "/images/engine/programming-01-scope-menu.png",
+    "alt": "Programming menu showing global startup, scene startup and object component script scopes.",
+    "caption": "Choose global, scene, or object-component scope from Programming."
+  },
+  {
+    "file": "docs/Scripting/scriptingLua/attach-and-choose-a-scope.md",
+    "line": 18,
+    "asset": "/images/engine/programming-03-attach-existing-picker.png",
+    "full_size": "/images/engine/programming-03-attach-existing-picker.png",
+    "alt": "Cube gameplay scripts section with Add Component picker offering scripts example behavior Lua.",
+    "caption": "Cube is selected and its component picker lists the existing example behavior. This is not a newly created script."
+  },
+  {
+    "file": "docs/Scripting/scriptingLua/attach-and-choose-a-scope.md",
+    "line": 22,
+    "asset": "/images/engine/attached-lua-component-detail.png",
+    "full_size": "/images/engine/programming-04-attached-script-and-explorer.png",
+    "alt": "Gameplay scripts section with one enabled example Lua behavior on Cube.",
+    "caption": "The sample Cube has one enabled Lua attachment. Open the full image to see the source file in Explorer."
+  },
+  {
+    "file": "docs/Scripting/README.md",
+    "line": 98,
+    "asset": "/images/engine/programming-04-attached-script-and-explorer.png",
+    "full_size": "/images/engine/programming-04-attached-script-and-explorer.png",
+    "alt": "Cube with one enabled Lua behavior and Explorer listing the source script, main scene, registry and UI directory.",
+    "caption": "The source file in Explorer and the enabled behavior attached to Cube."
+  },
+  {
+    "file": "content/editor/cameras-lighting.md",
+    "line": 7,
+    "asset": "/images/engine/scene-explorer-add-menu.png",
+    "full_size": "/images/engine/scene-explorer-add-menu.png",
+    "alt": "Scene Explorer Add menu with Camera and Light choices above the primitive object choices.",
+    "caption": "Add a Camera or Light from Scene Explorer."
+  },
+  {
+    "file": "content/editor/cameras-lighting.md",
+    "line": 21,
+    "asset": "/images/engine/camera-settings-detail.png",
+    "full_size": "/images/engine/camera-inspector-perspective.png",
+    "alt": "Camera properties with transform, active state, priority, zoom, projection and clipping controls.",
+    "caption": "Perspective camera settings in Properties. The full capture also shows its cyan editor-only frustum."
+  },
+  {
+    "file": "content/editor/cameras-lighting.md",
+    "line": 34,
+    "asset": "/images/engine/light-settings-detail.png",
+    "full_size": "/images/engine/light-inspector-directional.png",
+    "alt": "Directional light properties with type, white color and intensity controls.",
+    "caption": "Directional light settings in Properties. Point and Spot reveal additional controls; those variants are not pictured."
+  },
+  {
+    "file": "docs/CAMERAS_AND_LIGHTS/camera.md",
+    "line": 18,
+    "asset": "/images/engine/camera-inspector-perspective.png",
+    "full_size": "/images/engine/camera-inspector-perspective.png",
+    "alt": "Selected Camera with active state, priority, zoom, projection and clipping controls beside a cyan frustum guide.",
+    "caption": "Camera controls and the cyan editor-only frustum guide."
+  },
+  {
+    "file": "docs/CAMERAS_AND_LIGHTS/light.md",
+    "line": 20,
+    "asset": "/images/engine/light-inspector-directional.png",
+    "full_size": "/images/engine/light-inspector-directional.png",
+    "alt": "Directional light properties showing type, white color, intensity one and an amber direction guide in the viewport.",
+    "caption": "A Directional light and its amber editor guide. This capture does not demonstrate Point or Spot controls."
+  },
+  {
+    "file": "content/editor/playtesting.md",
+    "line": 16,
+    "asset": "/images/engine/play-01-mode-selector.png",
+    "full_size": "/images/engine/play-01-mode-selector.png",
+    "alt": "Rustic Play mode selector listing Play, New Window and Standalone.",
+    "caption": "Select one of the three local runtime modes."
+  },
+  {
+    "file": "content/editor/playtesting.md",
+    "line": 20,
+    "asset": "/images/engine/play-02-first-successful-frame.png",
+    "full_size": "/images/engine/play-02-first-successful-frame.png",
+    "alt": "Embedded Play renders a gray cube while Stop and Pause controls and runtime startup messages appear.",
+    "caption": "The existing sample Cube in embedded Play on its first successful frame; this is not the Player controller tutorial."
+  },
+  {
+    "file": "content/editor/playtesting.md",
+    "line": 30,
+    "asset": "/images/engine/play-03-paused-reload-controls.png",
+    "full_size": "/images/engine/play-03-paused-reload-controls.png",
+    "alt": "Paused Rustic session with Resume and Frame controls and enabled Reload Scripts and Restart Play menu commands.",
+    "caption": "Paused Play exposes Frame and script-reload controls. The unanchored sample Cube has fallen out of view by this tick; the empty game view is not a rendering failure."
+  },
+  {
+    "file": "content/editor/playtesting.md",
+    "line": 43,
+    "asset": "/images/engine/runtime-change-review-detail.png",
+    "full_size": "/images/engine/play-04-review-runtime-changes.png",
+    "alt": "Runtime-change review listing transform proposals and Discard and Apply choices.",
+    "caption": "Stop offers proposed transform changes for review. Discard keeps the authored scene; Apply makes one undoable edit."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/validation-diagnostics-and-reload.md",
+    "line": 16,
+    "asset": "/images/engine/lua-reload-error-detail.png",
+    "full_size": "/images/engine/troubleshooting-01-lua-reload-rejected.png",
+    "alt": "Terminal diagnostics for a rejected Lua reload.",
+    "caption": "Reload rejects invalid Lua. Terminal rows can clip horizontally; use the actual diagnostic text when investigating."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/validation-diagnostics-and-reload.md",
+    "line": 20,
+    "asset": "/images/engine/lua-reload-recovery-detail.png",
+    "full_size": "/images/engine/troubleshooting-02-lua-reload-restored.png",
+    "alt": "Terminal showing a successful Lua source reload alongside earlier error scrollback.",
+    "caption": "Restoring the valid source allows reload to succeed. Earlier errors remain in Terminal scrollback."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/external-process-languages/toolchains.md",
+    "line": 16,
+    "asset": "/images/engine/gameplay-dependencies-detail.png",
+    "full_size": "/images/engine/configuration-gameplay-dependencies.png",
+    "alt": "Project Manager settings showing gameplay language dependency detection.",
+    "caption": "Gameplay dependency detection in the captured Project Manager settings. This is not an installation-wizard capture."
+  },
+  {
+    "file": "docs/GAMEPLAY_PROGRAMMING/sandbox-and-play-safety.md",
+    "line": 12,
+    "asset": "/images/engine/isolated-play-flow.svg",
+    "full_size": "/images/engine/isolated-play-flow.svg",
+    "alt": "Authoring scene to immutable snapshot to child runtime, then explicit review and Apply or Discard.",
+    "caption": "Conceptual Play workflow: only explicit Apply changes authoring data."
+  }
+]

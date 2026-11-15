@@ -9,6 +9,7 @@ import { resolveDocHref as resolveSourceHref } from "../lib/docs-markdown";
 import { remarkDocumentation } from "../lib/markdown-model";
 import { highlightCode, type SyntaxNode } from "../lib/syntax-highlighting";
 import { LanguageTabs } from "./language-tabs";
+import engineImageDimensions from "../lib/engine-image-dimensions.json";
 
 export function resolveDocHref(href: string, sourcePath?: string) {
   return resolveSourceHref(defaultUrlTransform(href), sourcePath);
@@ -47,7 +48,10 @@ export function Markdown({ source, sourcePath }: { source: string; sourcePath?: 
     table: ({ children }) => <div className="table-wrap" role="region" tabIndex={0} aria-label="Scrollable reference table"><table>{children}</table></div>,
     th: ({ children }) => <th scope="col">{children}</th>,
     // Native images are compatible with static export; captions use Markdown's title.
-    img: ({ src, alt, title }) => <span className="doc-image"><img src={src} alt={alt ?? ""} loading="lazy" decoding="async" />{title && <span className="doc-image-caption">{title}</span>}</span>,
+    img: ({ src, alt, title }) => {
+      const dimensions = typeof src === "string" ? (engineImageDimensions as Record<string, { width: number; height: number }>)[src] : undefined;
+      return <span className="doc-image"><img src={src} alt={alt ?? ""} {...dimensions} loading="lazy" decoding="async" />{title && <span className="doc-image-caption">{title}</span>}</span>;
+    },
     div: ({ node, children, ...props }) => node?.properties["data-language-group"] ? <LanguageTabs>{children}</LanguageTabs> : <div {...props}>{children}</div>,
   }}>{source}</ReactMarkdown>;
 }

@@ -14,11 +14,19 @@ Obtain a complete engine build using [Requirements and installation](/docs/getti
 
 The project has a `project.engine` descriptor, scene data, scripts, assets and generated caches. It is distinct from the engine source. Do not manually create or edit JSON to attach your first script.
 
+
+
+[![Project creation form showing name, parent folder and Empty3d template.](/images/engine/create-project-form-detail.png "Example Empty3d creation form; this capture was canceled. Choose your own writable parent folder.")](/images/engine/getting-started-01-create-project-form.png)
+
 ## Understand the first screen
 
 Use the **Project** panel’s **Scene** tab to select objects, **Explorer** to find files, and **Inspector** to edit the selection. The viewport shows the authoring scene; the game camera controls what Play renders. Read [Editor manual](/docs/editor/overview) and then [Your first playable scene](/docs/tutorials/first-game).
 
 The checked-in editor provides scene saving and opens the project’s default scene. This guide uses that scene; it does not assume a **New Scene** wizard or arbitrary scene-switching menu exists. Scene formats and migration are described in [Scene System](/docs/open-source/engine/scene-system).
+
+
+
+[![Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.](/images/engine/workspace-cube-properties.png "The native Rustic workspace with the sample Cube selected.")](/images/engine/workspace-cube-properties.png)
 
 ## Save and reopen
 

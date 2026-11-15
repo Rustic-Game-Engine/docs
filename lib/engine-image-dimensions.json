@@ -1,0 +1,114 @@
+{
+  "/images/engine/workspace-cube-properties.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/getting-started-01-create-project-form.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/create-project-form-detail.png": {
+    "width": 492,
+    "height": 201
+  },
+  "/images/engine/camera-inspector-perspective.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/camera-settings-detail.png": {
+    "width": 428,
+    "height": 456
+  },
+  "/images/engine/light-inspector-directional.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/light-settings-detail.png": {
+    "width": 428,
+    "height": 384
+  },
+  "/images/engine/scene-explorer-add-menu.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/programming-01-scope-menu.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/programming-02-component-languages.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/programming-scope-language-detail.png": {
+    "width": 430,
+    "height": 268
+  },
+  "/images/engine/programming-03-attach-existing-picker.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/programming-04-attached-script-and-explorer.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/attached-lua-component-detail.png": {
+    "width": 428,
+    "height": 110
+  },
+  "/images/engine/play-01-mode-selector.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/play-mode-selector-detail.png": {
+    "width": 193,
+    "height": 108
+  },
+  "/images/engine/play-02-first-successful-frame.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/play-03-paused-reload-controls.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/play-04-review-runtime-changes.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/runtime-change-review-detail.png": {
+    "width": 348,
+    "height": 360
+  },
+  "/images/engine/troubleshooting-01-lua-reload-rejected.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/lua-reload-error-detail.png": {
+    "width": 423,
+    "height": 67
+  },
+  "/images/engine/troubleshooting-02-lua-reload-restored.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/lua-reload-recovery-detail.png": {
+    "width": 423,
+    "height": 120
+  },
+  "/images/engine/configuration-gameplay-dependencies.png": {
+    "width": 1280,
+    "height": 672
+  },
+  "/images/engine/gameplay-dependencies-detail.png": {
+    "width": 680,
+    "height": 395
+  },
+  "/images/engine/isolated-play-flow.svg": {
+    "width": 1120,
+    "height": 500
+  },
+  "/images/engine/script-asset-lifecycle.svg": {
+    "width": 1120,
+    "height": 500
+  }
+}

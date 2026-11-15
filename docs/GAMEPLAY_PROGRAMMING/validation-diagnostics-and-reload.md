@@ -11,6 +11,14 @@ currently require Restart Play; incompatible live replacement is rejected. A fai
 reload leaves the prior instance running. **Restart Play** rebuilds the
 immutable snapshot.
 
+
+
+[![Terminal diagnostics for a rejected Lua reload.](/images/engine/lua-reload-error-detail.png "Reload rejects invalid Lua. Terminal rows can clip horizontally; use the actual diagnostic text when investigating.")](/images/engine/troubleshooting-01-lua-reload-rejected.png)
+
+
+
+[![Terminal showing a successful Lua source reload alongside earlier error scrollback.](/images/engine/lua-reload-recovery-detail.png "Restoring the valid source allows reload to succeed. Earlier errors remain in Terminal scrollback.")](/images/engine/troubleshooting-02-lua-reload-restored.png)
+
 Console records identify process and subsystem, collapse duplicates, filter/search,
 copy, clear, and open source/stack locations externally. Interactive debugging is not
 currently claimed.
