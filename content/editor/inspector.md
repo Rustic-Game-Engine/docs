@@ -23,6 +23,10 @@ Expected result: validated authoring changes appear in the preview and saved sce
 
 Expected result: the enabled attachment executes in its documented lifecycle scope. The Inspector edits stored component properties; it does not guarantee automatic discovery of arbitrary variables declared in source. Entity-valued properties display an identifier rather than a freeform entity picker.
 
+
+
+[![Cube gameplay scripts section with Add Component picker offering scripts example behavior Lua.](/images/engine/programming-03-attach-existing-picker.png "With Cube selected, + Add Component lists a registered Lua script. The sample already has an attachment; avoid adding it twice.")](/images/engine/programming-03-attach-existing-picker.png)
+
 ## Camera, light and runtime state
 
 A camera selection exposes active state, priority, zoom, projection and clipping settings. A light exposes type, color, intensity, range and spot angle as applicable. Follow [cameras and lighting](/docs/guides/editor/cameras-lighting) for a complete setup.

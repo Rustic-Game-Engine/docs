@@ -11,6 +11,10 @@ installs every selected item through Windows Package Manager. Lua, JavaScript, a
 HTML/CSS are bundled. Additional toolchains can be installed later using **Rustic Game
 Engine > Language Toolchain Manager** in the Start menu or by rerunning Setup.
 
+
+
+[![Project Manager settings showing gameplay language dependency detection.](/images/engine/gameplay-dependencies-detail.png "Gameplay dependency detection in the captured Project Manager settings. This is not an installation-wizard capture.")](/images/engine/configuration-gameplay-dependencies.png)
+
 On Windows, Rustic checks the editor's PATH first, then the saved system and user
 PATH on each dependency check. For C/C++, it also checks LLVM's registered install
 folder and the standard LLVM folders under Program Files and

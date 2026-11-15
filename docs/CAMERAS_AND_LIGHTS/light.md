@@ -15,6 +15,10 @@ Point and spot Intensity is a relative source strength: away from the range boun
 
 To check distance falloff, add a point light in front of a flat surface, set Range to `100` and Intensity to `0.5`, and compare distances of `1` and `2` world units from the surface. The direct contribution should fall to roughly one quarter; ambient light remains, so the displayed pixel will not become exactly four times darker. Material colors from the inspector and imported models are already linear. The renderer accumulates light in that space, applies Reinhard highlight compression, blends the linear haze color, and encodes to sRGB for display. Dark faces retain ambient detail and increasing Intensity remains visible through bright highlights instead of immediately clipping to white. Selection outlines and editor guides retain their authored colors. Very high intensities can still approach white in the 8-bit image; lower Intensity when needed. Older scenes may need higher point/spot intensity after the distance-falloff correction, especially for lights several world units away. Pixel brightness is display encoded and compressed, so measure falloff in linear light rather than dividing screenshot byte values. If rectangular patches flicker while orbiting, check for two meshes occupying the same space: overlapping faces can fight for depth, and changing lighting will not resolve that geometry issue.
 
+
+
+[![Directional light properties showing type, white color, intensity one and an amber direction guide in the viewport.](/images/engine/light-inspector-directional.png "A Directional light and its amber editor guide. This capture does not demonstrate Point or Spot controls.")](/images/engine/light-inspector-directional.png)
+
 Parent transforms move and rotate lights. Range and cone controls appear only for the light types that use them. Shadow casting is not implemented and has no editable control.
 
 Selecting a light displays an amber editor guide: an arrow for directional lights, the range sphere for point lights, or the complete range cone and center trajectory for spot lights. Guides are editor-only and do not appear in the game view.

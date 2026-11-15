@@ -93,6 +93,10 @@ Startup Script**, or **Object Component Script**. Use **Programming > Attach Exi
 Script**, **+ Add Component** in the Inspector, or drag a script from Explorer onto
 the viewport to attach an existing component script to the selected object.
 
+
+
+[![Cube with one enabled Lua behavior and Explorer listing the source script, main scene, registry and UI directory.](/images/engine/programming-04-attached-script-and-explorer.png "The source file in Explorer and the enabled behavior attached to Cube.")](/images/engine/programming-04-attached-script-and-explorer.png)
+
 New scenes live at `scene/{scene-name}.scene`. The older `scenes/*.rscene` layout remains readable and is saved in place. Legacy `entry_script` settings are ignored; snake-case callbacks remain compatible. Do not migrate an old project by hand.
 
 Execution is deterministic: global scope before scene scope before component scope;

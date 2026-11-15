@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="500" viewBox="0 0 1120 500" role="img" aria-labelledby="title desc"><title id="title">Play copies the scene; applying changes is a separate choice</title><desc id="desc">Authoring data is copied into a Play snapshot and child runtime. Stop offers a change review. Apply edits authoring; Discard keeps the authored state.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#9a4b26"/></marker></defs>
+<rect width="1120" height="500" fill="#faf7f1"/>
+<text x="32" y="38" font-family="sans-serif" font-size="24" font-weight="700" fill="#26221e">Play copies the scene; applying changes is a separate choice</text>
+<path d="M292 135 L430 135" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="361.0" y="125.0" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Start Play</text>
+<path d="M690 135 L828 135" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="759.0" y="125.0" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Launch</text>
+<path d="M958 175 L958 310" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="992" y="232.5" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Stop</text>
+<path d="M828 350 L690 350" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="759.0" y="340.0" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Choose</text>
+<path d="M560 310 L162 175" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="337" y="213" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Update scene</text>
+<path d="M958 390 L958 417 L162 417 L162 390" stroke="#9a4b26" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<text x="560.0" y="410" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#713a23">Or discard</text>
+<rect x="32" y="95" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="162.0" y="125" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Authoring scene</text>
+<text x="162.0" y="150" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">Editor-owned project state</text>
+<rect x="430" y="95" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="560.0" y="125" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Play snapshot</text>
+<text x="560.0" y="150" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">Immutable starting data</text>
+<rect x="828" y="95" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="958.0" y="125" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Child runtime</text>
+<text x="958.0" y="150" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">Game view and logs</text>
+<rect x="828" y="310" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="958.0" y="340" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Review after Stop</text>
+<text x="958.0" y="365" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">Proposed runtime changes</text>
+<rect x="430" y="310" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="560.0" y="340" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Apply</text>
+<text x="560.0" y="365" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">One undoable authoring edit</text>
+<rect x="32" y="310" width="260" height="80" rx="8" fill="#fff" stroke="#aa9c89"/>
+<text x="162.0" y="340" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#26221e">Discard</text>
+<text x="162.0" y="365" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#62574b">Keep authored state</text>
+<text x="32" y="447" font-family="sans-serif" font-size="15" fill="#62574b">Conceptual workflow, checked against architecture and Play safety documentation.</text>
+<text x="32" y="471" font-family="sans-serif" font-size="15" fill="#62574b">Frames and logs return to the editor; this diagram does not specify operating-system transport.</text>
+</svg>

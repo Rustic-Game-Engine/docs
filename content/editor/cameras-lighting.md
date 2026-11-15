@@ -2,6 +2,10 @@
 
 Prerequisites: a writable project with visible geometry. Stop Play while preparing the scene.
 
+
+
+[![Scene Explorer Add menu with Camera and Light choices above the primitive object choices.](/images/engine/scene-explorer-add-menu.png "Add a Camera or Light from Scene Explorer.")](/images/engine/scene-explorer-add-menu.png)
+
 ## Prepare the game camera
 
 1. Position the editor view using the [viewport controls](/docs/guides/editor/viewport).
@@ -12,6 +16,10 @@ Prerequisites: a writable project with visible geometry. Stop Play while prepari
 
 Expected result: Play uses the active scene camera rather than the authoring camera. Optical zoom above 1 magnifies; values below 1 zoom out. Use [the current-camera API](/docs/api/camera) for scripted selection rather than assuming editor selection changes the runtime camera.
 
+
+
+[![Camera properties with transform, active state, priority, zoom, projection and clipping controls.](/images/engine/camera-settings-detail.png "Perspective camera settings in Properties. The full capture also shows its cyan editor-only frustum.")](/images/engine/camera-inspector-perspective.png)
+
 ## Add a light
 
 1. Choose **+ Add → Light**, then select it.
@@ -20,6 +28,10 @@ Expected result: Play uses the active scene camera rather than the authoring cam
 4. Position/rotate the entity. Directional and spot lights shine along local **+Z**. Save and inspect Play.
 
 Expected result: geometry responds to the light configuration. Intensity 0 turns a light off. The current renderer supports up to 32 scene lights and does not implement shadow casting yet.
+
+
+
+[![Directional light properties with type, white color and intensity controls.](/images/engine/light-settings-detail.png "Directional light settings in Properties. Point and Spot reveal additional controls; those variants are not pictured.")](/images/engine/light-inspector-directional.png)
 
 ## Set sky and atmosphere
 

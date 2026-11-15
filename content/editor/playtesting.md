@@ -11,11 +11,23 @@ Prerequisites: a saved project, an enabled registered script attachment and any 
 
 Expected result: the toolbar shows session mode and fixed tick. Missing executables, startup failures and runtime supervision errors appear in Console. Do not promise that a physics tick is identical to a rendered frame.
 
+
+
+[![Rustic Play mode selector listing Play, New Window and Standalone.](/images/engine/play-01-mode-selector.png "Select one of the three local runtime modes.")](/images/engine/play-01-mode-selector.png)
+
+
+
+[![Embedded Play renders a gray cube while Stop and Pause controls and runtime startup messages appear.](/images/engine/play-02-first-successful-frame.png "The existing sample Cube in embedded Play on its first successful frame; this is not the Player controller tutorial.")](/images/engine/play-02-first-successful-frame.png)
+
 ## Console and script debugging
 
 Read Console entries for severity, subsystem and source diagnostics. Source-linked entries open the external editor at the indicated location when editor integration is configured. Use Console **Copy** to retain a report and **Clear** to clear displayed entries.
 
 Use your language's logging API from a lifecycle callback. Verify scope, Script ID registration, enabled state, callback spelling and runtime dependencies before changing the engine. During Play, **Programming → Reload Scripts** attempts a reload and **Restart Play** starts a new session. Preserve a working source version; failure handling and toolchain constraints differ by adapter.
+
+
+
+[![Paused Rustic session with Resume and Frame controls and enabled Reload Scripts and Restart Play menu commands.](/images/engine/play-03-paused-reload-controls.png "Paused Play exposes Frame and script-reload controls. The unanchored sample Cube has fallen out of view by this tick; the empty game view is not a rendering failure.")](/images/engine/play-03-paused-reload-controls.png)
 
 ## Inspect and review runtime changes
 
@@ -25,6 +37,10 @@ Use your language's logging API from a lifecycle callback. Verify scope, Script 
 4. Save the scene if you applied changes you want to keep.
 
 Expected result: runtime changes are never silently applied to authoring state. This review covers the supported property changes reported by the runtime, not arbitrary filesystem changes, all runtime-created entities or every script's internal variables.
+
+
+
+[![Runtime-change review listing transform proposals and Discard and Apply choices.](/images/engine/runtime-change-review-detail.png "Stop offers proposed transform changes for review. Discard keeps the authored scene; Apply makes one undoable edit.")](/images/engine/play-04-review-runtime-changes.png)
 
 Related: [lifecycle callbacks](/docs/callbacks), [logging API](/docs/api/logging), [Inspector](/docs/guides/editor/inspector), [troubleshooting](/docs/open-source/engine/troubleshooting).
 

@@ -13,6 +13,10 @@ Prerequisites: a working desktop graphics session and a writable project locatio
 
 Expected result: your project opens with its scene, and a successful save persists authored changes. Save explicitly before closing or copying a project.
 
+
+
+[![Rustic Editor showing Cube properties on the left, its move gizmo in the center, and Scene Explorer on the right.](/images/engine/workspace-cube-properties.png "The native Rustic workspace with the sample Cube selected.")](/images/engine/workspace-cube-properties.png)
+
 ## Layout, panels and toolbar
 
 The workspace includes 3D/2D viewports and separate **Scene Explorer**, **Explorer**, **Properties** (Inspector), and **Terminal** (Console) dock tabs. Scene Explorer and Explorer initially share a tab group, but each can be moved independently.
