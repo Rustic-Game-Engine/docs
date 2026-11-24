@@ -2,7 +2,14 @@
 
 [Back to C#](/docs/scripting/csharp).
 
-1. Install .NET SDK 10 or newer on PATH. Restart the editor after changing PATH.
+1. Install .NET SDK 10 or newer. On Windows, select **C#** in Rustic Setup or
+   **Language Toolchain Manager** from the Start menu to install the SDK. Rustic
+   automatically checks the default Windows location, `%ProgramFiles%\dotnet`,
+   the per-user `.dotnet` folder, and PATH. Standard system and per-user .NET
+   folders are checked on macOS and Linux too. For a custom location, set
+   `DOTNET_ROOT` to the folder containing `dotnet` and reopen Rustic so it
+   inherits the new variable. Run `dotnet --list-sdks` using that installation
+   to check that it lists version 10 or newer.
    Check the Project Manager’s **Settings** language tools and the editor **Console** for discovery errors. Contributors with a source checkout can optionally run `cargo xtask doctor` from `Engine/`.
 2. Open your game project and scene. Select a **Part** object for this movement example.
 3. Use **Programming > Object Component Script** and select C#.
