@@ -29,8 +29,10 @@ examples below only for a compiled UI. Compiled manifests do not also generate
 the Python companion bundle. A portable export with setup disabled does not
 compile the UI or export the compiled manifest as an HTTP configuration.
 
-Install the **.NET 8 SDK** on the build machine and put `dotnet` on PATH before
-opening the editor. Publishing restores Microsoft WebView2 from NuGet and the
+Install **.NET SDK 8 or newer** on the build machine. Rustic checks PATH and
+standard .NET installation folders automatically. For a custom installation,
+set `DOTNET_ROOT` to the folder containing `dotnet.exe` before opening Rustic.
+Publishing restores Microsoft WebView2 from NuGet and the
 Windows/.NET runtime packs, requiring network access on the first build. Players
 do not need .NET. Web interfaces require the **Microsoft Edge WebView2 Runtime**
 on the player's Windows machine; install it from Microsoft if startup reports it
@@ -300,7 +302,7 @@ C# runs as native code with the player's account privileges. Installer sources
 are independent of game behaviors; do not register them in `config/scripts.ron`.
 Portable Windows builds and website/Android exports do not use this UI.
 
-If publishing fails, check the .NET 8 SDK and the reported NuGet/compiler output.
+If publishing fails, check the .NET SDK and the reported NuGet/compiler output.
 If the web page is blank, check relative asset paths and script errors in WebView2
 developer tools. If installation fails, display the bridge error/exit code, check
 the chosen directory is writable. To diagnose the standard wizard separately,
